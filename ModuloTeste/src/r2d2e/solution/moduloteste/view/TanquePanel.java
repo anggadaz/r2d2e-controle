@@ -48,8 +48,8 @@ public class TanquePanel extends JPanel {
 
     private void loadImage() {
         try {
-            tanqueImage = ImageIO.read(getClass().getResource("/solution/moduloteste/view/resources/tanque.jpg"));
-            waterImage = ImageIO.read(getClass().getResource("/solution/moduloteste/view/resources/agua.jpg"));
+            tanqueImage = ImageIO.read(getClass().getResource("/r2d2e/solution/moduloteste/view/resources/tanque.jpg"));
+            waterImage = ImageIO.read(getClass().getResource("/r2d2e/solution/moduloteste/view/resources/agua.jpg"));
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -395,7 +395,7 @@
                         </DimensionLayout>
                       </Layout>
                     </Container>
-                    <Container class="solution.moduloteste.view.TanquePanel" name="tanquePanel">
+                    <Container class="r2d2e.solution.moduloteste.view.TanquePanel" name="tanquePanel">
                       <Properties>
                         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="ff" green="ff" red="ff" type="rgb"/>
