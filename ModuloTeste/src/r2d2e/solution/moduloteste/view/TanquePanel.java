@@ -18,8 +18,9 @@ public class TanquePanel extends JPanel {
 
     private BufferedImage tanqueImage;
     private BufferedImage waterImage;
-    private int heightWater = 0;
+    private double heightWater = 0;
     private int maxWidthWater;
+    private int maxLevelWater = 30;
 
     public TanquePanel() {
         loadImage();
@@ -29,7 +30,7 @@ public class TanquePanel extends JPanel {
     @Override
     public void paint(Graphics g) {
         g.drawImage(tanqueImage, 0, 50, null);
-        g.drawImage(waterImage, 93, 62 + (maxWidthWater-heightWater), waterImage.getWidth(), heightWater, null);
+        g.drawImage(waterImage, 93, 62 + (int)(maxWidthWater-heightWater), waterImage.getWidth(), (int)heightWater, null);
     }
     
     @Override
@@ -41,7 +42,8 @@ public class TanquePanel extends JPanel {
         }
     }
 
-    public void setPercentWater(int PercentWater) {
+    public void setLevelWater(double levelWater) {
+        double PercentWater = (100*levelWater)/maxLevelWater;
         heightWater = (PercentWater * maxWidthWater) / 100;
         repaint();
     }

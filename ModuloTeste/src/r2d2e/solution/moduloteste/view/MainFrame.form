@@ -107,7 +107,7 @@
                   <Component id="buttonPararTeste" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="buttonNovoCiclo" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="660" max="32767" attributes="0"/>
+                  <EmptySpace pref="688" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -145,8 +145,11 @@
         </Component>
         <Component class="javax.swing.JButton" name="buttonNovoCiclo">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Novo Ciclo"/>
+            <Property name="text" type="java.lang.String" value="Ciclo"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonNovoCicloActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JSeparator" name="separador">
         </Component>
@@ -288,34 +291,46 @@
             </Component>
             <Component class="javax.swing.JSpinner" name="spinnerTI">
               <Properties>
-                <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
-                  <SpinnerModel initial="0" maximum="3" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
+                <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="new javax.swing.SpinnerNumberModel(0.0, 0.0, 3.0, 0.1)" type="code"/>
                 </Property>
                 <Property name="toolTipText" type="java.lang.String" value="Quanto a tens&#xe3;o ir&#xe1; variar"/>
+                <Property name="editor" type="javax.swing.JComponent" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="new javax.swing.JSpinner.NumberEditor(spinnerTI, &quot;#,##0.0#&quot;)" type="code"/>
+                </Property>
               </Properties>
             </Component>
             <Component class="javax.swing.JSpinner" name="spinnerTMax">
               <Properties>
-                <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
-                  <SpinnerModel initial="0.0" maximum="3.0" minimum="-3.0" numberType="java.lang.Double" stepSize="1.0" type="number"/>
+                <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="new javax.swing.SpinnerNumberModel(1.0, -3.0, 3.0, 0.1)" type="code"/>
                 </Property>
                 <Property name="toolTipText" type="java.lang.String" value="Tens&#xe3;o M&#xe1;xima do motor"/>
+                <Property name="editor" type="javax.swing.JComponent" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="new javax.swing.JSpinner.NumberEditor(spinnerTMax, &quot;#,##0.0#&quot;)" type="code"/>
+                </Property>
               </Properties>
             </Component>
             <Component class="javax.swing.JSpinner" name="spinnerNA">
               <Properties>
-                <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
-                  <SpinnerModel initial="0" maximum="3" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
+                <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="new javax.swing.SpinnerNumberModel(0.0, 0.0, 30.0, 0.1)" type="code"/>
                 </Property>
                 <Property name="toolTipText" type="java.lang.String" value="Quanto a tens&#xe3;o ir&#xe1; variar"/>
+                <Property name="editor" type="javax.swing.JComponent" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="new javax.swing.JSpinner.NumberEditor(spinnerNA, &quot;#,##0.0#&quot;)" type="code"/>
+                </Property>
               </Properties>
             </Component>
             <Component class="javax.swing.JSpinner" name="spinnerTMin">
               <Properties>
-                <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
-                  <SpinnerModel initial="0.0" maximum="3.0" minimum="-3.0" numberType="java.lang.Double" stepSize="1.0" type="number"/>
+                <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="new javax.swing.SpinnerNumberModel(1.0, -3.0, 3.0, 0.1)" type="code"/>
                 </Property>
                 <Property name="toolTipText" type="java.lang.String" value="Tens&#xe3;o M&#xe1;xima do motor"/>
+                <Property name="editor" type="javax.swing.JComponent" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="new javax.swing.JSpinner.NumberEditor(spinnerTMin, &quot;#,##0.0#&quot;)" type="code"/>
+                </Property>
               </Properties>
             </Component>
           </SubComponents>
@@ -385,7 +400,7 @@
                       <Layout>
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <EmptySpace min="0" pref="178" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="169" max="32767" attributes="0"/>
                           </Group>
                         </DimensionLayout>
                         <DimensionLayout dim="1">
@@ -433,12 +448,12 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="scrollPane" alignment="0" pref="476" max="32767" attributes="0"/>
+                          <Component id="scrollPane" alignment="0" pref="485" max="32767" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
                               <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="mediaField" pref="355" max="32767" attributes="0"/>
+                              <Component id="mediaField" pref="364" max="32767" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="Exportar" min="-2" max="-2" attributes="0"/>
                           </Group>

@@ -12,6 +12,8 @@
 package r2d2e.solution.moduloteste.view;
 
 import javax.swing.JFrame;
+import javax.swing.JSpinner;
+import r2d2e.solution.moduloteste.domain.controlerInterface;
 import r2d2e.solution.moduloteste.handler.MainFrameHandler;
 
 
@@ -27,6 +29,7 @@ public class MainFrame extends javax.swing.JFrame {
     public MainFrame() {
         initComponents();
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        controlerInterface.tanquePanel = tanquePanel;
     }
 
     /** This method is called from within the constructor to
@@ -96,7 +99,12 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
-        buttonNovoCiclo.setText("Novo Ciclo");
+        buttonNovoCiclo.setText("Ciclo");
+        buttonNovoCiclo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonNovoCicloActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout menuPanelLayout = new javax.swing.GroupLayout(menuPanel);
         menuPanel.setLayout(menuPanelLayout);
@@ -110,7 +118,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addComponent(buttonPararTeste)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(buttonNovoCiclo)
-                .addContainerGap(660, Short.MAX_VALUE))
+                .addContainerGap(688, Short.MAX_VALUE))
         );
         menuPanelLayout.setVerticalGroup(
             menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -147,17 +155,21 @@ public class MainFrame extends javax.swing.JFrame {
 
         jLabel8.setText("Volts");
 
-        spinnerTI.setModel(new javax.swing.SpinnerNumberModel(0, 0, 3, 1));
+        spinnerTI.setModel(new javax.swing.SpinnerNumberModel(0.0, 0.0, 3.0, 0.1));
         spinnerTI.setToolTipText("Quanto a tensão irá variar");
+        spinnerTI.setEditor(new javax.swing.JSpinner.NumberEditor(spinnerTI, "#,##0.0#"));
 
-        spinnerTMax.setModel(new javax.swing.SpinnerNumberModel(0.0d, -3.0d, 3.0d, 1.0d));
+        spinnerTMax.setModel(new javax.swing.SpinnerNumberModel(1.0, -3.0, 3.0, 0.1));
         spinnerTMax.setToolTipText("Tensão Máxima do motor");
+        spinnerTMax.setEditor(new javax.swing.JSpinner.NumberEditor(spinnerTMax, "#,##0.0#"));
 
-        spinnerNA.setModel(new javax.swing.SpinnerNumberModel(0, 0, 3, 1));
+        spinnerNA.setModel(new javax.swing.SpinnerNumberModel(0.0, 0.0, 30.0, 0.1));
         spinnerNA.setToolTipText("Quanto a tensão irá variar");
+        spinnerNA.setEditor(new javax.swing.JSpinner.NumberEditor(spinnerNA, "#,##0.0#"));
 
-        spinnerTMin.setModel(new javax.swing.SpinnerNumberModel(0.0d, -3.0d, 3.0d, 1.0d));
+        spinnerTMin.setModel(new javax.swing.SpinnerNumberModel(1.0, -3.0, 3.0, 0.1));
         spinnerTMin.setToolTipText("Tensão Máxima do motor");
+        spinnerTMin.setEditor(new javax.swing.JSpinner.NumberEditor(spinnerTMin, "#,##0.0#"));
 
         javax.swing.GroupLayout confPanelLayout = new javax.swing.GroupLayout(confPanel);
         confPanel.setLayout(confPanelLayout);
@@ -232,7 +244,7 @@ public class MainFrame extends javax.swing.JFrame {
         gráficoPanel.setLayout(gráficoPanelLayout);
         gráficoPanelLayout.setHorizontalGroup(
             gráficoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 178, Short.MAX_VALUE)
+            .addGap(0, 169, Short.MAX_VALUE)
         );
         gráficoPanelLayout.setVerticalGroup(
             gráficoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -295,12 +307,12 @@ public class MainFrame extends javax.swing.JFrame {
         tabelaPanel.setLayout(tabelaPanelLayout);
         tabelaPanelLayout.setHorizontalGroup(
             tabelaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(scrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 476, Short.MAX_VALUE)
+            .addComponent(scrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 485, Short.MAX_VALUE)
             .addGroup(tabelaPanelLayout.createSequentialGroup()
                 .addGap(4, 4, 4)
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(mediaField, javax.swing.GroupLayout.DEFAULT_SIZE, 355, Short.MAX_VALUE)
+                .addComponent(mediaField, javax.swing.GroupLayout.DEFAULT_SIZE, 364, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(Exportar))
         );
@@ -386,8 +398,29 @@ public class MainFrame extends javax.swing.JFrame {
         mainFrameHandler.stopTest();
     }//GEN-LAST:event_buttonPararTesteActionPerformed
 
+    private void buttonNovoCicloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonNovoCicloActionPerformed
+        // TODO add your handling code here:
+        mainFrameHandler.cycle();
+    }//GEN-LAST:event_buttonNovoCicloActionPerformed
+
     public TanquePanel getTanquePanel() {
         return tanquePanel;
+    }
+
+    public JSpinner getSpinnerNA() {
+        return spinnerNA;
+    }
+
+    public JSpinner getSpinnerTI() {
+        return spinnerTI;
+    }
+
+    public JSpinner getSpinnerTMin() {
+        return spinnerTMin;
+    }
+
+    public JSpinner getSpinnerTMax() {
+        return spinnerTMax;
     }
 
     /**

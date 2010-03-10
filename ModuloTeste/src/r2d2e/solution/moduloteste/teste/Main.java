@@ -28,6 +28,9 @@ public class Main {
      */
     public static void main(String[] args) {
 
+        double a = 1.5;
+        System.out.println(a);
+
         new Thread() {
             public void run() {
                 QuanserClient quanserClient;
