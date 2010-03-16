@@ -16,6 +16,9 @@
                 <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
                   <KeyStroke key="Ctrl+S"/>
                 </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/r2d2e/solution/moduloteste/view/resources/save.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Salvar Configura&#xe7;&#xe3;o"/>
               </Properties>
             </MenuItem>
@@ -23,6 +26,9 @@
               <Properties>
                 <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
                   <KeyStroke key="Ctrl+C"/>
+                </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/r2d2e/solution/moduloteste/view/resources/load.jpg"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Carregar Configur&#xe7;&#xe3;o"/>
               </Properties>
@@ -33,6 +39,9 @@
               <Properties>
                 <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
                   <KeyStroke key="Ctrl+Q"/>
+                </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/r2d2e/solution/moduloteste/view/resources/exit.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Sair"/>
               </Properties>
@@ -79,16 +88,16 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Component id="menuPanel" alignment="0" max="32767" attributes="0"/>
-          <Component id="splitPane" alignment="0" pref="945" max="32767" attributes="0"/>
+          <Component id="spGeral" alignment="0" pref="945" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <Component id="menuPanel" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="splitPane" pref="424" max="32767" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <Component id="spGeral" pref="494" max="32767" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -99,28 +108,28 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="separador" alignment="0" pref="945" max="32767" attributes="0"/>
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="buttonIniciarTeste" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="buttonPararTeste" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="buttonNovoCiclo" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="688" max="32767" attributes="0"/>
+                  <Component id="buttonIniciarTeste" min="-2" pref="33" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Component id="buttonPararTeste" min="-2" pref="35" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Component id="buttonNovoCiclo" min="-2" pref="33" max="-2" attributes="0"/>
+                  <EmptySpace pref="814" max="32767" attributes="0"/>
               </Group>
+              <Component id="separador" alignment="0" pref="945" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="buttonIniciarTeste" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
-                      <Component id="buttonPararTeste" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
-                      <Component id="buttonNovoCiclo" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="buttonIniciarTeste" alignment="0" min="-2" max="-2" attributes="1"/>
+                      <Component id="buttonPararTeste" min="0" pref="0" max="32767" attributes="1"/>
+                      <Component id="buttonNovoCiclo" min="0" pref="0" max="32767" attributes="1"/>
                   </Group>
-                  <EmptySpace pref="9" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Component id="separador" min="-2" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -129,7 +138,15 @@
       <SubComponents>
         <Component class="javax.swing.JButton" name="buttonIniciarTeste">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Iniciar Teste"/>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/r2d2e/solution/moduloteste/view/resources/play.png"/>
+            </Property>
+            <Property name="toolTipText" type="java.lang.String" value="Iniciar Teste"/>
+            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+              <Border info="null"/>
+            </Property>
+            <Property name="borderPainted" type="boolean" value="false"/>
+            <Property name="contentAreaFilled" type="boolean" value="false"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonIniciarTesteActionPerformed"/>
@@ -137,7 +154,12 @@
         </Component>
         <Component class="javax.swing.JButton" name="buttonPararTeste">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Parar Teste"/>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/r2d2e/solution/moduloteste/view/resources/play_stop.png"/>
+            </Property>
+            <Property name="toolTipText" type="java.lang.String" value="Parar Teste"/>
+            <Property name="borderPainted" type="boolean" value="false"/>
+            <Property name="contentAreaFilled" type="boolean" value="false"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonPararTesteActionPerformed"/>
@@ -145,7 +167,12 @@
         </Component>
         <Component class="javax.swing.JButton" name="buttonNovoCiclo">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Ciclo"/>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/r2d2e/solution/moduloteste/view/resources/cycle.png"/>
+            </Property>
+            <Property name="toolTipText" type="java.lang.String" value="Efetuar novo Ciclo"/>
+            <Property name="borderPainted" type="boolean" value="false"/>
+            <Property name="contentAreaFilled" type="boolean" value="false"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonNovoCicloActionPerformed"/>
@@ -155,10 +182,9 @@
         </Component>
       </SubComponents>
     </Container>
-    <Container class="javax.swing.JSplitPane" name="splitPane">
+    <Container class="javax.swing.JSplitPane" name="spGeral">
       <Properties>
-        <Property name="dividerLocation" type="int" value="250"/>
-        <Property name="dividerSize" type="int" value="7"/>
+        <Property name="dividerLocation" type="int" value="310"/>
         <Property name="orientation" type="int" value="0"/>
         <Property name="oneTouchExpandable" type="boolean" value="true"/>
       </Properties>
@@ -243,7 +269,7 @@
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace pref="67" max="32767" attributes="0"/>
+                      <EmptySpace pref="79" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -303,7 +329,7 @@
             <Component class="javax.swing.JSpinner" name="spinnerTMax">
               <Properties>
                 <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="new javax.swing.SpinnerNumberModel(1.0, -3.0, 3.0, 0.1)" type="code"/>
+                  <Connection code="new javax.swing.SpinnerNumberModel(1.0, 0.0, 3.0, 0.1)" type="code"/>
                 </Property>
                 <Property name="toolTipText" type="java.lang.String" value="Tens&#xe3;o M&#xe1;xima do motor"/>
                 <Property name="editor" type="javax.swing.JComponent" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
@@ -325,7 +351,7 @@
             <Component class="javax.swing.JSpinner" name="spinnerTMin">
               <Properties>
                 <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="new javax.swing.SpinnerNumberModel(1.0, -3.0, 3.0, 0.1)" type="code"/>
+                  <Connection code="new javax.swing.SpinnerNumberModel(1.0, 0.0, 3.0, 0.1)" type="code"/>
                 </Property>
                 <Property name="toolTipText" type="java.lang.String" value="Tens&#xe3;o M&#xe1;xima do motor"/>
                 <Property name="editor" type="javax.swing.JComponent" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
@@ -345,31 +371,30 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jSplitPane2" alignment="0" pref="943" max="32767" attributes="0"/>
+                  <Component id="spTabela" alignment="0" pref="943" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jSplitPane2" alignment="0" pref="249" max="32767" attributes="0"/>
+                  <Component id="spTabela" alignment="0" pref="309" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Container class="javax.swing.JSplitPane" name="jSplitPane2">
+            <Container class="javax.swing.JSplitPane" name="spTabela">
               <Properties>
-                <Property name="dividerSize" type="int" value="7"/>
+                <Property name="dividerLocation" type="int" value="600"/>
                 <Property name="oneTouchExpandable" type="boolean" value="true"/>
               </Properties>
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JSplitPaneSupportLayout"/>
               <SubComponents>
-                <Container class="javax.swing.JSplitPane" name="jSplitPane1">
+                <Container class="javax.swing.JSplitPane" name="spTanque">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
                     <Property name="dividerLocation" type="int" value="270"/>
-                    <Property name="dividerSize" type="int" value="7"/>
                     <Property name="oneTouchExpandable" type="boolean" value="true"/>
                   </Properties>
                   <Constraints>
@@ -380,16 +405,19 @@
 
                   <Layout class="org.netbeans.modules.form.compat2.layouts.support.JSplitPaneSupportLayout"/>
                   <SubComponents>
-                    <Container class="javax.swing.JPanel" name="gr&#xe1;ficoPanel">
+                    <Container class="javax.swing.JPanel" name="graficoPanel">
                       <Properties>
                         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="ff" green="ff" red="ff" type="rgb"/>
                         </Property>
                         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                           <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
-                            <LineBorder/>
+                            <LineBorder>
+                              <Color PropertyName="color" blue="99" green="99" red="99" type="rgb"/>
+                            </LineBorder>
                           </Border>
                         </Property>
+                        <Property name="opaque" type="boolean" value="false"/>
                       </Properties>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JSplitPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JSplitPaneSupportLayout$JSplitPaneConstraintsDescription">
@@ -397,23 +425,19 @@
                         </Constraint>
                       </Constraints>
 
-                      <Layout>
-                        <DimensionLayout dim="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <EmptySpace min="0" pref="169" max="32767" attributes="0"/>
-                          </Group>
-                        </DimensionLayout>
-                        <DimensionLayout dim="1">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <EmptySpace min="0" pref="243" max="32767" attributes="0"/>
-                          </Group>
-                        </DimensionLayout>
-                      </Layout>
+                      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
                     </Container>
                     <Container class="r2d2e.solution.moduloteste.view.TanquePanel" name="tanquePanel">
                       <Properties>
                         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                          <Color blue="99" green="99" red="99" type="rgb"/>
+                        </Property>
+                        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                          <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                            <LineBorder>
+                              <Color PropertyName="color" blue="99" green="99" red="99" type="rgb"/>
+                            </LineBorder>
+                          </Border>
                         </Property>
                         <Property name="opaque" type="boolean" value="false"/>
                       </Properties>
@@ -426,12 +450,12 @@
                       <Layout>
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <EmptySpace min="0" pref="269" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="267" max="32767" attributes="0"/>
                           </Group>
                         </DimensionLayout>
                         <DimensionLayout dim="1">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <EmptySpace min="0" pref="245" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="303" max="32767" attributes="0"/>
                           </Group>
                         </DimensionLayout>
                       </Layout>
@@ -439,6 +463,15 @@
                   </SubComponents>
                 </Container>
                 <Container class="javax.swing.JPanel" name="tabelaPanel">
+                  <Properties>
+                    <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                      <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                        <LineBorder>
+                          <Color PropertyName="color" blue="99" green="99" red="99" type="rgb"/>
+                        </LineBorder>
+                      </Border>
+                    </Property>
+                  </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JSplitPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JSplitPaneSupportLayout$JSplitPaneConstraintsDescription">
                       <JSplitPaneConstraints position="right"/>
@@ -448,26 +481,36 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="scrollPane" alignment="0" pref="485" max="32767" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
                               <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="mediaField" pref="364" max="32767" attributes="0"/>
+                              <Component id="mediaField" pref="227" max="32767" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="Exportar" min="-2" max="-2" attributes="0"/>
+                              <Component id="Exportar" min="-2" pref="26" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                           </Group>
+                          <Component id="scrollPane" alignment="0" pref="335" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="scrollPane" pref="195" max="32767" attributes="0"/>
-                              <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="mediaField" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="Exportar" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="scrollPane" pref="256" max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="Exportar" min="-2" pref="23" max="-2" attributes="1"/>
+                                  </Group>
+                                  <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
+                                      <Group type="102" attributes="0">
+                                          <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                                          <Component id="mediaField" max="32767" attributes="1"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                                          <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
                               </Group>
                               <EmptySpace min="-2" max="-2" attributes="0"/>
                           </Group>
@@ -476,6 +519,18 @@
                   </Layout>
                   <SubComponents>
                     <Container class="javax.swing.JScrollPane" name="scrollPane">
+                      <Properties>
+                        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                        </Property>
+                        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                          <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                            <LineBorder>
+                              <Color PropertyName="color" blue="99" green="99" red="99" type="rgb"/>
+                            </LineBorder>
+                          </Border>
+                        </Property>
+                      </Properties>
                       <AuxValues>
                         <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
                       </AuxValues>
@@ -485,11 +540,33 @@
                         <Component class="javax.swing.JTable" name="table">
                           <Properties>
                             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                              <Table columnCount="3" rowCount="1">
+                              <Table columnCount="3" rowCount="0">
                                 <Column editable="false" title="Tens&#xe3;o" type="java.lang.Double"/>
                                 <Column editable="false" title="Tempo" type="java.lang.Double"/>
                                 <Column editable="false" title="Km" type="java.lang.Double"/>
                               </Table>
+                            </Property>
+                            <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+                              <TableColumnModel selectionModel="0">
+                                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                                  <Title/>
+                                  <Editor/>
+                                  <Renderer/>
+                                </Column>
+                                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                                  <Title/>
+                                  <Editor/>
+                                  <Renderer/>
+                                </Column>
+                                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                                  <Title/>
+                                  <Editor/>
+                                  <Renderer/>
+                                </Column>
+                              </TableColumnModel>
+                            </Property>
+                            <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
+                              <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                             </Property>
                           </Properties>
                         </Component>
@@ -508,7 +585,12 @@
                     </Component>
                     <Component class="javax.swing.JButton" name="Exportar">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Ex"/>
+                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                          <Image iconType="3" name="/r2d2e/solution/moduloteste/view/resources/export.png"/>
+                        </Property>
+                        <Property name="toolTipText" type="java.lang.String" value="Exportar as informa&#xe7;&#xf5;es da tabela e do km m&#xe9;dio"/>
+                        <Property name="borderPainted" type="boolean" value="false"/>
+                        <Property name="contentAreaFilled" type="boolean" value="false"/>
                       </Properties>
                     </Component>
                   </SubComponents>

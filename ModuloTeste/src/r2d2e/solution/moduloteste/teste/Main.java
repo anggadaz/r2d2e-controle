@@ -8,10 +8,8 @@
  */
 package r2d2e.solution.moduloteste.teste;
 
-import br.ufrn.dca.controle.QuanserClient;
-import br.ufrn.dca.controle.QuanserClientException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import r2d2e.solution.moduloteste.domain.QuanserClientException;
+import r2d2e.solution.moduloteste.domain.QuanserClient;
 
 /**
  *

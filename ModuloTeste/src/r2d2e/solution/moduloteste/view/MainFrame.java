@@ -11,8 +11,14 @@
 
 package r2d2e.solution.moduloteste.view;
 
+import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JSpinner;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.UIManager;
+import org.jvnet.substance.skin.SubstanceBusinessBlackSteelLookAndFeel;
 import r2d2e.solution.moduloteste.domain.controlerInterface;
 import r2d2e.solution.moduloteste.handler.MainFrameHandler;
 
@@ -28,8 +34,11 @@ public class MainFrame extends javax.swing.JFrame {
     /** Creates new form mainFrame */
     public MainFrame() {
         initComponents();
+        init();
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         controlerInterface.tanquePanel = tanquePanel;
+        controlerInterface.mainFrameHandler = mainFrameHandler;
+        buttonPararTeste.setEnabled(false);
     }
 
     /** This method is called from within the constructor to
@@ -47,7 +56,7 @@ public class MainFrame extends javax.swing.JFrame {
         buttonPararTeste = new javax.swing.JButton();
         buttonNovoCiclo = new javax.swing.JButton();
         separador = new javax.swing.JSeparator();
-        splitPane = new javax.swing.JSplitPane();
+        spGeral = new javax.swing.JSplitPane();
         confPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -62,9 +71,9 @@ public class MainFrame extends javax.swing.JFrame {
         spinnerNA = new javax.swing.JSpinner();
         spinnerTMin = new javax.swing.JSpinner();
         contentPanel = new javax.swing.JPanel();
-        jSplitPane2 = new javax.swing.JSplitPane();
-        jSplitPane1 = new javax.swing.JSplitPane();
-        gráficoPanel = new javax.swing.JPanel();
+        spTabela = new javax.swing.JSplitPane();
+        spTanque = new javax.swing.JSplitPane();
+        graficoPanel = new javax.swing.JPanel();
         tanquePanel = new r2d2e.solution.moduloteste.view.TanquePanel();
         tabelaPanel = new javax.swing.JPanel();
         scrollPane = new javax.swing.JScrollPane();
@@ -85,21 +94,31 @@ public class MainFrame extends javax.swing.JFrame {
         setTitle("Módulo de Teste");
         setName("mainFrame"); // NOI18N
 
-        buttonIniciarTeste.setText("Iniciar Teste");
+        buttonIniciarTeste.setIcon(new javax.swing.ImageIcon(getClass().getResource("/r2d2e/solution/moduloteste/view/resources/play.png"))); // NOI18N
+        buttonIniciarTeste.setToolTipText("Iniciar Teste");
+        buttonIniciarTeste.setBorder(null);
+        buttonIniciarTeste.setBorderPainted(false);
+        buttonIniciarTeste.setContentAreaFilled(false);
         buttonIniciarTeste.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonIniciarTesteActionPerformed(evt);
             }
         });
 
-        buttonPararTeste.setText("Parar Teste");
+        buttonPararTeste.setIcon(new javax.swing.ImageIcon(getClass().getResource("/r2d2e/solution/moduloteste/view/resources/play_stop.png"))); // NOI18N
+        buttonPararTeste.setToolTipText("Parar Teste");
+        buttonPararTeste.setBorderPainted(false);
+        buttonPararTeste.setContentAreaFilled(false);
         buttonPararTeste.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonPararTesteActionPerformed(evt);
             }
         });
 
-        buttonNovoCiclo.setText("Ciclo");
+        buttonNovoCiclo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/r2d2e/solution/moduloteste/view/resources/cycle.png"))); // NOI18N
+        buttonNovoCiclo.setToolTipText("Efetuar novo Ciclo");
+        buttonNovoCiclo.setBorderPainted(false);
+        buttonNovoCiclo.setContentAreaFilled(false);
         buttonNovoCiclo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonNovoCicloActionPerformed(evt);
@@ -110,32 +129,31 @@ public class MainFrame extends javax.swing.JFrame {
         menuPanel.setLayout(menuPanelLayout);
         menuPanelLayout.setHorizontalGroup(
             menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(separador, javax.swing.GroupLayout.DEFAULT_SIZE, 945, Short.MAX_VALUE)
             .addGroup(menuPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(buttonIniciarTeste)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(buttonPararTeste)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(buttonNovoCiclo)
-                .addContainerGap(688, Short.MAX_VALUE))
+                .addComponent(buttonIniciarTeste, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(buttonPararTeste, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(buttonNovoCiclo, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(814, Short.MAX_VALUE))
+            .addComponent(separador, javax.swing.GroupLayout.DEFAULT_SIZE, 945, Short.MAX_VALUE)
         );
         menuPanelLayout.setVerticalGroup(
             menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menuPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(buttonIniciarTeste, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buttonPararTeste, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buttonNovoCiclo, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(buttonIniciarTeste, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(buttonPararTeste, 0, 0, Short.MAX_VALUE)
+                    .addComponent(buttonNovoCiclo, 0, 0, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(separador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        splitPane.setDividerLocation(250);
-        splitPane.setDividerSize(7);
-        splitPane.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
-        splitPane.setOneTouchExpandable(true);
+        spGeral.setDividerLocation(310);
+        spGeral.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
+        spGeral.setOneTouchExpandable(true);
 
         confPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Configurações"));
 
@@ -159,7 +177,7 @@ public class MainFrame extends javax.swing.JFrame {
         spinnerTI.setToolTipText("Quanto a tensão irá variar");
         spinnerTI.setEditor(new javax.swing.JSpinner.NumberEditor(spinnerTI, "#,##0.0#"));
 
-        spinnerTMax.setModel(new javax.swing.SpinnerNumberModel(1.0, -3.0, 3.0, 0.1));
+        spinnerTMax.setModel(new javax.swing.SpinnerNumberModel(1.0, 0.0, 3.0, 0.1));
         spinnerTMax.setToolTipText("Tensão Máxima do motor");
         spinnerTMax.setEditor(new javax.swing.JSpinner.NumberEditor(spinnerTMax, "#,##0.0#"));
 
@@ -167,7 +185,7 @@ public class MainFrame extends javax.swing.JFrame {
         spinnerNA.setToolTipText("Quanto a tensão irá variar");
         spinnerNA.setEditor(new javax.swing.JSpinner.NumberEditor(spinnerNA, "#,##0.0#"));
 
-        spinnerTMin.setModel(new javax.swing.SpinnerNumberModel(1.0, -3.0, 3.0, 0.1));
+        spinnerTMin.setModel(new javax.swing.SpinnerNumberModel(1.0, 0.0, 3.0, 0.1));
         spinnerTMin.setToolTipText("Tensão Máxima do motor");
         spinnerTMin.setEditor(new javax.swing.JSpinner.NumberEditor(spinnerTMin, "#,##0.0#"));
 
@@ -224,56 +242,50 @@ public class MainFrame extends javax.swing.JFrame {
                             .addComponent(spinnerTI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel8)
                             .addComponent(jLabel3))))
-                .addContainerGap(67, Short.MAX_VALUE))
+                .addContainerGap(79, Short.MAX_VALUE))
         );
 
-        splitPane.setBottomComponent(confPanel);
+        spGeral.setBottomComponent(confPanel);
 
-        jSplitPane2.setDividerSize(7);
-        jSplitPane2.setOneTouchExpandable(true);
+        spTabela.setDividerLocation(600);
+        spTabela.setOneTouchExpandable(true);
 
-        jSplitPane1.setBackground(new java.awt.Color(255, 255, 255));
-        jSplitPane1.setDividerLocation(270);
-        jSplitPane1.setDividerSize(7);
-        jSplitPane1.setOneTouchExpandable(true);
+        spTanque.setBackground(new java.awt.Color(255, 255, 255));
+        spTanque.setDividerLocation(270);
+        spTanque.setOneTouchExpandable(true);
 
-        gráficoPanel.setBackground(new java.awt.Color(255, 255, 255));
-        gráficoPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        graficoPanel.setBackground(new java.awt.Color(255, 255, 255));
+        graficoPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
+        graficoPanel.setOpaque(false);
+        spTanque.setRightComponent(graficoPanel);
 
-        javax.swing.GroupLayout gráficoPanelLayout = new javax.swing.GroupLayout(gráficoPanel);
-        gráficoPanel.setLayout(gráficoPanelLayout);
-        gráficoPanelLayout.setHorizontalGroup(
-            gráficoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 169, Short.MAX_VALUE)
-        );
-        gráficoPanelLayout.setVerticalGroup(
-            gráficoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 243, Short.MAX_VALUE)
-        );
-
-        jSplitPane1.setRightComponent(gráficoPanel);
-
-        tanquePanel.setBackground(new java.awt.Color(255, 255, 255));
+        tanquePanel.setBackground(new java.awt.Color(153, 153, 153));
+        tanquePanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
         tanquePanel.setOpaque(false);
 
         javax.swing.GroupLayout tanquePanelLayout = new javax.swing.GroupLayout(tanquePanel);
         tanquePanel.setLayout(tanquePanelLayout);
         tanquePanelLayout.setHorizontalGroup(
             tanquePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 269, Short.MAX_VALUE)
+            .addGap(0, 267, Short.MAX_VALUE)
         );
         tanquePanelLayout.setVerticalGroup(
             tanquePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 245, Short.MAX_VALUE)
+            .addGap(0, 303, Short.MAX_VALUE)
         );
 
-        jSplitPane1.setLeftComponent(tanquePanel);
+        spTanque.setLeftComponent(tanquePanel);
 
-        jSplitPane2.setLeftComponent(jSplitPane1);
+        spTabela.setLeftComponent(spTanque);
+
+        tabelaPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
+
+        scrollPane.setBackground(new java.awt.Color(255, 255, 255));
+        scrollPane.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
 
         table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null}
+
             },
             new String [] {
                 "Tensão", "Tempo", "Km"
@@ -301,60 +313,72 @@ public class MainFrame extends javax.swing.JFrame {
         mediaField.setEditable(false);
         mediaField.setToolTipText("Valor Médio de Km");
 
-        Exportar.setText("Ex");
+        Exportar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/r2d2e/solution/moduloteste/view/resources/export.png"))); // NOI18N
+        Exportar.setToolTipText("Exportar as informações da tabela e do km médio");
+        Exportar.setBorderPainted(false);
+        Exportar.setContentAreaFilled(false);
 
         javax.swing.GroupLayout tabelaPanelLayout = new javax.swing.GroupLayout(tabelaPanel);
         tabelaPanel.setLayout(tabelaPanelLayout);
         tabelaPanelLayout.setHorizontalGroup(
             tabelaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(scrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 485, Short.MAX_VALUE)
             .addGroup(tabelaPanelLayout.createSequentialGroup()
-                .addGap(4, 4, 4)
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(mediaField, javax.swing.GroupLayout.DEFAULT_SIZE, 364, Short.MAX_VALUE)
+                .addComponent(mediaField, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(Exportar))
+                .addComponent(Exportar, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+            .addComponent(scrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 335, Short.MAX_VALUE)
         );
         tabelaPanelLayout.setVerticalGroup(
             tabelaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(tabelaPanelLayout.createSequentialGroup()
-                .addComponent(scrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addGroup(tabelaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(mediaField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Exportar)
-                    .addComponent(jLabel9))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tabelaPanelLayout.createSequentialGroup()
+                .addComponent(scrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 257, Short.MAX_VALUE)
+                .addGroup(tabelaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(tabelaPanelLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Exportar, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(tabelaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(tabelaPanelLayout.createSequentialGroup()
+                            .addGap(18, 18, 18)
+                            .addComponent(mediaField))
+                        .addGroup(tabelaPanelLayout.createSequentialGroup()
+                            .addGap(18, 18, 18)
+                            .addComponent(jLabel9))))
                 .addContainerGap())
         );
 
-        jSplitPane2.setRightComponent(tabelaPanel);
+        spTabela.setRightComponent(tabelaPanel);
 
         javax.swing.GroupLayout contentPanelLayout = new javax.swing.GroupLayout(contentPanel);
         contentPanel.setLayout(contentPanelLayout);
         contentPanelLayout.setHorizontalGroup(
             contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSplitPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 943, Short.MAX_VALUE)
+            .addComponent(spTabela, javax.swing.GroupLayout.DEFAULT_SIZE, 943, Short.MAX_VALUE)
         );
         contentPanelLayout.setVerticalGroup(
             contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSplitPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE)
+            .addComponent(spTabela, javax.swing.GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE)
         );
 
-        splitPane.setLeftComponent(contentPanel);
+        spGeral.setLeftComponent(contentPanel);
 
         arquivoMenu.setText("Arquivo");
 
         SalvarConfig.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
+        SalvarConfig.setIcon(new javax.swing.ImageIcon(getClass().getResource("/r2d2e/solution/moduloteste/view/resources/save.png"))); // NOI18N
         SalvarConfig.setText("Salvar Configuração");
         arquivoMenu.add(SalvarConfig);
 
         CarregarConfig.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
+        CarregarConfig.setIcon(new javax.swing.ImageIcon(getClass().getResource("/r2d2e/solution/moduloteste/view/resources/load.jpg"))); // NOI18N
         CarregarConfig.setText("Carregar Configurção");
         arquivoMenu.add(CarregarConfig);
         arquivoMenu.add(separadorMenu);
 
         SairMenu.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.CTRL_MASK));
+        SairMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/r2d2e/solution/moduloteste/view/resources/exit.png"))); // NOI18N
         SairMenu.setText("Sair");
         arquivoMenu.add(SairMenu);
 
@@ -374,14 +398,14 @@ public class MainFrame extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(menuPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(splitPane, javax.swing.GroupLayout.DEFAULT_SIZE, 945, Short.MAX_VALUE)
+            .addComponent(spGeral, javax.swing.GroupLayout.DEFAULT_SIZE, 945, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(menuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(splitPane, javax.swing.GroupLayout.DEFAULT_SIZE, 424, Short.MAX_VALUE)
+                .addComponent(spGeral, javax.swing.GroupLayout.DEFAULT_SIZE, 494, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -423,12 +447,49 @@ public class MainFrame extends javax.swing.JFrame {
         return spinnerTMax;
     }
 
+    public JTable getTable() {
+        return table;
+    }
+
+    public JTextField getMediaField() {
+        return mediaField;
+    }
+
+    public JButton getButtonIniciarTeste() {
+        return buttonIniciarTeste;
+    }
+
+    public JButton getButtonNovoCiclo() {
+        return buttonNovoCiclo;
+    }
+
+    public JButton getButtonPararTeste() {
+        return buttonPararTeste;
+    }
+
+    private void init() {
+        spTabela.setDividerLocation(1.0);
+        spTanque.setDividerLocation(1.0);
+        spGeral.setDividerLocation(1.0);
+    }
+
+    private static void SkinInitialize() {
+        JFrame.setDefaultLookAndFeelDecorated(true);
+        JDialog.setDefaultLookAndFeelDecorated(true);
+
+        try { /*SubstanceBusinessLookAndFeel()*/
+            UIManager.setLookAndFeel(new SubstanceBusinessBlackSteelLookAndFeel());
+        } catch (Exception e) {
+            System.out.println("Substance Raven Graphite failed to initialize");
+        }
+    }
     /**
     * @param args the command line arguments
     */
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                SkinInitialize();
                 new MainFrame().setVisible(true);
             }
         });
@@ -446,7 +507,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton buttonPararTeste;
     private javax.swing.JPanel confPanel;
     private javax.swing.JPanel contentPanel;
-    private javax.swing.JPanel gráficoPanel;
+    private javax.swing.JPanel graficoPanel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -456,8 +517,6 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JSplitPane jSplitPane1;
-    private javax.swing.JSplitPane jSplitPane2;
     private javax.swing.JTextField mediaField;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JPanel menuPanel;
@@ -466,11 +525,13 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JSeparator separador;
     private javax.swing.JSeparator separadorMenu;
     private javax.swing.JMenuItem sobre;
+    private javax.swing.JSplitPane spGeral;
+    private javax.swing.JSplitPane spTabela;
+    private javax.swing.JSplitPane spTanque;
     private javax.swing.JSpinner spinnerNA;
     private javax.swing.JSpinner spinnerTI;
     private javax.swing.JSpinner spinnerTMax;
     private javax.swing.JSpinner spinnerTMin;
-    private javax.swing.JSplitPane splitPane;
     private javax.swing.JPanel tabelaPanel;
     private javax.swing.JTable table;
     private r2d2e.solution.moduloteste.view.TanquePanel tanquePanel;
