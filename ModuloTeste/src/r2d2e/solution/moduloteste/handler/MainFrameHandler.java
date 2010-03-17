@@ -31,6 +31,8 @@ public class MainFrameHandler {
     private Double tensaoStep;
     private Double nivelAgua;
     private double sumKm = 0;
+    private int numInteracoesMax = 0;
+    private int numInteracoesAtual = 0;
 
     public MainFrameHandler(MainFrame mainFrame) {
         this.mainFrame = mainFrame;
@@ -45,28 +47,37 @@ public class MainFrameHandler {
         setEnable(false);
         controlerInterface.end = false;
         verifyCalibration();
+        calculateInteracoesMax();
+        numInteracoesAtual = 0;
         mainFrame.getButtonPararTeste().setEnabled(true);
+        mainFrame.getButtonNovoCiclo().setEnabled(true);
     }
 
     public void stopTest() {
-        if(threadCycle != null){
+        if (threadCycle != null) {
             setEnable(true);
             cleanInterface();
             quanser.stopMotor();
             threadCycle.stopTimer();
-            if(!controlerInterface.isDrying){
+            if (!controlerInterface.isDrying) {
                 controlerInterface.end = true;
                 controlerInterface.tanquePanelDry(quanser);
             }
             mainFrame.getButtonPararTeste().setEnabled(false);
+            numInteracoesAtual = 0;
+            numInteracoesMax = 0;
         }
     }
 
     public void cycle() {
-        if ((tensaoAtual <= tensaoMax) && quanser.isServerOk()) {
+        System.out.println("Tensao " + tensaoAtual);
+        System.out.println("step " + tensaoStep);
+        System.out.println("InteracoesAtual " + numInteracoesAtual);
+        if ((numInteracoesAtual < numInteracoesMax) && quanser.isServerOk()) {
             threadCycle = new ThreadCycle(tensaoAtual, nivelAgua, quanser);
             threadCycle.start();
             tensaoAtual += tensaoStep;
+            numInteracoesAtual += 1;
             mainFrame.getButtonNovoCiclo().setEnabled(false);
         }
     }
@@ -81,12 +92,18 @@ public class MainFrameHandler {
         linha.add(km);
         dtm.addRow(linha);
         sumKm += km;
-        mainFrame.getButtonNovoCiclo().setEnabled(true);
     }
 
     public void verifyTestEnd() {
-        if (tensaoAtual > tensaoMax) {
+        if (numInteracoesAtual < numInteracoesMax) {
             end();
+        }
+    }
+
+    private void cleanTable() {
+        DefaultTableModel dtm = (DefaultTableModel) mainFrame.getTable().getModel();
+        for (int i = 0; i < dtm.getRowCount(); i++) {
+            dtm.removeRow(i);
         }
     }
 
@@ -96,6 +113,8 @@ public class MainFrameHandler {
         field.setText(mediaKm.toString());
         setEnable(true);
         controlerInterface.end = true;
+        numInteracoesAtual = 0;
+        numInteracoesMax = 0;
     }
 
     private double calculateKm(double tensao, double tempo, double nivel) {
@@ -118,7 +137,7 @@ public class MainFrameHandler {
     }
 
     private void cleanInterface() {
-        mainFrame.getTable().removeAll();
+        cleanTable();
         mainFrame.getMediaField().setText("");
     }
 
@@ -126,5 +145,18 @@ public class MainFrameHandler {
         Double nivel_Min = quanser.readSensor1();
         controlerInterface.NIVEL_LOW_CALIBRATION = nivel_Min + 0.1;
         System.out.println("nivelMIN " + nivel_Min);
+    }
+
+    public void closeConnection() {
+        quanser.closeConnection();
+    }
+
+    private void calculateInteracoesMax() {
+        numInteracoesMax = (int) ((tensaoMax - tensaoAtual) / tensaoStep) + 1;
+        System.out.println("NumIntera " + numInteracoesMax);
+    }
+
+    public void ciclyEnable() {
+        mainFrame.getButtonNovoCiclo().setEnabled(true);
     }
 }

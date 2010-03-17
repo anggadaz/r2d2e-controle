@@ -19,6 +19,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 import org.jvnet.substance.skin.SubstanceBusinessBlackSteelLookAndFeel;
+import r2d2e.solution.moduloteste.domain.Quanser;
 import r2d2e.solution.moduloteste.domain.controlerInterface;
 import r2d2e.solution.moduloteste.handler.MainFrameHandler;
 
@@ -39,6 +40,7 @@ public class MainFrame extends javax.swing.JFrame {
         controlerInterface.tanquePanel = tanquePanel;
         controlerInterface.mainFrameHandler = mainFrameHandler;
         buttonPararTeste.setEnabled(false);
+        buttonNovoCiclo.setEnabled(false);
     }
 
     /** This method is called from within the constructor to
@@ -93,6 +95,11 @@ public class MainFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Módulo de Teste");
         setName("mainFrame"); // NOI18N
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         buttonIniciarTeste.setIcon(new javax.swing.ImageIcon(getClass().getResource("/r2d2e/solution/moduloteste/view/resources/play.png"))); // NOI18N
         buttonIniciarTeste.setToolTipText("Iniciar Teste");
@@ -334,18 +341,13 @@ public class MainFrame extends javax.swing.JFrame {
         tabelaPanelLayout.setVerticalGroup(
             tabelaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tabelaPanelLayout.createSequentialGroup()
-                .addComponent(scrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 257, Short.MAX_VALUE)
+                .addComponent(scrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
+                .addGap(15, 15, 15)
                 .addGroup(tabelaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(tabelaPanelLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Exportar, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Exportar, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(tabelaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(tabelaPanelLayout.createSequentialGroup()
-                            .addGap(18, 18, 18)
-                            .addComponent(mediaField))
-                        .addGroup(tabelaPanelLayout.createSequentialGroup()
-                            .addGap(18, 18, 18)
-                            .addComponent(jLabel9))))
+                        .addComponent(mediaField)
+                        .addComponent(jLabel9)))
                 .addContainerGap())
         );
 
@@ -373,13 +375,18 @@ public class MainFrame extends javax.swing.JFrame {
 
         CarregarConfig.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
         CarregarConfig.setIcon(new javax.swing.ImageIcon(getClass().getResource("/r2d2e/solution/moduloteste/view/resources/load.jpg"))); // NOI18N
-        CarregarConfig.setText("Carregar Configurção");
+        CarregarConfig.setText("Carregar Configuração");
         arquivoMenu.add(CarregarConfig);
         arquivoMenu.add(separadorMenu);
 
         SairMenu.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.CTRL_MASK));
         SairMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/r2d2e/solution/moduloteste/view/resources/exit.png"))); // NOI18N
         SairMenu.setText("Sair");
+        SairMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SairMenuActionPerformed(evt);
+            }
+        });
         arquivoMenu.add(SairMenu);
 
         menuBar.add(arquivoMenu);
@@ -426,6 +433,17 @@ public class MainFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         mainFrameHandler.cycle();
     }//GEN-LAST:event_buttonNovoCicloActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        // TODO add your handling code here:
+        mainFrameHandler.closeConnection();
+    }//GEN-LAST:event_formWindowClosing
+
+    private void SairMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SairMenuActionPerformed
+        // TODO add your handling code here:
+        mainFrameHandler.closeConnection();
+        dispose();
+    }//GEN-LAST:event_SairMenuActionPerformed
 
     public TanquePanel getTanquePanel() {
         return tanquePanel;

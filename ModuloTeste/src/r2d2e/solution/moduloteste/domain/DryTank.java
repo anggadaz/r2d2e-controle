@@ -7,6 +7,7 @@ package r2d2e.solution.moduloteste.domain;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.Timer;
+import r2d2e.solution.moduloteste.handler.MainFrameHandler;
 import r2d2e.solution.moduloteste.view.TanquePanel;
 
 /**
@@ -28,7 +29,6 @@ public class DryTank implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         double nivel = quanser.readSensor1();
         tanquePanel.setLevelWater(nivel);
-        System.out.println("nivel " + nivel);
         if (nivel <= controlerInterface.NIVEL_LOW_CALIBRATION) {
             tanquePanel.setLevelWater(0);
             stop();
@@ -38,8 +38,9 @@ public class DryTank implements ActionListener {
     public void stop() {
         controlerInterface.isDrying = false;
         time.stop();
-        if (controlerInterface.end) {
-            quanser.closeConnection();
-        }
+        controlerInterface.ciclyEnable();
+//        if (controlerInterface.end) {
+//            quanser.closeConnection();
+//        }
     }
 }

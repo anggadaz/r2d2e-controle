@@ -46,4 +46,7 @@ public class controlerInterface {
     static void verifyTestEnd() {
         mainFrameHandler.verifyTestEnd();
     }
+    static void ciclyEnable(){
+        mainFrameHandler.ciclyEnable();
+    }
 }
