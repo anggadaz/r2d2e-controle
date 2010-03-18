@@ -1,43 +1,40 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package r2d2e.solution.moduloteste.domain;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.Timer;
-import org.openide.util.Exceptions;
 
 /**
  *
- * @author demetrios
+ * @author Rivaldo
  */
+
 public class ThreadCycle extends Thread {
 
     private double nivelAgua;
     private Double tensaoAtual;
-    private long initTime;
     private Quanser quanser;
-    private Timer t;
+
+    private FillTank fillTank;
     
     public ThreadCycle(double tensao, double nivelAgua, Quanser quanser) {
         tensaoAtual = tensao;
         this.nivelAgua = nivelAgua;
         this.quanser = quanser;
+
+        fillTank = new FillTank(quanser,100,tensao, nivelAgua);
     }
 
     @Override
     public void run() {
-            initTime = System.currentTimeMillis();
-            quanser.writeBomb(tensaoAtual);
-            t = new Timer(100, null);
-            final FillTank fillTank = new FillTank(quanser, t, tensaoAtual, initTime, nivelAgua);
-            t.addActionListener(fillTank);
-            t.start();
+
+        quanser.writeBomb(tensaoAtual);
+        
+        fillTank.setInitTime(System.currentTimeMillis());
+        fillTank.start();
+
     }
 
     public void stopTimer(){
-        t.stop();
+        fillTank.stop();
     }
 }

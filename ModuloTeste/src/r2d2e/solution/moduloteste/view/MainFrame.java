@@ -14,12 +14,14 @@ package r2d2e.solution.moduloteste.view;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 import org.jvnet.substance.skin.SubstanceBusinessBlackSteelLookAndFeel;
-import r2d2e.solution.moduloteste.domain.Quanser;
+import r2d2e.solution.moduloteste.domain.BarChart;
+import r2d2e.solution.moduloteste.domain.HistoChart;
 import r2d2e.solution.moduloteste.domain.controlerInterface;
 import r2d2e.solution.moduloteste.handler.MainFrameHandler;
 
@@ -36,6 +38,7 @@ public class MainFrame extends javax.swing.JFrame {
     public MainFrame() {
         initComponents();
         init();
+        initChart();
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         controlerInterface.tanquePanel = tanquePanel;
         controlerInterface.mainFrameHandler = mainFrameHandler;
@@ -75,8 +78,10 @@ public class MainFrame extends javax.swing.JFrame {
         contentPanel = new javax.swing.JPanel();
         spTabela = new javax.swing.JSplitPane();
         spTanque = new javax.swing.JSplitPane();
-        graficoPanel = new javax.swing.JPanel();
         tanquePanel = new r2d2e.solution.moduloteste.view.TanquePanel();
+        panelGrafico = new javax.swing.JTabbedPane();
+        graficoTensao = new javax.swing.JPanel();
+        graficoNivel = new javax.swing.JPanel();
         tabelaPanel = new javax.swing.JPanel();
         scrollPane = new javax.swing.JScrollPane();
         table = new javax.swing.JTable();
@@ -143,7 +148,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addComponent(buttonPararTeste, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(buttonNovoCiclo, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(814, Short.MAX_VALUE))
+                .addContainerGap(837, Short.MAX_VALUE))
             .addComponent(separador, javax.swing.GroupLayout.DEFAULT_SIZE, 945, Short.MAX_VALUE)
         );
         menuPanelLayout.setVerticalGroup(
@@ -214,9 +219,9 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(confPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(spinnerTI, javax.swing.GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE)
-                    .addComponent(spinnerTMax, javax.swing.GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE)
-                    .addComponent(spinnerTMin, javax.swing.GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE))
+                    .addComponent(spinnerTI, javax.swing.GroupLayout.DEFAULT_SIZE, 265, Short.MAX_VALUE)
+                    .addComponent(spinnerTMax, javax.swing.GroupLayout.DEFAULT_SIZE, 265, Short.MAX_VALUE)
+                    .addComponent(spinnerTMin, javax.swing.GroupLayout.DEFAULT_SIZE, 265, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(confPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel8)
@@ -249,7 +254,7 @@ public class MainFrame extends javax.swing.JFrame {
                             .addComponent(spinnerTI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel8)
                             .addComponent(jLabel3))))
-                .addContainerGap(79, Short.MAX_VALUE))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
 
         spGeral.setBottomComponent(confPanel);
@@ -261,11 +266,6 @@ public class MainFrame extends javax.swing.JFrame {
         spTanque.setDividerLocation(270);
         spTanque.setOneTouchExpandable(true);
 
-        graficoPanel.setBackground(new java.awt.Color(255, 255, 255));
-        graficoPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
-        graficoPanel.setOpaque(false);
-        spTanque.setRightComponent(graficoPanel);
-
         tanquePanel.setBackground(new java.awt.Color(153, 153, 153));
         tanquePanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
         tanquePanel.setOpaque(false);
@@ -274,20 +274,24 @@ public class MainFrame extends javax.swing.JFrame {
         tanquePanel.setLayout(tanquePanelLayout);
         tanquePanelLayout.setHorizontalGroup(
             tanquePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 267, Short.MAX_VALUE)
+            .addGap(0, 266, Short.MAX_VALUE)
         );
         tanquePanelLayout.setVerticalGroup(
             tanquePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 303, Short.MAX_VALUE)
+            .addGap(0, 298, Short.MAX_VALUE)
         );
 
         spTanque.setLeftComponent(tanquePanel);
+
+        panelGrafico.addTab("Tensão x Tempo", graficoTensao);
+        panelGrafico.addTab("Nível x Tempo", graficoNivel);
+
+        spTanque.setRightComponent(panelGrafico);
 
         spTabela.setLeftComponent(spTanque);
 
         tabelaPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
 
-        scrollPane.setBackground(new java.awt.Color(255, 255, 255));
         scrollPane.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
 
         table.setModel(new javax.swing.table.DefaultTableModel(
@@ -332,16 +336,16 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(tabelaPanelLayout.createSequentialGroup()
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(mediaField, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)
+                .addComponent(mediaField, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(Exportar, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
-            .addComponent(scrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 335, Short.MAX_VALUE)
+            .addComponent(scrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 328, Short.MAX_VALUE)
         );
         tabelaPanelLayout.setVerticalGroup(
             tabelaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tabelaPanelLayout.createSequentialGroup()
-                .addComponent(scrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
+                .addComponent(scrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 239, Short.MAX_VALUE)
                 .addGap(15, 15, 15)
                 .addGroup(tabelaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(Exportar, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -357,11 +361,11 @@ public class MainFrame extends javax.swing.JFrame {
         contentPanel.setLayout(contentPanelLayout);
         contentPanelLayout.setHorizontalGroup(
             contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(spTabela, javax.swing.GroupLayout.DEFAULT_SIZE, 943, Short.MAX_VALUE)
+            .addComponent(spTabela, javax.swing.GroupLayout.DEFAULT_SIZE, 941, Short.MAX_VALUE)
         );
         contentPanelLayout.setVerticalGroup(
             contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(spTabela, javax.swing.GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE)
+            .addComponent(spTabela, javax.swing.GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE)
         );
 
         spGeral.setLeftComponent(contentPanel);
@@ -491,6 +495,20 @@ public class MainFrame extends javax.swing.JFrame {
         spGeral.setDividerLocation(1.0);
     }
 
+    private void initChart() {
+        controlerInterface.barChart = new BarChart();
+        controlerInterface.histoChart = new HistoChart(30000);
+
+        //controlerInterface.barChart.sample();
+
+        graficoTensao.add(controlerInterface.barChart.getChart());
+        graficoNivel.add(controlerInterface.histoChart.getChart());
+    }
+
+    public JPanel getBarChartPanel() {
+        return graficoTensao;
+    }
+
     private static void SkinInitialize() {
         JFrame.setDefaultLookAndFeelDecorated(true);
         JDialog.setDefaultLookAndFeelDecorated(true);
@@ -525,7 +543,8 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton buttonPararTeste;
     private javax.swing.JPanel confPanel;
     private javax.swing.JPanel contentPanel;
-    private javax.swing.JPanel graficoPanel;
+    private javax.swing.JPanel graficoNivel;
+    private javax.swing.JPanel graficoTensao;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -538,6 +557,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JTextField mediaField;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JPanel menuPanel;
+    private javax.swing.JTabbedPane panelGrafico;
     private javax.swing.ButtonGroup radioGroup;
     private javax.swing.JScrollPane scrollPane;
     private javax.swing.JSeparator separador;

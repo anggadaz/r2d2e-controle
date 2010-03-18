@@ -14,7 +14,6 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
-import org.openide.util.Exceptions;
 
 /**
  * Classe responsável pela conexão com o sistema de tanques da Quanser.

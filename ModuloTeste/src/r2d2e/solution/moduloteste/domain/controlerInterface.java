@@ -1,10 +1,6 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package r2d2e.solution.moduloteste.domain;
 
-import org.openide.util.Exceptions;
 import r2d2e.solution.moduloteste.handler.MainFrameHandler;
 import r2d2e.solution.moduloteste.view.TanquePanel;
 import javax.swing.Timer;
@@ -13,10 +9,15 @@ import javax.swing.Timer;
  *
  * @author demetrios
  */
+
 public class controlerInterface {
 
     public static TanquePanel tanquePanel;
     public static MainFrameHandler mainFrameHandler;
+
+    public static BarChart barChart;
+    public static HistoChart histoChart;
+
     public static boolean isDrying = false;
     public static boolean end = false;
     public static Double NIVEL_LOW_CALIBRATION;
@@ -39,6 +40,11 @@ public class controlerInterface {
         }.start();
     }
 
+    public static void clearCharts() {
+        barChart.clear();
+        histoChart.clear();
+    }
+
     public static void updateTable(double tensao, double tempo, double nivel) {
         mainFrameHandler.updateTable(tensao, tempo, nivel);
     }
@@ -48,5 +54,9 @@ public class controlerInterface {
     }
     static void ciclyEnable(){
         mainFrameHandler.ciclyEnable();
+    }
+
+    static void updateBarChart() {
+        mainFrameHandler.updateBarChart();
     }
 }

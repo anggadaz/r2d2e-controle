@@ -4,15 +4,13 @@
  */
 package r2d2e.solution.moduloteste.handler;
 
-import java.util.ArrayList;
 import java.util.Vector;
-import javax.swing.JSpinner;
+import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import r2d2e.solution.moduloteste.domain.Quanser;
 import r2d2e.solution.moduloteste.domain.ThreadCycle;
-import r2d2e.solution.moduloteste.domain.ThreadRead;
 import r2d2e.solution.moduloteste.domain.controlerInterface;
 import r2d2e.solution.moduloteste.view.MainFrame;
 
@@ -94,8 +92,15 @@ public class MainFrameHandler {
         sumKm += km;
     }
 
+    public void updateBarChart() {
+        JPanel panel = mainFrame.getBarChartPanel();
+        panel.removeAll();
+
+        panel.add(controlerInterface.barChart.getChart());
+    }
+
     public void verifyTestEnd() {
-        if (numInteracoesAtual < numInteracoesMax) {
+        if (numInteracoesAtual >= numInteracoesMax) {
             end();
         }
     }
@@ -115,6 +120,8 @@ public class MainFrameHandler {
         controlerInterface.end = true;
         numInteracoesAtual = 0;
         numInteracoesMax = 0;
+
+        controlerInterface.barChart.addSeries(tensaoAtual - tensaoStep);
     }
 
     private double calculateKm(double tensao, double tempo, double nivel) {
