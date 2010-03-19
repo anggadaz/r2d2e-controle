@@ -1,9 +1,9 @@
-
 package r2d2e.solution.moduloteste.domain;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
+import java.util.Date;
 import javax.swing.BorderFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -21,14 +21,13 @@ import org.jfree.ui.RectangleInsets;
  *
  * @author Rivaldo
  */
-
 public class HistoChart {
 
     private TimeSeries nivel;
     private ChartPanel panel;
 
     public HistoChart(int maxAge) {
-        nivel = new TimeSeries("Nível", Millisecond.class);
+        nivel = new TimeSeries("Nível");
         nivel.setMaximumItemAge(maxAge);
 
         TimeSeriesCollection dataset = new TimeSeriesCollection();
@@ -40,10 +39,11 @@ public class HistoChart {
         range.setTickLabelFont(new Font("SansSerif", Font.PLAIN, 12));
         domain.setLabelFont(new Font("SansSerif", Font.PLAIN, 14));
         range.setLabelFont(new Font("SansSerif", Font.PLAIN, 14));
+        domain.setMinimumDate(new Date(0, 0, 0, 0, 0, 0));
 
         XYItemRenderer renderer = new XYLineAndShapeRenderer(true, false);
         renderer.setSeriesPaint(0, Color.red);
-        renderer.setStroke(new BasicStroke(3f, BasicStroke.CAP_BUTT,BasicStroke.JOIN_BEVEL));
+        renderer.setStroke(new BasicStroke(3f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL));
 
         XYPlot plot = new XYPlot(dataset, domain, range, renderer);
         plot.setBackgroundPaint(Color.lightGray);
@@ -62,7 +62,7 @@ public class HistoChart {
         chart.setBackgroundPaint(Color.white);
 
         panel = new ChartPanel(chart);
-        panel.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createEmptyBorder(4, 4, 4, 4),BorderFactory.createLineBorder(Color.black)));
+        panel.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createEmptyBorder(4, 4, 4, 4), BorderFactory.createLineBorder(Color.black)));
     }
 
     public ChartPanel getChart() {
@@ -73,8 +73,13 @@ public class HistoChart {
         nivel.clear();
     }
 
-    public void addNivelObservation(double y) {
-        nivel.add(new Millisecond(), y);
+    public void addNivelObservation(long time, double y) {
+        nivel.add(new Millisecond(new Date(time)), y);
     }
 
+    public void setRange(double min, double max) {
+        XYPlot plot = (XYPlot) panel.getChart().getPlot();
+        NumberAxis range = (NumberAxis) plot.getRangeAxis();
+        range.setRange(min, max);
+    }
 }
