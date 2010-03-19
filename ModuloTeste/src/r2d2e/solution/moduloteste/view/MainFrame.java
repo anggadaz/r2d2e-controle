@@ -44,6 +44,7 @@ public class MainFrame extends javax.swing.JFrame {
         controlerInterface.mainFrameHandler = mainFrameHandler;
         buttonPararTeste.setEnabled(false);
         buttonNovoCiclo.setEnabled(false);
+        Splash.getInstance().finalizaSplash();
     }
 
     /** This method is called from within the constructor to
@@ -399,6 +400,11 @@ public class MainFrame extends javax.swing.JFrame {
         Ajuda.setText("Ajuda");
 
         sobre.setText("Sobre");
+        sobre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sobreActionPerformed(evt);
+            }
+        });
         Ajuda.add(sobre);
 
         menuBar.add(Ajuda);
@@ -449,6 +455,11 @@ public class MainFrame extends javax.swing.JFrame {
         mainFrameHandler.closeConnection();
         dispose();
     }//GEN-LAST:event_SairMenuActionPerformed
+
+    private void sobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sobreActionPerformed
+        // TODO add your handling code here:
+        new About(this, true).setVisible(true);
+    }//GEN-LAST:event_sobreActionPerformed
 
     public TanquePanel getTanquePanel() {
         return tanquePanel;
@@ -526,6 +537,7 @@ public class MainFrame extends javax.swing.JFrame {
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                Splash.getInstance().inicializaSplash();
                 SkinInitialize();
                 new MainFrame().setVisible(true);
             }
