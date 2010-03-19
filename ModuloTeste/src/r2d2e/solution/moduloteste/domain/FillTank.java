@@ -17,9 +17,9 @@ public class FillTank extends Timer implements ActionListener {
     private Quanser quanser;
     private double nivelAqua;
     private double tensaoAtual;
-    private long initTime;
-    private long stopTime;
-
+    private double initTime;
+    private double stopTime;
+    private long initT;
 
     public FillTank(Quanser quanser, int delay, double tensaoAtual, double nivelAqua) {
 
@@ -31,6 +31,7 @@ public class FillTank extends Timer implements ActionListener {
         this.nivelAqua = nivelAqua;
         this.tensaoAtual = tensaoAtual;
         this.initTime = System.currentTimeMillis();
+        this.initT = System.currentTimeMillis();
 
         controlerInterface.histoChart.clear();
     }
@@ -40,7 +41,7 @@ public class FillTank extends Timer implements ActionListener {
         double nivel = quanser.readSensor1();
 
         controlerInterface.tanquePanelUpdate(nivel);
-        controlerInterface.histoChart.addNivelObservation(System.currentTimeMillis()-initTime, nivel);
+        controlerInterface.histoChart.addNivelObservation(System.currentTimeMillis()-initT, nivel);
 
         if (nivel >= nivelAqua) {
             stopTime = System.currentTimeMillis();
@@ -62,7 +63,7 @@ public class FillTank extends Timer implements ActionListener {
         initTime = init;
     }
 
-    public long getTime() {
-        return (long) ((stopTime - initTime) / 1000);
+    public double getTime() {
+        return (double) ((stopTime - initTime) / 1000);
     }
 }

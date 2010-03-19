@@ -46,7 +46,9 @@ public class MainFrameHandler {
         controlerInterface.end = false;
         verifyCalibration();
         calculateInteracoesMax();
+        cleanTable();
         numInteracoesAtual = 0;
+        controlerInterface.barChart.clear();
         mainFrame.getButtonPararTeste().setEnabled(true);
         mainFrame.getButtonNovoCiclo().setEnabled(true);
         controlerInterface.histoChart.setRange(0.0, nivelAgua+2);
@@ -54,20 +56,20 @@ public class MainFrameHandler {
 
     public void stopTest() {
 
-        setEnable(true);
-        cleanInterface();
-        quanser.stopMotor();
+            setEnable(true);
+            cleanInterface();
+            quanser.stopMotor();
         mainFrame.getButtonPararTeste().setEnabled(false);
         numInteracoesAtual = 0;
         numInteracoesMax = 0;
         if (threadCycle != null) {
             threadCycle.stopTimer();
         }
-        if (!controlerInterface.isDrying) {
-            controlerInterface.end = true;
-            controlerInterface.tanquePanelDry(quanser);
+            if (!controlerInterface.isDrying) {
+                controlerInterface.end = true;
+                controlerInterface.tanquePanelDry(quanser);
+            }
         }
-    }
 
     public void cycle() {
         System.out.println("Tensao " + tensaoAtual);
@@ -95,10 +97,10 @@ public class MainFrameHandler {
     }
 
     public void updateBarChart() {
-        JPanel panel = mainFrame.getBarChartPanel();
+        /*JPanel panel = mainFrame.getBarChartPanel();
         panel.removeAll();
 
-        panel.add(controlerInterface.barChart.getChart());
+        panel.add(controlerInterface.barChart.getChart());*/
     }
 
     public void verifyTestEnd() {
@@ -123,7 +125,7 @@ public class MainFrameHandler {
         numInteracoesAtual = 0;
         numInteracoesMax = 0;
         mainFrame.getButtonPararTeste().setEnabled(false);
-        controlerInterface.barChart.addSeries(tensaoAtual - tensaoStep);
+//        controlerInterface.barChart.addSeries(tensaoAtual - tensaoStep);
     }
 
     private double calculateKm(double tensao, double tempo, double nivel) {

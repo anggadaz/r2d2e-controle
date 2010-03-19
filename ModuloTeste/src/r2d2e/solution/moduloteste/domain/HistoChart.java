@@ -2,6 +2,7 @@ package r2d2e.solution.moduloteste.domain;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.util.Date;
 import javax.swing.BorderFactory;
@@ -63,6 +64,7 @@ public class HistoChart {
 
         panel = new ChartPanel(chart);
         panel.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createEmptyBorder(4, 4, 4, 4), BorderFactory.createLineBorder(Color.black)));
+        panel.setPreferredSize(new Dimension(650, 400));
     }
 
     public ChartPanel getChart() {
