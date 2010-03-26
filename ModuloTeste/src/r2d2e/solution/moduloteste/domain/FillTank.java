@@ -59,7 +59,7 @@ public class FillTank extends Timer implements ActionListener {
         }
     }
 
-    public void setInitTime(long init) {
+    public void setInitTime(double init) {
         initTime = init;
     }
 

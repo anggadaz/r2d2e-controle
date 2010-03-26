@@ -39,7 +39,7 @@ public class Main {
                     System.out.println("Gravando 1.2 volts no canal 4...");
                     boolean f = true;
                     while(f){
-                        quanserClient.write(0, 1.5);
+                        quanserClient.write(0, 0);
                         double _read = quanserClient.read(0);
                         System.out.println("Leitura Canal 0: " + (_read*6.25+2.0));
                     }

@@ -21,11 +21,11 @@ public class Quanser {
     private static double VOLT_TO_LEVEL = 6.25;
 
     public Quanser() {
-        try {
+        /*try {
             quanserClient = new QuanserClient(IP_QUANSER, PORT_QUANSER);
         } catch (QuanserClientException e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
     public void writeBomb(double volt) {
