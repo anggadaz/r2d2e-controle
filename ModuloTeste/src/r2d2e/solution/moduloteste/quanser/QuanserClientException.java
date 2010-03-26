@@ -4,7 +4,7 @@
  * Created on 27 de Novembro de 2007, 22:38
  */
 
-package r2d2e.solution.moduloteste.domain;
+package r2d2e.solution.moduloteste.quanser;
 
 /**
  * Classe responsável pela recepção das excessões da Classe QuanserClient

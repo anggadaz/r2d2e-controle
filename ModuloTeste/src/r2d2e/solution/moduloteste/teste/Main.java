@@ -8,8 +8,8 @@
  */
 package r2d2e.solution.moduloteste.teste;
 
-import r2d2e.solution.moduloteste.domain.QuanserClientException;
-import r2d2e.solution.moduloteste.domain.QuanserClient;
+import r2d2e.solution.moduloteste.quanser.QuanserClientException;
+import r2d2e.solution.moduloteste.quanser.QuanserClient;
 
 /**
  *

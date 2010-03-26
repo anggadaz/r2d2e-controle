@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-package r2d2e.solution.moduloteste.domain;
+package r2d2e.solution.moduloteste.domain.graph;
 
 import java.awt.Color;
 import java.awt.Dimension;

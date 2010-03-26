@@ -4,6 +4,8 @@
  */
 package r2d2e.solution.moduloteste.domain;
 
+import r2d2e.solution.moduloteste.quanser.QuanserClient;
+import r2d2e.solution.moduloteste.quanser.QuanserClientException;
 import org.openide.util.Exceptions;
 
 /**

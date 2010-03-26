@@ -1,6 +1,8 @@
 
 package r2d2e.solution.moduloteste.domain;
 
+import r2d2e.solution.moduloteste.domain.graph.HistoChart;
+import r2d2e.solution.moduloteste.domain.graph.BarChart;
 import r2d2e.solution.moduloteste.handler.MainFrameHandler;
 import r2d2e.solution.moduloteste.view.TanquePanel;
 import javax.swing.Timer;

@@ -1,4 +1,4 @@
-package r2d2e.solution.moduloteste.domain;
+package r2d2e.solution.moduloteste.domain.graph;
 
 import java.awt.BasicStroke;
 import java.awt.Color;

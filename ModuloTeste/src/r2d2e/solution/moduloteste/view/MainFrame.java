@@ -20,8 +20,8 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 import org.jvnet.substance.skin.SubstanceBusinessBlackSteelLookAndFeel;
-import r2d2e.solution.moduloteste.domain.BarChart;
-import r2d2e.solution.moduloteste.domain.HistoChart;
+import r2d2e.solution.moduloteste.domain.graph.BarChart;
+import r2d2e.solution.moduloteste.domain.graph.HistoChart;
 import r2d2e.solution.moduloteste.domain.controlerInterface;
 import r2d2e.solution.moduloteste.handler.MainFrameHandler;
 

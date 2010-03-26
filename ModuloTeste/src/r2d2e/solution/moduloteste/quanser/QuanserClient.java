@@ -3,7 +3,7 @@
  *
  * Created on 27 de Novembro de 2007, 22:35
  */
-package r2d2e.solution.moduloteste.domain;
+package r2d2e.solution.moduloteste.quanser;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
