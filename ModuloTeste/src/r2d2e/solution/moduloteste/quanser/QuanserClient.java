@@ -42,7 +42,7 @@ public class QuanserClient {
             this.output = this.socket.getOutputStream();
         } catch (UnknownHostException e) {
             // TODO Auto-generated catch block
-            throw new QuanserClientException("Host n�o encontrado!");
+            throw new QuanserClientException("Host não encontrado!");
         } catch (IOException e) {
             throw new QuanserClientException("Erro de I/O!");
             // TODO Auto-generated catch block
@@ -107,6 +107,8 @@ public class QuanserClient {
     public void closeConnection() throws QuanserClientException {
         if (socket != null) {
             try {
+                input.close();
+                output.close();
                 socket.close();
             } catch (IOException ex) {
                 throw new QuanserClientException("Erro ao fechar conexão");

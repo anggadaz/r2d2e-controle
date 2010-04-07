@@ -51,25 +51,25 @@ public class MainFrameHandler {
         controlerInterface.barChart.clear();
         mainFrame.getButtonPararTeste().setEnabled(true);
         mainFrame.getButtonNovoCiclo().setEnabled(true);
-        controlerInterface.histoChart.setRange(0.0, nivelAgua+2);
+        controlerInterface.histoChart.setRange(0.0, nivelAgua + 2);
     }
 
     public void stopTest() {
 
-            setEnable(true);
-            cleanInterface();
-            quanser.stopMotor();
+        setEnable(true);
+        cleanInterface();
+        quanser.stopMotor();
         mainFrame.getButtonPararTeste().setEnabled(false);
         numInteracoesAtual = 0;
         numInteracoesMax = 0;
         if (threadCycle != null) {
             threadCycle.stopTimer();
         }
-            if (!controlerInterface.isDrying) {
-                controlerInterface.end = true;
-                controlerInterface.tanquePanelDry(quanser);
-            }
+        if (!controlerInterface.isDrying) {
+            controlerInterface.end = true;
+            controlerInterface.tanquePanelDry(quanser);
         }
+    }
 
     public void cycle() {
         System.out.println("Tensao " + tensaoAtual);

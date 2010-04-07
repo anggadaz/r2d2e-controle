@@ -39,9 +39,8 @@ public class FillTank extends Timer implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         double nivel = quanser.readSensor1();
-
         controlerInterface.tanquePanelUpdate(nivel);
-        controlerInterface.histoChart.addNivelObservation(System.currentTimeMillis()-initT, nivel);
+        controlerInterface.histoChart.addNivelObservation(System.currentTimeMillis() - initT, nivel);
 
         if (nivel >= nivelAqua) {
             stopTime = System.currentTimeMillis();

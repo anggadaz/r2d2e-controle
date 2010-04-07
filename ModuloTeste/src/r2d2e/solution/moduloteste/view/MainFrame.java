@@ -39,7 +39,7 @@ public class MainFrame extends javax.swing.JFrame {
         initComponents();
         init();
         initChart();
-        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
         controlerInterface.tanquePanel = tanquePanel;
         controlerInterface.mainFrameHandler = mainFrameHandler;
         buttonPararTeste.setEnabled(false);

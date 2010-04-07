@@ -26,7 +26,7 @@ public class ThreadCycle extends Thread {
 
     @Override
     public void run() {
-
+        System.out.println("ESCRENDO NA BOMBA " + tensaoAtual);
         quanser.writeBomb(tensaoAtual);
         
         fillTank.setInitTime(System.currentTimeMillis());

@@ -6,7 +6,6 @@ package r2d2e.solution.moduloteste.domain;
 
 import r2d2e.solution.moduloteste.quanser.QuanserClient;
 import r2d2e.solution.moduloteste.quanser.QuanserClientException;
-import org.openide.util.Exceptions;
 
 /**
  *
@@ -15,19 +14,19 @@ import org.openide.util.Exceptions;
 public class Quanser {
 
     private QuanserClient quanserClient;
-    public static String IP_QUANSER = "10.13.99.69";
+    public static String IP_QUANSER = "localhost";//"10.13.99.69";
     public static int PORT_QUANSER = 20081;
     private static int CHANNEL_BOMB = 0;
-    private static double CALIBRATION1 = 2.0;
+    private static double CALIBRATION1 = 0.0;//2.0;
     private static double CALIBRATION2 = 0.0;
     private static double VOLT_TO_LEVEL = 6.25;
 
     public Quanser() {
-        /*try {
+        try {
             quanserClient = new QuanserClient(IP_QUANSER, PORT_QUANSER);
         } catch (QuanserClientException e) {
             e.printStackTrace();
-        }*/
+        }
     }
 
     public void writeBomb(double volt) {
@@ -63,7 +62,6 @@ public class Quanser {
         return (quanserClient != null);
     }
 
-    
     public void closeConnection() {
         try {
             quanserClient.closeConnection();
