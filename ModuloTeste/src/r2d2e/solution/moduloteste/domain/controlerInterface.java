@@ -1,11 +1,9 @@
 
 package r2d2e.solution.moduloteste.domain;
 
-import r2d2e.solution.moduloteste.domain.graph.HistoChart;
-import r2d2e.solution.moduloteste.domain.graph.BarChart;
-import r2d2e.solution.moduloteste.handler.MainFrameHandler;
-import r2d2e.solution.moduloteste.view.TanquePanel2;
 import javax.swing.Timer;
+import r2d2e.solution.moduloteste.handler.TestModeHandler;
+import r2d2e.solution.moduloteste.view.TanquePanel;
 
 /**
  *
@@ -14,18 +12,15 @@ import javax.swing.Timer;
 
 public class controlerInterface {
 
-    public static TanquePanel2 tanquePanel;
-    public static MainFrameHandler mainFrameHandler;
-
-    public static BarChart barChart;
-    public static HistoChart histoChart;
+    public static TanquePanel tanquePanel;
+    public static TestModeHandler testModeHandler;
 
     public static boolean isDrying = false;
     public static boolean end = false;
     public static Double NIVEL_LOW_CALIBRATION;
 
     public static void tanquePanelUpdate(double nivel) {
-        tanquePanel.setLevelWater(nivel);
+        tanquePanel.setLevelWater2(nivel);
     }
 
     public static void tanquePanelDry(final Quanser quanser) {
@@ -42,23 +37,15 @@ public class controlerInterface {
         }.start();
     }
 
-    public static void clearCharts() {
-        barChart.clear();
-        histoChart.clear();
-    }
-
     public static void updateTable(double tensao, double tempo, double nivel) {
-        mainFrameHandler.updateTable(tensao, tempo, nivel);
+        testModeHandler.updateTable(tensao, tempo, nivel);
     }
 
     static void verifyTestEnd() {
-        mainFrameHandler.verifyTestEnd();
+        testModeHandler.verifyTestEnd();
     }
     static void ciclyEnable(){
-        mainFrameHandler.ciclyEnable();
+        testModeHandler.ciclyEnable();
     }
 
-    static void updateBarChart() {
-        mainFrameHandler.updateBarChart();
-    }
 }

@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import javax.imageio.ImageIO;
+import javax.swing.JFrame;
 import org.openide.util.Exceptions;
 
 /**
@@ -16,12 +17,13 @@ public class TanquePanel extends javax.swing.JPanel {
     private BufferedImage waterImage1;
     private BufferedImage waterImage2;
 
-    private double heightWater = 0;
+    private double heightWater1 = 0;
+    private double heightWater2 = 0;
 
     private int maxWidthWater1;
     private int maxWidthWater2;
 
-    private int maxLevelWater = 30;
+    private int maxLevelWater = 26;
 
     /** Creates new form TanquePanel */
     public TanquePanel() {
@@ -32,21 +34,22 @@ public class TanquePanel extends javax.swing.JPanel {
     @Override
     public void paint(Graphics g) {
         g.drawImage(tanques, 0, 0, null);
-        g.drawImage(waterImage1,174, 14, null);
-        g.drawImage(waterImage2,112, 253, null);
+        //g.drawImage(waterImage1,174, 14, null);
+        //g.drawImage(waterImage2,112, 253, null);
 
-        g.drawImage(waterImage1, 174, 62 + (int)(maxWidthWater1-heightWater), waterImage1.getWidth(), (int)heightWater, null);
+        g.drawImage(waterImage1, 174, 10 + (int)(maxWidthWater1-heightWater1), waterImage1.getWidth(), (int)heightWater1, null);
+        g.drawImage(waterImage2, 112, 250 + (int)(maxWidthWater2-heightWater2), waterImage2.getWidth(), (int)heightWater2, null);
     }
 
     public void setLevelWater1(double levelWater) {
         double PercentWater = (100*levelWater)/maxLevelWater;
-        heightWater = (PercentWater * maxWidthWater1) / 100;
+        heightWater1 = (PercentWater * maxWidthWater1) / 100;
         repaint();
     }
 
     public void setLevelWater2(double levelWater) {
         double PercentWater = (100*levelWater)/maxLevelWater;
-        heightWater = (PercentWater * maxWidthWater2) / 100;
+        heightWater2 = (PercentWater * maxWidthWater2) / 100;
         repaint();
     }
 
@@ -57,11 +60,37 @@ public class TanquePanel extends javax.swing.JPanel {
             waterImage2 = ImageIO.read(getClass().getResource("/r2d2e/solution/moduloteste/view/resources/agua.png"));
 
             maxWidthWater1 = waterImage1.getHeight();
-            maxWidthWater2 = waterImage1.getHeight();
+            maxWidthWater2 = waterImage2.getHeight();
 
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void main(String args[]) {
+
+        final TanquePanel panel = new TanquePanel();
+
+        JFrame frame = new JFrame();
+        frame.add(panel);
+        frame.setSize(700, 700);
+
+        frame.setVisible(true);
+
+        new Thread() {
+            @Override
+            public void run() {
+                for (int i = 0; i < 20; i++) {
+                    panel.setLevelWater1( (i<4) ? 0 : i-4);
+                    panel.setLevelWater2(i);
+                    try {
+                        sleep(50);
+                    } catch (InterruptedException ex) {
+                        Exceptions.printStackTrace(ex);
+                    }
+                }
+            }
+        }.start();
     }
 
     /** This method is called from within the constructor to

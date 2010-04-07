@@ -1,14 +1,10 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package r2d2e.solution.moduloteste.domain;
 
+import r2d2e.solution.moduloteste.handler.TestModeHandler;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.Timer;
-import r2d2e.solution.moduloteste.handler.MainFrameHandler;
-import r2d2e.solution.moduloteste.view.TanquePanel2;
+import r2d2e.solution.moduloteste.view.TanquePanel;
 
 /**
  *
@@ -17,10 +13,10 @@ import r2d2e.solution.moduloteste.view.TanquePanel2;
 public class DryTank implements ActionListener {
 
     private Quanser quanser;
-    private TanquePanel2 tanquePanel;
+    private TanquePanel tanquePanel;
     private Timer time;
 
-    public DryTank(Quanser quanser, TanquePanel2 tanquePanel, Timer time) {
+    public DryTank(Quanser quanser, TanquePanel tanquePanel, Timer time) {
         this.quanser = quanser;
         this.tanquePanel = tanquePanel;
         this.time = time;
@@ -28,9 +24,9 @@ public class DryTank implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
         double nivel = quanser.readSensor1();
-        tanquePanel.setLevelWater(nivel);
+        tanquePanel.setLevelWater1(nivel);
         if (nivel <= controlerInterface.NIVEL_LOW_CALIBRATION) {
-            tanquePanel.setLevelWater(0);
+            tanquePanel.setLevelWater1(0);
             stop();
         }
     }

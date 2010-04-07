@@ -7,6 +7,7 @@ package r2d2e.solution.moduloteste.domain;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.Timer;
+import r2d2e.solution.moduloteste.handler.TestModeHandler;
 
 /**
  *
@@ -33,14 +34,14 @@ public class FillTank extends Timer implements ActionListener {
         this.initTime = System.currentTimeMillis();
         this.initT = System.currentTimeMillis();
 
-        controlerInterface.histoChart.clear();
+        TestModeHandler.histoChart.clear();
     }
 
     public void actionPerformed(ActionEvent e) {
 
         double nivel = quanser.readSensor1();
         controlerInterface.tanquePanelUpdate(nivel);
-        controlerInterface.histoChart.addNivelObservation(System.currentTimeMillis() - initT, nivel);
+        TestModeHandler.histoChart.addNivelObservation(System.currentTimeMillis()-initT, nivel);
 
         if (nivel >= nivelAqua) {
             stopTime = System.currentTimeMillis();
@@ -48,8 +49,7 @@ public class FillTank extends Timer implements ActionListener {
             quanser.writeBomb(0);
             double timeTotal = getTime();
 
-            controlerInterface.barChart.addSeries(tensaoAtual, timeTotal);
-            controlerInterface.updateBarChart();
+            TestModeHandler.barChart.addSeries(tensaoAtual, timeTotal);
 
             controlerInterface.updateTable(tensaoAtual, timeTotal, nivelAqua);
             controlerInterface.tanquePanelDry(quanser);

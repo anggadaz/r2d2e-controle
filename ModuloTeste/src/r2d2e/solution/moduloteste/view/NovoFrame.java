@@ -1,9 +1,11 @@
 package r2d2e.solution.moduloteste.view;
 
+import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
 import org.jvnet.substance.skin.SubstanceBusinessBlackSteelLookAndFeel;
+import r2d2e.solution.moduloteste.domain.controlerInterface;
 import r2d2e.solution.moduloteste.handler.MainFrameHandler;
 
 /**
@@ -12,11 +14,14 @@ import r2d2e.solution.moduloteste.handler.MainFrameHandler;
  */
 public class NovoFrame extends javax.swing.JFrame {
 
-    private MainFrameHandler mainFrameHandler = new MainFrameHandler(null); // NULL Por enquanto
+    private MainFrameHandler mainFrameHandler;
 
     public NovoFrame() {
         initComponents();
         SkinInitialize();
+        mainFrameHandler = new MainFrameHandler(this);
+        mainFrameHandler.enterTestMode();
+        Splash.getInstance().finalizaSplash();
     }
 
     private static void SkinInitialize() {
@@ -30,6 +35,32 @@ public class NovoFrame extends javax.swing.JFrame {
         }
     }
 
+    public JButton getButtonIniciarTeste() {
+        return buttonIniciar;
+    }
+
+    public JButton getButtonNovoCiclo() {
+        return buttonNovoCiclo;
+    }
+
+    public JButton getButtonPararTeste() {
+        return buttonParar;
+    }
+
+    public TestePanel getTestePanel1() {
+        return testePanel;
+    }
+
+    public ConfTeste getConfTeste1() {
+        return confTeste;
+    }
+
+    public TanquePanel getTanquePanel() {
+        return tanquePanel;
+    }
+
+
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -41,34 +72,22 @@ public class NovoFrame extends javax.swing.JFrame {
 
         backgroundPanel = new r2d2e.solution.moduloteste.view.BackgroundPanel();
         toolbarPanel = new javax.swing.JPanel();
-        buttonIniciarTeste = new javax.swing.JButton();
+        buttonIniciar = new javax.swing.JButton();
         buttonNovoCiclo = new javax.swing.JButton();
-        buttonPararTeste = new javax.swing.JButton();
+        buttonParar = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         buttonOpcoesGrafico = new javax.swing.JButton();
         buttonOpcoesGeral = new javax.swing.JButton();
         tanquePanel = new r2d2e.solution.moduloteste.view.TanquePanel();
         mainPanel = new javax.swing.JPanel();
-        testePanel1 = new r2d2e.solution.moduloteste.view.TestePanel();
+        testePanel = new r2d2e.solution.moduloteste.view.TestePanel();
         opcoesPanel = new javax.swing.JPanel();
-        confPanel = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        spinnerTI = new javax.swing.JSpinner();
-        spinnerTMax = new javax.swing.JSpinner();
-        spinnerNA = new javax.swing.JSpinner();
-        spinnerTMin = new javax.swing.JSpinner();
+        confTeste = new r2d2e.solution.moduloteste.view.ConfTeste();
         menuBar = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
-        jCheckBoxMenuItem1 = new javax.swing.JCheckBoxMenuItem();
-        jCheckBoxMenuItem2 = new javax.swing.JCheckBoxMenuItem();
+        menuTeste = new javax.swing.JCheckBoxMenuItem();
+        menuControle = new javax.swing.JCheckBoxMenuItem();
         jMenu3 = new javax.swing.JMenu();
         itemSobre = new javax.swing.JMenuItem();
 
@@ -76,32 +95,49 @@ public class NovoFrame extends javax.swing.JFrame {
 
         toolbarPanel.setOpaque(false);
 
-        buttonIniciarTeste.setIcon(new javax.swing.ImageIcon(getClass().getResource("/r2d2e/solution/moduloteste/view/resources/play_1.png"))); // NOI18N
-        buttonIniciarTeste.setToolTipText(org.openide.util.NbBundle.getMessage(NovoFrame.class, "NovoFrame.buttonIniciarTeste.toolTipText")); // NOI18N
-        buttonIniciarTeste.setBorder(null);
-        buttonIniciarTeste.setBorderPainted(false);
-        buttonIniciarTeste.setContentAreaFilled(false);
-        buttonIniciarTeste.setFocusable(false);
-        buttonIniciarTeste.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        buttonIniciarTeste.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        buttonIniciar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/r2d2e/solution/moduloteste/view/resources/play_1.png"))); // NOI18N
+        buttonIniciar.setToolTipText(org.openide.util.NbBundle.getMessage(NovoFrame.class, "NovoFrame.buttonIniciar.toolTipText")); // NOI18N
+        buttonIniciar.setBorder(null);
+        buttonIniciar.setBorderPainted(false);
+        buttonIniciar.setContentAreaFilled(false);
+        buttonIniciar.setFocusable(false);
+        buttonIniciar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        buttonIniciar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        buttonIniciar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonIniciarActionPerformed(evt);
+            }
+        });
 
         buttonNovoCiclo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/r2d2e/solution/moduloteste/view/resources/play-repeat.png"))); // NOI18N
         buttonNovoCiclo.setToolTipText(org.openide.util.NbBundle.getMessage(NovoFrame.class, "NovoFrame.buttonNovoCiclo.toolTipText")); // NOI18N
         buttonNovoCiclo.setBorder(null);
         buttonNovoCiclo.setBorderPainted(false);
         buttonNovoCiclo.setContentAreaFilled(false);
+        buttonNovoCiclo.setEnabled(false);
         buttonNovoCiclo.setFocusable(false);
         buttonNovoCiclo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         buttonNovoCiclo.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        buttonNovoCiclo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonNovoCicloActionPerformed(evt);
+            }
+        });
 
-        buttonPararTeste.setIcon(new javax.swing.ImageIcon(getClass().getResource("/r2d2e/solution/moduloteste/view/resources/play-stop.png"))); // NOI18N
-        buttonPararTeste.setToolTipText(org.openide.util.NbBundle.getMessage(NovoFrame.class, "NovoFrame.buttonPararTeste.toolTipText")); // NOI18N
-        buttonPararTeste.setBorder(null);
-        buttonPararTeste.setBorderPainted(false);
-        buttonPararTeste.setContentAreaFilled(false);
-        buttonPararTeste.setFocusable(false);
-        buttonPararTeste.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        buttonPararTeste.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        buttonParar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/r2d2e/solution/moduloteste/view/resources/play-stop.png"))); // NOI18N
+        buttonParar.setToolTipText(org.openide.util.NbBundle.getMessage(NovoFrame.class, "NovoFrame.buttonParar.toolTipText")); // NOI18N
+        buttonParar.setBorder(null);
+        buttonParar.setBorderPainted(false);
+        buttonParar.setContentAreaFilled(false);
+        buttonParar.setEnabled(false);
+        buttonParar.setFocusable(false);
+        buttonParar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        buttonParar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        buttonParar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonPararActionPerformed(evt);
+            }
+        });
 
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
@@ -129,11 +165,11 @@ public class NovoFrame extends javax.swing.JFrame {
             toolbarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(toolbarPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(buttonIniciarTeste)
+                .addComponent(buttonIniciar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(buttonNovoCiclo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(buttonPararTeste)
+                .addComponent(buttonParar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -151,15 +187,15 @@ public class NovoFrame extends javax.swing.JFrame {
                     .addComponent(buttonOpcoesGrafico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, toolbarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(buttonPararTeste, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(buttonParar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(buttonNovoCiclo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(buttonIniciarTeste, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(buttonIniciar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
-        buttonIniciarTeste.getAccessibleContext().setAccessibleDescription(org.openide.util.NbBundle.getMessage(NovoFrame.class, "NovoFrame.buttonIniciarTeste.AccessibleContext.accessibleDescription")); // NOI18N
+        buttonIniciar.getAccessibleContext().setAccessibleDescription(org.openide.util.NbBundle.getMessage(NovoFrame.class, "NovoFrame.buttonIniciarTeste.AccessibleContext.accessibleDescription")); // NOI18N
         buttonNovoCiclo.getAccessibleContext().setAccessibleDescription(org.openide.util.NbBundle.getMessage(NovoFrame.class, "NovoFrame.buttonNovoCiclo.AccessibleContext.accessibleDescription")); // NOI18N
-        buttonPararTeste.getAccessibleContext().setAccessibleDescription(org.openide.util.NbBundle.getMessage(NovoFrame.class, "NovoFrame.buttonPararTeste.AccessibleContext.accessibleDescription")); // NOI18N
+        buttonParar.getAccessibleContext().setAccessibleDescription(org.openide.util.NbBundle.getMessage(NovoFrame.class, "NovoFrame.buttonPararTeste.AccessibleContext.accessibleDescription")); // NOI18N
         buttonOpcoesGrafico.getAccessibleContext().setAccessibleDescription(org.openide.util.NbBundle.getMessage(NovoFrame.class, "NovoFrame.buttonOpcoesGrafico.AccessibleContext.accessibleDescription")); // NOI18N
         buttonOpcoesGeral.getAccessibleContext().setAccessibleDescription(org.openide.util.NbBundle.getMessage(NovoFrame.class, "NovoFrame.buttonOpcoesGeral.AccessibleContext.accessibleDescription")); // NOI18N
 
@@ -173,105 +209,17 @@ public class NovoFrame extends javax.swing.JFrame {
         );
         tanquePanelLayout.setVerticalGroup(
             tanquePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 488, Short.MAX_VALUE)
+            .addGap(0, 492, Short.MAX_VALUE)
         );
 
         mainPanel.setLayout(new java.awt.CardLayout());
-
-        testePanel1.setOpaque(false);
-        mainPanel.add(testePanel1, "card2");
+        mainPanel.add(testePanel, "card2");
 
         opcoesPanel.setOpaque(false);
         opcoesPanel.setLayout(new java.awt.CardLayout());
 
-        confPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, org.openide.util.NbBundle.getMessage(NovoFrame.class, "NovoFrame.confPanel.border.title"), javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(255, 255, 255))); // NOI18N
-        confPanel.setOpaque(false);
-
-        jLabel1.setText(org.openide.util.NbBundle.getMessage(NovoFrame.class, "NovoFrame.jLabel1.text")); // NOI18N
-
-        jLabel2.setText(org.openide.util.NbBundle.getMessage(NovoFrame.class, "NovoFrame.jLabel2.text")); // NOI18N
-
-        jLabel3.setText(org.openide.util.NbBundle.getMessage(NovoFrame.class, "NovoFrame.jLabel3.text")); // NOI18N
-
-        jLabel4.setText(org.openide.util.NbBundle.getMessage(NovoFrame.class, "NovoFrame.jLabel4.text")); // NOI18N
-
-        jLabel5.setText(org.openide.util.NbBundle.getMessage(NovoFrame.class, "NovoFrame.jLabel5.text")); // NOI18N
-
-        jLabel6.setText(org.openide.util.NbBundle.getMessage(NovoFrame.class, "NovoFrame.jLabel6.text")); // NOI18N
-
-        jLabel7.setText(org.openide.util.NbBundle.getMessage(NovoFrame.class, "NovoFrame.jLabel7.text")); // NOI18N
-
-        jLabel8.setText(org.openide.util.NbBundle.getMessage(NovoFrame.class, "NovoFrame.jLabel8.text")); // NOI18N
-
-        spinnerTI.setModel(new javax.swing.SpinnerNumberModel(0.0, 0.0, 3.0, 0.1));
-        spinnerTI.setToolTipText(org.openide.util.NbBundle.getMessage(NovoFrame.class, "NovoFrame.spinnerTI.toolTipText")); // NOI18N
-        spinnerTI.setEditor(new javax.swing.JSpinner.NumberEditor(spinnerTI, "#,##0.0#"));
-
-        spinnerTMax.setModel(new javax.swing.SpinnerNumberModel(1.0, 0.0, 3.0, 0.1));
-        spinnerTMax.setToolTipText(org.openide.util.NbBundle.getMessage(NovoFrame.class, "NovoFrame.spinnerTMax.toolTipText")); // NOI18N
-        spinnerTMax.setEditor(new javax.swing.JSpinner.NumberEditor(spinnerTMax, "#,##0.0#"));
-
-        spinnerNA.setModel(new javax.swing.SpinnerNumberModel(0.0, 0.0, 30.0, 0.1));
-        spinnerNA.setToolTipText(org.openide.util.NbBundle.getMessage(NovoFrame.class, "NovoFrame.spinnerNA.toolTipText")); // NOI18N
-        spinnerNA.setEditor(new javax.swing.JSpinner.NumberEditor(spinnerNA, "#,##0.0#"));
-
-        spinnerTMin.setModel(new javax.swing.SpinnerNumberModel(1.0, 0.0, 3.0, 0.1));
-        spinnerTMin.setToolTipText(org.openide.util.NbBundle.getMessage(NovoFrame.class, "NovoFrame.spinnerTMin.toolTipText")); // NOI18N
-        spinnerTMin.setEditor(new javax.swing.JSpinner.NumberEditor(spinnerTMin, "#,##0.0#"));
-
-        javax.swing.GroupLayout confPanelLayout = new javax.swing.GroupLayout(confPanel);
-        confPanel.setLayout(confPanelLayout);
-        confPanelLayout.setHorizontalGroup(
-            confPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(confPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(spinnerNA, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(confPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(confPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(spinnerTI, javax.swing.GroupLayout.DEFAULT_SIZE, 215, Short.MAX_VALUE)
-                    .addComponent(spinnerTMax, javax.swing.GroupLayout.DEFAULT_SIZE, 215, Short.MAX_VALUE)
-                    .addComponent(spinnerTMin, javax.swing.GroupLayout.DEFAULT_SIZE, 215, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addGroup(confPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel8)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel6)))
-        );
-        confPanelLayout.setVerticalGroup(
-            confPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(confPanelLayout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addGroup(confPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(spinnerNA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5)))
-            .addGroup(confPanelLayout.createSequentialGroup()
-                .addGroup(confPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(spinnerTMin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(confPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(spinnerTMax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(confPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE, false)
-                    .addComponent(spinnerTI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8)
-                    .addComponent(jLabel3)))
-        );
-
-        opcoesPanel.add(confPanel, "card2");
+        confTeste.setOpaque(false);
+        opcoesPanel.add(confTeste, "card2");
 
         javax.swing.GroupLayout backgroundPanelLayout = new javax.swing.GroupLayout(backgroundPanel);
         backgroundPanel.setLayout(backgroundPanelLayout);
@@ -297,7 +245,7 @@ public class NovoFrame extends javax.swing.JFrame {
                     .addGroup(backgroundPanelLayout.createSequentialGroup()
                         .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(opcoesPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)))
+                        .addComponent(opcoesPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -306,13 +254,22 @@ public class NovoFrame extends javax.swing.JFrame {
 
         jMenu2.setText(org.openide.util.NbBundle.getMessage(NovoFrame.class, "NovoFrame.jMenu2.text")); // NOI18N
 
-        jCheckBoxMenuItem1.setSelected(true);
-        jCheckBoxMenuItem1.setText(org.openide.util.NbBundle.getMessage(NovoFrame.class, "NovoFrame.jCheckBoxMenuItem1.text")); // NOI18N
-        jMenu2.add(jCheckBoxMenuItem1);
+        menuTeste.setSelected(true);
+        menuTeste.setText(org.openide.util.NbBundle.getMessage(NovoFrame.class, "NovoFrame.menuTeste.text")); // NOI18N
+        menuTeste.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuTesteActionPerformed(evt);
+            }
+        });
+        jMenu2.add(menuTeste);
 
-        jCheckBoxMenuItem2.setSelected(true);
-        jCheckBoxMenuItem2.setText(org.openide.util.NbBundle.getMessage(NovoFrame.class, "NovoFrame.jCheckBoxMenuItem2.text")); // NOI18N
-        jMenu2.add(jCheckBoxMenuItem2);
+        menuControle.setText(org.openide.util.NbBundle.getMessage(NovoFrame.class, "NovoFrame.menuControle.text")); // NOI18N
+        menuControle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuControleActionPerformed(evt);
+            }
+        });
+        jMenu2.add(menuControle);
 
         menuBar.add(jMenu2);
 
@@ -350,12 +307,37 @@ public class NovoFrame extends javax.swing.JFrame {
         about.setVisible(true);
     }//GEN-LAST:event_itemSobreActionPerformed
 
+    private void buttonIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonIniciarActionPerformed
+        mainFrameHandler.play();
+    }//GEN-LAST:event_buttonIniciarActionPerformed
+
+    private void buttonPararActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPararActionPerformed
+        mainFrameHandler.stop();
+    }//GEN-LAST:event_buttonPararActionPerformed
+
+    private void buttonNovoCicloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonNovoCicloActionPerformed
+        mainFrameHandler.cycle();
+    }//GEN-LAST:event_buttonNovoCicloActionPerformed
+
+    private void menuTesteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuTesteActionPerformed
+        menuTeste.setSelected(true);
+        menuControle.setSelected(false);
+        mainFrameHandler.enterTestMode();
+    }//GEN-LAST:event_menuTesteActionPerformed
+
+    private void menuControleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuControleActionPerformed
+        menuControle.setSelected(true);
+        menuTeste.setSelected(false);
+        mainFrameHandler.enterControlMode();
+    }//GEN-LAST:event_menuControleActionPerformed
+
     /**
     * @param args the command line arguments
     */
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                Splash.getInstance().inicializaSplash();
                 new NovoFrame().setVisible(true);
             }
         });
@@ -363,36 +345,24 @@ public class NovoFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private r2d2e.solution.moduloteste.view.BackgroundPanel backgroundPanel;
-    private javax.swing.JButton buttonIniciarTeste;
+    private javax.swing.JButton buttonIniciar;
     private javax.swing.JButton buttonNovoCiclo;
     private javax.swing.JButton buttonOpcoesGeral;
     private javax.swing.JButton buttonOpcoesGrafico;
-    private javax.swing.JButton buttonPararTeste;
-    private javax.swing.JPanel confPanel;
+    private javax.swing.JButton buttonParar;
+    private r2d2e.solution.moduloteste.view.ConfTeste confTeste;
     private javax.swing.JMenuItem itemSobre;
-    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
-    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem2;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JMenuBar menuBar;
+    private javax.swing.JCheckBoxMenuItem menuControle;
+    private javax.swing.JCheckBoxMenuItem menuTeste;
     private javax.swing.JPanel opcoesPanel;
-    private javax.swing.JSpinner spinnerNA;
-    private javax.swing.JSpinner spinnerTI;
-    private javax.swing.JSpinner spinnerTMax;
-    private javax.swing.JSpinner spinnerTMin;
     private r2d2e.solution.moduloteste.view.TanquePanel tanquePanel;
-    private r2d2e.solution.moduloteste.view.TestePanel testePanel1;
+    private r2d2e.solution.moduloteste.view.TestePanel testePanel;
     private javax.swing.JPanel toolbarPanel;
     // End of variables declaration//GEN-END:variables
 
