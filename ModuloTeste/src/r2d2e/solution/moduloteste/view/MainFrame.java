@@ -62,6 +62,7 @@ public class MainFrame extends javax.swing.JFrame {
         buttonPararTeste = new javax.swing.JButton();
         buttonNovoCiclo = new javax.swing.JButton();
         separador = new javax.swing.JSeparator();
+        jSeparator1 = new javax.swing.JSeparator();
         spGeral = new javax.swing.JSplitPane();
         confPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -79,10 +80,10 @@ public class MainFrame extends javax.swing.JFrame {
         contentPanel = new javax.swing.JPanel();
         spTabela = new javax.swing.JSplitPane();
         spTanque = new javax.swing.JSplitPane();
-        tanquePanel = new r2d2e.solution.moduloteste.view.TanquePanel();
+        tanquePanel = new r2d2e.solution.moduloteste.view.TanquePanel2();
         panelGrafico = new javax.swing.JTabbedPane();
-        graficoTensao = new javax.swing.JPanel();
         graficoNivel = new javax.swing.JPanel();
+        graficoTensao = new javax.swing.JPanel();
         tabelaPanel = new javax.swing.JPanel();
         scrollPane = new javax.swing.JScrollPane();
         table = new javax.swing.JTable();
@@ -138,6 +139,8 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
+        jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
+
         javax.swing.GroupLayout menuPanelLayout = new javax.swing.GroupLayout(menuPanel);
         menuPanel.setLayout(menuPanelLayout);
         menuPanelLayout.setHorizontalGroup(
@@ -149,17 +152,20 @@ public class MainFrame extends javax.swing.JFrame {
                 .addComponent(buttonPararTeste, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(buttonNovoCiclo, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(837, Short.MAX_VALUE))
-            .addComponent(separador, javax.swing.GroupLayout.DEFAULT_SIZE, 968, Short.MAX_VALUE)
+                .addGap(28, 28, 28)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(739, Short.MAX_VALUE))
+            .addComponent(separador, javax.swing.GroupLayout.DEFAULT_SIZE, 948, Short.MAX_VALUE)
         );
         menuPanelLayout.setVerticalGroup(
             menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menuPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(buttonIniciarTeste, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(buttonPararTeste, 0, 0, Short.MAX_VALUE)
-                    .addComponent(buttonNovoCiclo, 0, 0, Short.MAX_VALUE))
+                .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(buttonIniciarTeste)
+                    .addComponent(buttonPararTeste, javax.swing.GroupLayout.Alignment.TRAILING, 0, 0, Short.MAX_VALUE)
+                    .addComponent(buttonNovoCiclo, javax.swing.GroupLayout.Alignment.TRAILING, 0, 0, Short.MAX_VALUE)
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(separador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -210,52 +216,48 @@ public class MainFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(spinnerNA, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(spinnerNA, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel5)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(confPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
                     .addComponent(jLabel2)
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(confPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(spinnerTI, javax.swing.GroupLayout.DEFAULT_SIZE, 389, Short.MAX_VALUE)
-                    .addComponent(spinnerTMax, javax.swing.GroupLayout.DEFAULT_SIZE, 389, Short.MAX_VALUE)
-                    .addComponent(spinnerTMin, javax.swing.GroupLayout.DEFAULT_SIZE, 389, Short.MAX_VALUE))
+                    .addComponent(spinnerTI, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
+                    .addComponent(spinnerTMax, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
+                    .addComponent(spinnerTMin, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(confPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel8)
                     .addComponent(jLabel7)
-                    .addComponent(jLabel6))
-                .addContainerGap())
+                    .addComponent(jLabel6)))
         );
         confPanelLayout.setVerticalGroup(
             confPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(confPanelLayout.createSequentialGroup()
-                .addGroup(confPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(confPanelLayout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addGroup(confPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(spinnerNA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(confPanelLayout.createSequentialGroup()
-                        .addGroup(confPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel1)
-                            .addComponent(spinnerTMin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(confPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel7)
-                            .addComponent(spinnerTMax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel5))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(confPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE, false)
-                            .addComponent(spinnerTI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel3))))
-                .addContainerGap(79, Short.MAX_VALUE))
+                .addGap(26, 26, 26)
+                .addGroup(confPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(spinnerNA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5)))
+            .addGroup(confPanelLayout.createSequentialGroup()
+                .addGroup(confPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(spinnerTMin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(confPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(spinnerTMax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(confPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE, false)
+                    .addComponent(spinnerTI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel3)))
         );
 
         spGeral.setBottomComponent(confPanel);
@@ -285,8 +287,8 @@ public class MainFrame extends javax.swing.JFrame {
         spTanque.setLeftComponent(tanquePanel);
 
         panelGrafico.setOpaque(true);
-        panelGrafico.addTab("Tensão x Tempo", graficoTensao);
         panelGrafico.addTab("Nível x Tempo", graficoNivel);
+        panelGrafico.addTab("Tensão x Tempo", graficoTensao);
 
         spTanque.setRightComponent(panelGrafico);
 
@@ -415,15 +417,19 @@ public class MainFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(menuPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(spGeral, javax.swing.GroupLayout.DEFAULT_SIZE, 968, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(menuPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(menuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(spGeral, javax.swing.GroupLayout.DEFAULT_SIZE, 494, Short.MAX_VALUE)
+                .addComponent(spGeral, javax.swing.GroupLayout.DEFAULT_SIZE, 483, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -461,7 +467,7 @@ public class MainFrame extends javax.swing.JFrame {
         new About(this, true).setVisible(true);
     }//GEN-LAST:event_sobreActionPerformed
 
-    public TanquePanel getTanquePanel() {
+    public TanquePanel2 getTanquePanel() {
         return tanquePanel;
     }
 
@@ -567,6 +573,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextField mediaField;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JPanel menuPanel;
@@ -585,7 +592,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JSpinner spinnerTMin;
     private javax.swing.JPanel tabelaPanel;
     private javax.swing.JTable table;
-    private r2d2e.solution.moduloteste.view.TanquePanel tanquePanel;
+    private r2d2e.solution.moduloteste.view.TanquePanel2 tanquePanel;
     // End of variables declaration//GEN-END:variables
 
 }

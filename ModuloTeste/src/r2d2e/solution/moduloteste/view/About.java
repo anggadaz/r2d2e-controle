@@ -36,6 +36,7 @@ public class About extends javax.swing.JDialog {
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle(org.openide.util.NbBundle.getMessage(About.class, "About.title")); // NOI18N
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/r2d2e/solution/moduloteste/view/resources/about.png"))); // NOI18N
         jLabel1.setText(org.openide.util.NbBundle.getMessage(About.class, "About.jLabel1.text")); // NOI18N

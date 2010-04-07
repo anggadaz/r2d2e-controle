@@ -8,7 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.Timer;
 import r2d2e.solution.moduloteste.handler.MainFrameHandler;
-import r2d2e.solution.moduloteste.view.TanquePanel;
+import r2d2e.solution.moduloteste.view.TanquePanel2;
 
 /**
  *
@@ -17,10 +17,10 @@ import r2d2e.solution.moduloteste.view.TanquePanel;
 public class DryTank implements ActionListener {
 
     private Quanser quanser;
-    private TanquePanel tanquePanel;
+    private TanquePanel2 tanquePanel;
     private Timer time;
 
-    public DryTank(Quanser quanser, TanquePanel tanquePanel, Timer time) {
+    public DryTank(Quanser quanser, TanquePanel2 tanquePanel, Timer time) {
         this.quanser = quanser;
         this.tanquePanel = tanquePanel;
         this.time = time;

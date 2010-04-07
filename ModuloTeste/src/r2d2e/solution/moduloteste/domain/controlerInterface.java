@@ -4,7 +4,7 @@ package r2d2e.solution.moduloteste.domain;
 import r2d2e.solution.moduloteste.domain.graph.HistoChart;
 import r2d2e.solution.moduloteste.domain.graph.BarChart;
 import r2d2e.solution.moduloteste.handler.MainFrameHandler;
-import r2d2e.solution.moduloteste.view.TanquePanel;
+import r2d2e.solution.moduloteste.view.TanquePanel2;
 import javax.swing.Timer;
 
 /**
@@ -14,7 +14,7 @@ import javax.swing.Timer;
 
 public class controlerInterface {
 
-    public static TanquePanel tanquePanel;
+    public static TanquePanel2 tanquePanel;
     public static MainFrameHandler mainFrameHandler;
 
     public static BarChart barChart;
