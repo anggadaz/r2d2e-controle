@@ -28,6 +28,7 @@ public class Simulation3d extends Simulation {
         plantModel = new PlantModel();
     }
 
+    @Override
     public void actionPerformed(ActionEvent e) {
         if (ativo) {
             double level2 = plantModel.getNivelAtualTank2();

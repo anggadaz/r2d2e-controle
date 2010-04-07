@@ -1,10 +1,12 @@
 package r2d2e.solution.tanksimulator.tank;
 
+import com.sun.j3d.utils.behaviors.mouse.MouseZoom;
 import r2d2e.solution.tanksimulator.tank.ObjLoader;
 import com.sun.j3d.utils.behaviors.vp.OrbitBehavior;
 import com.sun.j3d.utils.geometry.Cylinder;
 import com.sun.j3d.utils.universe.SimpleUniverse;
 import com.sun.j3d.utils.universe.ViewingPlatform;
+import com.sun.org.apache.xalan.internal.xsltc.cmdline.Transform;
 import javax.media.j3d.*;
 import java.awt.*;
 import javax.vecmath.Color3f;
@@ -53,10 +55,15 @@ public class Tanks3DContainer extends Container {
 
         // Adiciona "mouse behaviors" à "viewingPlatform"
         // (equivale a trocar a posição do "observador virtual")
-        OrbitBehavior orbit = new OrbitBehavior(canvas, OrbitBehavior.REVERSE_ALL);
+        OrbitBehavior orbit = new OrbitBehavior(canvas, OrbitBehavior.REVERSE_ALL | OrbitBehavior.DISABLE_ROTATE) ;
         BoundingSphere bounds = new BoundingSphere(new Point3d(0.0, 0.0, 0.0), 200.0);
         orbit.setSchedulingBounds(bounds);
         viewingPlatform.setViewPlatformBehavior(orbit);
+
+        Background background = new Background(new Color3f(0.4f,0.4f,0.5f));
+        background.setApplicationBounds(bounds);
+
+        scene.addChild(background);
 
         universe.addBranchGraph(scene);
         setSize(getPreferredSize());
@@ -120,7 +127,7 @@ public class Tanks3DContainer extends Container {
         TransparencyAttributes transparencia = new TransparencyAttributes();
         transparencia.setTransparencyMode(transparencia.BLENDED);
         transparencia.setTransparency(0.35f);
-        AguaApp.setTransparencyAttributes(transparencia);
+        //AguaApp.setTransparencyAttributes(transparencia);
 
 
         Cylinder Coluna1 = new Cylinder((float) 0.06, (float) 0.03);
@@ -138,6 +145,11 @@ public class Tanks3DContainer extends Container {
         setColuna02(0.0);
         Coluna2TransGroup.addChild(Coluna2);
         TanksTransGroup.addChild(Coluna2TransGroup);
+
+        // Seta transformaçoes no transformgroup dos tanks
+        Transform3D TanksRot = new Transform3D();
+        TanksRot.rotY(-0.4 * Math.PI);
+        TanksTransGroup.setTransform(TanksRot);
 
         ////////////////////////LUZES
         Color3f corLuz = new Color3f(0.9f, 0.9f, 0.9f);

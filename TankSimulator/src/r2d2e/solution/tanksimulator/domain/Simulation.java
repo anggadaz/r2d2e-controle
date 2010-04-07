@@ -7,6 +7,7 @@ package r2d2e.solution.tanksimulator.domain;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.Timer;
+import r2d2e.solution.tanksimulator.view.MainView;
 import r2d2e.solution.tanksimulator.view.TankPanel;
 
 /**
@@ -19,8 +20,6 @@ public class Simulation extends Timer implements ActionListener {
     private TankPanel tank1;
     private TankPanel tank2;
     protected boolean ativo = true;
-    public boolean isTransbordando1 = false;
-    public boolean isTransbordando2 = false;
 
     public Simulation(int delay, TankPanel tank1, TankPanel tank2) {
         super(delay, null);
@@ -43,25 +42,27 @@ public class Simulation extends Timer implements ActionListener {
     }
 
     protected void verificarTransbordamento(double level1, double level2) {
-        if (level1 >= 33) {
-            Logger.println("TANQUE 1 TRANSBORDANDO!!!");
-            if (!isTransbordando1) {
-                UpdateStatus.updateSatus(UpdateStatus.RED_STATUS, "TANQUE 1 TRANSBORDANDO!!!");
-                isTransbordando1 = true;
-            } else {
-                UpdateStatus.updateSatus(UpdateStatus.YELLOW_STATUS, "TANQUE 1 TRANSBORDANDO!!!");
-                isTransbordando1 = false;
-            }
+        if (level1 >= 30) {
+            atualizarStatus(1);
+            return;
         }
-        if (level2 >= 33) {
+        if (level2 >= 30) {
+            atualizarStatus(2);
+            return;
+        }
+        if (!MainView.isStopped()) {
+            UpdateStatus.updateSatus(UpdateStatus.GREEN_STATUS, "Simulação rodando");
+        }
+
+    }
+
+    private void atualizarStatus(int tank) {
+        if (tank == 1) {
+            Logger.println("TANQUE 1 TRANSBORDANDO!!!");
+            UpdateStatus.updateSatus(UpdateStatus.RED_STATUS, "TANQUE 1 TRANSBORDANDO!!!");
+        } else {
             Logger.println("TANQUE 2 TRANSBORDANDO!!!");
-            if (!isTransbordando2) {
-                UpdateStatus.updateSatus(UpdateStatus.RED_STATUS, "TANQUE 2 TRANSBORDANDO!!!");
-                isTransbordando2 = true;
-            } else {
-                UpdateStatus.updateSatus(UpdateStatus.YELLOW_STATUS, "TANQUE 2 TRANSBORDANDO!!!");
-                isTransbordando2 = false;
-            }
+            UpdateStatus.updateSatus(UpdateStatus.RED_STATUS, "TANQUE 2 TRANSBORDANDO!!!");
         }
     }
 

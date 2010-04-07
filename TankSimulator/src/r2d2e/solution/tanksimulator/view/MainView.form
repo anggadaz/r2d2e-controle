@@ -165,7 +165,7 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="buttonStart" alignment="2" min="-2" pref="34" max="-2" attributes="1"/>
-                  <Component id="buttonAltconf" alignment="2" min="-2" pref="28" max="-2" attributes="1"/>
+                  <Component id="buttonAltconf" alignment="2" min="-2" pref="31" max="-2" attributes="1"/>
                   <Component id="jSeparator1" alignment="2" min="-2" pref="28" max="-2" attributes="0"/>
                   <Component id="infoPanel" alignment="2" min="-2" max="-2" attributes="0"/>
                   <Component id="buttonStop" alignment="2" min="-2" pref="30" max="-2" attributes="1"/>
@@ -203,7 +203,7 @@
         <Component class="javax.swing.JButton" name="buttonAltconf">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/r2d2e/solution/tanksimulator/view/resource/settings.png"/>
+              <Image iconType="3" name="/r2d2e/solution/tanksimulator/view/resource/Signal.png"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Editar Configura&#xe7;&#xf5;es do simulador"/>
             <Property name="borderPainted" type="boolean" value="false"/>
@@ -299,17 +299,17 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Component id="separator" alignment="0" pref="564" max="32767" attributes="0"/>
-              <Component id="simulatorPanel" alignment="0" max="32767" attributes="0"/>
               <Component id="statusPanel" alignment="1" max="32767" attributes="0"/>
+              <Component id="simulatorPanel" alignment="0" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <Component id="separator" min="-2" pref="2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Component id="simulatorPanel" max="32767" attributes="0"/>
-                  <EmptySpace min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Component id="statusPanel" min="-2" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -322,6 +322,9 @@
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="componentResized" listener="java.awt.event.ComponentListener" parameters="java.awt.event.ComponentEvent" handler="simulatorPanelComponentResized"/>
+          </Events>
 
           <Layout>
             <DimensionLayout dim="0">
@@ -331,7 +334,7 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="455" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="463" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>

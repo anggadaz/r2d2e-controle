@@ -23,4 +23,8 @@ public class MainViewHandler {
         EditConf conf = new EditConf(mainView, true);
         conf.setVisible(true);
     }
+
+    public void turnOff() {
+        mainView.stop();
+    }
 }

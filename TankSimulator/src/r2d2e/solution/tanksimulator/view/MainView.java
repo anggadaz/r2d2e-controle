@@ -40,6 +40,7 @@ public class MainView extends javax.swing.JFrame {
     private Tanks3DContainer tanks3d;
     private int port = 20081;
     private static int delay = 100;//milisegundos
+    private static boolean isStopped = false;
 
     /** Creates new form mainView */
     public MainView() {
@@ -47,13 +48,14 @@ public class MainView extends javax.swing.JFrame {
         init();
         simulatorPanel.add(tanks3d);
         tanks3d.setSize(simulatorPanel.getPreferredSize());
+        Splash.getInstance().finalizaSplash();
     }
 
     private void init() {
         tanks3d = new Tanks3DContainer();
         handler = new MainViewHandler(this);
         simulation3d = new Simulation3d(delay, tanks3d);
-        driver = new QuanserDriver(simulation3d);
+        driver = new QuanserDriver(simulation3d, handler);
 
         URL imgURL = getClass().getResource("/r2d2e/solution/tanksimulator/view/resource/r2d2e.jpg");
         setIconImage(new ImageIcon(imgURL).getImage());
@@ -177,7 +179,7 @@ public class MainView extends javax.swing.JFrame {
             }
         });
 
-        buttonAltconf.setIcon(new javax.swing.ImageIcon(getClass().getResource("/r2d2e/solution/tanksimulator/view/resource/settings.png"))); // NOI18N
+        buttonAltconf.setIcon(new javax.swing.ImageIcon(getClass().getResource("/r2d2e/solution/tanksimulator/view/resource/Signal.png"))); // NOI18N
         buttonAltconf.setToolTipText("Editar Configurações do simulador");
         buttonAltconf.setBorderPainted(false);
         buttonAltconf.setContentAreaFilled(false);
@@ -256,13 +258,18 @@ public class MainView extends javax.swing.JFrame {
             botoesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(botoesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(buttonStart, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(buttonAltconf, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(buttonAltconf, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addComponent(infoPanel, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addComponent(buttonStop, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         simulatorPanel.setBackground(new java.awt.Color(255, 255, 255));
+        simulatorPanel.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentResized(java.awt.event.ComponentEvent evt) {
+                simulatorPanelComponentResized(evt);
+            }
+        });
 
         javax.swing.GroupLayout simulatorPanelLayout = new javax.swing.GroupLayout(simulatorPanel);
         simulatorPanel.setLayout(simulatorPanelLayout);
@@ -272,7 +279,7 @@ public class MainView extends javax.swing.JFrame {
         );
         simulatorPanelLayout.setVerticalGroup(
             simulatorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 455, Short.MAX_VALUE)
+            .addGap(0, 463, Short.MAX_VALUE)
         );
 
         labelIcon.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -308,8 +315,8 @@ public class MainView extends javax.swing.JFrame {
         contentPanelLayout.setHorizontalGroup(
             contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(separator, javax.swing.GroupLayout.DEFAULT_SIZE, 564, Short.MAX_VALUE)
-            .addComponent(simulatorPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(statusPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(simulatorPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         contentPanelLayout.setVerticalGroup(
             contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -400,15 +407,10 @@ public class MainView extends javax.swing.JFrame {
 
     private void buttonStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonStartActionPerformed
         // TODO add your handling code here:
-        if (simulation3d.isAtivo()) {
-            server = new QuanserServer(port, driver);
-            server.start();
-            if (!simulation3d.isRunning()) {
-                simulation3d.start();
-            }
-        } else {
-            simulation3d.setAtivo(true);
-        }
+        isStopped = false;
+        server = new QuanserServer(port, driver);
+        server.start();
+        simulation3d.start();
         buttonStop.setEnabled(true);
         buttonStart.setEnabled(false);
         Logger.println("----------------------------");
@@ -417,6 +419,11 @@ public class MainView extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonStartActionPerformed
 
     private void buttonStopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonStopActionPerformed
+        stop();
+    }
+
+    public void stop() {
+        isStopped = true;
         // TODO add your handling code here:
         Logger.println("Simulação Parada.");
         Logger.println("----------------------------");
@@ -457,6 +464,11 @@ public class MainView extends javax.swing.JFrame {
         about.setVisible(true);
     }//GEN-LAST:event_itemSobreActionPerformed
 
+    private void simulatorPanelComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_simulatorPanelComponentResized
+        tanks3d.setSize(simulatorPanel.getSize());
+        tanks3d.setCanvasSize(simulatorPanel.getSize());
+    }//GEN-LAST:event_simulatorPanelComponentResized
+
     public int getPort() {
         return port;
     }
@@ -488,6 +500,10 @@ public class MainView extends javax.swing.JFrame {
         return server.isAlive();
     }
 
+    public static boolean isStopped() {
+        return isStopped;
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -495,6 +511,7 @@ public class MainView extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
 
             public void run() {
+                Splash.getInstance().inicializaSplash();
                 SkinInitialize();
                 new MainView().setVisible(true);
             }

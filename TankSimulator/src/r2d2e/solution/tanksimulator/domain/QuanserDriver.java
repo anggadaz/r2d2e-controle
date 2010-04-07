@@ -5,6 +5,7 @@
 package r2d2e.solution.tanksimulator.domain;
 
 import java.text.DecimalFormat;
+import r2d2e.solution.tanksimulator.handler.MainViewHandler;
 
 /**
  *
@@ -18,9 +19,11 @@ public class QuanserDriver {
     private static final int VOLT_FACTOR = 5;
     private static final double COEF = 6.25;
     private Simulation simulation;
+    private MainViewHandler handler;
 
-    public QuanserDriver(Simulation simulation) {
+    public QuanserDriver(Simulation simulation, MainViewHandler handler) {
         this.simulation = simulation;
+        this.handler = handler;
     }
 
     public synchronized String readFromSensor(String channel, int ID) {
@@ -37,7 +40,10 @@ public class QuanserDriver {
     }
 
     public synchronized String writeAtBomb(String channel, String volt, int ID) {
-        verifyVoltage(volt, ID);
+        boolean ok = verifyVoltage(volt, ID);
+        if(!ok){
+            return ERROR;
+        }
         int cha = convertToInt(channel, ID);
         switch (cha) {
             case 0:
@@ -70,7 +76,7 @@ public class QuanserDriver {
     private void writeAtBomb1(String volt, int ID) {
         double tensao = convertToDouble(volt, ID);
         simulation.setTensao(tensao * VOLT_FACTOR);
-        Logger.println("Escrever na bomba 1 tensão " + volt + " V. ID = " + ID);
+        UpdateStatus.updateSatus(UpdateStatus.GREEN_STATUS, "Simulação rodando.");
     }
 
     private void writeAtBomb2(String volt, int ID) {
@@ -94,13 +100,20 @@ public class QuanserDriver {
         }
     }
 
-    private void verifyVoltage(String volt, int ID) {
+    private boolean verifyVoltage(String volt, int ID) {
         double tensao = convertToDouble(volt, ID);
         if (tensao > 3) {
-            Logger.println("Tensão muito alta!!");
+            Logger.println("Tensao acima de 15 volt ID = " + ID);
+            UpdateStatus.updateSatus(UpdateStatus.RED_STATUS, "TENSAO ACIMA DE 15 V!!!!!");
+            handler.turnOff();
+            return false;
         }
         if (tensao < -3) {
-            Logger.println("Tensão muito baixa!!");
+            Logger.println("Tensao abaixo de -15 volt ID = " + ID);
+            UpdateStatus.updateSatus(UpdateStatus.RED_STATUS, "TENSAO ABAIXO DE -15 V!!!!!");
+            handler.turnOff();
+            return false;
         }
+        return true;
     }
 }
