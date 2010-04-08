@@ -22,7 +22,7 @@ public class Teste extends Thread {
     @Override
     public void run() {
         Quanser quanser = new Quanser();
-        quanser.writeBomb(3);
+        quanser.writeBomb(0);
         try {
             sleep(2000);
         } catch (InterruptedException ex) {
@@ -39,31 +39,31 @@ public class Teste extends Thread {
 //            double q2 = quanser.readSensor1();
 //            System.out.println("q2 " + q2);
 //        }
-        quanser.writeBomb(2);
-        try {
-            sleep(3000);
-        } catch (InterruptedException ex) {
-            Exceptions.printStackTrace(ex);
-        }
-        quanser.writeBomb(0.0);
-        try {
-            sleep(3000);
-        } catch (InterruptedException ex) {
-            Exceptions.printStackTrace(ex);
-        }
-        quanser.writeBomb(3);
-        try {
-            sleep(5000);
-        } catch (InterruptedException ex) {
-            Exceptions.printStackTrace(ex);
-        }
-        quanser.writeBomb(3.0);
-        try {
-            sleep(1000);
-        } catch (InterruptedException ex) {
-            Exceptions.printStackTrace(ex);
-        }
-        quanser.writeBomb(5);
+//        quanser.writeBomb(2);
+//        try {
+//            sleep(3000);
+//        } catch (InterruptedException ex) {
+//            Exceptions.printStackTrace(ex);
+//        }
+//        quanser.writeBomb(0.0);
+//        try {
+//            sleep(3000);
+//        } catch (InterruptedException ex) {
+//            Exceptions.printStackTrace(ex);
+//        }
+//        quanser.writeBomb(3);
+//        try {
+//            sleep(5000);
+//        } catch (InterruptedException ex) {
+//            Exceptions.printStackTrace(ex);
+//        }
+//        quanser.writeBomb(3.0);
+//        try {
+//            sleep(1000);
+//        } catch (InterruptedException ex) {
+//            Exceptions.printStackTrace(ex);
+//        }
+//        quanser.writeBomb(5);
         quanser.closeConnection();
     }
 

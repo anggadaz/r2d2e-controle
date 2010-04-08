@@ -26,7 +26,6 @@ public class ControlModeHandler {
 
     public ControlModeHandler(ConfControle confControle) {
         this.confControle = confControle;
-        algController = new AlgController(100, controllerSelected);
     }
 
     public Controller getControllerSelected() {
@@ -41,6 +40,10 @@ public class ControlModeHandler {
         if (controllerSelected instanceof PController) {
             String nivel = confControle.getTextSetPoint().getText();
             String kp = confControle.getTextKP().getText();
+
+            nivel = fixNumber(nivel);
+            kp = fixNumber(kp);
+
             controllerSelected.setSetPoint(Double.parseDouble(nivel));
             ((PController) controllerSelected).setKp(Double.parseDouble(kp));
         }
@@ -48,6 +51,11 @@ public class ControlModeHandler {
             String nivel = confControle.getTextSetPoint().getText();
             String kp = confControle.getTextKP().getText();
             String kd = confControle.getTextKD().getText();
+
+            nivel = fixNumber(nivel);
+            kp = fixNumber(kp);
+            kd = fixNumber(kd);
+
             controllerSelected.setSetPoint(Double.parseDouble(nivel));
             ((PDController) controllerSelected).setKp(Double.parseDouble(kp));
             ((PDController) controllerSelected).setKd(Double.parseDouble(kd));
@@ -56,6 +64,11 @@ public class ControlModeHandler {
             String nivel = confControle.getTextSetPoint().getText();
             String kp = confControle.getTextKP().getText();
             String ki = confControle.getTextKI().getText();
+
+            nivel = fixNumber(nivel);
+            kp = fixNumber(kp);
+            ki = fixNumber(ki);
+
             controllerSelected.setSetPoint(Double.parseDouble(nivel));
             ((PIController) controllerSelected).setKp(Double.parseDouble(kp));
             ((PIController) controllerSelected).setKi(Double.parseDouble(ki));
@@ -65,6 +78,12 @@ public class ControlModeHandler {
             String kp = confControle.getTextKP().getText();
             String ki = confControle.getTextKI().getText();
             String kd = confControle.getTextKD().getText();
+
+            nivel = fixNumber(nivel);
+            kp = fixNumber(kp);
+            ki = fixNumber(ki);
+            kd = fixNumber(kd);
+
             controllerSelected.setSetPoint(Double.parseDouble(nivel));
             ((PIDController) controllerSelected).setKp(Double.parseDouble(kp));
             ((PIDController) controllerSelected).setKi(Double.parseDouble(ki));
@@ -75,6 +94,12 @@ public class ControlModeHandler {
             String kp = confControle.getTextKP().getText();
             String ki = confControle.getTextKI().getText();
             String kd2 = confControle.getTextKD().getText();
+
+            nivel = fixNumber(nivel);
+            kp = fixNumber(kp);
+            ki = fixNumber(ki);
+            kd2 = fixNumber(kd2);
+            
             controllerSelected.setSetPoint(Double.parseDouble(nivel));
             ((PID2Controller) controllerSelected).setKp(Double.parseDouble(kp));
             ((PID2Controller) controllerSelected).setKi(Double.parseDouble(ki));
@@ -83,8 +108,15 @@ public class ControlModeHandler {
     }
 
     public void init(Quanser quanser) {
-        algController.setQuanser(quanser);
+        algController = new AlgController(100, controllerSelected,quanser);
         algController.start();
+    }
 
+    private String fixNumber(String numb){
+        return numb.replace(",", ".");
+    }
+
+    public void stop(){
+        algController.stop();
     }
 }

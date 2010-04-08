@@ -170,11 +170,11 @@ public class ConfControle extends javax.swing.JPanel {
         labelKi.setForeground(new java.awt.Color(255, 255, 255));
         labelKi.setText(org.openide.util.NbBundle.getMessage(ConfControle.class, "ConfControle.labelKi.text")); // NOI18N
 
-        textKI.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getIntegerInstance())));
+        textKI.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
         textKI.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         textKI.setText(org.openide.util.NbBundle.getMessage(ConfControle.class, "ConfControle.textKI.text")); // NOI18N
 
-        textKD.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getIntegerInstance())));
+        textKD.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
         textKD.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         textKD.setText(org.openide.util.NbBundle.getMessage(ConfControle.class, "ConfControle.textKD.text")); // NOI18N
 

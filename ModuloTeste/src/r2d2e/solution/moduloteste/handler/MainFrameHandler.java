@@ -2,6 +2,7 @@ package r2d2e.solution.moduloteste.handler;
 
 import r2d2e.solution.moduloteste.domain.Quanser;
 import r2d2e.solution.moduloteste.view.NovoFrame;
+import r2d2e.solution.moduloteste.view.OpcoesGerais;
 
 /**
  *
@@ -11,9 +12,7 @@ public class MainFrameHandler {
 
     public static final int TEST_MOD = 0;
     public static final int CONTROL_MOD = 1;
-
     private NovoFrame mainFrame;
-
     private TestModeHandler testModeHandler;
     private ControlModeHandler controlModeHandler;
     private Quanser quanser;
@@ -22,13 +21,13 @@ public class MainFrameHandler {
     public MainFrameHandler(NovoFrame mainFrame) {
         this.mainFrame = mainFrame;
         quanser = new Quanser();
-        testModeHandler = new TestModeHandler(mainFrame,quanser);
+        testModeHandler = new TestModeHandler(mainFrame, quanser);
         controlModeHandler = mainFrame.getConfControle().getControlModeHandler();
     }
 
     public void enterTestMode() {
 
-        if(mode == TEST_MOD) {
+        if (mode == TEST_MOD) {
             return;
         }
 
@@ -39,7 +38,7 @@ public class MainFrameHandler {
 
     public void enterControlMode() {
 
-        if(mode == CONTROL_MOD) {
+        if (mode == CONTROL_MOD) {
             return;
         }
 
@@ -49,23 +48,39 @@ public class MainFrameHandler {
     }
 
     public void play() {
-        if(mode == TEST_MOD) {
+        if (mode == TEST_MOD) {
             testModeHandler.initTest();
         }
-        if(mode == CONTROL_MOD) {
+        if (mode == CONTROL_MOD) {
             controlModeHandler.init(quanser);
         }
+        mainFrame.getButtonPararTeste().setEnabled(true);
+        mainFrame.getButtonIniciarTeste().setEnabled(false);
     }
 
     public void cycle() {
-        if(mode == TEST_MOD) {
+        if (mode == TEST_MOD) {
             testModeHandler.cycle();
         }
     }
 
     public void stop() {
-        if(mode == TEST_MOD) {
+        if (mode == TEST_MOD) {
             testModeHandler.stopTest();
         }
+        if (mode == CONTROL_MOD) {
+            controlModeHandler.stop();
+        }
+        mainFrame.getButtonPararTeste().setEnabled(false);
+        mainFrame.getButtonIniciarTeste().setEnabled(true);
+    }
+
+    public void closeConnection() {
+        quanser.closeConnection();
+    }
+
+    public void initOpcoesGerais() {
+        OpcoesGerais gerais = new OpcoesGerais(mainFrame, true);
+        gerais.setVisible(true);
     }
 }

@@ -22,14 +22,13 @@ public class NovoFrame extends javax.swing.JFrame {
     public static final String CARD_CONF_TESTE = "cardConfTeste";
     public static final String CARD_CONF_CONTROLE = "cardConfControle";
 
-
     public NovoFrame() {
         initComponents();
         mainFrameHandler = new MainFrameHandler(this);
         mainFrameHandler.enterTestMode();
         URL imgURL = getClass().getResource("/r2d2e/solution/moduloteste/view/resources/r2d2e.jpg");
         setIconImage(new ImageIcon(imgURL).getImage());
-
+        setLocationRelativeTo(null);
         Splash.getInstance().finalizaSplash();
     }
 
@@ -93,6 +92,7 @@ public class NovoFrame extends javax.swing.JFrame {
         confControle = new r2d2e.solution.moduloteste.view.ConfControle();
         menuBar = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        menuSair = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         menuTeste = new javax.swing.JCheckBoxMenuItem();
         menuControle = new javax.swing.JCheckBoxMenuItem();
@@ -100,6 +100,12 @@ public class NovoFrame extends javax.swing.JFrame {
         itemSobre = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle(org.openide.util.NbBundle.getMessage(NovoFrame.class, "NovoFrame.title")); // NOI18N
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         toolbarPanel.setOpaque(false);
 
@@ -166,6 +172,11 @@ public class NovoFrame extends javax.swing.JFrame {
         buttonOpcoesGeral.setFocusable(false);
         buttonOpcoesGeral.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         buttonOpcoesGeral.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        buttonOpcoesGeral.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonOpcoesGeralActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout toolbarPanelLayout = new javax.swing.GroupLayout(toolbarPanel);
         toolbarPanel.setLayout(toolbarPanelLayout);
@@ -261,6 +272,11 @@ public class NovoFrame extends javax.swing.JFrame {
         );
 
         jMenu1.setText(org.openide.util.NbBundle.getMessage(NovoFrame.class, "NovoFrame.jMenu1.text")); // NOI18N
+
+        menuSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/r2d2e/solution/moduloteste/view/resources/close.png"))); // NOI18N
+        menuSair.setText(org.openide.util.NbBundle.getMessage(NovoFrame.class, "NovoFrame.menuSair.text")); // NOI18N
+        jMenu1.add(menuSair);
+
         menuBar.add(jMenu1);
 
         jMenu2.setText(org.openide.util.NbBundle.getMessage(NovoFrame.class, "NovoFrame.jMenu2.text")); // NOI18N
@@ -286,6 +302,7 @@ public class NovoFrame extends javax.swing.JFrame {
 
         jMenu3.setText(org.openide.util.NbBundle.getMessage(NovoFrame.class, "NovoFrame.jMenu3.text")); // NOI18N
 
+        itemSobre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/r2d2e/solution/moduloteste/view/resources/r2d2e20X20.jpg"))); // NOI18N
         itemSobre.setText(org.openide.util.NbBundle.getMessage(NovoFrame.class, "NovoFrame.itemSobre.text")); // NOI18N
         itemSobre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -342,6 +359,16 @@ public class NovoFrame extends javax.swing.JFrame {
         mainFrameHandler.enterControlMode();
     }//GEN-LAST:event_menuControleActionPerformed
 
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        // TODO add your handling code here:
+        mainFrameHandler.closeConnection();
+    }//GEN-LAST:event_formWindowClosing
+
+    private void buttonOpcoesGeralActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonOpcoesGeralActionPerformed
+        // TODO add your handling code here:
+        mainFrameHandler.initOpcoesGerais();
+    }//GEN-LAST:event_buttonOpcoesGeralActionPerformed
+
     public void changeCard(String card) {
         CardLayout layout = (CardLayout) opcoesPanel.getLayout();
         layout.show(opcoesPanel, card);
@@ -385,6 +412,7 @@ public class NovoFrame extends javax.swing.JFrame {
     private javax.swing.JPanel mainPanel;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JCheckBoxMenuItem menuControle;
+    private javax.swing.JMenuItem menuSair;
     private javax.swing.JCheckBoxMenuItem menuTeste;
     private javax.swing.JPanel opcoesPanel;
     private r2d2e.solution.moduloteste.view.TanquePanel tanquePanel;
