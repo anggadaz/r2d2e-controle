@@ -12,9 +12,12 @@ public class MainFrameHandler {
 
     public static final int TEST_MOD = 0;
     public static final int CONTROL_MOD = 1;
+
     private NovoFrame mainFrame;
+
     private TestModeHandler testModeHandler;
     private ControlModeHandler controlModeHandler;
+
     private Quanser quanser;
     private int mode;
 
@@ -22,7 +25,7 @@ public class MainFrameHandler {
         this.mainFrame = mainFrame;
         quanser = new Quanser();
         testModeHandler = new TestModeHandler(mainFrame, quanser);
-        controlModeHandler = mainFrame.getConfControle().getControlModeHandler();
+        controlModeHandler = new ControlModeHandler(mainFrame);
     }
 
     public void enterTestMode() {

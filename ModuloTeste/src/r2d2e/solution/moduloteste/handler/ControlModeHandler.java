@@ -13,6 +13,8 @@ import r2d2e.solution.moduloteste.controlers.PIDController;
 import r2d2e.solution.moduloteste.domain.AlgController;
 import r2d2e.solution.moduloteste.domain.Quanser;
 import r2d2e.solution.moduloteste.view.ConfControle;
+import r2d2e.solution.moduloteste.view.NovoFrame;
+import r2d2e.solution.moduloteste.view.TanquePanel;
 
 /**
  *
@@ -20,23 +22,26 @@ import r2d2e.solution.moduloteste.view.ConfControle;
  */
 public class ControlModeHandler {
 
-    private ConfControle confControle;
-    private Controller controllerSelected;
+    private static TanquePanel tanquePanel;
+    private static ConfControle confControle;
     private AlgController algController;
+    
+    private static Controller controllerSelected;
 
-    public ControlModeHandler(ConfControle confControle) {
-        this.confControle = confControle;
+    public ControlModeHandler(NovoFrame frame) {
+        tanquePanel = frame.getTanquePanel();
+        confControle = frame.getConfControle();
     }
 
-    public Controller getControllerSelected() {
+    public static Controller getControllerSelected() {
         return controllerSelected;
     }
 
-    public void setControllerSelected(Controller controllerSelected) {
-        this.controllerSelected = controllerSelected;
+    public static void setControllerSelected(Controller control) {
+        controllerSelected = control;
     }
 
-    public void updateVariables() {
+    public static void updateVariables() {
         if (controllerSelected instanceof PController) {
             String nivel = confControle.getTextSetPoint().getText();
             String kp = confControle.getTextKP().getText();
@@ -112,7 +117,7 @@ public class ControlModeHandler {
         algController.start();
     }
 
-    private String fixNumber(String numb){
+    private static String fixNumber(String numb){
         return numb.replace(",", ".");
     }
 

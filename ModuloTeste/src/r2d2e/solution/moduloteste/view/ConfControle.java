@@ -11,11 +11,9 @@
 package r2d2e.solution.moduloteste.view;
 
 import java.util.Vector;
-import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
-import javax.swing.JFrame;
 import r2d2e.solution.moduloteste.controlers.Controller;
 import r2d2e.solution.moduloteste.controlers.PController;
 import r2d2e.solution.moduloteste.controlers.PDController;
@@ -31,15 +29,14 @@ import r2d2e.solution.moduloteste.handler.ControlModeHandler;
 public class ConfControle extends javax.swing.JPanel {
 
     private double sampleRate = 0.1;
-    private ControlModeHandler controlModeHandler;
 
     /** Creates new form ConfControle */
     public ConfControle() {
         initComponents();
         popularComboBox();
         setP();
-        controlModeHandler = new ControlModeHandler(this);
-        controlModeHandler.setControllerSelected((Controller) comboControladores.getItemAt(0));
+
+        ControlModeHandler.setControllerSelected((Controller) comboControladores.getItemAt(0));
     }
 
     public void popularComboBox() {
@@ -326,20 +323,12 @@ public class ConfControle extends javax.swing.JPanel {
         if (c instanceof PIDController || c instanceof PID2Controller) {
             setPID();
         }
-        controlModeHandler.setControllerSelected(c);
+        ControlModeHandler.setControllerSelected(c);
     }//GEN-LAST:event_comboControladoresItemStateChanged
 
     private void buttonReloadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonReloadActionPerformed
         // TODO add your handling code here:
-        controlModeHandler.updateVariables();
-    }
-
-    public ControlModeHandler getControlModeHandler() {
-        return controlModeHandler;
-    }
-
-    public void setControlModeHandler(ControlModeHandler controlModeHandler) {
-        this.controlModeHandler = controlModeHandler;
+        ControlModeHandler.updateVariables();
     }
 
     public JComboBox getComboControladores() {
