@@ -38,12 +38,6 @@ public class EditConf extends javax.swing.JDialog {
         Integer port = mainView.getPort();
         fieldPort.setText(port.toString());
 
-//        Double km = simulation.getKM();
-//        String kmS = km.toString().replace('.', ',');
-//        kmS += '0';
-//        fieldKm.setText(kmS);
-
-        boolean co = simulation.isAllowFlowOut1();
     }
 
     /** This method is called from within the constructor to
@@ -137,10 +131,6 @@ public class EditConf extends javax.swing.JDialog {
         // TODO add your handling code here:
 
         String port = fieldPort.getText();
-        
-        if(mainView.isStarted()){
-            
-        }
 
         try {
             mainView.setPort(Integer.parseInt(port));
@@ -151,7 +141,7 @@ public class EditConf extends javax.swing.JDialog {
         } catch (Exception ex) {
             Logger.println("Erro ao salvar parâmetros.");
         }
-        
+
         Logger.println("");
         dispose();
     }//GEN-LAST:event_buttonSalvarActionPerformed

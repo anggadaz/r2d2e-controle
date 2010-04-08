@@ -60,8 +60,6 @@ public class MainView extends javax.swing.JFrame {
         URL imgURL = getClass().getResource("/r2d2e/solution/tanksimulator/view/resource/r2d2e.jpg");
         setIconImage(new ImageIcon(imgURL).getImage());
 
-        buttonStop.setEnabled(false);
-
         setSize(getWidth(), getHeight() + 180);
         setLocationRelativeTo(null);
 
@@ -172,6 +170,7 @@ public class MainView extends javax.swing.JFrame {
         buttonStop.setToolTipText("Parar Simulação");
         buttonStop.setBorderPainted(false);
         buttonStop.setContentAreaFilled(false);
+        buttonStop.setEnabled(false);
         buttonStop.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonStopActionPerformed(evt);
@@ -285,7 +284,7 @@ public class MainView extends javax.swing.JFrame {
         labelIcon.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         labelIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/r2d2e/solution/tanksimulator/view/resource/ball_blue.png"))); // NOI18N
 
-        labelText.setFont(new java.awt.Font("Verdana", 0, 11)); // NOI18N
+        labelText.setFont(new java.awt.Font("Verdana", 0, 11));
 
         javax.swing.GroupLayout statusPanelLayout = new javax.swing.GroupLayout(statusPanel);
         statusPanel.setLayout(statusPanelLayout);
@@ -413,6 +412,7 @@ public class MainView extends javax.swing.JFrame {
         simulation3d.start();
         buttonStop.setEnabled(true);
         buttonStart.setEnabled(false);
+        buttonAltconf.setEnabled(false);
         Logger.println("----------------------------");
         Logger.println("Simulação Iniciada.");
         UpdateStatus.updateSatus(UpdateStatus.GREEN_STATUS, "Simulação Inciada.");
@@ -433,6 +433,7 @@ public class MainView extends javax.swing.JFrame {
         driver.writeAtBomb("0", "0.0", 999);
         buttonStart.setEnabled(true);
         buttonStop.setEnabled(false);
+        buttonAltconf.setEnabled(true);
         UpdateStatus.updateSatus(UpdateStatus.BLUE_STATUS, "Simulação Parada.");
     }//GEN-LAST:event_buttonStopActionPerformed
 
