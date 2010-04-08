@@ -1,5 +1,6 @@
 package r2d2e.solution.moduloteste.handler;
 
+import r2d2e.solution.moduloteste.domain.Quanser;
 import r2d2e.solution.moduloteste.view.NovoFrame;
 
 /**
@@ -15,12 +16,13 @@ public class MainFrameHandler {
 
     private TestModeHandler testModeHandler;
     private ControlModeHandler controlModeHandler;
-
+    private Quanser quanser;
     private int mode;
 
     public MainFrameHandler(NovoFrame mainFrame) {
         this.mainFrame = mainFrame;
-        testModeHandler = new TestModeHandler(mainFrame);
+        quanser = new Quanser();
+        testModeHandler = new TestModeHandler(mainFrame,quanser);
         controlModeHandler = mainFrame.getConfControle().getControlModeHandler();
     }
 
@@ -51,7 +53,7 @@ public class MainFrameHandler {
             testModeHandler.initTest();
         }
         if(mode == CONTROL_MOD) {
-            controlModeHandler.init();
+            controlModeHandler.init(quanser);
         }
     }
 

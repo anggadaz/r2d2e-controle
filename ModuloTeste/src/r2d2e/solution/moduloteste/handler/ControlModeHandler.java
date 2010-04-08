@@ -10,6 +10,8 @@ import r2d2e.solution.moduloteste.controlers.PDController;
 import r2d2e.solution.moduloteste.controlers.PIController;
 import r2d2e.solution.moduloteste.controlers.PID2Controller;
 import r2d2e.solution.moduloteste.controlers.PIDController;
+import r2d2e.solution.moduloteste.domain.AlgController;
+import r2d2e.solution.moduloteste.domain.Quanser;
 import r2d2e.solution.moduloteste.view.ConfControle;
 
 /**
@@ -20,9 +22,11 @@ public class ControlModeHandler {
 
     private ConfControle confControle;
     private Controller controllerSelected;
+    private AlgController algController;
 
     public ControlModeHandler(ConfControle confControle) {
         this.confControle = confControle;
+        algController = new AlgController(100, controllerSelected);
     }
 
     public Controller getControllerSelected() {
@@ -78,7 +82,9 @@ public class ControlModeHandler {
         }
     }
 
-    public void init() {
-        //TODO FAZER
+    public void init(Quanser quanser) {
+        algController.setQuanser(quanser);
+        algController.start();
+
     }
 }

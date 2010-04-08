@@ -49,7 +49,7 @@ public class TestModeHandler {
     private int numInteracoesMax = 0;
     private int numInteracoesAtual = 0;
 
-    public TestModeHandler(NovoFrame frame) {
+    public TestModeHandler(NovoFrame frame,Quanser quanser) {
         tanquePanel = frame.getTanquePanel();
         confPanel = frame.getConfTeste1();
         testePanel = frame.getTestePanel1();
@@ -58,9 +58,9 @@ public class TestModeHandler {
         buttonCiclo = frame.getButtonNovoCiclo();
         buttonParar = frame.getButtonPararTeste();
 
-        initChart();
+        this.quanser = quanser;
 
-        quanser = new Quanser();
+        initChart();
 
         controlerInterface.tanquePanel = tanquePanel;
         controlerInterface.testModeHandler = this;
