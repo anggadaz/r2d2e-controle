@@ -28,6 +28,13 @@ public class OpcoesGerais extends javax.swing.JDialog {
         URL imgURL = getClass().getResource("/r2d2e/solution/moduloteste/view/resources/r2d2e.jpg");
         setIconImage(new ImageIcon(imgURL).getImage());
         setLocationRelativeTo(parent);
+
+        double cal1 = Quanser.getCALIBRATION1();
+        double cal2 = Quanser.getCALIBRATION2();
+        String ip = Quanser.getIP_QUANSER();
+        textTanque1.setText(Double.toString(cal1));
+        textTanque2.setText(Double.toString(cal2));
+        textIP.setText(ip);
     }
 
     /** This method is called from within the constructor to
@@ -44,14 +51,12 @@ public class OpcoesGerais extends javax.swing.JDialog {
         panelCalibracao = new javax.swing.JPanel();
         labelTanque1 = new javax.swing.JLabel();
         textTanque1 = new javax.swing.JFormattedTextField();
-        chkSomar1 = new javax.swing.JCheckBox();
-        ChkSubtrair1 = new javax.swing.JCheckBox();
         labelTanque2 = new javax.swing.JLabel();
         textTanque2 = new javax.swing.JFormattedTextField();
-        chkSomar2 = new javax.swing.JCheckBox();
-        chkSubtrair2 = new javax.swing.JCheckBox();
         buttonSalvar = new javax.swing.JButton();
         buttonFechar = new javax.swing.JButton();
+        labelIP = new javax.swing.JLabel();
+        textIP = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle(org.openide.util.NbBundle.getMessage(OpcoesGerais.class, "OpcoesGerais.title")); // NOI18N
@@ -65,26 +70,12 @@ public class OpcoesGerais extends javax.swing.JDialog {
         textTanque1.setText(org.openide.util.NbBundle.getMessage(OpcoesGerais.class, "OpcoesGerais.textTanque1.text")); // NOI18N
         textTanque1.setToolTipText(org.openide.util.NbBundle.getMessage(OpcoesGerais.class, "OpcoesGerais.textTanque1.toolTipText")); // NOI18N
 
-        buttonGroup1.add(chkSomar1);
-        chkSomar1.setSelected(true);
-        chkSomar1.setText(org.openide.util.NbBundle.getMessage(OpcoesGerais.class, "OpcoesGerais.chkSomar1.text")); // NOI18N
-
-        buttonGroup1.add(ChkSubtrair1);
-        ChkSubtrair1.setText(org.openide.util.NbBundle.getMessage(OpcoesGerais.class, "OpcoesGerais.ChkSubtrair1.text")); // NOI18N
-
         labelTanque2.setText(org.openide.util.NbBundle.getMessage(OpcoesGerais.class, "OpcoesGerais.labelTanque2.text")); // NOI18N
 
         textTanque2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
         textTanque2.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         textTanque2.setText(org.openide.util.NbBundle.getMessage(OpcoesGerais.class, "OpcoesGerais.textTanque2.text")); // NOI18N
         textTanque2.setToolTipText(org.openide.util.NbBundle.getMessage(OpcoesGerais.class, "OpcoesGerais.textTanque2.toolTipText")); // NOI18N
-
-        buttonGroup2.add(chkSomar2);
-        chkSomar2.setSelected(true);
-        chkSomar2.setText(org.openide.util.NbBundle.getMessage(OpcoesGerais.class, "OpcoesGerais.chkSomar2.text")); // NOI18N
-
-        buttonGroup2.add(chkSubtrair2);
-        chkSubtrair2.setText(org.openide.util.NbBundle.getMessage(OpcoesGerais.class, "OpcoesGerais.chkSubtrair2.text")); // NOI18N
 
         javax.swing.GroupLayout panelCalibracaoLayout = new javax.swing.GroupLayout(panelCalibracao);
         panelCalibracao.setLayout(panelCalibracaoLayout);
@@ -93,22 +84,12 @@ public class OpcoesGerais extends javax.swing.JDialog {
             .addGroup(panelCalibracaoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelCalibracaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelCalibracaoLayout.createSequentialGroup()
-                        .addComponent(labelTanque1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(textTanque1, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(chkSomar1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(ChkSubtrair1))
-                    .addGroup(panelCalibracaoLayout.createSequentialGroup()
-                        .addComponent(labelTanque2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(textTanque2, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(chkSomar2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(chkSubtrair2)))
+                    .addComponent(labelTanque1)
+                    .addComponent(labelTanque2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panelCalibracaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(textTanque2, javax.swing.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE)
+                    .addComponent(textTanque1, javax.swing.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE))
                 .addContainerGap())
         );
         panelCalibracaoLayout.setVerticalGroup(
@@ -116,16 +97,12 @@ public class OpcoesGerais extends javax.swing.JDialog {
             .addGroup(panelCalibracaoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelCalibracaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelTanque1)
                     .addComponent(textTanque1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(chkSomar1)
-                    .addComponent(ChkSubtrair1))
+                    .addComponent(labelTanque1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelCalibracaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelTanque2)
-                    .addComponent(textTanque2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(chkSubtrair2)
-                    .addComponent(chkSomar2))
+                    .addComponent(textTanque2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -151,6 +128,11 @@ public class OpcoesGerais extends javax.swing.JDialog {
             }
         });
 
+        labelIP.setText(org.openide.util.NbBundle.getMessage(OpcoesGerais.class, "OpcoesGerais.labelIP.text")); // NOI18N
+
+        textIP.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        textIP.setText(org.openide.util.NbBundle.getMessage(OpcoesGerais.class, "OpcoesGerais.textIP.text")); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -159,20 +141,31 @@ public class OpcoesGerais extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(panelCalibracao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(buttonFechar, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(buttonSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(panelCalibracao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                        .addGap(18, 18, 18)
+                        .addComponent(buttonSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(labelIP)
+                        .addGap(10, 10, 10)
+                        .addComponent(textIP, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE)
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(panelCalibracao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(11, 11, 11)
+                .addComponent(panelCalibracao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(buttonSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buttonFechar, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(textIP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelIP))
+                .addGap(21, 21, 21)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(buttonFechar, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -187,18 +180,16 @@ public class OpcoesGerais extends javax.swing.JDialog {
     private void buttonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSalvarActionPerformed
         // TODO add your handling code here:
         
-        boolean som1 = chkSomar1.isSelected();
-        boolean som2 = chkSomar2.isSelected();
         String cal1 = textTanque1.getText();
         String cal2 = textTanque2.getText();
+        String ip = textIP.getText();
+
         cal1 = fixNumber(cal1);
         cal2 = fixNumber(cal2);
 
-        Quanser.setSOMAR1(som1);
-        Quanser.setSOMAR2(som2);
         Quanser.setCALIBRATION1(Double.parseDouble(cal1));
         Quanser.setCALIBRATION2(Double.parseDouble(cal2));
-        dispose();
+        Quanser.setIP_QUANSER(ip);
     }//GEN-LAST:event_buttonSalvarActionPerformed
     private String fixNumber(String numb) {
         return numb.replace(",", ".");
@@ -223,17 +214,15 @@ public class OpcoesGerais extends javax.swing.JDialog {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JCheckBox ChkSubtrair1;
     private javax.swing.JButton buttonFechar;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JButton buttonSalvar;
-    private javax.swing.JCheckBox chkSomar1;
-    private javax.swing.JCheckBox chkSomar2;
-    private javax.swing.JCheckBox chkSubtrair2;
+    private javax.swing.JLabel labelIP;
     private javax.swing.JLabel labelTanque1;
     private javax.swing.JLabel labelTanque2;
     private javax.swing.JPanel panelCalibracao;
+    private javax.swing.JTextField textIP;
     private javax.swing.JFormattedTextField textTanque1;
     private javax.swing.JFormattedTextField textTanque2;
     // End of variables declaration//GEN-END:variables

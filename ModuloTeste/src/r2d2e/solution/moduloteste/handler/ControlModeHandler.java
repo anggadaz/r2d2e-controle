@@ -116,7 +116,8 @@ public class ControlModeHandler {
         return numb.replace(",", ".");
     }
 
-    public void stop(){
+    public void stop(Quanser quanser){
         algController.stop();
+        quanser.stopMotor();
     }
 }

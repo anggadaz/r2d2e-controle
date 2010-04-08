@@ -14,16 +14,17 @@ import r2d2e.solution.moduloteste.quanser.QuanserClientException;
 public class Quanser {
 
     private QuanserClient quanserClient;
-    public static String IP_QUANSER = "10.13.99.69";
-    public static int PORT_QUANSER = 20081;//20081;
+    private static String IP_QUANSER = "10.13.99.69";
+    private static int PORT_QUANSER = 20081;//20081;
     private static int CHANNEL_BOMB = 0;
     private static double CALIBRATION1 = 0.0;//2.0;
     private static double CALIBRATION2 = 0.0;
     private static double VOLT_TO_LEVEL = 6.25;
-    private static boolean SOMAR1 = true;
-    private static boolean SOMAR2 = true;
 
     public Quanser() {
+    }
+
+    public void connect() {
         try {
             quanserClient = new QuanserClient(IP_QUANSER, PORT_QUANSER);
         } catch (QuanserClientException e) {
@@ -44,11 +45,7 @@ public class Quanser {
         try {
             read = quanserClient.read(0);
             read *= VOLT_TO_LEVEL;
-            if (SOMAR1) {
-                read += CALIBRATION1;
-            } else {
-                read -= CALIBRATION1;
-            }
+            read += CALIBRATION1;
         } catch (QuanserClientException e) {
             e.printStackTrace();
         }
@@ -60,11 +57,7 @@ public class Quanser {
         try {
             read = quanserClient.read(1);
             read *= VOLT_TO_LEVEL;
-            if (SOMAR2) {
-                read += CALIBRATION2;
-            } else {
-                read -= CALIBRATION2;
-            }
+            read += CALIBRATION2;
         } catch (QuanserClientException e) {
             e.printStackTrace();
         }
@@ -95,12 +88,19 @@ public class Quanser {
         Quanser.CALIBRATION2 = CALIBRATION2;
     }
 
-    public static void setSOMAR1(boolean SOMAR1) {
-        Quanser.SOMAR1 = SOMAR1;
+    public static double getCALIBRATION1() {
+        return CALIBRATION1;
     }
 
-    public static void setSOMAR2(boolean SOMAR2) {
-        Quanser.SOMAR2 = SOMAR2;
+    public static double getCALIBRATION2() {
+        return CALIBRATION2;
     }
-    
+
+    public static String getIP_QUANSER() {
+        return IP_QUANSER;
+    }
+
+    public static void setIP_QUANSER(String IP_QUANSER) {
+        Quanser.IP_QUANSER = IP_QUANSER;
+    }
 }

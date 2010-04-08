@@ -17,7 +17,7 @@ public abstract class Controller {
     //setpoint - default 20 cm.
     protected Double setPoint = 20.0;
     //valor do integral passado
-    private Double pastIntegral;
+    protected Double pastIntegral;
     //valor do erro passado
     private Double pastError;
     //valor da variavel de processo passado
@@ -54,8 +54,9 @@ public abstract class Controller {
         System.out.println("KI " + ki);
         System.out.println("pastIntegral " + pastIntegral);
         double inte = pastIntegral + ki * sampleRate * error(processVariable);
+
         System.out.println("inte " + inte);
-        pastIntegral = inte;
+
         return inte;
     }
 
@@ -85,10 +86,19 @@ public abstract class Controller {
         return erro;
     }
 
+    protected double IntegralTest(double s, double p, double i, double d) {
+        if (s > 3 || s < -3) {
+            s = p + d + pastIntegral;
+        } else {
+            pastIntegral = i;
+        }
+        return s;
+    }
     /*
      * Método que deve ser sobrecarregado pelos que irao herdar essa classe.
      * Cada classe deve calcular o valor que se deve aplicar no tanque
      */
+
     public abstract double calculateOutput(double processVariable);
 
     public Double getSampleRate() {

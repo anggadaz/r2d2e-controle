@@ -48,6 +48,10 @@ public class MainFrameHandler {
     }
 
     public void play() {
+        if(!quanser.isServerOk()){
+            quanser.connect();
+        }
+
         if (mode == TEST_MOD) {
             testModeHandler.initTest();
         }
@@ -69,7 +73,7 @@ public class MainFrameHandler {
             testModeHandler.stopTest();
         }
         if (mode == CONTROL_MOD) {
-            controlModeHandler.stop();
+            controlModeHandler.stop(quanser);
         }
         mainFrame.getButtonPararTeste().setEnabled(false);
         mainFrame.getButtonIniciarTeste().setEnabled(true);

@@ -20,7 +20,15 @@ public class PID2Controller extends Controller {
 
     @Override
     public double calculateOutput(double processVariable) {
-        return proporcionalTerm(kp, processVariable) + integralTerm(ki, processVariable) + derivativeOutputTerm(kd2, processVariable);
+        double k = proporcionalTerm(kp, processVariable);
+        double i = integralTerm(ki, processVariable);
+        double d = derivativeOutputTerm(kd2, processVariable);
+
+        double s = k + i + d;
+
+        s = IntegralTest(s, k, i, d);
+
+        return s;
     }
 
     public double getKp() {

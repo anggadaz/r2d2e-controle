@@ -19,7 +19,13 @@ public class PIController extends Controller {
 
     @Override
     public double calculateOutput(double processVariable) {
-        return proporcionalTerm(kp, processVariable) + integralTerm(ki, processVariable);
+        double k = proporcionalTerm(kp, processVariable);
+        double i = integralTerm(ki, processVariable);
+        double s = k + i;
+
+        s = IntegralTest(s, k, i, 0);
+
+        return s;
     }
 
     public double getKp() {
