@@ -6,6 +6,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.UIManager;
 import org.jvnet.substance.skin.SubstanceBusinessBlackSteelLookAndFeel;
 import r2d2e.solution.moduloteste.domain.Quanser;
@@ -231,6 +232,7 @@ public class NovoFrame extends javax.swing.JFrame {
             .addGap(0, 511, Short.MAX_VALUE)
         );
 
+        mainPanel.setOpaque(false);
         mainPanel.setLayout(new java.awt.CardLayout());
         mainPanel.add(testePanel, "card2");
 
@@ -254,7 +256,7 @@ public class NovoFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(backgroundPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(opcoesPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 597, Short.MAX_VALUE))
                 .addContainerGap())
         );
         backgroundPanelLayout.setVerticalGroup(

@@ -61,8 +61,8 @@ public class BarChart extends JPanel {
 
 
         ChartPanel chartPanel = new ChartPanel(chart, false);
-        chartPanel.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createEmptyBorder(4, 4, 4, 4), BorderFactory.createLineBorder(Color.black)));
-        chartPanel.setPreferredSize(new Dimension(650, 400));
+        //chartPanel.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createEmptyBorder(4, 4, 4, 4), BorderFactory.createLineBorder(Color.black)));
+        chartPanel.setPreferredSize(new Dimension(400, 330));
         return chartPanel;
     }
 

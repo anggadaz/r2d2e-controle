@@ -128,7 +128,7 @@
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="opcoesPanel" max="32767" attributes="0"/>
-                      <Component id="mainPanel" alignment="0" max="32767" attributes="0"/>
+                      <Component id="mainPanel" alignment="0" pref="597" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -353,6 +353,9 @@
           </Layout>
         </Container>
         <Container class="javax.swing.JPanel" name="mainPanel">
+          <Properties>
+            <Property name="opaque" type="boolean" value="false"/>
+          </Properties>
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.DesignCardLayout"/>
           <SubComponents>

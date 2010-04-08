@@ -70,8 +70,8 @@ public class TestModeHandler {
         barChart = new BarChart();
         histoChart = new HistoChart(30000);
 
-        testePanel.getGraficoTensao().add(barChart.getChart());
-        testePanel.getGraficoNivel().add(histoChart.getChart());
+        testePanel.addChartTensao(barChart.getChart());
+        testePanel.addChartNivel(histoChart.getChart());
     }
 
     public void initTest() {

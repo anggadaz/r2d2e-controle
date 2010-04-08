@@ -3,6 +3,7 @@ package r2d2e.solution.moduloteste.view;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import org.jfree.chart.ChartPanel;
 
 /**
  *
@@ -27,8 +28,16 @@ public class TestePanel extends javax.swing.JPanel {
         return graficoNivel;
     }
 
+    public void addChartNivel(ChartPanel chart) {
+        graficoNivel.add(chart);
+    }
+
     public JPanel getGraficoTensao() {
         return graficoTensao;
+    }
+
+    public void addChartTensao(ChartPanel chart) {
+        graficoTensao.add(chart);
     }
 
     public void setGraficoNivel(JPanel graficoNivel) {
@@ -61,7 +70,8 @@ public class TestePanel extends javax.swing.JPanel {
 
         setOpaque(false);
 
-        jSplitPane1.setDividerLocation(350);
+        jSplitPane1.setDividerLocation(400);
+        jSplitPane1.setOpaque(false);
 
         tabelaPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
 
@@ -109,11 +119,11 @@ public class TestePanel extends javax.swing.JPanel {
             .addGroup(tabelaPanelLayout.createSequentialGroup()
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(mediaField, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
+                .addComponent(mediaField, javax.swing.GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(Exportar, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
-            .addComponent(scrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 239, Short.MAX_VALUE)
+            .addComponent(scrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
         );
         tabelaPanelLayout.setVerticalGroup(
             tabelaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -130,30 +140,10 @@ public class TestePanel extends javax.swing.JPanel {
 
         jSplitPane1.setRightComponent(tabelaPanel);
 
-        javax.swing.GroupLayout graficoNivelLayout = new javax.swing.GroupLayout(graficoNivel);
-        graficoNivel.setLayout(graficoNivelLayout);
-        graficoNivelLayout.setHorizontalGroup(
-            graficoNivelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 344, Short.MAX_VALUE)
-        );
-        graficoNivelLayout.setVerticalGroup(
-            graficoNivelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 322, Short.MAX_VALUE)
-        );
-
+        graficoNivel.setOpaque(false);
         jTabbedPane1.addTab(org.openide.util.NbBundle.getMessage(TestePanel.class, "TestePanel.graficoNivel.TabConstraints.tabTitle"), graficoNivel); // NOI18N
 
-        javax.swing.GroupLayout graficoTensaoLayout = new javax.swing.GroupLayout(graficoTensao);
-        graficoTensao.setLayout(graficoTensaoLayout);
-        graficoTensaoLayout.setHorizontalGroup(
-            graficoTensaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 344, Short.MAX_VALUE)
-        );
-        graficoTensaoLayout.setVerticalGroup(
-            graficoTensaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 322, Short.MAX_VALUE)
-        );
-
+        graficoTensao.setOpaque(false);
         jTabbedPane1.addTab(org.openide.util.NbBundle.getMessage(TestePanel.class, "TestePanel.graficoTensao.TabConstraints.tabTitle"), graficoTensao); // NOI18N
 
         jSplitPane1.setLeftComponent(jTabbedPane1);
