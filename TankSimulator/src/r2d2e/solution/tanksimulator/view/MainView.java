@@ -62,7 +62,7 @@ public class MainView extends javax.swing.JFrame {
 
         buttonStop.setEnabled(false);
 
-        setSize(getWidth(), getHeight() + 100);
+        setSize(getWidth(), getHeight() + 180);
         setLocationRelativeTo(null);
 
         UpdateStatus.setIcon(labelIcon);
@@ -102,9 +102,8 @@ public class MainView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        popUpTank1 = new javax.swing.JPopupMenu();
+        popUpTank = new javax.swing.JPopupMenu();
         chkAllowFlowOut1 = new javax.swing.JCheckBoxMenuItem();
-        popUpTank2 = new javax.swing.JPopupMenu();
         chkAllowFlowOut2 = new javax.swing.JCheckBoxMenuItem();
         botoesPanel = new javax.swing.JPanel();
         buttonStart = new javax.swing.JButton();
@@ -140,7 +139,7 @@ public class MainView extends javax.swing.JFrame {
                 chkAllowFlowOut1ActionPerformed(evt);
             }
         });
-        popUpTank1.add(chkAllowFlowOut1);
+        popUpTank.add(chkAllowFlowOut1);
 
         chkAllowFlowOut2.setSelected(true);
         chkAllowFlowOut2.setText("Permitir Vazão de Saída");
@@ -149,7 +148,7 @@ public class MainView extends javax.swing.JFrame {
                 chkAllowFlowOut2ActionPerformed(evt);
             }
         });
-        popUpTank2.add(chkAllowFlowOut2);
+        popUpTank.add(chkAllowFlowOut2);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("R2D2E - Tank Simulator");
@@ -265,6 +264,7 @@ public class MainView extends javax.swing.JFrame {
         );
 
         simulatorPanel.setBackground(new java.awt.Color(255, 255, 255));
+        simulatorPanel.setComponentPopupMenu(popUpTank);
         simulatorPanel.addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentResized(java.awt.event.ComponentEvent evt) {
                 simulatorPanelComponentResized(evt);
@@ -540,8 +540,7 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JMenu menuEdit;
     private javax.swing.JMenu menuFile;
     private javax.swing.JMenu menuHelp;
-    private javax.swing.JPopupMenu popUpTank1;
-    private javax.swing.JPopupMenu popUpTank2;
+    private javax.swing.JPopupMenu popUpTank;
     private javax.swing.JSeparator separator;
     private javax.swing.JPanel simulatorPanel;
     private javax.swing.JPanel statusPanel;
