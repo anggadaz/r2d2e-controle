@@ -37,4 +37,9 @@ public class PIController extends Controller {
     public void setKi(double ki) {
         this.ki = ki;
     }
+
+    @Override
+    public String toString() {
+        return "PI";
+    }
 }

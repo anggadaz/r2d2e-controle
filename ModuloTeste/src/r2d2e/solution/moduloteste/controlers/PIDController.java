@@ -46,4 +46,9 @@ public class PIDController extends Controller {
     public void setKd(double kd) {
         this.kd = kd;
     }
+
+    @Override
+    public String toString() {
+        return "PID";
+    }
 }

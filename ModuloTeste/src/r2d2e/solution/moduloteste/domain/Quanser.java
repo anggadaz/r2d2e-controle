@@ -15,7 +15,7 @@ public class Quanser {
 
     private QuanserClient quanserClient;
     public static String IP_QUANSER = "localhost";//"10.13.99.69";
-    public static int PORT_QUANSER = 20081;
+    public static int PORT_QUANSER = 3000;//20081;
     private static int CHANNEL_BOMB = 0;
     private static double CALIBRATION1 = 0.0;//2.0;
     private static double CALIBRATION2 = 0.0;

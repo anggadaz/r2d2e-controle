@@ -8,8 +8,19 @@
  *
  * Created on 07/04/2010, 15:17:01
  */
-
 package r2d2e.solution.moduloteste.view;
+
+import java.util.Vector;
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JFrame;
+import r2d2e.solution.moduloteste.controlers.Controller;
+import r2d2e.solution.moduloteste.controlers.PController;
+import r2d2e.solution.moduloteste.controlers.PDController;
+import r2d2e.solution.moduloteste.controlers.PIController;
+import r2d2e.solution.moduloteste.controlers.PID2Controller;
+import r2d2e.solution.moduloteste.controlers.PIDController;
+import r2d2e.solution.moduloteste.handler.ControlModeHandler;
 
 /**
  *
@@ -17,9 +28,67 @@ package r2d2e.solution.moduloteste.view;
  */
 public class ConfControle extends javax.swing.JPanel {
 
+    private double sampleRate = 0.1;
+    private ControlModeHandler controlModeHandler;
+
     /** Creates new form ConfControle */
     public ConfControle() {
         initComponents();
+        popularComboBox();
+        setP();
+        controlModeHandler = new ControlModeHandler(this);
+        controlModeHandler.setControllerSelected((Controller) comboControladores.getItemAt(0));
+    }
+
+    public void popularComboBox() {
+        Vector<Controller> controllers = new Vector<Controller>();
+
+        controllers.add(new PController(sampleRate, (Double) textSetPoint.getValue()));
+        controllers.add(new PDController(sampleRate, (Double) textSetPoint.getValue()));
+        controllers.add(new PIController(sampleRate, (Double) textSetPoint.getValue()));
+        controllers.add(new PIDController(sampleRate, (Double) textSetPoint.getValue()));
+        controllers.add(new PID2Controller(sampleRate, (Double) textSetPoint.getValue()));
+
+        DefaultComboBoxModel boxModel = new DefaultComboBoxModel(controllers);
+
+        comboControladores.setModel(boxModel);
+        comboControladores.setSelectedIndex(0);
+
+    }
+
+    public void setP() {
+
+        labelKd.setVisible(false);
+        labelKi.setVisible(false);
+        textKD.setVisible(false);
+        textKI.setVisible(false);
+
+    }
+
+    public void setPD() {
+
+        labelKd.setVisible(true);
+        labelKi.setVisible(false);
+        textKD.setVisible(true);
+        textKI.setVisible(false);
+    }
+
+    public void setPI() {
+
+        labelKi.setVisible(true);
+        labelKd.setVisible(false);
+        textKI.setVisible(true);
+        textKD.setVisible(false);
+
+    }
+
+    public void setPID() {
+
+        labelKd.setVisible(true);
+        labelKi.setVisible(true);
+        textKD.setVisible(true);
+        textKI.setVisible(true);
+
     }
 
     /** This method is called from within the constructor to
@@ -31,137 +100,174 @@ public class ConfControle extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        spinnerTI = new javax.swing.JSpinner();
-        spinnerTMax = new javax.swing.JSpinner();
-        spinnerNA = new javax.swing.JSpinner();
-        spinnerTMin = new javax.swing.JSpinner();
+        comboControladores = new javax.swing.JComboBox();
+        labelTipoCtrl = new javax.swing.JLabel();
+        labelSetPoint = new javax.swing.JLabel();
+        textSetPoint = new javax.swing.JFormattedTextField();
+        panelGanhos = new javax.swing.JPanel();
+        labelKp = new javax.swing.JLabel();
+        labelKd = new javax.swing.JLabel();
+        labelKi = new javax.swing.JLabel();
+        textKI = new javax.swing.JFormattedTextField();
+        textKD = new javax.swing.JFormattedTextField();
+        textKP = new javax.swing.JFormattedTextField();
+        SeparatorCtrl = new javax.swing.JSeparator();
 
         setBackground(new java.awt.Color(0, 0, 0));
         setBorder(javax.swing.BorderFactory.createTitledBorder(null, org.openide.util.NbBundle.getMessage(ConfControle.class, "ConfControle.border.title"), javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(255, 255, 255))); // NOI18N
         setPreferredSize(new java.awt.Dimension(540, 121));
 
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText(org.openide.util.NbBundle.getMessage(ConfControle.class, "ConfControle.jLabel1.text")); // NOI18N
+        comboControladores.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                comboControladoresItemStateChanged(evt);
+            }
+        });
 
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText(org.openide.util.NbBundle.getMessage(ConfControle.class, "ConfControle.jLabel2.text")); // NOI18N
+        labelTipoCtrl.setForeground(new java.awt.Color(255, 255, 255));
+        labelTipoCtrl.setText(org.openide.util.NbBundle.getMessage(ConfControle.class, "ConfControle.labelTipoCtrl.text")); // NOI18N
 
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText(org.openide.util.NbBundle.getMessage(ConfControle.class, "ConfControle.jLabel3.text")); // NOI18N
+        labelSetPoint.setForeground(new java.awt.Color(255, 255, 255));
+        labelSetPoint.setText(org.openide.util.NbBundle.getMessage(ConfControle.class, "ConfControle.labelSetPoint.text")); // NOI18N
 
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText(org.openide.util.NbBundle.getMessage(ConfControle.class, "ConfControle.jLabel4.text")); // NOI18N
+        textSetPoint.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getIntegerInstance())));
+        textSetPoint.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        textSetPoint.setText(org.openide.util.NbBundle.getMessage(ConfControle.class, "ConfControle.textSetPoint.text")); // NOI18N
 
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText(org.openide.util.NbBundle.getMessage(ConfControle.class, "ConfControle.jLabel5.text")); // NOI18N
+        panelGanhos.setBackground(new java.awt.Color(0, 0, 0));
+        panelGanhos.setBorder(javax.swing.BorderFactory.createTitledBorder(null, org.openide.util.NbBundle.getMessage(ConfControle.class, "ConfControle.panelGanhos.border.title"), javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(255, 255, 255))); // NOI18N
 
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText(org.openide.util.NbBundle.getMessage(ConfControle.class, "ConfControle.jLabel6.text")); // NOI18N
+        labelKp.setForeground(new java.awt.Color(255, 255, 255));
+        labelKp.setText(org.openide.util.NbBundle.getMessage(ConfControle.class, "ConfControle.labelKp.text")); // NOI18N
 
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText(org.openide.util.NbBundle.getMessage(ConfControle.class, "ConfControle.jLabel7.text")); // NOI18N
+        labelKd.setForeground(new java.awt.Color(255, 255, 255));
+        labelKd.setText(org.openide.util.NbBundle.getMessage(ConfControle.class, "ConfControle.labelKd.text")); // NOI18N
 
-        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setText(org.openide.util.NbBundle.getMessage(ConfControle.class, "ConfControle.jLabel8.text")); // NOI18N
+        labelKi.setForeground(new java.awt.Color(255, 255, 255));
+        labelKi.setText(org.openide.util.NbBundle.getMessage(ConfControle.class, "ConfControle.labelKi.text")); // NOI18N
 
-        spinnerTI.setModel(new javax.swing.SpinnerNumberModel(0.0, 0.0, 3.0, 0.1));
-        spinnerTI.setToolTipText(org.openide.util.NbBundle.getMessage(ConfControle.class, "ConfControle.spinnerTI.toolTipText")); // NOI18N
-        spinnerTI.setEditor(new javax.swing.JSpinner.NumberEditor(spinnerTI, "#,##0.0#"));
+        textKI.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getIntegerInstance())));
+        textKI.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        textKI.setText(org.openide.util.NbBundle.getMessage(ConfControle.class, "ConfControle.textKI.text")); // NOI18N
 
-        spinnerTMax.setModel(new javax.swing.SpinnerNumberModel(1.0, 0.0, 3.0, 0.1));
-        spinnerTMax.setToolTipText(org.openide.util.NbBundle.getMessage(ConfControle.class, "ConfControle.spinnerTMax.toolTipText")); // NOI18N
-        spinnerTMax.setEditor(new javax.swing.JSpinner.NumberEditor(spinnerTMax, "#,##0.0#"));
+        textKD.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getIntegerInstance())));
+        textKD.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        textKD.setText(org.openide.util.NbBundle.getMessage(ConfControle.class, "ConfControle.textKD.text")); // NOI18N
 
-        spinnerNA.setModel(new javax.swing.SpinnerNumberModel(0.0, 0.0, 30.0, 0.1));
-        spinnerNA.setToolTipText(org.openide.util.NbBundle.getMessage(ConfControle.class, "ConfControle.spinnerNA.toolTipText")); // NOI18N
-        spinnerNA.setEditor(new javax.swing.JSpinner.NumberEditor(spinnerNA, "#,##0.0#"));
+        textKP.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getIntegerInstance())));
+        textKP.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        textKP.setText(org.openide.util.NbBundle.getMessage(ConfControle.class, "ConfControle.textKP.text")); // NOI18N
 
-        spinnerTMin.setModel(new javax.swing.SpinnerNumberModel(1.0, 0.0, 3.0, 0.1));
-        spinnerTMin.setToolTipText(org.openide.util.NbBundle.getMessage(ConfControle.class, "ConfControle.spinnerTMin.toolTipText")); // NOI18N
-        spinnerTMin.setEditor(new javax.swing.JSpinner.NumberEditor(spinnerTMin, "#,##0.0#"));
+        javax.swing.GroupLayout panelGanhosLayout = new javax.swing.GroupLayout(panelGanhos);
+        panelGanhos.setLayout(panelGanhosLayout);
+        panelGanhosLayout.setHorizontalGroup(
+            panelGanhosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelGanhosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelGanhosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(labelKp)
+                    .addComponent(labelKd)
+                    .addComponent(labelKi))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelGanhosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(textKI, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
+                    .addComponent(textKD, javax.swing.GroupLayout.Alignment.TRAILING, 0, 0, Short.MAX_VALUE)
+                    .addComponent(textKP, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        panelGanhosLayout.setVerticalGroup(
+            panelGanhosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelGanhosLayout.createSequentialGroup()
+                .addGroup(panelGanhosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelKp)
+                    .addComponent(textKP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelGanhosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelKd)
+                    .addComponent(textKD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelGanhosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelKi)
+                    .addComponent(textKI, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        SeparatorCtrl.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 559, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(spinnerNA, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(spinnerTI, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
-                    .addComponent(spinnerTMax, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
-                    .addComponent(spinnerTMin, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel8))
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 94, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(labelTipoCtrl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(comboControladores, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(labelSetPoint, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(textSetPoint, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE)))
+                .addGap(30, 30, 30)
+                .addComponent(SeparatorCtrl, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 149, Short.MAX_VALUE)
+                .addComponent(panelGanhos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(spinnerNA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(spinnerTMin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel6))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(spinnerTMax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel7))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE, false)
-                            .addComponent(spinnerTI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel8))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(labelTipoCtrl)
+                        .addGap(11, 11, 11)
+                        .addComponent(comboControladores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(labelSetPoint)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(textSetPoint, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(panelGanhos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(SeparatorCtrl, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE))
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void comboControladoresItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboControladoresItemStateChanged
+        // TODO add your handling code here:
+        Controller c = (Controller) comboControladores.getSelectedItem();
+        if (c instanceof PController) {
+            setP();
+        }
+        if (c instanceof PDController) {
+            setPD();
+        }
+        if (c instanceof PIController) {
+            setPI();
+        }
+        if (c instanceof PIDController || c instanceof PID2Controller) {
+            setPID();
+        }
+        controlModeHandler.setControllerSelected(c);
+    }//GEN-LAST:event_comboControladoresItemStateChanged
 
+    public static void main(String args[]) {
+        ConfControle ct = new ConfControle();
+        JFrame frame = new JFrame();
+        frame.add(ct);
+        frame.setSize(540, 121);
+        frame.setVisible(true);
+    }
+
+    ;
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JSpinner spinnerNA;
-    private javax.swing.JSpinner spinnerTI;
-    private javax.swing.JSpinner spinnerTMax;
-    private javax.swing.JSpinner spinnerTMin;
+    private javax.swing.JSeparator SeparatorCtrl;
+    private javax.swing.JComboBox comboControladores;
+    private javax.swing.JLabel labelKd;
+    private javax.swing.JLabel labelKi;
+    private javax.swing.JLabel labelKp;
+    private javax.swing.JLabel labelSetPoint;
+    private javax.swing.JLabel labelTipoCtrl;
+    private javax.swing.JPanel panelGanhos;
+    private javax.swing.JFormattedTextField textKD;
+    private javax.swing.JFormattedTextField textKI;
+    private javax.swing.JFormattedTextField textKP;
+    private javax.swing.JFormattedTextField textSetPoint;
     // End of variables declaration//GEN-END:variables
-
 }

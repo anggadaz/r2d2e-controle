@@ -59,11 +59,11 @@ public class Teste extends Thread {
         }
         quanser.writeBomb(3.0);
         try {
-            sleep(3000);
+            sleep(1000);
         } catch (InterruptedException ex) {
             Exceptions.printStackTrace(ex);
         }
-        quanser.writeBomb(0);
+        quanser.writeBomb(5);
         quanser.closeConnection();
     }
 

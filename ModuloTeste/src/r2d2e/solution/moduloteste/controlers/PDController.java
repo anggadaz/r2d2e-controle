@@ -37,4 +37,9 @@ public class PDController extends Controller {
     public void setKd(double kd) {
         this.kd = kd;
     }
+
+    @Override
+    public String toString() {
+        return "PD";
+    }
 }

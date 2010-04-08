@@ -28,4 +28,10 @@ public class PController extends Controller {
     public void setKp(double kp) {
         this.kp = kp;
     }
+
+    @Override
+    public String toString() {
+        return "P";
+    }
+
 }
