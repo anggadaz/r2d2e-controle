@@ -1,5 +1,8 @@
 package r2d2e.solution.moduloteste.view;
 
+import java.awt.CardLayout;
+import java.net.URL;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -15,12 +18,16 @@ import r2d2e.solution.moduloteste.handler.MainFrameHandler;
 public class NovoFrame extends javax.swing.JFrame {
 
     private MainFrameHandler mainFrameHandler;
+    public static final String CARD_CONF_TESTE = "cardConfTeste";
+    public static final String CARD_CONF_CONTROLE = "cardConfControle";
 
     public NovoFrame() {
         initComponents();
-        SkinInitialize();
         mainFrameHandler = new MainFrameHandler(this);
         mainFrameHandler.enterTestMode();
+        URL imgURL = getClass().getResource("/r2d2e/solution/moduloteste/view/resources/r2d2e.jpg");
+        setIconImage(new ImageIcon(imgURL).getImage());
+
         Splash.getInstance().finalizaSplash();
     }
 
@@ -59,8 +66,6 @@ public class NovoFrame extends javax.swing.JFrame {
         return tanquePanel;
     }
 
-
-
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -83,6 +88,7 @@ public class NovoFrame extends javax.swing.JFrame {
         testePanel = new r2d2e.solution.moduloteste.view.TestePanel();
         opcoesPanel = new javax.swing.JPanel();
         confTeste = new r2d2e.solution.moduloteste.view.ConfTeste();
+        confControle = new r2d2e.solution.moduloteste.view.ConfControle();
         menuBar = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -176,7 +182,7 @@ public class NovoFrame extends javax.swing.JFrame {
                 .addComponent(buttonOpcoesGrafico)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(buttonOpcoesGeral)
-                .addContainerGap(640, Short.MAX_VALUE))
+                .addContainerGap(646, Short.MAX_VALUE))
         );
         toolbarPanelLayout.setVerticalGroup(
             toolbarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -209,7 +215,7 @@ public class NovoFrame extends javax.swing.JFrame {
         );
         tanquePanelLayout.setVerticalGroup(
             tanquePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 492, Short.MAX_VALUE)
+            .addGap(0, 503, Short.MAX_VALUE)
         );
 
         mainPanel.setLayout(new java.awt.CardLayout());
@@ -219,7 +225,10 @@ public class NovoFrame extends javax.swing.JFrame {
         opcoesPanel.setLayout(new java.awt.CardLayout());
 
         confTeste.setOpaque(false);
-        opcoesPanel.add(confTeste, "card2");
+        opcoesPanel.add(confTeste, "cardConfTeste");
+
+        confControle.setOpaque(false);
+        opcoesPanel.add(confControle, "cardConfControle");
 
         javax.swing.GroupLayout backgroundPanelLayout = new javax.swing.GroupLayout(backgroundPanel);
         backgroundPanel.setLayout(backgroundPanelLayout);
@@ -231,8 +240,8 @@ public class NovoFrame extends javax.swing.JFrame {
                 .addComponent(tanquePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(backgroundPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(opcoesPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 591, Short.MAX_VALUE)
-                    .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 591, Short.MAX_VALUE))
+                    .addComponent(opcoesPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         backgroundPanelLayout.setVerticalGroup(
@@ -243,9 +252,9 @@ public class NovoFrame extends javax.swing.JFrame {
                 .addGroup(backgroundPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(tanquePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(backgroundPanelLayout.createSequentialGroup()
-                        .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 365, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(opcoesPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)))
+                        .addComponent(opcoesPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
 
@@ -331,18 +340,32 @@ public class NovoFrame extends javax.swing.JFrame {
         mainFrameHandler.enterControlMode();
     }//GEN-LAST:event_menuControleActionPerformed
 
+    public void changeCard(String card) {
+        CardLayout layout = (CardLayout) opcoesPanel.getLayout();
+        layout.show(opcoesPanel, card);
+    }
+
+    public ConfControle getConfControle() {
+        return confControle;
+    }
+
+    public void setConfControle(ConfControle confControle) {
+        this.confControle = confControle;
+    }
+
     /**
-    * @param args the command line arguments
-    */
+     * @param args the command line arguments
+     */
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
+
             public void run() {
                 Splash.getInstance().inicializaSplash();
+                SkinInitialize();
                 new NovoFrame().setVisible(true);
             }
         });
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private r2d2e.solution.moduloteste.view.BackgroundPanel backgroundPanel;
     private javax.swing.JButton buttonIniciar;
@@ -350,6 +373,7 @@ public class NovoFrame extends javax.swing.JFrame {
     private javax.swing.JButton buttonOpcoesGeral;
     private javax.swing.JButton buttonOpcoesGrafico;
     private javax.swing.JButton buttonParar;
+    private r2d2e.solution.moduloteste.view.ConfControle confControle;
     private r2d2e.solution.moduloteste.view.ConfTeste confTeste;
     private javax.swing.JMenuItem itemSobre;
     private javax.swing.JMenu jMenu1;
@@ -365,5 +389,4 @@ public class NovoFrame extends javax.swing.JFrame {
     private r2d2e.solution.moduloteste.view.TestePanel testePanel;
     private javax.swing.JPanel toolbarPanel;
     // End of variables declaration//GEN-END:variables
-
 }

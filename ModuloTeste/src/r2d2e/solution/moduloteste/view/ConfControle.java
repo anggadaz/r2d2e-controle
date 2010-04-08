@@ -13,6 +13,8 @@ package r2d2e.solution.moduloteste.view;
 import java.util.Vector;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import r2d2e.solution.moduloteste.controlers.Controller;
 import r2d2e.solution.moduloteste.controlers.PController;
@@ -62,6 +64,10 @@ public class ConfControle extends javax.swing.JPanel {
         labelKi.setVisible(false);
         textKD.setVisible(false);
         textKI.setVisible(false);
+        labelTD.setVisible(false);
+        labelTI.setVisible(false);
+        textTD.setVisible(false);
+        textTI.setVisible(false);
 
     }
 
@@ -71,6 +77,10 @@ public class ConfControle extends javax.swing.JPanel {
         labelKi.setVisible(false);
         textKD.setVisible(true);
         textKI.setVisible(false);
+        labelTD.setVisible(true);
+        labelTI.setVisible(false);
+        textTD.setVisible(true);
+        textTI.setVisible(false);
     }
 
     public void setPI() {
@@ -79,7 +89,10 @@ public class ConfControle extends javax.swing.JPanel {
         labelKd.setVisible(false);
         textKI.setVisible(true);
         textKD.setVisible(false);
-
+        labelTD.setVisible(false);
+        labelTI.setVisible(true);
+        textTD.setVisible(false);
+        textTI.setVisible(true);
     }
 
     public void setPID() {
@@ -88,7 +101,10 @@ public class ConfControle extends javax.swing.JPanel {
         labelKi.setVisible(true);
         textKD.setVisible(true);
         textKI.setVisible(true);
-
+        labelTD.setVisible(true);
+        labelTI.setVisible(true);
+        textTD.setVisible(true);
+        textTI.setVisible(true);
     }
 
     /** This method is called from within the constructor to
@@ -111,11 +127,18 @@ public class ConfControle extends javax.swing.JPanel {
         textKI = new javax.swing.JFormattedTextField();
         textKD = new javax.swing.JFormattedTextField();
         textKP = new javax.swing.JFormattedTextField();
+        labelTD = new javax.swing.JLabel();
+        labelTI = new javax.swing.JLabel();
+        textTD = new javax.swing.JFormattedTextField();
+        textTI = new javax.swing.JFormattedTextField();
         SeparatorCtrl = new javax.swing.JSeparator();
+        buttonReload = new javax.swing.JButton();
+        labelCM = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(0, 0, 0));
         setBorder(javax.swing.BorderFactory.createTitledBorder(null, org.openide.util.NbBundle.getMessage(ConfControle.class, "ConfControle.border.title"), javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(255, 255, 255))); // NOI18N
-        setPreferredSize(new java.awt.Dimension(540, 121));
+        setMinimumSize(new java.awt.Dimension(597, 132));
+        setPreferredSize(new java.awt.Dimension(597, 132));
 
         comboControladores.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -129,12 +152,14 @@ public class ConfControle extends javax.swing.JPanel {
         labelSetPoint.setForeground(new java.awt.Color(255, 255, 255));
         labelSetPoint.setText(org.openide.util.NbBundle.getMessage(ConfControle.class, "ConfControle.labelSetPoint.text")); // NOI18N
 
-        textSetPoint.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getIntegerInstance())));
+        textSetPoint.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
         textSetPoint.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         textSetPoint.setText(org.openide.util.NbBundle.getMessage(ConfControle.class, "ConfControle.textSetPoint.text")); // NOI18N
+        textSetPoint.setToolTipText(org.openide.util.NbBundle.getMessage(ConfControle.class, "ConfControle.textSetPoint.toolTipText")); // NOI18N
 
         panelGanhos.setBackground(new java.awt.Color(0, 0, 0));
         panelGanhos.setBorder(javax.swing.BorderFactory.createTitledBorder(null, org.openide.util.NbBundle.getMessage(ConfControle.class, "ConfControle.panelGanhos.border.title"), javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(255, 255, 255))); // NOI18N
+        panelGanhos.setOpaque(false);
 
         labelKp.setForeground(new java.awt.Color(255, 255, 255));
         labelKp.setText(org.openide.util.NbBundle.getMessage(ConfControle.class, "ConfControle.labelKp.text")); // NOI18N
@@ -153,9 +178,28 @@ public class ConfControle extends javax.swing.JPanel {
         textKD.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         textKD.setText(org.openide.util.NbBundle.getMessage(ConfControle.class, "ConfControle.textKD.text")); // NOI18N
 
-        textKP.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getIntegerInstance())));
+        textKP.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
         textKP.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         textKP.setText(org.openide.util.NbBundle.getMessage(ConfControle.class, "ConfControle.textKP.text")); // NOI18N
+        textKP.setToolTipText(org.openide.util.NbBundle.getMessage(ConfControle.class, "ConfControle.textKP.toolTipText")); // NOI18N
+
+        labelTD.setForeground(new java.awt.Color(255, 255, 255));
+        labelTD.setText(org.openide.util.NbBundle.getMessage(ConfControle.class, "ConfControle.labelTD.text")); // NOI18N
+        labelTD.setToolTipText(org.openide.util.NbBundle.getMessage(ConfControle.class, "ConfControle.labelTD.toolTipText")); // NOI18N
+
+        labelTI.setForeground(new java.awt.Color(255, 255, 255));
+        labelTI.setText(org.openide.util.NbBundle.getMessage(ConfControle.class, "ConfControle.labelTI.text")); // NOI18N
+        labelTI.setToolTipText(org.openide.util.NbBundle.getMessage(ConfControle.class, "ConfControle.labelTI.toolTipText")); // NOI18N
+
+        textTD.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        textTD.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        textTD.setText(org.openide.util.NbBundle.getMessage(ConfControle.class, "ConfControle.textTD.text")); // NOI18N
+        textTD.setToolTipText(org.openide.util.NbBundle.getMessage(ConfControle.class, "ConfControle.textTD.toolTipText")); // NOI18N
+
+        textTI.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        textTI.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        textTI.setText(org.openide.util.NbBundle.getMessage(ConfControle.class, "ConfControle.textTI.text")); // NOI18N
+        textTI.setToolTipText(org.openide.util.NbBundle.getMessage(ConfControle.class, "ConfControle.textTI.toolTipText")); // NOI18N
 
         javax.swing.GroupLayout panelGanhosLayout = new javax.swing.GroupLayout(panelGanhos);
         panelGanhos.setLayout(panelGanhosLayout);
@@ -169,9 +213,19 @@ public class ConfControle extends javax.swing.JPanel {
                     .addComponent(labelKi))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelGanhosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(textKI, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
-                    .addComponent(textKD, javax.swing.GroupLayout.Alignment.TRAILING, 0, 0, Short.MAX_VALUE)
-                    .addComponent(textKP, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE))
+                    .addGroup(panelGanhosLayout.createSequentialGroup()
+                        .addGroup(panelGanhosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(textKI, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)
+                            .addComponent(textKD, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(panelGanhosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(labelTD)
+                            .addComponent(labelTI))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(panelGanhosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(textTI, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
+                            .addComponent(textTD, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)))
+                    .addComponent(textKP, javax.swing.GroupLayout.DEFAULT_SIZE, 364, Short.MAX_VALUE))
                 .addContainerGap())
         );
         panelGanhosLayout.setVerticalGroup(
@@ -183,15 +237,33 @@ public class ConfControle extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelGanhosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelKd)
-                    .addComponent(textKD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(textKD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelTD)
+                    .addComponent(textTD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelGanhosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelKi)
-                    .addComponent(textKI, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(textKI, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelTI)
+                    .addComponent(textTI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         SeparatorCtrl.setOrientation(javax.swing.SwingConstants.VERTICAL);
+
+        buttonReload.setIcon(new javax.swing.ImageIcon(getClass().getResource("/r2d2e/solution/moduloteste/view/resources/reload.png"))); // NOI18N
+        buttonReload.setText(org.openide.util.NbBundle.getMessage(ConfControle.class, "ConfControle.buttonReload.text")); // NOI18N
+        buttonReload.setToolTipText(org.openide.util.NbBundle.getMessage(ConfControle.class, "ConfControle.buttonReload.toolTipText")); // NOI18N
+        buttonReload.setBorder(null);
+        buttonReload.setBorderPainted(false);
+        buttonReload.setContentAreaFilled(false);
+        buttonReload.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonReloadActionPerformed(evt);
+            }
+        });
+
+        labelCM.setForeground(new java.awt.Color(255, 255, 255));
+        labelCM.setText(org.openide.util.NbBundle.getMessage(ConfControle.class, "ConfControle.labelCM.text")); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -200,31 +272,41 @@ public class ConfControle extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(labelTipoCtrl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(comboControladores, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(labelSetPoint, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(textSetPoint, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE)))
-                .addGap(30, 30, 30)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(labelTipoCtrl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(comboControladores, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(textSetPoint, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(labelCM))
+                    .addComponent(labelSetPoint, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(SeparatorCtrl, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 149, Short.MAX_VALUE)
-                .addComponent(panelGanhos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panelGanhos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(buttonReload))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(buttonReload))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(labelTipoCtrl)
                         .addGap(11, 11, 11)
                         .addComponent(comboControladores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(labelSetPoint)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(textSetPoint, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(panelGanhos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(SeparatorCtrl, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE))
+                        .addComponent(labelSetPoint)
+                        .addGap(7, 7, 7)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(labelCM)
+                            .addComponent(textSetPoint, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(SeparatorCtrl, javax.swing.GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE)
+                    .addComponent(panelGanhos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -247,27 +329,78 @@ public class ConfControle extends javax.swing.JPanel {
         controlModeHandler.setControllerSelected(c);
     }//GEN-LAST:event_comboControladoresItemStateChanged
 
-    public static void main(String args[]) {
-        ConfControle ct = new ConfControle();
-        JFrame frame = new JFrame();
-        frame.add(ct);
-        frame.setSize(540, 121);
-        frame.setVisible(true);
+    private void buttonReloadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonReloadActionPerformed
+        // TODO add your handling code here:
+        controlModeHandler.updateVariables();
     }
 
-    ;
+    public ControlModeHandler getControlModeHandler() {
+        return controlModeHandler;
+    }
+
+    public void setControlModeHandler(ControlModeHandler controlModeHandler) {
+        this.controlModeHandler = controlModeHandler;
+    }
+
+    public JComboBox getComboControladores() {
+        return comboControladores;
+    }
+
+    public void setComboControladores(JComboBox comboControladores) {
+        this.comboControladores = comboControladores;
+    }
+
+    public JFormattedTextField getTextKD() {
+        return textKD;
+    }
+
+    public void setTextKD(JFormattedTextField textKD) {
+        this.textKD = textKD;
+    }
+
+    public JFormattedTextField getTextKI() {
+        return textKI;
+    }
+
+    public void setTextKI(JFormattedTextField textKI) {
+        this.textKI = textKI;
+    }
+
+    public JFormattedTextField getTextKP() {
+        return textKP;
+    }
+
+    public void setTextKP(JFormattedTextField textKP) {
+        this.textKP = textKP;
+    }
+
+    public JFormattedTextField getTextSetPoint() {
+        return textSetPoint;
+    }
+
+    public void setTextSetPoint(JFormattedTextField textSetPoint) {
+        this.textSetPoint = textSetPoint;
+    }//GEN-LAST:event_buttonReloadActionPerformed
+
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JSeparator SeparatorCtrl;
+    private javax.swing.JButton buttonReload;
     private javax.swing.JComboBox comboControladores;
+    private javax.swing.JLabel labelCM;
     private javax.swing.JLabel labelKd;
     private javax.swing.JLabel labelKi;
     private javax.swing.JLabel labelKp;
     private javax.swing.JLabel labelSetPoint;
+    private javax.swing.JLabel labelTD;
+    private javax.swing.JLabel labelTI;
     private javax.swing.JLabel labelTipoCtrl;
     private javax.swing.JPanel panelGanhos;
     private javax.swing.JFormattedTextField textKD;
     private javax.swing.JFormattedTextField textKI;
     private javax.swing.JFormattedTextField textKP;
     private javax.swing.JFormattedTextField textSetPoint;
+    private javax.swing.JFormattedTextField textTD;
+    private javax.swing.JFormattedTextField textTI;
     // End of variables declaration//GEN-END:variables
 }

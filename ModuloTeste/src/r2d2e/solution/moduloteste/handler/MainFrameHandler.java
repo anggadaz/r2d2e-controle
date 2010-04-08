@@ -14,12 +14,14 @@ public class MainFrameHandler {
     private NovoFrame mainFrame;
 
     private TestModeHandler testModeHandler;
+    private ControlModeHandler controlModeHandler;
 
     private int mode;
 
     public MainFrameHandler(NovoFrame mainFrame) {
         this.mainFrame = mainFrame;
         testModeHandler = new TestModeHandler(mainFrame);
+        controlModeHandler = mainFrame.getConfControle().getControlModeHandler();
     }
 
     public void enterTestMode() {
@@ -30,6 +32,7 @@ public class MainFrameHandler {
 
         mode = TEST_MOD;
         // Trocar a carta
+        mainFrame.changeCard(NovoFrame.CARD_CONF_TESTE);
     }
 
     public void enterControlMode() {
@@ -40,11 +43,15 @@ public class MainFrameHandler {
 
         mode = CONTROL_MOD;
         // Trocar a carta
+        mainFrame.changeCard(NovoFrame.CARD_CONF_CONTROLE);
     }
 
     public void play() {
         if(mode == TEST_MOD) {
             testModeHandler.initTest();
+        }
+        if(mode == CONTROL_MOD) {
+            controlModeHandler.init();
         }
     }
 

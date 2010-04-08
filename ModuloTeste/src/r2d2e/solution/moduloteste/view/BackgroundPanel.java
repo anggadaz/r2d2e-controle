@@ -35,7 +35,7 @@ public class BackgroundPanel extends javax.swing.JPanel {
 
     @Override
     public void paintComponent(Graphics g) {
-        g.drawImage(background, 0, 0, null);
+        g.drawImage(background, 0, 0,getWidth(),getHeight() ,null);
     }
 
     /** This method is called from within the constructor to
