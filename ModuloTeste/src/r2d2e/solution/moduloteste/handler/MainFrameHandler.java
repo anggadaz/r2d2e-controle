@@ -1,6 +1,7 @@
 package r2d2e.solution.moduloteste.handler;
 
 import r2d2e.solution.moduloteste.domain.Quanser;
+import r2d2e.solution.moduloteste.domain.UpdateWater;
 import r2d2e.solution.moduloteste.view.NovoFrame;
 import r2d2e.solution.moduloteste.view.OpcoesGerais;
 
@@ -12,13 +13,11 @@ public class MainFrameHandler {
 
     public static final int TEST_MOD = 0;
     public static final int CONTROL_MOD = 1;
-
     private NovoFrame mainFrame;
-
     private TestModeHandler testModeHandler;
     private ControlModeHandler controlModeHandler;
-
     private Quanser quanser;
+    private UpdateWater updateWater;
     private int mode;
 
     public MainFrameHandler(NovoFrame mainFrame) {
@@ -26,6 +25,7 @@ public class MainFrameHandler {
         quanser = new Quanser();
         testModeHandler = new TestModeHandler(mainFrame, quanser);
         controlModeHandler = new ControlModeHandler(mainFrame);
+        updateWater = new UpdateWater(100, mainFrame.getTanquePanel(), quanser);
     }
 
     public void enterTestMode() {
@@ -51,8 +51,9 @@ public class MainFrameHandler {
     }
 
     public void play() {
-        if(!quanser.isServerOk()){
+        if (!quanser.isServerOk()) {
             quanser.connect();
+            updateWater.start();
         }
 
         if (mode == TEST_MOD) {

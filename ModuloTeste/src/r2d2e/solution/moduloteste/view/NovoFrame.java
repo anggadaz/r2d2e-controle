@@ -6,11 +6,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.UIManager;
 import org.jvnet.substance.skin.SubstanceBusinessBlackSteelLookAndFeel;
-import r2d2e.solution.moduloteste.domain.Quanser;
-import r2d2e.solution.moduloteste.domain.controlerInterface;
+import r2d2e.solution.moduloteste.domain.UpdateWater;
 import r2d2e.solution.moduloteste.handler.MainFrameHandler;
 
 /**
@@ -27,9 +25,12 @@ public class NovoFrame extends javax.swing.JFrame {
         initComponents();
         mainFrameHandler = new MainFrameHandler(this);
         mainFrameHandler.enterTestMode();
+
         URL imgURL = getClass().getResource("/r2d2e/solution/moduloteste/view/resources/r2d2e.jpg");
         setIconImage(new ImageIcon(imgURL).getImage());
+
         setLocationRelativeTo(null);
+
         Splash.getInstance().finalizaSplash();
     }
 

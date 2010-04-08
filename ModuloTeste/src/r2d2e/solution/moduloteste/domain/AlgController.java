@@ -19,7 +19,6 @@ public class AlgController extends Timer implements ActionListener {
     public static final int NIVEL_MAX = 27;
     public static final int NIVEL_MIN = 3;
 
-    private TanquePanel tanque;
     private Controller controller;
     private Quanser quanser;
     private double nivelAnte = NIVEL_MAX;
@@ -27,7 +26,6 @@ public class AlgController extends Timer implements ActionListener {
     public AlgController(int delay, Controller controller, Quanser quanser) {
         super(delay, null);
         addActionListener(this);
-        this.tanque = tanque;
         this.controller = controller;
         this.quanser = quanser;
     }
@@ -39,7 +37,6 @@ public class AlgController extends Timer implements ActionListener {
 
         //Ler do tank
         double nivel = quanser.readSensor1();
-        tanque.setLevelWater1(nivel);
 
         System.out.println("nivel " + nivel);
         //calcular valor de tensão
