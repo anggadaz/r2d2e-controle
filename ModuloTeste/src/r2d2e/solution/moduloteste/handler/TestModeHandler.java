@@ -204,11 +204,7 @@ public class TestModeHandler {
     public void ciclyEnable() {
         buttonCiclo.setEnabled(true);
     }
-
-    public static void tanquePanelUpdate(double nivel) {
-        tanquePanel.setLevelWater2(nivel);
-    }
-
+    
     public static void clearCharts() {
         barChart.clear();
         histoChart.clear();

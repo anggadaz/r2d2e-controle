@@ -23,7 +23,7 @@ public class TanquePanel extends javax.swing.JPanel {
     private int maxWidthWater1;
     private int maxWidthWater2;
 
-    private int maxLevelWater = 26;
+    private final int maxLevelWater = 26;
 
     /** Creates new form TanquePanel */
     public TanquePanel() {

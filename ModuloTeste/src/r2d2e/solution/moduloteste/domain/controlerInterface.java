@@ -20,7 +20,7 @@ public class controlerInterface {
     public static Double NIVEL_LOW_CALIBRATION;
 
     public static void tanquePanelUpdate(double nivel) {
-        tanquePanel.setLevelWater2(nivel);
+        tanquePanel.setLevelWater1(nivel);
     }
 
     public static void tanquePanelDry(final Quanser quanser) {
