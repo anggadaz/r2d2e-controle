@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package r2d2e.solution.moduloteste.handler;
 
 import r2d2e.solution.moduloteste.controlers.Controller;
@@ -12,7 +8,11 @@ import r2d2e.solution.moduloteste.controlers.PID2Controller;
 import r2d2e.solution.moduloteste.controlers.PIDController;
 import r2d2e.solution.moduloteste.domain.AlgController;
 import r2d2e.solution.moduloteste.domain.Quanser;
+import r2d2e.solution.moduloteste.domain.graph.GraphNivel;
+import r2d2e.solution.moduloteste.domain.graph.GraphTensao1;
+import r2d2e.solution.moduloteste.domain.graph.GraphTensao2;
 import r2d2e.solution.moduloteste.view.ConfControle;
+import r2d2e.solution.moduloteste.view.ControlPanel;
 import r2d2e.solution.moduloteste.view.NovoFrame;
 import r2d2e.solution.moduloteste.view.TanquePanel;
 
@@ -23,13 +23,33 @@ import r2d2e.solution.moduloteste.view.TanquePanel;
 public class ControlModeHandler {
 
     private static TanquePanel tanquePanel;
+    private static ControlPanel controlPanel;
     private static ConfControle confControle;
+
     private static AlgController algController;
+
+    public static GraphNivel graphNivel;
+    public static GraphTensao1 graphTensao1;
+    public static GraphTensao2 graphTensao2;
+
     private static Controller controllerSelected;
 
     public ControlModeHandler(NovoFrame frame) {
         tanquePanel = frame.getTanquePanel();
+        controlPanel = frame.getControlPanel();
         confControle = frame.getConfControle();
+        initChart();
+    }
+
+    private void initChart() {
+        graphNivel = new GraphNivel(30000);
+        graphTensao1 = new GraphTensao1(30000);
+        graphTensao2 = new GraphTensao2(30000);
+
+        controlPanel.addChartNivel(graphNivel.getChart());
+        controlPanel.addChartTensao1(graphTensao1.getChart());
+        controlPanel.addChartTensao2(graphTensao2.getChart());
+
     }
 
     public static Controller getControllerSelected() {
@@ -117,6 +137,9 @@ public class ControlModeHandler {
     public void init(Quanser quanser) {
         algController = new AlgController(100, controllerSelected, quanser);
         algController.start();
+        graphNivel.clear();
+        graphTensao1.clear();
+        graphTensao2.clear();
     }
 
     public static String fixNumber(String numb) {

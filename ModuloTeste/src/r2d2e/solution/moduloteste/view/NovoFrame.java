@@ -21,6 +21,9 @@ public class NovoFrame extends javax.swing.JFrame {
     public static final String CARD_CONF_TESTE = "cardConfTeste";
     public static final String CARD_CONF_CONTROLE = "cardConfControle";
 
+    public static final String CARD_MAIN_TESTE = "cardMainTeste";
+    public static final String CARD_MAIN_CONTROLE = "cardMainControle";
+
     public NovoFrame() {
         initComponents();
         mainFrameHandler = new MainFrameHandler(this);
@@ -65,6 +68,10 @@ public class NovoFrame extends javax.swing.JFrame {
         return confTeste;
     }
 
+    public ControlPanel getControlPanel() {
+        return controlPanel;
+    }
+
     public TanquePanel getTanquePanel() {
         return tanquePanel;
     }
@@ -89,6 +96,7 @@ public class NovoFrame extends javax.swing.JFrame {
         tanquePanel = new r2d2e.solution.moduloteste.view.TanquePanel();
         mainPanel = new javax.swing.JPanel();
         testePanel = new r2d2e.solution.moduloteste.view.TestePanel();
+        controlPanel = new r2d2e.solution.moduloteste.view.ControlPanel();
         opcoesPanel = new javax.swing.JPanel();
         confTeste = new r2d2e.solution.moduloteste.view.ConfTeste();
         confControle = new r2d2e.solution.moduloteste.view.ConfControle();
@@ -197,7 +205,7 @@ public class NovoFrame extends javax.swing.JFrame {
                 .addComponent(buttonOpcoesGrafico)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(buttonOpcoesGeral)
-                .addContainerGap(646, Short.MAX_VALUE))
+                .addContainerGap(756, Short.MAX_VALUE))
         );
         toolbarPanelLayout.setVerticalGroup(
             toolbarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -230,12 +238,13 @@ public class NovoFrame extends javax.swing.JFrame {
         );
         tanquePanelLayout.setVerticalGroup(
             tanquePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 511, Short.MAX_VALUE)
+            .addGap(0, 566, Short.MAX_VALUE)
         );
 
         mainPanel.setOpaque(false);
         mainPanel.setLayout(new java.awt.CardLayout());
-        mainPanel.add(testePanel, "card2");
+        mainPanel.add(testePanel, "cardMainTeste");
+        mainPanel.add(controlPanel, "cardMainControle");
 
         opcoesPanel.setOpaque(false);
         opcoesPanel.setLayout(new java.awt.CardLayout());
@@ -256,8 +265,8 @@ public class NovoFrame extends javax.swing.JFrame {
                 .addComponent(tanquePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(backgroundPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(opcoesPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 597, Short.MAX_VALUE))
+                    .addComponent(opcoesPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 707, Short.MAX_VALUE)
+                    .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 707, Short.MAX_VALUE))
                 .addContainerGap())
         );
         backgroundPanelLayout.setVerticalGroup(
@@ -268,7 +277,7 @@ public class NovoFrame extends javax.swing.JFrame {
                 .addGroup(backgroundPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(tanquePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backgroundPanelLayout.createSequentialGroup()
-                        .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 368, Short.MAX_VALUE)
+                        .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 423, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(opcoesPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
@@ -372,9 +381,14 @@ public class NovoFrame extends javax.swing.JFrame {
         mainFrameHandler.initOpcoesGerais();
     }//GEN-LAST:event_buttonOpcoesGeralActionPerformed
 
-    public void changeCard(String card) {
+    public void changeCardConf(String card) {
         CardLayout layout = (CardLayout) opcoesPanel.getLayout();
         layout.show(opcoesPanel, card);
+    }
+
+    public void changeCardMain(String card) {
+        CardLayout layout = (CardLayout) mainPanel.getLayout();
+        layout.show(mainPanel, card);
     }
 
     public ConfControle getConfControle() {
@@ -407,6 +421,7 @@ public class NovoFrame extends javax.swing.JFrame {
     private javax.swing.JButton buttonParar;
     private r2d2e.solution.moduloteste.view.ConfControle confControle;
     private r2d2e.solution.moduloteste.view.ConfTeste confTeste;
+    private r2d2e.solution.moduloteste.view.ControlPanel controlPanel;
     private javax.swing.JMenuItem itemSobre;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;

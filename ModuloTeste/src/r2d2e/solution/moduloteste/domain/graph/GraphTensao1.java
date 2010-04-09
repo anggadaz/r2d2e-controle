@@ -5,7 +5,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.util.Date;
-import javax.swing.BorderFactory;
+import javax.swing.JPanel;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.DateAxis;
@@ -22,20 +22,43 @@ import org.jfree.ui.RectangleInsets;
  *
  * @author Rivaldo
  */
-public class HistoChart {
 
-    private TimeSeries nivel;
+public class GraphTensao1 extends JPanel {
+
+    public static final int P = 0;
+    public static final int I = 1;
+    public static final int D = 2;
+    public static final int D2 = 3;
+
+    private TimeSeries p;
+    private TimeSeries i;
+    private TimeSeries d;
+    private TimeSeries d2;
+
     private ChartPanel panel;
 
-    public HistoChart(int maxAge) {
-        nivel = new TimeSeries("Nível");
-        nivel.setMaximumItemAge(maxAge);
+    public GraphTensao1(int maxAge) {
+
+        p = new TimeSeries("P");
+        p.setMaximumItemAge(maxAge);
+
+        i = new TimeSeries("I");
+        i.setMaximumItemAge(maxAge);
+
+        d = new TimeSeries("D");
+        d.setMaximumItemAge(maxAge);
+
+        d2 = new TimeSeries("D2");
+        d2.setMaximumItemAge(maxAge);
 
         TimeSeriesCollection dataset = new TimeSeriesCollection();
-        dataset.addSeries(nivel);
+        dataset.addSeries(p);
+        dataset.addSeries(i);
+        dataset.addSeries(d);
+        dataset.addSeries(d2);
 
-        DateAxis domain = new DateAxis("Tempo");
-        NumberAxis range = new NumberAxis("Nível");
+        DateAxis domain = new DateAxis("s");
+        NumberAxis range = new NumberAxis("volts");
         domain.setTickLabelFont(new Font("SansSerif", Font.PLAIN, 12));
         range.setTickLabelFont(new Font("SansSerif", Font.PLAIN, 12));
         domain.setLabelFont(new Font("SansSerif", Font.PLAIN, 14));
@@ -44,6 +67,9 @@ public class HistoChart {
 
         XYItemRenderer renderer = new XYLineAndShapeRenderer(true, false);
         renderer.setSeriesPaint(0, Color.red);
+        renderer.setSeriesPaint(1, Color.blue);
+        renderer.setSeriesPaint(2, Color.green);
+        renderer.setSeriesPaint(3, Color.YELLOW);
         renderer.setStroke(new BasicStroke(3f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL));
 
         XYPlot plot = new XYPlot(dataset, domain, range, renderer);
@@ -59,12 +85,12 @@ public class HistoChart {
 
         range.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
 
-        JFreeChart chart = new JFreeChart("Nível x Tempo", new Font("SansSerif", Font.BOLD, 24), plot, true);
+        JFreeChart chart = new JFreeChart("Sinal de controle", new Font("SansSerif", Font.BOLD, 24), plot, true);
         chart.setBackgroundPaint(Color.white);
 
         panel = new ChartPanel(chart);
         //panel.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createEmptyBorder(4, 4, 4, 4), BorderFactory.createLineBorder(Color.black)));
-        panel.setPreferredSize(new Dimension(500, 380));
+        panel.setPreferredSize(new Dimension(380, 208));
     }
 
     public ChartPanel getChart() {
@@ -72,11 +98,28 @@ public class HistoChart {
     }
 
     public void clear() {
-        nivel.clear();
+        p.clear();
+        i.clear();
+        d.clear();
+        d2.clear();
     }
 
-    public void addNivelObservation(long time, double y) {
-        nivel.add(new Millisecond(new Date(time)), y);
+    public void addTensao(long time, double y, int tipo) {
+        if(tipo == P) {
+            p.add(new Millisecond(new Date(time)), y);
+        }
+
+        if(tipo == I){
+            i.add(new Millisecond(new Date(time)), y);
+        }
+
+        if(tipo == D) {
+            d.add(new Millisecond(new Date(time)), y);
+        }
+
+        if(tipo == D2) {
+            d2.add(new Millisecond(new Date(time)), y);
+        }
     }
 
     public void setRange(double min, double max) {
@@ -84,4 +127,5 @@ public class HistoChart {
         NumberAxis range = (NumberAxis) plot.getRangeAxis();
         range.setRange(min, max);
     }
+
 }

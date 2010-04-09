@@ -37,7 +37,8 @@ public class MainFrameHandler {
 
         mode = TEST_MOD;
         // Trocar a carta
-        mainFrame.changeCard(NovoFrame.CARD_CONF_TESTE);
+        mainFrame.changeCardConf(NovoFrame.CARD_CONF_TESTE);
+        mainFrame.changeCardMain(NovoFrame.CARD_MAIN_TESTE);
     }
 
     public void enterControlMode() {
@@ -48,7 +49,8 @@ public class MainFrameHandler {
 
         mode = CONTROL_MOD;
         // Trocar a carta
-        mainFrame.changeCard(NovoFrame.CARD_CONF_CONTROLE);
+        mainFrame.changeCardConf(NovoFrame.CARD_CONF_CONTROLE);
+        mainFrame.changeCardMain(NovoFrame.CARD_MAIN_CONTROLE);
     }
 
     public void play() {

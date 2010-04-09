@@ -127,8 +127,8 @@
                   <Component id="tanquePanel" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="opcoesPanel" max="32767" attributes="0"/>
-                      <Component id="mainPanel" alignment="0" pref="597" max="32767" attributes="0"/>
+                      <Component id="opcoesPanel" pref="707" max="32767" attributes="0"/>
+                      <Component id="mainPanel" alignment="0" pref="707" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -142,7 +142,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="tanquePanel" max="32767" attributes="0"/>
                       <Group type="102" alignment="1" attributes="0">
-                          <Component id="mainPanel" pref="368" max="32767" attributes="0"/>
+                          <Component id="mainPanel" pref="423" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="opcoesPanel" min="-2" pref="137" max="-2" attributes="0"/>
                       </Group>
@@ -174,7 +174,7 @@
                       <Component id="buttonOpcoesGrafico" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="buttonOpcoesGeral" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="646" max="32767" attributes="0"/>
+                      <EmptySpace pref="756" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -347,7 +347,7 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="511" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="566" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>
@@ -362,7 +362,14 @@
             <Component class="r2d2e.solution.moduloteste.view.TestePanel" name="testePanel">
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
-                  <CardConstraints cardName="card2"/>
+                  <CardConstraints cardName="cardMainTeste"/>
+                </Constraint>
+              </Constraints>
+            </Component>
+            <Component class="r2d2e.solution.moduloteste.view.ControlPanel" name="controlPanel">
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
+                  <CardConstraints cardName="cardMainControle"/>
                 </Constraint>
               </Constraints>
             </Component>

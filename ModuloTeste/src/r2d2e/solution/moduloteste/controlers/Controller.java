@@ -23,6 +23,11 @@ public abstract class Controller {
     //valor da variavel de processo passado
     private Double pastprocessVariable;
 
+    private double proporcional = 0;
+    private double integral = 0;
+    private double derivative = 0;
+    private double derivative2 = 0;
+
     //Contrutor default
     public Controller() {
 
@@ -44,20 +49,20 @@ public abstract class Controller {
     //Funçao que calcula a ação proporcional de controle.
     public double proporcionalTerm(double kp, double processVariable) {
         System.out.println("KP " + kp);
-        double p = kp * error(processVariable);
-        System.out.println("PRO " + p);
-        return p;
+        proporcional = kp * error(processVariable);
+        System.out.println("PRO " + proporcional);
+        return proporcional;
     }
 
     //Funçao que calcula a ação integrativa de controle.
     public double integralTerm(double ki, double processVariable) {
         System.out.println("KI " + ki);
         System.out.println("pastIntegral " + pastIntegral);
-        double inte = pastIntegral + ki * sampleRate * error(processVariable);
+        integral = pastIntegral + ki * sampleRate * error(processVariable);
 
-        System.out.println("inte " + inte);
+        System.out.println("inte " + integral);
 
-        return inte;
+        return integral;
     }
 
     //Funçao que calcula a ação derivativa de controle.
@@ -65,18 +70,18 @@ public abstract class Controller {
         System.out.println("KD " + kd);
         System.out.println("pastError " + pastError);
         double erro = error(processVariable);
-        double deri = kd * ((erro - pastError) / sampleRate);
+        derivative = kd * ((erro - pastError) / sampleRate);
         pastError = erro;
-        return deri;
+        return derivative;
     }
 
     //Funçao que calcula a segunda ação derivativa de controle.
     public double derivativeOutputTerm(double kd2, double processVariable) {
         System.out.println("kd2 " + kd2);
         System.out.println("pastprocessVariable " + pastprocessVariable);
-        double deriOut = kd2 * ((processVariable - pastprocessVariable) / sampleRate);
+        derivative2 = kd2 * ((processVariable - pastprocessVariable) / sampleRate);
         pastprocessVariable = processVariable;
-        return deriOut;
+        return derivative2;
     }
 
     //Funçao que calcula um erro
@@ -115,5 +120,21 @@ public abstract class Controller {
 
     public void setSetPoint(Double setPoint) {
         this.setPoint = setPoint;
+    }
+
+    public double getDerivative() {
+        return derivative;
+    }
+
+    public double getDerivative2() {
+        return derivative2;
+    }
+
+    public double getIntegral() {
+        return integral;
+    }
+
+    public double getProporcional() {
+        return proporcional;
     }
 }
