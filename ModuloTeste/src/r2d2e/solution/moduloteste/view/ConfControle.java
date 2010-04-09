@@ -43,11 +43,15 @@ public class ConfControle extends javax.swing.JPanel {
     public void popularComboBox() {
         Vector<Controller> controllers = new Vector<Controller>();
 
-        controllers.add(new PController(sampleRate, (Double) textSetPoint.getValue()));
-        controllers.add(new PDController(sampleRate, (Double) textSetPoint.getValue()));
-        controllers.add(new PIController(sampleRate, (Double) textSetPoint.getValue()));
-        controllers.add(new PIDController(sampleRate, (Double) textSetPoint.getValue()));
-        controllers.add(new PID2Controller(sampleRate, (Double) textSetPoint.getValue()));
+        String text = textSetPoint.getText();
+        text = ControlModeHandler.fixNumber(text);
+        double sp = Double.parseDouble(text);
+
+        controllers.add(new PController(sampleRate, sp));
+        controllers.add(new PDController(sampleRate,sp));
+        controllers.add(new PIController(sampleRate, sp));
+        controllers.add(new PIDController(sampleRate, sp));
+        controllers.add(new PID2Controller(sampleRate, sp));
 
         DefaultComboBoxModel boxModel = new DefaultComboBoxModel(controllers);
 
@@ -486,7 +490,6 @@ public class ConfControle extends javax.swing.JPanel {
         textKI.setEditable(!chkd);
         textTI.setEditable(chkd);
     }//GEN-LAST:event_chkTIActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JSeparator SeparatorCtrl;
     private javax.swing.ButtonGroup buttonGroup1;

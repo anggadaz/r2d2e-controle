@@ -177,6 +177,7 @@ public class TestModeHandler {
         numInteracoesAtual = 0;
         numInteracoesMax = 0;
         buttonParar.setEnabled(false);
+        buttonInicio.setEnabled(true);
     }
 
     private double calculateKm(double tensao, double tempo, double nivel) {

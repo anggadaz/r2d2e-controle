@@ -34,7 +34,7 @@ public class DryTank implements ActionListener {
     public void stop() {
         controlerInterface.isDrying = false;
         time.stop();
-        
+        System.out.println("end " + controlerInterface.end);
         if (!controlerInterface.end) {
             controlerInterface.ciclyEnable();
         }
