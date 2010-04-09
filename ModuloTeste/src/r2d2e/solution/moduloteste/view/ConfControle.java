@@ -12,6 +12,7 @@ package r2d2e.solution.moduloteste.view;
 
 import java.util.Vector;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import r2d2e.solution.moduloteste.controlers.Controller;
@@ -57,12 +58,12 @@ public class ConfControle extends javax.swing.JPanel {
 
     public void setP() {
 
-        labelKd.setVisible(false);
-        labelKi.setVisible(false);
+        chkKD.setVisible(false);
+        chkKI.setVisible(false);
         textKD.setVisible(false);
         textKI.setVisible(false);
-        labelTD.setVisible(false);
-        labelTI.setVisible(false);
+        chkTD.setVisible(false);
+        chkTI.setVisible(false);
         textTD.setVisible(false);
         textTI.setVisible(false);
 
@@ -70,36 +71,36 @@ public class ConfControle extends javax.swing.JPanel {
 
     public void setPD() {
 
-        labelKd.setVisible(true);
-        labelKi.setVisible(false);
+        chkKD.setVisible(true);
+        chkKI.setVisible(false);
         textKD.setVisible(true);
         textKI.setVisible(false);
-        labelTD.setVisible(true);
-        labelTI.setVisible(false);
+        chkTD.setVisible(true);
+        chkTI.setVisible(false);
         textTD.setVisible(true);
         textTI.setVisible(false);
     }
 
     public void setPI() {
 
-        labelKi.setVisible(true);
-        labelKd.setVisible(false);
+        chkKI.setVisible(true);
+        chkKD.setVisible(false);
         textKI.setVisible(true);
         textKD.setVisible(false);
-        labelTD.setVisible(false);
-        labelTI.setVisible(true);
+        chkTD.setVisible(false);
+        chkTI.setVisible(true);
         textTD.setVisible(false);
         textTI.setVisible(true);
     }
 
     public void setPID() {
 
-        labelKd.setVisible(true);
-        labelKi.setVisible(true);
+        chkKD.setVisible(true);
+        chkKI.setVisible(true);
         textKD.setVisible(true);
         textKI.setVisible(true);
-        labelTD.setVisible(true);
-        labelTI.setVisible(true);
+        chkTD.setVisible(true);
+        chkTI.setVisible(true);
         textTD.setVisible(true);
         textTI.setVisible(true);
     }
@@ -113,21 +114,23 @@ public class ConfControle extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
+        buttonGroup2 = new javax.swing.ButtonGroup();
         comboControladores = new javax.swing.JComboBox();
         labelTipoCtrl = new javax.swing.JLabel();
         labelSetPoint = new javax.swing.JLabel();
         textSetPoint = new javax.swing.JFormattedTextField();
         panelGanhos = new javax.swing.JPanel();
         labelKp = new javax.swing.JLabel();
-        labelKd = new javax.swing.JLabel();
-        labelKi = new javax.swing.JLabel();
-        textKI = new javax.swing.JFormattedTextField();
-        textKD = new javax.swing.JFormattedTextField();
         textKP = new javax.swing.JFormattedTextField();
-        labelTD = new javax.swing.JLabel();
-        labelTI = new javax.swing.JLabel();
-        textTD = new javax.swing.JFormattedTextField();
+        textKD = new javax.swing.JFormattedTextField();
         textTI = new javax.swing.JFormattedTextField();
+        textTD = new javax.swing.JFormattedTextField();
+        textKI = new javax.swing.JFormattedTextField();
+        chkKD = new javax.swing.JCheckBox();
+        chkKI = new javax.swing.JCheckBox();
+        chkTD = new javax.swing.JCheckBox();
+        chkTI = new javax.swing.JCheckBox();
         SeparatorCtrl = new javax.swing.JSeparator();
         buttonReload = new javax.swing.JButton();
         labelCM = new javax.swing.JLabel();
@@ -157,46 +160,79 @@ public class ConfControle extends javax.swing.JPanel {
         panelGanhos.setBackground(new java.awt.Color(0, 0, 0));
         panelGanhos.setBorder(javax.swing.BorderFactory.createTitledBorder(null, org.openide.util.NbBundle.getMessage(ConfControle.class, "ConfControle.panelGanhos.border.title"), javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(255, 255, 255))); // NOI18N
         panelGanhos.setOpaque(false);
+        panelGanhos.setPreferredSize(new java.awt.Dimension(597, 132));
 
         labelKp.setForeground(new java.awt.Color(255, 255, 255));
         labelKp.setText(org.openide.util.NbBundle.getMessage(ConfControle.class, "ConfControle.labelKp.text")); // NOI18N
-
-        labelKd.setForeground(new java.awt.Color(255, 255, 255));
-        labelKd.setText(org.openide.util.NbBundle.getMessage(ConfControle.class, "ConfControle.labelKd.text")); // NOI18N
-
-        labelKi.setForeground(new java.awt.Color(255, 255, 255));
-        labelKi.setText(org.openide.util.NbBundle.getMessage(ConfControle.class, "ConfControle.labelKi.text")); // NOI18N
-
-        textKI.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
-        textKI.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        textKI.setText(org.openide.util.NbBundle.getMessage(ConfControle.class, "ConfControle.textKI.text")); // NOI18N
-
-        textKD.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
-        textKD.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        textKD.setText(org.openide.util.NbBundle.getMessage(ConfControle.class, "ConfControle.textKD.text")); // NOI18N
 
         textKP.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
         textKP.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         textKP.setText(org.openide.util.NbBundle.getMessage(ConfControle.class, "ConfControle.textKP.text")); // NOI18N
         textKP.setToolTipText(org.openide.util.NbBundle.getMessage(ConfControle.class, "ConfControle.textKP.toolTipText")); // NOI18N
 
-        labelTD.setForeground(new java.awt.Color(255, 255, 255));
-        labelTD.setText(org.openide.util.NbBundle.getMessage(ConfControle.class, "ConfControle.labelTD.text")); // NOI18N
-        labelTD.setToolTipText(org.openide.util.NbBundle.getMessage(ConfControle.class, "ConfControle.labelTD.toolTipText")); // NOI18N
+        textKD.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        textKD.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        textKD.setText(org.openide.util.NbBundle.getMessage(ConfControle.class, "ConfControle.textKD.text")); // NOI18N
+        textKD.setToolTipText(org.openide.util.NbBundle.getMessage(ConfControle.class, "ConfControle.textKD.toolTipText")); // NOI18N
 
-        labelTI.setForeground(new java.awt.Color(255, 255, 255));
-        labelTI.setText(org.openide.util.NbBundle.getMessage(ConfControle.class, "ConfControle.labelTI.text")); // NOI18N
-        labelTI.setToolTipText(org.openide.util.NbBundle.getMessage(ConfControle.class, "ConfControle.labelTI.toolTipText")); // NOI18N
+        textTI.setEditable(false);
+        textTI.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        textTI.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        textTI.setText(org.openide.util.NbBundle.getMessage(ConfControle.class, "ConfControle.textTI.text")); // NOI18N
+        textTI.setToolTipText(org.openide.util.NbBundle.getMessage(ConfControle.class, "ConfControle.textTI.toolTipText")); // NOI18N
 
+        textTD.setEditable(false);
         textTD.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
         textTD.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         textTD.setText(org.openide.util.NbBundle.getMessage(ConfControle.class, "ConfControle.textTD.text")); // NOI18N
         textTD.setToolTipText(org.openide.util.NbBundle.getMessage(ConfControle.class, "ConfControle.textTD.toolTipText")); // NOI18N
 
-        textTI.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
-        textTI.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        textTI.setText(org.openide.util.NbBundle.getMessage(ConfControle.class, "ConfControle.textTI.text")); // NOI18N
-        textTI.setToolTipText(org.openide.util.NbBundle.getMessage(ConfControle.class, "ConfControle.textTI.toolTipText")); // NOI18N
+        textKI.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        textKI.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        textKI.setText(org.openide.util.NbBundle.getMessage(ConfControle.class, "ConfControle.textKI.text")); // NOI18N
+        textKI.setToolTipText(org.openide.util.NbBundle.getMessage(ConfControle.class, "ConfControle.textKI.toolTipText")); // NOI18N
+
+        buttonGroup1.add(chkKD);
+        chkKD.setForeground(new java.awt.Color(255, 255, 255));
+        chkKD.setSelected(true);
+        chkKD.setText(org.openide.util.NbBundle.getMessage(ConfControle.class, "ConfControle.chkKD.text")); // NOI18N
+        chkKD.setOpaque(false);
+        chkKD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkKDActionPerformed(evt);
+            }
+        });
+
+        buttonGroup2.add(chkKI);
+        chkKI.setForeground(new java.awt.Color(255, 255, 255));
+        chkKI.setSelected(true);
+        chkKI.setText(org.openide.util.NbBundle.getMessage(ConfControle.class, "ConfControle.chkKI.text")); // NOI18N
+        chkKI.setOpaque(false);
+        chkKI.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkKIActionPerformed(evt);
+            }
+        });
+
+        buttonGroup1.add(chkTD);
+        chkTD.setForeground(new java.awt.Color(255, 255, 255));
+        chkTD.setText(org.openide.util.NbBundle.getMessage(ConfControle.class, "ConfControle.chkTD.text")); // NOI18N
+        chkTD.setOpaque(false);
+        chkTD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkTDActionPerformed(evt);
+            }
+        });
+
+        buttonGroup2.add(chkTI);
+        chkTI.setForeground(new java.awt.Color(255, 255, 255));
+        chkTI.setText(org.openide.util.NbBundle.getMessage(ConfControle.class, "ConfControle.chkTI.text")); // NOI18N
+        chkTI.setOpaque(false);
+        chkTI.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkTIActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelGanhosLayout = new javax.swing.GroupLayout(panelGanhos);
         panelGanhos.setLayout(panelGanhosLayout);
@@ -204,45 +240,54 @@ public class ConfControle extends javax.swing.JPanel {
             panelGanhosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelGanhosLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panelGanhosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(labelKp)
-                    .addComponent(labelKd)
-                    .addComponent(labelKi))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelGanhosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(panelGanhosLayout.createSequentialGroup()
+                        .addGroup(panelGanhosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(chkKD)
+                            .addComponent(chkKI))
+                        .addGap(6, 6, 6))
+                    .addGroup(panelGanhosLayout.createSequentialGroup()
+                        .addComponent(labelKp)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                 .addGroup(panelGanhosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelGanhosLayout.createSequentialGroup()
                         .addGroup(panelGanhosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(textKI, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)
-                            .addComponent(textKD, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(panelGanhosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(labelTD)
-                            .addComponent(labelTI))
+                            .addComponent(textKD, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)
+                            .addGroup(panelGanhosLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(textKI, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(panelGanhosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(textTI, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
-                            .addComponent(textTD, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)))
-                    .addComponent(textKP, javax.swing.GroupLayout.DEFAULT_SIZE, 364, Short.MAX_VALUE))
+                            .addComponent(chkTD)
+                            .addComponent(chkTI))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(panelGanhosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(textTI, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)
+                            .addComponent(textTD, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)))
+                    .addComponent(textKP, javax.swing.GroupLayout.DEFAULT_SIZE, 327, Short.MAX_VALUE))
                 .addContainerGap())
         );
         panelGanhosLayout.setVerticalGroup(
             panelGanhosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelGanhosLayout.createSequentialGroup()
                 .addGroup(panelGanhosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelKp)
-                    .addComponent(textKP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelGanhosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelKd)
+                    .addComponent(textKP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelKp))
+                .addGap(5, 5, 5)
+                .addGroup(panelGanhosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE, false)
+                    .addComponent(chkTD)
+                    .addComponent(chkKD)
                     .addComponent(textKD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelTD)
                     .addComponent(textTD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelGanhosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelKi)
-                    .addComponent(textKI, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelTI)
-                    .addComponent(textTI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(3, 3, 3)
+                .addGroup(panelGanhosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE, false)
+                    .addGroup(panelGanhosLayout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addComponent(textTI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(chkKI)
+                    .addComponent(chkTI)
+                    .addComponent(textKI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
         SeparatorCtrl.setOrientation(javax.swing.SwingConstants.VERTICAL);
@@ -281,29 +326,32 @@ public class ConfControle extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(SeparatorCtrl, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panelGanhos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(buttonReload))
+                .addComponent(panelGanhos, javax.swing.GroupLayout.DEFAULT_SIZE, 398, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(buttonReload)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(buttonReload))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(labelTipoCtrl)
-                        .addGap(11, 11, 11)
-                        .addComponent(comboControladores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(labelSetPoint)
-                        .addGap(7, 7, 7)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(labelCM)
-                            .addComponent(textSetPoint, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(SeparatorCtrl, javax.swing.GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE)
-                    .addComponent(panelGanhos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(labelTipoCtrl)
+                                .addGap(11, 11, 11)
+                                .addComponent(comboControladores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(labelSetPoint)
+                                .addGap(7, 7, 7)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(labelCM)
+                                    .addComponent(textSetPoint, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(SeparatorCtrl, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE))
+                        .addComponent(panelGanhos, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -347,14 +395,6 @@ public class ConfControle extends javax.swing.JPanel {
         this.textKD = textKD;
     }
 
-    public JFormattedTextField getTextKI() {
-        return textKI;
-    }
-
-    public void setTextKI(JFormattedTextField textKI) {
-        this.textKI = textKI;
-    }
-
     public JFormattedTextField getTextKP() {
         return textKP;
     }
@@ -367,22 +407,99 @@ public class ConfControle extends javax.swing.JPanel {
         return textSetPoint;
     }
 
+    public JFormattedTextField getTextTD() {
+        return textTD;
+    }
+
+    public JFormattedTextField getTextTI() {
+        return textTI;
+    }
+
+    public JCheckBox getChkKD() {
+        return chkKD;
+    }
+
+    public void setChkKD(JCheckBox chkKD) {
+        this.chkKD = chkKD;
+    }
+
+    public JCheckBox getChkKI() {
+        return chkKI;
+    }
+
+    public void setChkKI(JCheckBox chkKI) {
+        this.chkKI = chkKI;
+    }
+
+    public JCheckBox getChkTD() {
+        return chkTD;
+    }
+
+    public void setChkTD(JCheckBox chkTD) {
+        this.chkTD = chkTD;
+    }
+
+    public JCheckBox getChkTI() {
+        return chkTI;
+    }
+
+    public void setChkTI(JCheckBox chkTI) {
+        this.chkTI = chkTI;
+    }
+
+    public JFormattedTextField getTextKI() {
+        return textKI;
+    }
+
+    public void setTextKI(JFormattedTextField textKI) {
+        this.textKI = textKI;
+    }
+
     public void setTextSetPoint(JFormattedTextField textSetPoint) {
         this.textSetPoint = textSetPoint;
     }//GEN-LAST:event_buttonReloadActionPerformed
 
-    
+    private void chkKDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkKDActionPerformed
+        // TODO add your handling code here:
+        boolean chkd = chkKD.isSelected();
+        textKD.setEditable(chkd);
+        textTD.setEditable(!chkd);
+    }//GEN-LAST:event_chkKDActionPerformed
+
+    private void chkKIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkKIActionPerformed
+        // TODO add your handling code here:
+        boolean chki = chkKI.isSelected();
+        textKI.setEditable(chki);
+        textTI.setEditable(!chki);
+    }//GEN-LAST:event_chkKIActionPerformed
+
+    private void chkTDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkTDActionPerformed
+        // TODO add your handling code here:
+        boolean chkd = chkTD.isSelected();
+        textKD.setEditable(!chkd);
+        textTD.setEditable(chkd);
+    }//GEN-LAST:event_chkTDActionPerformed
+
+    private void chkTIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkTIActionPerformed
+        // TODO add your handling code here:
+        boolean chkd = chkTI.isSelected();
+        textKI.setEditable(!chkd);
+        textTI.setEditable(chkd);
+    }//GEN-LAST:event_chkTIActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JSeparator SeparatorCtrl;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JButton buttonReload;
+    private javax.swing.JCheckBox chkKD;
+    private javax.swing.JCheckBox chkKI;
+    private javax.swing.JCheckBox chkTD;
+    private javax.swing.JCheckBox chkTI;
     private javax.swing.JComboBox comboControladores;
     private javax.swing.JLabel labelCM;
-    private javax.swing.JLabel labelKd;
-    private javax.swing.JLabel labelKi;
     private javax.swing.JLabel labelKp;
     private javax.swing.JLabel labelSetPoint;
-    private javax.swing.JLabel labelTD;
-    private javax.swing.JLabel labelTI;
     private javax.swing.JLabel labelTipoCtrl;
     private javax.swing.JPanel panelGanhos;
     private javax.swing.JFormattedTextField textKD;

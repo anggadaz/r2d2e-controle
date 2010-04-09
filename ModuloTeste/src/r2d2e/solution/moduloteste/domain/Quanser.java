@@ -70,7 +70,9 @@ public class Quanser {
 
     public void closeConnection() {
         try {
-            quanserClient.closeConnection();
+            if (quanserClient != null) {
+                quanserClient.closeConnection();
+            }
         } catch (QuanserClientException ex) {
             ex.printStackTrace();
         }

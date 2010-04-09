@@ -82,7 +82,6 @@ public class TestModeHandler {
 
         setEnable(false);
         controlerInterface.end = false;
-        verifyCalibration();
         calculateInteracoesMax();
         cleanTable();
 
@@ -135,12 +134,6 @@ public class TestModeHandler {
     private void calculateInteracoesMax() {
         numInteracoesMax = (int) ((tensaoMax - tensaoAtual) / tensaoStep) + 1;
         System.out.println("NumIntera " + numInteracoesMax);
-    }
-
-    private void verifyCalibration() {
-        Double nivel_Min = quanser.readSensor1();
-        controlerInterface.NIVEL_LOW_CALIBRATION = nivel_Min + 0.1;
-        System.out.println("nivelMIN " + nivel_Min);
     }
 
     private void setEnable(boolean enable) {

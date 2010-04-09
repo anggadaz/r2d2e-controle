@@ -30,6 +30,12 @@ public class UpdateWater extends Timer implements ActionListener {
         double nivel1 = quanser.readSensor1();
         double nivel2 = quanser.readSensor2();
 
+        if (nivel1 < 0) {
+            nivel1 = 0;
+        }
+        if (nivel2 < 0) {
+            nivel2 = 0;
+        }
         tanquePanel.setLevelWater1(nivel1);
         tanquePanel.setLevelWater2(nivel2);
 

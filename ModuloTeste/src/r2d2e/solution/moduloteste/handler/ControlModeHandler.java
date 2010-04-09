@@ -24,8 +24,7 @@ public class ControlModeHandler {
 
     private static TanquePanel tanquePanel;
     private static ConfControle confControle;
-    private AlgController algController;
-    
+    private static AlgController algController;
     private static Controller controllerSelected;
 
     public ControlModeHandler(NovoFrame frame) {
@@ -55,7 +54,7 @@ public class ControlModeHandler {
         if (controllerSelected instanceof PDController) {
             String nivel = confControle.getTextSetPoint().getText();
             String kp = confControle.getTextKP().getText();
-            String kd = confControle.getTextKD().getText();
+            String kd = getKdValue();
 
             nivel = fixNumber(nivel);
             kp = fixNumber(kp);
@@ -68,7 +67,7 @@ public class ControlModeHandler {
         if (controllerSelected instanceof PIController) {
             String nivel = confControle.getTextSetPoint().getText();
             String kp = confControle.getTextKP().getText();
-            String ki = confControle.getTextKI().getText();
+            String ki = getKIValue();
 
             nivel = fixNumber(nivel);
             kp = fixNumber(kp);
@@ -81,8 +80,8 @@ public class ControlModeHandler {
         if (controllerSelected instanceof PIDController) {
             String nivel = confControle.getTextSetPoint().getText();
             String kp = confControle.getTextKP().getText();
-            String ki = confControle.getTextKI().getText();
-            String kd = confControle.getTextKD().getText();
+            String ki = getKIValue();
+            String kd = getKdValue();
 
             nivel = fixNumber(nivel);
             kp = fixNumber(kp);
@@ -97,32 +96,98 @@ public class ControlModeHandler {
         if (controllerSelected instanceof PID2Controller) {
             String nivel = confControle.getTextSetPoint().getText();
             String kp = confControle.getTextKP().getText();
-            String ki = confControle.getTextKI().getText();
-            String kd2 = confControle.getTextKD().getText();
+            String ki = getKIValue();
+            String kd2 = getKdValue();
 
             nivel = fixNumber(nivel);
             kp = fixNumber(kp);
             ki = fixNumber(ki);
             kd2 = fixNumber(kd2);
-            
+
             controllerSelected.setSetPoint(Double.parseDouble(nivel));
             ((PID2Controller) controllerSelected).setKp(Double.parseDouble(kp));
             ((PID2Controller) controllerSelected).setKi(Double.parseDouble(ki));
             ((PID2Controller) controllerSelected).setKd2(Double.parseDouble(kd2));
         }
+        if (algController != null) {
+            algController.setController(controllerSelected);
+        }
     }
 
     public void init(Quanser quanser) {
-        algController = new AlgController(100, controllerSelected,quanser);
+        algController = new AlgController(100, controllerSelected, quanser);
         algController.start();
     }
 
-    private static String fixNumber(String numb){
+    public static String fixNumber(String numb) {
         return numb.replace(",", ".");
     }
 
-    public void stop(Quanser quanser){
+    public void stop(Quanser quanser) {
         algController.stop();
         quanser.stopMotor();
+    }
+
+    public static void updateKD() {
+        String d = confControle.getTextTD().getText();
+        confControle.getTextKD().setText(d);
+    }
+
+    public static void updateKI() {
+        String ti = confControle.getTextTI().getText();
+        if (ti != null && !ti.isEmpty()) {
+            ti = fixNumber(ti);
+            double d = Double.parseDouble(ti);
+            Double resultado = 1.0 / d;
+            confControle.getTextKI().setText(resultado.toString());
+        }
+        System.out.println("ki2 " + confControle.getTextKI().getText());
+        System.out.println("ti2 " + confControle.getTextTI().getText());
+    }
+
+    public static void updateTD() {
+        String kd = confControle.getTextKD().getText();
+        confControle.getTextTD().setText(kd);
+    }
+
+    public static void updateTI() {
+        String td = confControle.getTextKI().getText();
+        if (td != null && !td.isEmpty()) {
+            td = fixNumber(td);
+            double d = Double.parseDouble(td);
+            Double resultado = 1.0 / d;
+            confControle.getTextTI().setText(resultado.toString());
+        }
+        System.out.println("ki " + confControle.getTextKI().getText());
+        System.out.println("ti " + confControle.getTextTI().getText());
+
+    }
+
+    private static String getKdValue() {
+        boolean ok = confControle.getChkKD().isSelected();
+        String kd = null;
+        if (ok) {
+            kd = confControle.getTextKD().getText();
+        } else {
+            kd = confControle.getTextTD().getText();
+        }
+        kd = fixNumber(kd);
+        return kd;
+    }
+
+    private static String getKIValue() {
+        boolean ok = confControle.getChkKI().isSelected();
+        String ki = null;
+        if (ok) {
+            ki = confControle.getTextKI().getText();
+            ki = fixNumber(ki);
+        } else {
+            String ti = confControle.getTextTI().getText();
+            ti = fixNumber(ti);
+            double d = Double.parseDouble(ti);
+            Double resultado = 1.0 / d;
+            ki = resultado.toString();
+        }
+        return ki;
     }
 }

@@ -21,7 +21,7 @@ public class AlgController extends Timer implements ActionListener {
 
     private Controller controller;
     private Quanser quanser;
-    private double nivelAnte = NIVEL_MAX;
+    private double nivelAnte = 0;
 
     public AlgController(int delay, Controller controller, Quanser quanser) {
         super(delay, null);
@@ -74,14 +74,19 @@ public class AlgController extends Timer implements ActionListener {
 
     private double limiteSuperior(double nivel, double tensaoAtual) {
         if (nivel >= NIVEL_MAX && tensaoAtual > 0) {
-            System.out.println("(nivelAnte + 0.8) " + (nivelAnte + 0.8));
-            if (nivel >= NIVEL_MAX && (nivelAnte + 0.8) < nivel) {
+            System.out.println("(nivelAnte + 0.8) " + nivelAnte);
+            if (nivel >= NIVEL_MAX && nivelAnte < nivel) {
                 tensaoAtual = 0;
             } else {
-                tensaoAtual = 1.8;
+                tensaoAtual = 1.7;
             }
             return tensaoAtual;
         }
         return tensaoAtual;
     }
+
+    public void setController(Controller controller) {
+        this.controller = controller;
+    }
+    
 }

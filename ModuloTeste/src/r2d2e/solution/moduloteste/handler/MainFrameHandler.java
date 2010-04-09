@@ -2,6 +2,7 @@ package r2d2e.solution.moduloteste.handler;
 
 import r2d2e.solution.moduloteste.domain.Quanser;
 import r2d2e.solution.moduloteste.domain.UpdateWater;
+import r2d2e.solution.moduloteste.domain.controlerInterface;
 import r2d2e.solution.moduloteste.view.NovoFrame;
 import r2d2e.solution.moduloteste.view.OpcoesGerais;
 
@@ -53,6 +54,7 @@ public class MainFrameHandler {
     public void play() {
         if (!quanser.isServerOk()) {
             quanser.connect();
+            verifyCalibration();
             updateWater.start();
         }
 
@@ -90,5 +92,11 @@ public class MainFrameHandler {
     public void initOpcoesGerais() {
         OpcoesGerais gerais = new OpcoesGerais(mainFrame, true);
         gerais.setVisible(true);
+    }
+
+    private void verifyCalibration() {
+        Double nivel_Min = quanser.readSensor1();
+        controlerInterface.NIVEL_LOW_CALIBRATION = nivel_Min + 0.1;
+        System.out.println("nivelMIN " + nivel_Min);
     }
 }
