@@ -45,6 +45,7 @@ public class MainView extends javax.swing.JFrame {
     /** Creates new form mainView */
     public MainView() {
         initComponents();
+        SkinInitialize();
         init();
         simulatorPanel.add(tanks3d);
         tanks3d.setSize(simulatorPanel.getPreferredSize());
@@ -505,19 +506,7 @@ public class MainView extends javax.swing.JFrame {
         return isStopped;
     }
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
 
-            public void run() {
-                Splash.getInstance().inicializaSplash();
-                SkinInitialize();
-                new MainView().setVisible(true);
-            }
-        });
-    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel botoesPanel;
     private javax.swing.JButton buttonAltconf;
