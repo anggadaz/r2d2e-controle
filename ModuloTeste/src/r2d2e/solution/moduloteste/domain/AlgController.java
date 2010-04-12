@@ -23,29 +23,29 @@ public class AlgController extends Timer implements ActionListener {
 
     public static final int NIVEL_MAX = 27;
     public static final int NIVEL_MIN = 3;
-
     private Controller controller;
     private Quanser quanser;
     private double nivelAnte = 0;
-
     private long initT;
 
-    public AlgController(int delay, Controller controller, Quanser quanser) {
+    public AlgController(int delay, Controller controller, Quanser quanser, boolean intCond) {
         super(delay, null);
         addActionListener(this);
         this.controller = controller;
         this.quanser = quanser;
 
         this.initT = System.currentTimeMillis();
+
+        controller.setInteCondi(intCond);
     }
 
     private void atualizarGrafico(double nivel, double set, double tensao, double trava) {
 
-        long tempo = System.currentTimeMillis()-initT;
+        long tempo = System.currentTimeMillis() - initT;
 
         ControlModeHandler.graphNivel.addNivel(tempo, nivel, GraphNivel.NIVEL);
         ControlModeHandler.graphNivel.addNivel(tempo, set, GraphNivel.SP);
-        ControlModeHandler.graphNivel.addNivel(tempo, set-nivel, GraphNivel.ERRO);
+        ControlModeHandler.graphNivel.addNivel(tempo, set - nivel, GraphNivel.ERRO);
 
         ControlModeHandler.graphTensao1.addTensao(tempo, controller.getProporcional(), GraphTensao1.P);
         ControlModeHandler.graphTensao1.addTensao(tempo, controller.getIntegral(), GraphTensao1.I);
@@ -72,7 +72,7 @@ public class AlgController extends Timer implements ActionListener {
 
         atualizarGrafico(nivel, setP, tensao, tensaoAtual);
 
-        System.out.println("tensaoAtual " + tensaoAtual);
+
         writeBomb(nivel, tensaoAtual);
     }
 
@@ -83,6 +83,7 @@ public class AlgController extends Timer implements ActionListener {
             tensaoAtual = limiteSuperior(nivel, tensaoAtual);
         }
         nivelAnte = nivel;
+
         quanser.writeBomb(tensaoAtual);
     }
 
@@ -103,12 +104,12 @@ public class AlgController extends Timer implements ActionListener {
 
     private double limiteSuperior(double nivel, double tensaoAtual) {
         if (nivel >= NIVEL_MAX && tensaoAtual > 0) {
-            System.out.println("(nivelAnte + 0.8) " + nivelAnte);
-            if (nivel >= NIVEL_MAX && nivelAnte < nivel) {
-                tensaoAtual = 0;
-            } else {
-                tensaoAtual = 1.7;
+            System.out.println("nivelAnte " + nivelAnte);
+            tensaoAtual = 1.8;
+            if(nivel >= 29){
+                tensaoAtual = 0.0;
             }
+            System.out.println("tensao " + tensaoAtual);
             return tensaoAtual;
         }
         return tensaoAtual;
@@ -117,5 +118,8 @@ public class AlgController extends Timer implements ActionListener {
     public void setController(Controller controller) {
         this.controller = controller;
     }
-    
+
+    public void setInteCondi(boolean inteCondi) {
+        controller.setInteCondi(inteCondi);
+    }
 }

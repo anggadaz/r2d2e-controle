@@ -28,7 +28,7 @@ public class Quanser {
         try {
             quanserClient = new QuanserClient(IP_QUANSER, PORT_QUANSER);
         } catch (QuanserClientException e) {
-            e.printStackTrace();
+            System.out.println("Nao foi possível conectar com o servidor");
         }
     }
 

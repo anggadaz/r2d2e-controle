@@ -25,14 +25,17 @@ public class ControlModeHandler {
     private static TanquePanel tanquePanel;
     private static ControlPanel controlPanel;
     private static ConfControle confControle;
-
     private static AlgController algController;
-
     public static GraphNivel graphNivel;
     public static GraphTensao1 graphTensao1;
     public static GraphTensao2 graphTensao2;
-
     private static Controller controllerSelected;
+
+    public static void setIntegracaoCondi(boolean chk) {
+        if (algController != null) {
+            algController.setInteCondi(chk);
+        }
+    }
 
     public ControlModeHandler(NovoFrame frame) {
         tanquePanel = frame.getTanquePanel();
@@ -42,9 +45,9 @@ public class ControlModeHandler {
     }
 
     private void initChart() {
-        graphNivel = new GraphNivel(30000);
-        graphTensao1 = new GraphTensao1(30000);
-        graphTensao2 = new GraphTensao2(30000);
+        graphNivel = new GraphNivel(300000);
+        graphTensao1 = new GraphTensao1(300000);
+        graphTensao2 = new GraphTensao2(300000);
 
         controlPanel.addChartNivel(graphNivel.getChart());
         controlPanel.addChartTensao1(graphTensao1.getChart());
@@ -135,7 +138,8 @@ public class ControlModeHandler {
     }
 
     public void init(Quanser quanser) {
-        algController = new AlgController(100, controllerSelected, quanser);
+        boolean ok = confControle.getChkIntCond().isSelected();
+        algController = new AlgController(100, controllerSelected, quanser,ok);
         algController.start();
         graphNivel.clear();
         graphTensao1.clear();

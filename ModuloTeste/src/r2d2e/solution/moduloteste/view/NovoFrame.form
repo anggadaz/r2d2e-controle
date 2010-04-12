@@ -144,7 +144,7 @@
                       <Group type="102" alignment="1" attributes="0">
                           <Component id="mainPanel" pref="423" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="opcoesPanel" min="-2" pref="137" max="-2" attributes="0"/>
+                          <Component id="opcoesPanel" min="-2" pref="142" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace min="-2" max="-2" attributes="0"/>
@@ -347,7 +347,7 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="566" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="571" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>

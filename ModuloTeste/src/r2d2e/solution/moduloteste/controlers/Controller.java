@@ -22,11 +22,11 @@ public abstract class Controller {
     private Double pastError;
     //valor da variavel de processo passado
     private Double pastprocessVariable;
-
     private double proporcional = 0;
     private double integral = 0;
     private double derivative = 0;
     private double derivative2 = 0;
+    private boolean inteCondi = true;
 
     //Contrutor default
     public Controller() {
@@ -92,11 +92,16 @@ public abstract class Controller {
     }
 
     protected double IntegralTest(double s, double p, double i, double d) {
-        if (s > 3 || s < -3) {
-            s = p + d + pastIntegral;
+        if (inteCondi) {
+            if (s > 3 || s < -3) {
+                s = p + d + pastIntegral;
+            } else {
+                pastIntegral = i;
+            }
         } else {
             pastIntegral = i;
         }
+
         return s;
     }
     /*
@@ -137,4 +142,9 @@ public abstract class Controller {
     public double getProporcional() {
         return proporcional;
     }
+
+    public void setInteCondi(boolean inteCondi) {
+        this.inteCondi = inteCondi;
+    }
+    
 }
