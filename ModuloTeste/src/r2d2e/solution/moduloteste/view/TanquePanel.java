@@ -16,13 +16,10 @@ public class TanquePanel extends javax.swing.JPanel {
     private BufferedImage tanques;
     private BufferedImage waterImage1;
     private BufferedImage waterImage2;
-
     private double heightWater1 = 0;
     private double heightWater2 = 0;
-
     private int maxWidthWater1;
     private int maxWidthWater2;
-
     private final int maxLevelWater = 26;
 
     /** Creates new form TanquePanel */
@@ -37,20 +34,26 @@ public class TanquePanel extends javax.swing.JPanel {
         //g.drawImage(waterImage1,174, 14, null);
         //g.drawImage(waterImage2,112, 253, null);
 
-        g.drawImage(waterImage1, 174, 10 + (int)(maxWidthWater1-heightWater1), waterImage1.getWidth(), (int)heightWater1, null);
-        g.drawImage(waterImage2, 112, 250 + (int)(maxWidthWater2-heightWater2), waterImage2.getWidth(), (int)heightWater2, null);
+        g.drawImage(waterImage1, 174, 10 + (int) (maxWidthWater1 - heightWater1), waterImage1.getWidth(), (int) heightWater1, null);
+        g.drawImage(waterImage2, 112, 250 + (int) (maxWidthWater2 - heightWater2), waterImage2.getWidth(), (int) heightWater2, null);
     }
 
     public void setLevelWater1(double levelWater) {
-        double PercentWater = (100*levelWater)/maxLevelWater;
-        heightWater1 = (PercentWater * maxWidthWater1) / 100;
-        repaint();
+        if (levelWater >= 0.0) {
+            double PercentWater = (100 * levelWater) / maxLevelWater;
+            heightWater1 = (PercentWater * maxWidthWater1) / 100;
+            repaint();
+        }
+
     }
 
     public void setLevelWater2(double levelWater) {
-        double PercentWater = (100*levelWater)/maxLevelWater;
-        heightWater2 = (PercentWater * maxWidthWater2) / 100;
-        repaint();
+        if (levelWater >= 0.0) {
+            double PercentWater = (100 * levelWater) / maxLevelWater;
+            heightWater2 = (PercentWater * maxWidthWater2) / 100;
+            repaint();
+        }
+
     }
 
     private void loadImage() {
@@ -78,10 +81,11 @@ public class TanquePanel extends javax.swing.JPanel {
         frame.setVisible(true);
 
         new Thread() {
+
             @Override
             public void run() {
                 for (int i = 0; i < 20; i++) {
-                    panel.setLevelWater1( (i<4) ? 0 : i-4);
+                    panel.setLevelWater1((i < 4) ? 0 : i - 4);
                     panel.setLevelWater2(i);
                     try {
                         sleep(50);
@@ -113,9 +117,6 @@ public class TanquePanel extends javax.swing.JPanel {
             .addGap(0, 300, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
-
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
-
 }

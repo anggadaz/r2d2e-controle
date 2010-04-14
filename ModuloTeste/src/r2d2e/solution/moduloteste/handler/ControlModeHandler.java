@@ -151,7 +151,7 @@ public class ControlModeHandler {
     }
 
     public void stop(Quanser quanser) {
-        algController.stop();
+        algController.setAtivo(false);
         quanser.stopMotor();
     }
 

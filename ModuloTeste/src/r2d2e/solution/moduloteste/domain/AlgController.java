@@ -28,8 +28,9 @@ public class AlgController extends Timer implements ActionListener {
     private TanquePanel tanquePanel;
     private double nivelAnte = 0;
     private long initT;
+    private boolean ativo = true;
 
-    public AlgController(int delay, Controller controller,TanquePanel tanquePanel,Quanser quanser, boolean intCond) {
+    public AlgController(int delay, Controller controller, TanquePanel tanquePanel, Quanser quanser, boolean intCond) {
         super(delay, null);
         addActionListener(this);
         this.controller = controller;
@@ -66,19 +67,25 @@ public class AlgController extends Timer implements ActionListener {
         double nivel1 = quanser.readSensor1();
         double nivel2 = quanser.readSensor1();
 
+        updateTanks(nivel1, nivel2);
+        if (ativo) {
+            double setP = controller.getSetPoint();
+
+            System.out.println("nivel " + nivel1);
+            //calcular valor de tensão
+            double tensao = controller.calculateOutput(nivel1);
+            double tensaoAtual = travaTensao(tensao);
+
+            atualizarGrafico(nivel1, setP, tensao, tensaoAtual);
+
+            writeBomb(nivel1, tensaoAtual);
+        }
+
+    }
+
+    private void updateTanks(double nivel1, double nivel2) {
         tanquePanel.setLevelWater1(nivel1);
         tanquePanel.setLevelWater2(nivel2);
-
-        double setP = controller.getSetPoint();
-
-        System.out.println("nivel " + nivel1);
-        //calcular valor de tensão
-        double tensao = controller.calculateOutput(nivel1);
-        double tensaoAtual = travaTensao(tensao);
-
-        atualizarGrafico(nivel1, setP, tensao, tensaoAtual);
-
-        writeBomb(nivel1, tensaoAtual);
     }
 
     private void writeBomb(double nivel, double tensaoAtual) {
@@ -111,7 +118,7 @@ public class AlgController extends Timer implements ActionListener {
         if (nivel >= NIVEL_MAX && tensaoAtual > 0) {
             System.out.println("nivelAnte " + nivelAnte);
             tensaoAtual = 1.8;
-            if(nivel >= 30){
+            if (nivel >= 30) {
                 tensaoAtual = -2;
             }
             System.out.println("tensao " + tensaoAtual);
@@ -126,5 +133,13 @@ public class AlgController extends Timer implements ActionListener {
 
     public void setInteCondi(boolean inteCondi) {
         controller.setInteCondi(inteCondi);
+    }
+
+    public boolean isAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
     }
 }
