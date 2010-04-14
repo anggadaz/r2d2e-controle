@@ -139,7 +139,7 @@ public class ControlModeHandler {
 
     public void init(Quanser quanser) {
         boolean ok = confControle.getChkIntCond().isSelected();
-        algController = new AlgController(100, controllerSelected, quanser,ok);
+        algController = new AlgController(100, controllerSelected,tanquePanel,quanser,ok);
         algController.start();
         graphNivel.clear();
         graphTensao1.clear();

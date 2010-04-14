@@ -58,7 +58,6 @@ public class GraphNivel extends JPanel {
         domain.setLabelFont(new Font("SansSerif", Font.PLAIN, 14));
         range.setLabelFont(new Font("SansSerif", Font.PLAIN, 14));
         domain.setMinimumDate(new Date(0, 0, 0, 0, 0, 0));
-
         XYItemRenderer renderer = new XYLineAndShapeRenderer(true, false);
         renderer.setSeriesPaint(0, Color.red);
         renderer.setSeriesPaint(1, Color.blue);

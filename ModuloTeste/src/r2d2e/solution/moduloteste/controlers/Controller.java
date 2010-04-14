@@ -49,8 +49,10 @@ public abstract class Controller {
     //Funçao que calcula a ação proporcional de controle.
     public double proporcionalTerm(double kp, double processVariable) {
         System.out.println("KP " + kp);
-        proporcional = kp * error(processVariable);
-        System.out.println("PRO " + proporcional);
+        double erro = error(processVariable);
+        proporcional = kp * erro;
+        System.out.println("erro " + erro);
+        System.out.println("PRO " + proporcional + "\n");
         return proporcional;
     }
 
@@ -60,7 +62,7 @@ public abstract class Controller {
         System.out.println("pastIntegral " + pastIntegral);
         integral = pastIntegral + ki * sampleRate * error(processVariable);
 
-        System.out.println("inte " + integral);
+        System.out.println("inte " + integral + "\n");
 
         return integral;
     }
@@ -68,9 +70,9 @@ public abstract class Controller {
     //Funçao que calcula a ação derivativa de controle.
     public double derivativeTerm(double kd, double processVariable) {
         System.out.println("KD " + kd);
-        System.out.println("pastError " + pastError);
         double erro = error(processVariable);
         derivative = kd * ((erro - pastError) / sampleRate);
+        System.out.println("Derivativo " + derivative + "\n");
         pastError = erro;
         return derivative;
     }
@@ -80,6 +82,7 @@ public abstract class Controller {
         System.out.println("kd2 " + kd2);
         System.out.println("pastprocessVariable " + pastprocessVariable);
         derivative2 = kd2 * ((processVariable - pastprocessVariable) / sampleRate);
+        System.out.println("Derivativo de saida " + "\n");
         pastprocessVariable = processVariable;
         return derivative2;
     }
@@ -87,11 +90,13 @@ public abstract class Controller {
     //Funçao que calcula um erro
     public double error(double processVariable) {
         double erro = setPoint - processVariable;
-        System.out.println("erro " + erro);
         return erro;
     }
 
     protected double IntegralTest(double s, double p, double i, double d) {
+
+        System.out.println("\n inteCond " + inteCondi);
+
         if (inteCondi) {
             if (s > 3 || s < -3) {
                 s = p + d + pastIntegral;
@@ -146,5 +151,4 @@ public abstract class Controller {
     public void setInteCondi(boolean inteCondi) {
         this.inteCondi = inteCondi;
     }
-    
 }

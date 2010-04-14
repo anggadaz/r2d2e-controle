@@ -22,9 +22,11 @@ public class Teste extends Thread {
     @Override
     public void run() {
         Quanser quanser = new Quanser();
+        Quanser.setIP_QUANSER("localhost");
+        quanser.connect();
         quanser.writeBomb(0);
         try {
-            sleep(2000);
+            sleep(6000);
         } catch (InterruptedException ex) {
             Exceptions.printStackTrace(ex);
         }
@@ -36,9 +38,9 @@ public class Teste extends Thread {
 //            } catch (InterruptedException ex) {
 //                Logger.getLogger(Teste.class.getName()).log(Level.SEVERE, null, ex);
 //            }
-//            double q2 = quanser.readSensor1();
-//            System.out.println("q2 " + q2);
-//        }
+////            double q2 = quanser.readSensor1();
+////            System.out.println("q2 " + q2);
+////        }
 //        quanser.writeBomb(2);
 //        try {
 //            sleep(3000);

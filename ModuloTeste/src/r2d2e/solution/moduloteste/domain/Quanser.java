@@ -14,7 +14,7 @@ import r2d2e.solution.moduloteste.quanser.QuanserClientException;
 public class Quanser {
 
     private QuanserClient quanserClient;
-    private static String IP_QUANSER = "10.13.99.69";
+        private static String IP_QUANSER = "10.13.99.69";
     private static int PORT_QUANSER = 20081;//20081;
     private static int CHANNEL_BOMB = 0;
     private static double CALIBRATION1 = 0.0;//2.0;
@@ -45,7 +45,9 @@ public class Quanser {
         try {
             read = quanserClient.read(0);
             read *= VOLT_TO_LEVEL;
-            read += CALIBRATION1;
+            System.out.println("read " + read);
+            read -= CALIBRATION1;
+            System.out.println("read " + read);
         } catch (QuanserClientException e) {
             e.printStackTrace();
         }
@@ -57,7 +59,7 @@ public class Quanser {
         try {
             read = quanserClient.read(1);
             read *= VOLT_TO_LEVEL;
-            read += CALIBRATION2;
+            read -= CALIBRATION2;
         } catch (QuanserClientException e) {
             e.printStackTrace();
         }

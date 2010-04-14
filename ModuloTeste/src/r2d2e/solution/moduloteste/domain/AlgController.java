@@ -21,19 +21,20 @@ import r2d2e.solution.moduloteste.view.TanquePanel;
  */
 public class AlgController extends Timer implements ActionListener {
 
-    public static final int NIVEL_MAX = 27;
+    public static final int NIVEL_MAX = 26;
     public static final int NIVEL_MIN = 3;
     private Controller controller;
     private Quanser quanser;
+    private TanquePanel tanquePanel;
     private double nivelAnte = 0;
     private long initT;
 
-    public AlgController(int delay, Controller controller, Quanser quanser, boolean intCond) {
+    public AlgController(int delay, Controller controller,TanquePanel tanquePanel,Quanser quanser, boolean intCond) {
         super(delay, null);
         addActionListener(this);
         this.controller = controller;
         this.quanser = quanser;
-
+        this.tanquePanel = tanquePanel;
         this.initT = System.currentTimeMillis();
 
         controller.setInteCondi(intCond);
@@ -62,18 +63,22 @@ public class AlgController extends Timer implements ActionListener {
         System.out.println("controller " + controller);
 
         //Ler do tank
-        double nivel = quanser.readSensor1();
+        double nivel1 = quanser.readSensor1();
+        double nivel2 = quanser.readSensor1();
+
+        tanquePanel.setLevelWater1(nivel1);
+        tanquePanel.setLevelWater2(nivel2);
+
         double setP = controller.getSetPoint();
 
-        System.out.println("nivel " + nivel);
+        System.out.println("nivel " + nivel1);
         //calcular valor de tensão
-        double tensao = controller.calculateOutput(nivel);
+        double tensao = controller.calculateOutput(nivel1);
         double tensaoAtual = travaTensao(tensao);
 
-        atualizarGrafico(nivel, setP, tensao, tensaoAtual);
+        atualizarGrafico(nivel1, setP, tensao, tensaoAtual);
 
-
-        writeBomb(nivel, tensaoAtual);
+        writeBomb(nivel1, tensaoAtual);
     }
 
     private void writeBomb(double nivel, double tensaoAtual) {
@@ -106,8 +111,8 @@ public class AlgController extends Timer implements ActionListener {
         if (nivel >= NIVEL_MAX && tensaoAtual > 0) {
             System.out.println("nivelAnte " + nivelAnte);
             tensaoAtual = 1.8;
-            if(nivel >= 29){
-                tensaoAtual = 0.0;
+            if(nivel >= 30){
+                tensaoAtual = -2;
             }
             System.out.println("tensao " + tensaoAtual);
             return tensaoAtual;

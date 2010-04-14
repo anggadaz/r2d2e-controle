@@ -26,7 +26,7 @@ public class MainFrameHandler {
         quanser = new Quanser();
         testModeHandler = new TestModeHandler(mainFrame, quanser);
         controlModeHandler = new ControlModeHandler(mainFrame);
-        updateWater = new UpdateWater(100, mainFrame.getTanquePanel(), quanser);
+       //updateWater = new UpdateWater(100, mainFrame.getTanquePanel(), );
     }
 
     public void enterTestMode() {
@@ -56,8 +56,9 @@ public class MainFrameHandler {
     public void play() {
         if (!quanser.isServerOk()) {
             quanser.connect();
+            quanser.writeBomb(0);
             verifyCalibration();
-            updateWater.start();
+            //updateWater.start();
         }
 
         if (mode == TEST_MOD) {
@@ -98,6 +99,9 @@ public class MainFrameHandler {
 
     private void verifyCalibration() {
         Double nivel_Min = quanser.readSensor1();
+        Double nivel_Min2 = quanser.readSensor2();
+        Quanser.setCALIBRATION1(nivel_Min);
+        Quanser.setCALIBRATION2(nivel_Min2);
         controlerInterface.NIVEL_LOW_CALIBRATION = nivel_Min + 0.1;
         System.out.println("nivelMIN " + nivel_Min);
     }
