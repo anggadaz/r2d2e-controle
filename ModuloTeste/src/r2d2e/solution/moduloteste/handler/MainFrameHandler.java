@@ -1,7 +1,6 @@
 package r2d2e.solution.moduloteste.handler;
 
 import r2d2e.solution.moduloteste.domain.Quanser;
-import r2d2e.solution.moduloteste.domain.UpdateWater;
 import r2d2e.solution.moduloteste.domain.controlerInterface;
 import r2d2e.solution.moduloteste.view.NovoFrame;
 import r2d2e.solution.moduloteste.view.OpcoesGerais;
@@ -18,7 +17,6 @@ public class MainFrameHandler {
     private TestModeHandler testModeHandler;
     private ControlModeHandler controlModeHandler;
     private Quanser quanser;
-    private UpdateWater updateWater;
     private int mode;
 
     public MainFrameHandler(NovoFrame mainFrame) {

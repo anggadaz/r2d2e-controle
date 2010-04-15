@@ -48,7 +48,7 @@ public class ConfControle extends javax.swing.JPanel {
         double sp = Double.parseDouble(text);
 
         controllers.add(new PController(sampleRate, sp));
-        controllers.add(new PDController(sampleRate,sp));
+        controllers.add(new PDController(sampleRate, sp));
         controllers.add(new PIController(sampleRate, sp));
         controllers.add(new PIDController(sampleRate, sp));
         controllers.add(new PID2Controller(sampleRate, sp));
@@ -314,11 +314,6 @@ public class ConfControle extends javax.swing.JPanel {
         chkIntCond.setText(org.openide.util.NbBundle.getMessage(ConfControle.class, "ConfControle.chkIntCond.text")); // NOI18N
         chkIntCond.setToolTipText(org.openide.util.NbBundle.getMessage(ConfControle.class, "ConfControle.chkIntCond.toolTipText")); // NOI18N
         chkIntCond.setOpaque(false);
-        chkIntCond.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                chkIntCondActionPerformed(evt);
-            }
-        });
 
         textSetPoint.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
         textSetPoint.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
@@ -401,7 +396,10 @@ public class ConfControle extends javax.swing.JPanel {
 
     private void buttonReloadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonReloadActionPerformed
         // TODO add your handling code here:
+
         ControlModeHandler.updateVariables();
+        boolean chk = chkIntCond.isSelected();
+        ControlModeHandler.setIntegracaoCondi(chk);
     }
 
     public JComboBox getComboControladores() {
@@ -515,13 +513,6 @@ public class ConfControle extends javax.swing.JPanel {
         textKI.setEditable(!chkd);
         textTI.setEditable(chkd);
     }//GEN-LAST:event_chkTIActionPerformed
-
-    private void chkIntCondActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkIntCondActionPerformed
-        // TODO add your handling code here:
-        boolean chk = chkIntCond.isSelected();
-        ControlModeHandler.setIntegracaoCondi(chk);
-    }//GEN-LAST:event_chkIntCondActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JSeparator SeparatorCtrl;
     private javax.swing.ButtonGroup buttonGroup1;

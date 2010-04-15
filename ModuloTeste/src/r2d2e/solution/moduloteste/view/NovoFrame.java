@@ -8,7 +8,6 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
 import org.jvnet.substance.skin.SubstanceBusinessBlackSteelLookAndFeel;
-import r2d2e.solution.moduloteste.domain.UpdateWater;
 import r2d2e.solution.moduloteste.handler.MainFrameHandler;
 
 /**

@@ -25,7 +25,7 @@ public class DryTank implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         double nivel = quanser.readSensor1();
         tanquePanel.setLevelWater1(nivel);
-        if (nivel <= controlerInterface.NIVEL_LOW_CALIBRATION) {
+        if (nivel <= 0.3) {
             tanquePanel.setLevelWater1(0);
             stop();
         }
