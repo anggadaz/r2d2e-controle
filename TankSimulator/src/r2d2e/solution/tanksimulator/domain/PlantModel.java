@@ -9,6 +9,7 @@ package r2d2e.solution.tanksimulator.domain;
  * @author demetrios
  */
 public class PlantModel {
+    public static final int NIVEL_MAX = 33;
 
     private double nivel1Ante = 0;
     private double nivel1Atual = 0;
@@ -17,11 +18,20 @@ public class PlantModel {
     private double tensaoAnte = 0;
     private boolean allowFlowOut1 = true;
     private boolean allowFlowOut2 = true;
+    private boolean pause = false;
 
     public PlantModel() {
     }
 
     public double getNivelAtualTank1() {
+
+        double tensaoTemp = tensao;
+        double tensaoAnteTemp = tensaoAnte;
+
+        if (pause) {
+            tensaoTemp = 0.0;
+            tensaoAnteTemp = 0.0;
+        }
 
         double coefAgua;
 
@@ -33,9 +43,9 @@ public class PlantModel {
 
         nivel1Ante = nivel1Atual;
 
-        double temp = coefAgua * nivel1Ante + 0.0148 * (tensao + tensaoAnte);
+        double temp = coefAgua * nivel1Ante + 0.0148 * (tensaoTemp + tensaoAnteTemp);
 
-        if (temp <= 34) {
+        if (temp < NIVEL_MAX) {
             nivel1Atual = temp;
         }
 
@@ -45,6 +55,14 @@ public class PlantModel {
     }
 
     public double getNivelAtualTank2() {
+
+        double nivel1AtualTemp = nivel1Atual;
+        double nivel1AnteTemp = nivel1Ante;
+
+        if (pause) {
+            nivel1AtualTemp = 0.0;
+            nivel1AnteTemp = 0.0;
+        }
 
         double coefAgua;
 
@@ -56,14 +74,14 @@ public class PlantModel {
 
         double nivel1 = 0.0;
         if (allowFlowOut1) {
-            nivel1 = nivel1Atual + nivel1Ante;
+            nivel1 = nivel1AtualTemp + nivel1AnteTemp;
         } else {
             nivel1 = 0.0;
         }
-        
+
         double temp = coefAgua * nivel2 + 0.0033 * nivel1;
 
-        if (temp <= 34) {
+        if (temp < NIVEL_MAX) {
             nivel2 = temp;
         }
 
@@ -101,5 +119,13 @@ public class PlantModel {
 
     public double getNivel2() {
         return nivel2;
+    }
+
+    public boolean isPause() {
+        return pause;
+    }
+
+    public void setPause(boolean pause) {
+        this.pause = pause;
     }
 }

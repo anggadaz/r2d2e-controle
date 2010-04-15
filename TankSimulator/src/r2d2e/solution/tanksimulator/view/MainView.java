@@ -12,8 +12,10 @@ package r2d2e.solution.tanksimulator.view;
 
 import java.io.File;
 import java.io.PrintStream;
+import javax.swing.JButton;
 import r2d2e.solution.tanksimulator.tank.Tanks3DContainer;
 import java.net.URL;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -116,6 +118,14 @@ public class MainView extends javax.swing.JFrame {
         labelTensao = new javax.swing.JLabel();
         labelSensor2 = new javax.swing.JLabel();
         labelSensor1 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        buttonPause = new javax.swing.JButton();
+        buttonFlow2 = new javax.swing.JButton();
+        jSeparator3 = new javax.swing.JSeparator();
+        buttonFlow1 = new javax.swing.JButton();
+        jSeparator4 = new javax.swing.JSeparator();
         contentPanel = new javax.swing.JPanel();
         simulatorPanel = new javax.swing.JPanel();
         separator = new javax.swing.JSeparator();
@@ -157,7 +167,7 @@ public class MainView extends javax.swing.JFrame {
             }
         });
 
-        buttonStart.setIcon(new javax.swing.ImageIcon(getClass().getResource("/r2d2e/solution/tanksimulator/view/resource/bt_play.png"))); // NOI18N
+        buttonStart.setIcon(new javax.swing.ImageIcon(getClass().getResource("/r2d2e/solution/tanksimulator/view/resource/play.png"))); // NOI18N
         buttonStart.setToolTipText("Iniciar Simulação");
         buttonStart.setBorderPainted(false);
         buttonStart.setContentAreaFilled(false);
@@ -167,7 +177,7 @@ public class MainView extends javax.swing.JFrame {
             }
         });
 
-        buttonStop.setIcon(new javax.swing.ImageIcon(getClass().getResource("/r2d2e/solution/tanksimulator/view/resource/bt_stop.png"))); // NOI18N
+        buttonStop.setIcon(new javax.swing.ImageIcon(getClass().getResource("/r2d2e/solution/tanksimulator/view/resource/play_stop.png"))); // NOI18N
         buttonStop.setToolTipText("Parar Simulação");
         buttonStop.setBorderPainted(false);
         buttonStop.setContentAreaFilled(false);
@@ -178,7 +188,7 @@ public class MainView extends javax.swing.JFrame {
             }
         });
 
-        buttonAltconf.setIcon(new javax.swing.ImageIcon(getClass().getResource("/r2d2e/solution/tanksimulator/view/resource/Signal.png"))); // NOI18N
+        buttonAltconf.setIcon(new javax.swing.ImageIcon(getClass().getResource("/r2d2e/solution/tanksimulator/view/resource/signal.png"))); // NOI18N
         buttonAltconf.setToolTipText("Editar Configurações do simulador");
         buttonAltconf.setBorderPainted(false);
         buttonAltconf.setContentAreaFilled(false);
@@ -191,14 +201,17 @@ public class MainView extends javax.swing.JFrame {
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
         textSensor2.setEditable(false);
+        textSensor2.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         textSensor2.setText("0.0");
         textSensor2.setToolTipText("Leitura Instântanea do sensor 2 (em cm)");
 
         textTensao.setEditable(false);
+        textTensao.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         textTensao.setText("0.0");
         textTensao.setToolTipText("Tensão sendo aplicada (em Volt)");
 
         textSensor1.setEditable(false);
+        textSensor1.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         textSensor1.setText("0.0");
         textSensor1.setToolTipText("Leitura Instântanea do sensor 1 ( em cm)");
 
@@ -208,34 +221,86 @@ public class MainView extends javax.swing.JFrame {
 
         labelSensor1.setText("Sensor 1 :");
 
+        jLabel1.setText("cm.");
+
+        jLabel2.setText("cm.");
+
+        jLabel3.setText("V.");
+
         javax.swing.GroupLayout infoPanelLayout = new javax.swing.GroupLayout(infoPanel);
         infoPanel.setLayout(infoPanelLayout);
         infoPanelLayout.setHorizontalGroup(
             infoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(infoPanelLayout.createSequentialGroup()
                 .addComponent(labelTensao)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(textTensao, javax.swing.GroupLayout.DEFAULT_SIZE, 77, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(textTensao, javax.swing.GroupLayout.DEFAULT_SIZE, 53, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(labelSensor1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(textSensor1, javax.swing.GroupLayout.DEFAULT_SIZE, 77, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(textSensor1, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(labelSensor2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(textSensor2, javax.swing.GroupLayout.DEFAULT_SIZE, 77, Short.MAX_VALUE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(textSensor2, javax.swing.GroupLayout.DEFAULT_SIZE, 54, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel1))
         );
         infoPanelLayout.setVerticalGroup(
             infoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(infoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(labelTensao, javax.swing.GroupLayout.Alignment.CENTER)
-                .addComponent(textTensao, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(labelSensor1, javax.swing.GroupLayout.Alignment.CENTER)
-                .addComponent(textSensor1, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(labelSensor2, javax.swing.GroupLayout.Alignment.CENTER)
-                .addComponent(textSensor2, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(infoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(textTensao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(labelTensao)
+                .addComponent(labelSensor1)
+                .addComponent(jLabel1)
+                .addComponent(textSensor2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(labelSensor2)
+                .addComponent(jLabel2)
+                .addComponent(jLabel3)
+                .addComponent(textSensor1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
+
+        buttonPause.setIcon(new javax.swing.ImageIcon(getClass().getResource("/r2d2e/solution/tanksimulator/view/resource/pause.png"))); // NOI18N
+        buttonPause.setToolTipText("Pausar a simulação - Serve para simular o desligamento da potencia");
+        buttonPause.setBorder(null);
+        buttonPause.setBorderPainted(false);
+        buttonPause.setContentAreaFilled(false);
+        buttonPause.setEnabled(false);
+        buttonPause.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonPauseActionPerformed(evt);
+            }
+        });
+
+        buttonFlow2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/r2d2e/solution/tanksimulator/view/resource/tank_two_open.png"))); // NOI18N
+        buttonFlow2.setToolTipText("Clique aqui para permitir a vazao de saida do tanque 1");
+        buttonFlow2.setBorder(null);
+        buttonFlow2.setBorderPainted(false);
+        buttonFlow2.setContentAreaFilled(false);
+        buttonFlow2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonFlow2ActionPerformed(evt);
+            }
+        });
+
+        jSeparator3.setOrientation(javax.swing.SwingConstants.VERTICAL);
+
+        buttonFlow1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/r2d2e/solution/tanksimulator/view/resource/tank_one_open.png"))); // NOI18N
+        buttonFlow1.setToolTipText("Clique aqui para permitir a vazao de saida do tanque 1");
+        buttonFlow1.setBorder(null);
+        buttonFlow1.setBorderPainted(false);
+        buttonFlow1.setContentAreaFilled(false);
+        buttonFlow1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonFlow1ActionPerformed(evt);
+            }
+        });
+
+        jSeparator4.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
         javax.swing.GroupLayout botoesPanelLayout = new javax.swing.GroupLayout(botoesPanel);
         botoesPanel.setLayout(botoesPanelLayout);
@@ -244,12 +309,22 @@ public class MainView extends javax.swing.JFrame {
             .addGroup(botoesPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(buttonStart, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(buttonPause)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(buttonStop, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(buttonFlow1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(buttonFlow2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10)
                 .addComponent(buttonAltconf, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(infoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -257,10 +332,15 @@ public class MainView extends javax.swing.JFrame {
             botoesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(botoesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(buttonStart, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(buttonPause, javax.swing.GroupLayout.Alignment.CENTER)
+                .addComponent(jSeparator3, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(buttonStop, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(buttonFlow1, javax.swing.GroupLayout.Alignment.CENTER)
+                .addComponent(buttonFlow2, javax.swing.GroupLayout.Alignment.CENTER)
+                .addComponent(jSeparator4, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addComponent(buttonAltconf, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(infoPanel, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(buttonStop, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(infoPanel, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         simulatorPanel.setBackground(new java.awt.Color(255, 255, 255));
@@ -275,7 +355,7 @@ public class MainView extends javax.swing.JFrame {
         simulatorPanel.setLayout(simulatorPanelLayout);
         simulatorPanelLayout.setHorizontalGroup(
             simulatorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 564, Short.MAX_VALUE)
+            .addGap(0, 643, Short.MAX_VALUE)
         );
         simulatorPanelLayout.setVerticalGroup(
             simulatorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -296,8 +376,8 @@ public class MainView extends javax.swing.JFrame {
                 .addComponent(labelIcon)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(labelText)
-                .addContainerGap(532, Short.MAX_VALUE))
-            .addComponent(jSeparator2, javax.swing.GroupLayout.DEFAULT_SIZE, 564, Short.MAX_VALUE)
+                .addContainerGap(611, Short.MAX_VALUE))
+            .addComponent(jSeparator2, javax.swing.GroupLayout.DEFAULT_SIZE, 643, Short.MAX_VALUE)
         );
         statusPanelLayout.setVerticalGroup(
             statusPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -314,7 +394,7 @@ public class MainView extends javax.swing.JFrame {
         contentPanel.setLayout(contentPanelLayout);
         contentPanelLayout.setHorizontalGroup(
             contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(separator, javax.swing.GroupLayout.DEFAULT_SIZE, 564, Short.MAX_VALUE)
+            .addComponent(separator, javax.swing.GroupLayout.DEFAULT_SIZE, 643, Short.MAX_VALUE)
             .addComponent(statusPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(simulatorPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -331,8 +411,9 @@ public class MainView extends javax.swing.JFrame {
         menuFile.setText("Arquivo");
 
         itemSair.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_MASK));
-        itemSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/r2d2e/solution/tanksimulator/view/resource/Close.png"))); // NOI18N
+        itemSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/r2d2e/solution/tanksimulator/view/resource/close.png"))); // NOI18N
         itemSair.setText("Sair");
+        itemSair.setToolTipText("Sair");
         itemSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 itemSairActionPerformed(evt);
@@ -408,11 +489,15 @@ public class MainView extends javax.swing.JFrame {
     private void buttonStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonStartActionPerformed
         // TODO add your handling code here:
         isStopped = false;
-        server = new QuanserServer(port, driver);
-        server.start();
-        simulation3d.start();
+        if (server == null || !server.isAlive()) {
+            server = new QuanserServer(port, driver);
+            server.start();
+            simulation3d.start();
+        }
+        simulation3d.pause(false);
         buttonStop.setEnabled(true);
         buttonStart.setEnabled(false);
+        buttonPause.setEnabled(true);
         buttonAltconf.setEnabled(false);
         Logger.println("----------------------------");
         Logger.println("Simulação Iniciada.");
@@ -434,6 +519,7 @@ public class MainView extends javax.swing.JFrame {
         driver.writeAtBomb("0", "0.0", 999);
         buttonStart.setEnabled(true);
         buttonStop.setEnabled(false);
+        buttonPause.setEnabled(false);
         buttonAltconf.setEnabled(true);
         UpdateStatus.updateSatus(UpdateStatus.BLUE_STATUS, "Simulação Parada.");
     }//GEN-LAST:event_buttonStopActionPerformed
@@ -471,6 +557,21 @@ public class MainView extends javax.swing.JFrame {
         tanks3d.setCanvasSize(simulatorPanel.getSize());
     }//GEN-LAST:event_simulatorPanelComponentResized
 
+    private void buttonPauseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPauseActionPerformed
+        // TODO add your handling code here:
+        handler.pause();
+    }//GEN-LAST:event_buttonPauseActionPerformed
+
+    private void buttonFlow1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonFlow1ActionPerformed
+        // TODO add your handling code here:
+        handler.flow1();
+    }//GEN-LAST:event_buttonFlow1ActionPerformed
+
+    private void buttonFlow2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonFlow2ActionPerformed
+        // TODO add your handling code here:
+        handler.flow2();
+    }//GEN-LAST:event_buttonFlow2ActionPerformed
+
     public int getPort() {
         return port;
     }
@@ -479,12 +580,60 @@ public class MainView extends javax.swing.JFrame {
         this.port = port;
     }
 
-    public Simulation getSimulation() {
+    public Simulation3d getSimulation() {
         return simulation3d;
     }
 
     public void setSimulation(Simulation3d simulation3d) {
         this.simulation3d = simulation3d;
+    }
+
+    public JButton getButtonAltconf() {
+        return buttonAltconf;
+    }
+
+    public void setButtonAltconf(JButton buttonAltconf) {
+        this.buttonAltconf = buttonAltconf;
+    }
+
+    public JButton getButtonFlow1() {
+        return buttonFlow1;
+    }
+
+    public void setButtonFlow1(JButton buttonFlow1) {
+        this.buttonFlow1 = buttonFlow1;
+    }
+
+    public JButton getButtonFlow2() {
+        return buttonFlow2;
+    }
+
+    public void setButtonFlow2(JButton buttonFlow2) {
+        this.buttonFlow2 = buttonFlow2;
+    }
+
+    public JButton getButtonPause() {
+        return buttonPause;
+    }
+
+    public void setButtonPause(JButton buttonPause) {
+        this.buttonPause = buttonPause;
+    }
+
+    public JButton getButtonStart() {
+        return buttonStart;
+    }
+
+    public void setButtonStart(JButton buttonStart) {
+        this.buttonStart = buttonStart;
+    }
+
+    public JButton getButtonStop() {
+        return buttonStop;
+    }
+
+    public void setButtonStop(JButton buttonStop) {
+        this.buttonStop = buttonStop;
     }
 
     private static void SkinInitialize() {
@@ -505,11 +654,12 @@ public class MainView extends javax.swing.JFrame {
     public static boolean isStopped() {
         return isStopped;
     }
-
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel botoesPanel;
     private javax.swing.JButton buttonAltconf;
+    private javax.swing.JButton buttonFlow1;
+    private javax.swing.JButton buttonFlow2;
+    private javax.swing.JButton buttonPause;
     private javax.swing.JButton buttonStart;
     private javax.swing.JButton buttonStop;
     private javax.swing.JCheckBoxMenuItem chkAllowFlowOut1;
@@ -519,8 +669,13 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JMenuItem itemConf;
     private javax.swing.JMenuItem itemSair;
     private javax.swing.JMenuItem itemSobre;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSeparator jSeparator4;
     private javax.swing.JLabel labelIcon;
     private javax.swing.JLabel labelSensor1;
     private javax.swing.JLabel labelSensor2;

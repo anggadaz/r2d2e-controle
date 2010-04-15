@@ -42,11 +42,11 @@ public class Simulation extends Timer implements ActionListener {
     }
 
     protected void verificarTransbordamento(double level1, double level2) {
-        if (level1 >= 30) {
+        if (level1 >= PlantModel.NIVEL_MAX) {
             atualizarStatus(1);
             return;
         }
-        if (level2 >= 30) {
+        if (level2 >= PlantModel.NIVEL_MAX) {
             atualizarStatus(2);
             return;
         }
@@ -101,5 +101,13 @@ public class Simulation extends Timer implements ActionListener {
 
     public void setAtivo(boolean ativo) {
         this.ativo = ativo;
+    }
+
+    public void pause(boolean paus) {
+        plantModel.setPause(paus);
+    }
+
+    public boolean ispause() {
+        return plantModel.isPause();
     }
 }

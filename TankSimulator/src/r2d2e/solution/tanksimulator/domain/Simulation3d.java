@@ -33,6 +33,7 @@ public class Simulation3d extends Simulation {
         if (ativo) {
             double level2 = plantModel.getNivelAtualTank2();
             double level1 = plantModel.getNivelAtualTank1();
+            
             tanks.setColuna01(level1);
             tanks.setColuna02(level2);
 
