@@ -277,7 +277,7 @@ public class MainView extends javax.swing.JFrame {
         });
 
         buttonFlow2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/r2d2e/solution/tanksimulator/view/resource/tank_two_open.png"))); // NOI18N
-        buttonFlow2.setToolTipText("Clique aqui para permitir a vazao de saida do tanque 1");
+        buttonFlow2.setToolTipText("Clique aqui para bloquear a vazão de saída do tanque 2");
         buttonFlow2.setBorder(null);
         buttonFlow2.setBorderPainted(false);
         buttonFlow2.setContentAreaFilled(false);
@@ -290,7 +290,7 @@ public class MainView extends javax.swing.JFrame {
         jSeparator3.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
         buttonFlow1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/r2d2e/solution/tanksimulator/view/resource/tank_one_open.png"))); // NOI18N
-        buttonFlow1.setToolTipText("Clique aqui para permitir a vazao de saida do tanque 1");
+        buttonFlow1.setToolTipText("Clique aqui para bloquear a vazão de saída do tanque 1");
         buttonFlow1.setBorder(null);
         buttonFlow1.setBorderPainted(false);
         buttonFlow1.setContentAreaFilled(false);

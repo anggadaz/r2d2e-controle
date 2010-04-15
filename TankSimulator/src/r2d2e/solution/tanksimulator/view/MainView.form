@@ -348,7 +348,7 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/r2d2e/solution/tanksimulator/view/resource/tank_two_open.png"/>
             </Property>
-            <Property name="toolTipText" type="java.lang.String" value="Clique aqui para permitir a vazao de saida do tanque 1"/>
+            <Property name="toolTipText" type="java.lang.String" value="Clique aqui para bloquear a vaz&#xe3;o de sa&#xed;da do tanque 2"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
             </Property>
@@ -369,7 +369,7 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/r2d2e/solution/tanksimulator/view/resource/tank_one_open.png"/>
             </Property>
-            <Property name="toolTipText" type="java.lang.String" value="Clique aqui para permitir a vazao de saida do tanque 1"/>
+            <Property name="toolTipText" type="java.lang.String" value="Clique aqui para bloquear a vaz&#xe3;o de sa&#xed;da do tanque 1"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
             </Property>

@@ -43,8 +43,10 @@ public class MainViewHandler {
         URL imgURL = null;
         if (!vazando) {
             imgURL = mainView.getClass().getResource("/r2d2e/solution/tanksimulator/view/resource/tank_one_open.png");
+            mainView.getButtonFlow1().setToolTipText("Clique aqui para bloquear a vazão de saída do tanque 1");
         } else {
             imgURL = mainView.getClass().getResource("/r2d2e/solution/tanksimulator/view/resource/tank_one_close.png");
+            mainView.getButtonFlow1().setToolTipText("Clique aqui para permitir a vazão de saída do tanque 1");
         }
         mainView.getButtonFlow1().setIcon(new ImageIcon(imgURL));
     }
@@ -55,8 +57,10 @@ public class MainViewHandler {
         URL imgURL = null;
         if (!vazando) {
             imgURL = mainView.getClass().getResource("/r2d2e/solution/tanksimulator/view/resource/tank_two_open.png");
+            mainView.getButtonFlow2().setToolTipText("Clique aqui para bloquear a vazão de saída do tanque 2");
         } else {
             imgURL = mainView.getClass().getResource("/r2d2e/solution/tanksimulator/view/resource/tank_two_close.png");
+            mainView.getButtonFlow2().setToolTipText("Clique aqui para permitir a vazão de saída do tanque 2");
         }
         mainView.getButtonFlow2().setIcon(new ImageIcon(imgURL));
     }
