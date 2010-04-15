@@ -160,7 +160,7 @@ public class MainView extends javax.swing.JFrame {
         popUpTank.add(chkAllowFlowOut2);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("R2D2E - Tank Simulator");
+        setTitle("R2D2E - Tank Simulator ver. Beta");
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
