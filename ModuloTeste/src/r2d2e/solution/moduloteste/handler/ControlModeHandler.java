@@ -11,7 +11,7 @@ import r2d2e.solution.moduloteste.domain.Quanser;
 import r2d2e.solution.moduloteste.domain.graph.GraphNivel;
 import r2d2e.solution.moduloteste.domain.graph.GraphTensao1;
 import r2d2e.solution.moduloteste.domain.graph.GraphTensao2;
-import r2d2e.solution.moduloteste.view.ConfControle;
+import r2d2e.solution.moduloteste.view.ConfParametros;
 import r2d2e.solution.moduloteste.view.ControlPanel;
 import r2d2e.solution.moduloteste.view.NovoFrame;
 import r2d2e.solution.moduloteste.view.TanquePanel;
@@ -24,7 +24,7 @@ public class ControlModeHandler {
 
     private static TanquePanel tanquePanel;
     private static ControlPanel controlPanel;
-    private static ConfControle confControle;
+    private static ConfParametros confControle;
     private static AlgController algController;
     public static GraphNivel graphNivel;
     public static GraphTensao1 graphTensao1;

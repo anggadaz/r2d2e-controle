@@ -38,21 +38,34 @@ public class TanquePanel extends javax.swing.JPanel {
         g.drawImage(waterImage2, 112, 250 + (int) (maxWidthWater2 - heightWater2), waterImage2.getWidth(), (int) heightWater2, null);
     }
 
-    public void setLevelWater1(double levelWater) {
-        if (levelWater >= 0.0) {
-            double PercentWater = (100 * levelWater) / maxLevelWater;
-            heightWater1 = (PercentWater * maxWidthWater1) / 100;
-            repaint();
-        }
+    public void setLevelWater1(final double levelWater) {
+        new Thread() {
+
+            @Override
+            public void run() {
+                if (levelWater >= 0.0) {
+                    double PercentWater = (100 * levelWater) / maxLevelWater;
+                    heightWater1 = (PercentWater * maxWidthWater1) / 100;
+                    repaint();
+                }
+            }
+        }.start();
 
     }
 
-    public void setLevelWater2(double levelWater) {
-        if (levelWater >= 0.0) {
-            double PercentWater = (100 * levelWater) / maxLevelWater;
-            heightWater2 = (PercentWater * maxWidthWater2) / 100;
-            repaint();
-        }
+    public void setLevelWater2(final double levelWater) {
+        new Thread() {
+
+            @Override
+            public void run() {
+                if (levelWater >= 0.0) {
+                    double PercentWater = (100 * levelWater) / maxLevelWater;
+                    heightWater2 = (PercentWater * maxWidthWater2) / 100;
+                    repaint();
+                }
+            }
+        }.start();
+
 
     }
 

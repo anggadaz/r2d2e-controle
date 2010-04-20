@@ -123,9 +123,9 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Component id="toolbarPanel" alignment="0" max="32767" attributes="0"/>
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="10" pref="10" max="10" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Component id="tanquePanel" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="opcoesPanel" pref="707" max="32767" attributes="0"/>
                       <Component id="mainPanel" alignment="0" pref="707" max="32767" attributes="0"/>
@@ -140,12 +140,12 @@
                   <Component id="toolbarPanel" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="tanquePanel" max="32767" attributes="0"/>
-                      <Group type="102" alignment="1" attributes="0">
+                      <Group type="102" attributes="0">
                           <Component id="mainPanel" pref="423" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="opcoesPanel" min="-2" pref="142" max="-2" attributes="0"/>
                       </Group>
+                      <Component id="tanquePanel" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" max="-2" attributes="0"/>
               </Group>
@@ -342,7 +342,7 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="246" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="250" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
@@ -392,7 +392,7 @@
                 </Constraint>
               </Constraints>
             </Component>
-            <Component class="r2d2e.solution.moduloteste.view.ConfControle" name="confControle">
+            <Component class="r2d2e.solution.moduloteste.view.ConfParametros" name="confControle">
               <Properties>
                 <Property name="opaque" type="boolean" value="false"/>
               </Properties>

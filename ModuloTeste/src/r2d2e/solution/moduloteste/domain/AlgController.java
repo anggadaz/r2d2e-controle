@@ -6,6 +6,7 @@ package r2d2e.solution.moduloteste.domain;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.sound.sampled.CompoundControl;
 import javax.swing.Timer;
 import r2d2e.solution.moduloteste.controlers.Controller;
 import r2d2e.solution.moduloteste.controlers.PController;
@@ -13,6 +14,7 @@ import r2d2e.solution.moduloteste.domain.graph.GraphNivel;
 import r2d2e.solution.moduloteste.domain.graph.GraphTensao1;
 import r2d2e.solution.moduloteste.domain.graph.GraphTensao2;
 import r2d2e.solution.moduloteste.handler.ControlModeHandler;
+import r2d2e.solution.moduloteste.view.ConfigControle;
 import r2d2e.solution.moduloteste.view.TanquePanel;
 
 /**
@@ -23,6 +25,7 @@ public class AlgController extends Timer implements ActionListener {
 
     public static final int NIVEL_MAX = 26;
     public static final int NIVEL_MIN = 3;
+    public static int CONTROLAR_TANQUE = ConfigControle.CONTROLE_UM;
     private Controller controller;
     private Quanser quanser;
     private TanquePanel tanquePanel;
@@ -65,20 +68,29 @@ public class AlgController extends Timer implements ActionListener {
 
         //Ler do tank
         double nivel1 = quanser.readSensor1();
-        double nivel2 = quanser.readSensor1();
+        double nivel2 = quanser.readSensor2();
 
         updateTanks(nivel1, nivel2);
+
+        double nivel;
+        System.out.println("CONTROLAR_TANQUE " + CONTROLAR_TANQUE);
+        if(CONTROLAR_TANQUE == ConfigControle.CONTROLE_UM){
+            nivel = nivel1;
+        }else{
+            nivel = nivel2;
+        }
+
         if (ativo) {
             double setP = controller.getSetPoint();
 
-            System.out.println("nivel " + nivel1);
+            System.out.println("nivel " + nivel);
             //calcular valor de tensão
-            double tensao = controller.calculateOutput(nivel1);
+            double tensao = controller.calculateOutput(nivel);
             double tensaoAtual = travaTensao(tensao);
 
-            atualizarGrafico(nivel1, setP, tensao, tensaoAtual);
+            writeBomb(nivel, tensaoAtual);
 
-            writeBomb(nivel1, tensaoAtual);
+            atualizarGrafico(nivel, setP, tensao, tensaoAtual);
         }
 
     }

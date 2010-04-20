@@ -98,7 +98,7 @@ public class NovoFrame extends javax.swing.JFrame {
         controlPanel = new r2d2e.solution.moduloteste.view.ControlPanel();
         opcoesPanel = new javax.swing.JPanel();
         confTeste = new r2d2e.solution.moduloteste.view.ConfTeste();
-        confControle = new r2d2e.solution.moduloteste.view.ConfControle();
+        confControle = new r2d2e.solution.moduloteste.view.ConfParametros();
         menuBar = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         menuSair = new javax.swing.JMenuItem();
@@ -233,7 +233,7 @@ public class NovoFrame extends javax.swing.JFrame {
         tanquePanel.setLayout(tanquePanelLayout);
         tanquePanelLayout.setHorizontalGroup(
             tanquePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 246, Short.MAX_VALUE)
+            .addGap(0, 250, Short.MAX_VALUE)
         );
         tanquePanelLayout.setVerticalGroup(
             tanquePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -260,9 +260,9 @@ public class NovoFrame extends javax.swing.JFrame {
             backgroundPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(toolbarPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(backgroundPanelLayout.createSequentialGroup()
-                .addGap(10, 10, 10)
+                .addContainerGap()
                 .addComponent(tanquePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(backgroundPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(opcoesPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 707, Short.MAX_VALUE)
                     .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 707, Short.MAX_VALUE))
@@ -274,11 +274,11 @@ public class NovoFrame extends javax.swing.JFrame {
                 .addComponent(toolbarPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(backgroundPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tanquePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backgroundPanelLayout.createSequentialGroup()
+                    .addGroup(backgroundPanelLayout.createSequentialGroup()
                         .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 423, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(opcoesPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(opcoesPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tanquePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -390,11 +390,11 @@ public class NovoFrame extends javax.swing.JFrame {
         layout.show(mainPanel, card);
     }
 
-    public ConfControle getConfControle() {
+    public ConfParametros getConfControle() {
         return confControle;
     }
 
-    public void setConfControle(ConfControle confControle) {
+    public void setConfControle(ConfParametros confControle) {
         this.confControle = confControle;
     }
 
@@ -418,7 +418,7 @@ public class NovoFrame extends javax.swing.JFrame {
     private javax.swing.JButton buttonOpcoesGeral;
     private javax.swing.JButton buttonOpcoesGrafico;
     private javax.swing.JButton buttonParar;
-    private r2d2e.solution.moduloteste.view.ConfControle confControle;
+    private r2d2e.solution.moduloteste.view.ConfParametros confControle;
     private r2d2e.solution.moduloteste.view.ConfTeste confTeste;
     private r2d2e.solution.moduloteste.view.ControlPanel controlPanel;
     private javax.swing.JMenuItem itemSobre;

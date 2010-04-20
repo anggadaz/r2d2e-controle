@@ -27,12 +27,12 @@ import r2d2e.solution.moduloteste.handler.ControlModeHandler;
  *
  * @author Rivaldo Jr
  */
-public class ConfControle extends javax.swing.JPanel {
+public class ConfParametros extends javax.swing.JPanel {
 
     private double sampleRate = 0.1;
 
     /** Creates new form ConfControle */
-    public ConfControle() {
+    public ConfParametros() {
         initComponents();
         popularComboBox();
         setP();
@@ -141,7 +141,7 @@ public class ConfControle extends javax.swing.JPanel {
         textSetPoint = new javax.swing.JFormattedTextField();
 
         setBackground(new java.awt.Color(0, 0, 0));
-        setBorder(javax.swing.BorderFactory.createTitledBorder(null, org.openide.util.NbBundle.getMessage(ConfControle.class, "ConfControle.border.title"), javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(255, 255, 255))); // NOI18N
+        setBorder(javax.swing.BorderFactory.createTitledBorder(null, org.openide.util.NbBundle.getMessage(ConfParametros.class, "ConfParametros.border.title"), javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(255, 255, 255))); // NOI18N
         setMaximumSize(new java.awt.Dimension(597, 132));
         setMinimumSize(new java.awt.Dimension(597, 132));
         setPreferredSize(new java.awt.Dimension(597, 132));
@@ -153,50 +153,50 @@ public class ConfControle extends javax.swing.JPanel {
         });
 
         labelTipoCtrl.setForeground(new java.awt.Color(255, 255, 255));
-        labelTipoCtrl.setText(org.openide.util.NbBundle.getMessage(ConfControle.class, "ConfControle.labelTipoCtrl.text")); // NOI18N
+        labelTipoCtrl.setText(org.openide.util.NbBundle.getMessage(ConfParametros.class, "ConfParametros.labelTipoCtrl.text")); // NOI18N
 
         labelSetPoint.setForeground(new java.awt.Color(255, 255, 255));
-        labelSetPoint.setText(org.openide.util.NbBundle.getMessage(ConfControle.class, "ConfControle.labelSetPoint.text")); // NOI18N
+        labelSetPoint.setText(org.openide.util.NbBundle.getMessage(ConfParametros.class, "ConfParametros.labelSetPoint.text")); // NOI18N
 
         panelGanhos.setBackground(new java.awt.Color(0, 0, 0));
-        panelGanhos.setBorder(javax.swing.BorderFactory.createTitledBorder(null, org.openide.util.NbBundle.getMessage(ConfControle.class, "ConfControle.panelGanhos.border.title"), javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(255, 255, 255))); // NOI18N
+        panelGanhos.setBorder(javax.swing.BorderFactory.createTitledBorder(null, org.openide.util.NbBundle.getMessage(ConfParametros.class, "ConfParametros.panelGanhos.border.title"), javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(255, 255, 255))); // NOI18N
         panelGanhos.setOpaque(false);
         panelGanhos.setPreferredSize(new java.awt.Dimension(597, 132));
 
         labelKp.setForeground(new java.awt.Color(255, 255, 255));
-        labelKp.setText(org.openide.util.NbBundle.getMessage(ConfControle.class, "ConfControle.labelKp.text")); // NOI18N
+        labelKp.setText(org.openide.util.NbBundle.getMessage(ConfParametros.class, "ConfParametros.labelKp.text")); // NOI18N
 
         textKP.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.0000"))));
         textKP.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        textKP.setText(org.openide.util.NbBundle.getMessage(ConfControle.class, "ConfControle.textKP.text")); // NOI18N
-        textKP.setToolTipText(org.openide.util.NbBundle.getMessage(ConfControle.class, "ConfControle.textKP.toolTipText")); // NOI18N
+        textKP.setText(org.openide.util.NbBundle.getMessage(ConfParametros.class, "ConfParametros.textKP.text")); // NOI18N
+        textKP.setToolTipText(org.openide.util.NbBundle.getMessage(ConfParametros.class, "ConfParametros.textKP.toolTipText")); // NOI18N
 
         textKD.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.0000"))));
         textKD.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        textKD.setText(org.openide.util.NbBundle.getMessage(ConfControle.class, "ConfControle.textKD.text")); // NOI18N
-        textKD.setToolTipText(org.openide.util.NbBundle.getMessage(ConfControle.class, "ConfControle.textKD.toolTipText")); // NOI18N
+        textKD.setText(org.openide.util.NbBundle.getMessage(ConfParametros.class, "ConfParametros.textKD.text")); // NOI18N
+        textKD.setToolTipText(org.openide.util.NbBundle.getMessage(ConfParametros.class, "ConfParametros.textKD.toolTipText")); // NOI18N
 
         textTI.setEditable(false);
         textTI.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.0000"))));
         textTI.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        textTI.setText(org.openide.util.NbBundle.getMessage(ConfControle.class, "ConfControle.textTI.text")); // NOI18N
-        textTI.setToolTipText(org.openide.util.NbBundle.getMessage(ConfControle.class, "ConfControle.textTI.toolTipText")); // NOI18N
+        textTI.setText(org.openide.util.NbBundle.getMessage(ConfParametros.class, "ConfParametros.textTI.text")); // NOI18N
+        textTI.setToolTipText(org.openide.util.NbBundle.getMessage(ConfParametros.class, "ConfParametros.textTI.toolTipText")); // NOI18N
 
         textTD.setEditable(false);
         textTD.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.0000"))));
         textTD.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        textTD.setText(org.openide.util.NbBundle.getMessage(ConfControle.class, "ConfControle.textTD.text")); // NOI18N
-        textTD.setToolTipText(org.openide.util.NbBundle.getMessage(ConfControle.class, "ConfControle.textTD.toolTipText")); // NOI18N
+        textTD.setText(org.openide.util.NbBundle.getMessage(ConfParametros.class, "ConfParametros.textTD.text")); // NOI18N
+        textTD.setToolTipText(org.openide.util.NbBundle.getMessage(ConfParametros.class, "ConfParametros.textTD.toolTipText")); // NOI18N
 
         textKI.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.0000"))));
         textKI.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        textKI.setText(org.openide.util.NbBundle.getMessage(ConfControle.class, "ConfControle.textKI.text")); // NOI18N
-        textKI.setToolTipText(org.openide.util.NbBundle.getMessage(ConfControle.class, "ConfControle.textKI.toolTipText")); // NOI18N
+        textKI.setText(org.openide.util.NbBundle.getMessage(ConfParametros.class, "ConfParametros.textKI.text")); // NOI18N
+        textKI.setToolTipText(org.openide.util.NbBundle.getMessage(ConfParametros.class, "ConfParametros.textKI.toolTipText")); // NOI18N
 
         buttonGroup1.add(chkKD);
         chkKD.setForeground(new java.awt.Color(255, 255, 255));
         chkKD.setSelected(true);
-        chkKD.setText(org.openide.util.NbBundle.getMessage(ConfControle.class, "ConfControle.chkKD.text")); // NOI18N
+        chkKD.setText(org.openide.util.NbBundle.getMessage(ConfParametros.class, "ConfParametros.chkKD.text")); // NOI18N
         chkKD.setOpaque(false);
         chkKD.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -207,7 +207,7 @@ public class ConfControle extends javax.swing.JPanel {
         buttonGroup2.add(chkKI);
         chkKI.setForeground(new java.awt.Color(255, 255, 255));
         chkKI.setSelected(true);
-        chkKI.setText(org.openide.util.NbBundle.getMessage(ConfControle.class, "ConfControle.chkKI.text")); // NOI18N
+        chkKI.setText(org.openide.util.NbBundle.getMessage(ConfParametros.class, "ConfParametros.chkKI.text")); // NOI18N
         chkKI.setOpaque(false);
         chkKI.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -217,7 +217,7 @@ public class ConfControle extends javax.swing.JPanel {
 
         buttonGroup1.add(chkTD);
         chkTD.setForeground(new java.awt.Color(255, 255, 255));
-        chkTD.setText(org.openide.util.NbBundle.getMessage(ConfControle.class, "ConfControle.chkTD.text")); // NOI18N
+        chkTD.setText(org.openide.util.NbBundle.getMessage(ConfParametros.class, "ConfParametros.chkTD.text")); // NOI18N
         chkTD.setOpaque(false);
         chkTD.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -227,7 +227,7 @@ public class ConfControle extends javax.swing.JPanel {
 
         buttonGroup2.add(chkTI);
         chkTI.setForeground(new java.awt.Color(255, 255, 255));
-        chkTI.setText(org.openide.util.NbBundle.getMessage(ConfControle.class, "ConfControle.chkTI.text")); // NOI18N
+        chkTI.setText(org.openide.util.NbBundle.getMessage(ConfParametros.class, "ConfParametros.chkTI.text")); // NOI18N
         chkTI.setOpaque(false);
         chkTI.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -295,8 +295,8 @@ public class ConfControle extends javax.swing.JPanel {
         SeparatorCtrl.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
         buttonReload.setIcon(new javax.swing.ImageIcon(getClass().getResource("/r2d2e/solution/moduloteste/view/resources/reload.png"))); // NOI18N
-        buttonReload.setText(org.openide.util.NbBundle.getMessage(ConfControle.class, "ConfControle.buttonReload.text")); // NOI18N
-        buttonReload.setToolTipText(org.openide.util.NbBundle.getMessage(ConfControle.class, "ConfControle.buttonReload.toolTipText")); // NOI18N
+        buttonReload.setText(org.openide.util.NbBundle.getMessage(ConfParametros.class, "ConfParametros.buttonReload.text")); // NOI18N
+        buttonReload.setToolTipText(org.openide.util.NbBundle.getMessage(ConfParametros.class, "ConfParametros.buttonReload.toolTipText")); // NOI18N
         buttonReload.setBorder(null);
         buttonReload.setBorderPainted(false);
         buttonReload.setContentAreaFilled(false);
@@ -307,18 +307,18 @@ public class ConfControle extends javax.swing.JPanel {
         });
 
         labelCM.setForeground(new java.awt.Color(255, 255, 255));
-        labelCM.setText(org.openide.util.NbBundle.getMessage(ConfControle.class, "ConfControle.labelCM.text")); // NOI18N
+        labelCM.setText(org.openide.util.NbBundle.getMessage(ConfParametros.class, "ConfParametros.labelCM.text")); // NOI18N
 
         chkIntCond.setForeground(new java.awt.Color(255, 255, 255));
         chkIntCond.setSelected(true);
-        chkIntCond.setText(org.openide.util.NbBundle.getMessage(ConfControle.class, "ConfControle.chkIntCond.text")); // NOI18N
-        chkIntCond.setToolTipText(org.openide.util.NbBundle.getMessage(ConfControle.class, "ConfControle.chkIntCond.toolTipText")); // NOI18N
+        chkIntCond.setText(org.openide.util.NbBundle.getMessage(ConfParametros.class, "ConfParametros.chkIntCond.text")); // NOI18N
+        chkIntCond.setToolTipText(org.openide.util.NbBundle.getMessage(ConfParametros.class, "ConfParametros.chkIntCond.toolTipText")); // NOI18N
         chkIntCond.setOpaque(false);
 
         textSetPoint.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
         textSetPoint.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        textSetPoint.setText(org.openide.util.NbBundle.getMessage(ConfControle.class, "ConfControle.textSetPoint.text")); // NOI18N
-        textSetPoint.setToolTipText(org.openide.util.NbBundle.getMessage(ConfControle.class, "ConfControle.textSetPoint.toolTipText")); // NOI18N
+        textSetPoint.setText(org.openide.util.NbBundle.getMessage(ConfParametros.class, "ConfParametros.textSetPoint.text")); // NOI18N
+        textSetPoint.setToolTipText(org.openide.util.NbBundle.getMessage(ConfParametros.class, "ConfParametros.textSetPoint.toolTipText")); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
