@@ -172,6 +172,11 @@ public class NovoFrame extends javax.swing.JFrame {
         buttonOpcoesGrafico.setFocusable(false);
         buttonOpcoesGrafico.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         buttonOpcoesGrafico.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        buttonOpcoesGrafico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonOpcoesGraficoActionPerformed(evt);
+            }
+        });
 
         buttonOpcoesGeral.setIcon(new javax.swing.ImageIcon(getClass().getResource("/r2d2e/solution/moduloteste/view/resources/tools.png"))); // NOI18N
         buttonOpcoesGeral.setToolTipText(org.openide.util.NbBundle.getMessage(NovoFrame.class, "NovoFrame.buttonOpcoesGeral.toolTipText")); // NOI18N
@@ -379,6 +384,10 @@ public class NovoFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         mainFrameHandler.initOpcoesGerais();
     }//GEN-LAST:event_buttonOpcoesGeralActionPerformed
+
+    private void buttonOpcoesGraficoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonOpcoesGraficoActionPerformed
+        mainFrameHandler.initOpcoesGrafico();
+    }//GEN-LAST:event_buttonOpcoesGraficoActionPerformed
 
     public void changeCardConf(String card) {
         CardLayout layout = (CardLayout) opcoesPanel.getLayout();

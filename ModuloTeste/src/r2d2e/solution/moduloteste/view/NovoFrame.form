@@ -305,6 +305,9 @@
                   <ResourceString bundle="r2d2e/solution/moduloteste/view/Bundle.properties" key="NovoFrame.buttonOpcoesGrafico.AccessibleContext.accessibleDescription" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
                 </Property>
               </AccessibilityProperties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonOpcoesGraficoActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="buttonOpcoesGeral">
               <Properties>

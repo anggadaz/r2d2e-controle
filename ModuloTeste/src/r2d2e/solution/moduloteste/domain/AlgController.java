@@ -11,8 +11,8 @@ import javax.swing.Timer;
 import r2d2e.solution.moduloteste.controlers.Controller;
 import r2d2e.solution.moduloteste.controlers.PController;
 import r2d2e.solution.moduloteste.domain.graph.GraphNivel;
-import r2d2e.solution.moduloteste.domain.graph.GraphTensao1;
-import r2d2e.solution.moduloteste.domain.graph.GraphTensao2;
+import r2d2e.solution.moduloteste.domain.graph.GraphControl;
+import r2d2e.solution.moduloteste.domain.graph.GraphAction;
 import r2d2e.solution.moduloteste.handler.ControlModeHandler;
 import r2d2e.solution.moduloteste.view.ConfigControle;
 import r2d2e.solution.moduloteste.view.TanquePanel;
@@ -52,13 +52,13 @@ public class AlgController extends Timer implements ActionListener {
         ControlModeHandler.graphNivel.addNivel(tempo, set, GraphNivel.SP);
         ControlModeHandler.graphNivel.addNivel(tempo, set - nivel, GraphNivel.ERRO);
 
-        ControlModeHandler.graphTensao1.addTensao(tempo, controller.getProporcional(), GraphTensao1.P);
-        ControlModeHandler.graphTensao1.addTensao(tempo, controller.getIntegral(), GraphTensao1.I);
-        ControlModeHandler.graphTensao1.addTensao(tempo, controller.getDerivative(), GraphTensao1.D);
-        ControlModeHandler.graphTensao1.addTensao(tempo, controller.getDerivative2(), GraphTensao1.D2);
+        ControlModeHandler.graphTensao1.addTensao(tempo, controller.getProporcional(), GraphControl.P);
+        ControlModeHandler.graphTensao1.addTensao(tempo, controller.getIntegral(), GraphControl.I);
+        ControlModeHandler.graphTensao1.addTensao(tempo, controller.getDerivative(), GraphControl.D);
+        ControlModeHandler.graphTensao1.addTensao(tempo, controller.getDerivative2(), GraphControl.D2);
 
-        ControlModeHandler.graphTensao2.addTensao(tempo, tensao, GraphTensao2.ATUAL);
-        ControlModeHandler.graphTensao2.addTensao(tempo, trava, GraphTensao2.TRAVA);
+        ControlModeHandler.graphTensao2.addTensao(tempo, tensao, GraphAction.ATUAL);
+        ControlModeHandler.graphTensao2.addTensao(tempo, trava, GraphAction.TRAVA);
     }
 
     public void actionPerformed(ActionEvent e) {

@@ -9,8 +9,8 @@ import r2d2e.solution.moduloteste.controlers.PIDController;
 import r2d2e.solution.moduloteste.domain.AlgController;
 import r2d2e.solution.moduloteste.domain.Quanser;
 import r2d2e.solution.moduloteste.domain.graph.GraphNivel;
-import r2d2e.solution.moduloteste.domain.graph.GraphTensao1;
-import r2d2e.solution.moduloteste.domain.graph.GraphTensao2;
+import r2d2e.solution.moduloteste.domain.graph.GraphControl;
+import r2d2e.solution.moduloteste.domain.graph.GraphAction;
 import r2d2e.solution.moduloteste.view.ConfParametros;
 import r2d2e.solution.moduloteste.view.ControlPanel;
 import r2d2e.solution.moduloteste.view.NovoFrame;
@@ -27,8 +27,8 @@ public class ControlModeHandler {
     private static ConfParametros confControle;
     private static AlgController algController;
     public static GraphNivel graphNivel;
-    public static GraphTensao1 graphTensao1;
-    public static GraphTensao2 graphTensao2;
+    public static GraphControl graphTensao1;
+    public static GraphAction graphTensao2;
     private static Controller controllerSelected;
 
     public static void setIntegracaoCondi(boolean chk) {
@@ -46,8 +46,8 @@ public class ControlModeHandler {
 
     private void initChart() {
         graphNivel = new GraphNivel(300000);
-        graphTensao1 = new GraphTensao1(300000);
-        graphTensao2 = new GraphTensao2(300000);
+        graphTensao1 = new GraphControl(300000);
+        graphTensao2 = new GraphAction(300000);
 
         controlPanel.addChartNivel(graphNivel.getChart());
         controlPanel.addChartTensao1(graphTensao1.getChart());

@@ -4,6 +4,7 @@ import r2d2e.solution.moduloteste.domain.Quanser;
 import r2d2e.solution.moduloteste.domain.controlerInterface;
 import r2d2e.solution.moduloteste.view.NovoFrame;
 import r2d2e.solution.moduloteste.view.OpcoesGerais;
+import r2d2e.solution.moduloteste.view.OpcoesGrafico;
 
 /**
  *
@@ -102,5 +103,10 @@ public class MainFrameHandler {
         Quanser.setCALIBRATION2(nivel_Min2);
         controlerInterface.NIVEL_LOW_CALIBRATION = nivel_Min + 0.1;
         System.out.println("nivelMIN " + nivel_Min);
+    }
+
+    public void initOpcoesGrafico() {
+        OpcoesGrafico janela = new OpcoesGrafico(mainFrame, true);
+        janela.setVisible(true);
     }
 }

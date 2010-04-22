@@ -5,7 +5,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.util.Date;
-import javax.swing.BorderFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.DateAxis;
@@ -40,11 +39,11 @@ public class HistoChart {
         range.setTickLabelFont(new Font("SansSerif", Font.PLAIN, 12));
         domain.setLabelFont(new Font("SansSerif", Font.PLAIN, 14));
         range.setLabelFont(new Font("SansSerif", Font.PLAIN, 14));
-        domain.setMinimumDate(new Date(0, 0, 0, 0, 0, 0));
+        domain.setMinimumDate(new Date(0l));
 
         XYItemRenderer renderer = new XYLineAndShapeRenderer(true, false);
         renderer.setSeriesPaint(0, Color.red);
-        renderer.setStroke(new BasicStroke(3f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL));
+        renderer.setStroke(new BasicStroke(1f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL));
 
         XYPlot plot = new XYPlot(dataset, domain, range, renderer);
         plot.setBackgroundPaint(Color.lightGray);

@@ -7,7 +7,7 @@
     </Property>
     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
       <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-        <TitledBorder title="M&#xf3;dulo de Teste">
+        <TitledBorder title="Op&#xe7;&#xf5;es de Teste">
           <ResourceString PropertyName="titleX" bundle="r2d2e/solution/moduloteste/view/Bundle.properties" key="ConfTeste.border.title" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
           <Color PropertyName="color" blue="ff" green="ff" red="ff" type="rgb"/>
         </TitledBorder>
