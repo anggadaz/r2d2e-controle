@@ -75,7 +75,7 @@ public class OpcoesGrafico extends javax.swing.JDialog {
         separator = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle(org.openide.util.NbBundle.getMessage(OpcoesGrafico.class, "OpcoesGerais.title")); // NOI18N
+        setTitle(org.openide.util.NbBundle.getMessage(OpcoesGrafico.class, "OpcoesGrafico.title")); // NOI18N
         setModal(true);
         setResizable(false);
 
@@ -103,7 +103,7 @@ public class OpcoesGrafico extends javax.swing.JDialog {
 
         panelCard.setLayout(new java.awt.CardLayout());
 
-        panelJanela.setBorder(javax.swing.BorderFactory.createTitledBorder(org.openide.util.NbBundle.getMessage(OpcoesGrafico.class, "OpcoesGerais.panelCalibracao.border.title"))); // NOI18N
+        panelJanela.setBorder(javax.swing.BorderFactory.createTitledBorder(org.openide.util.NbBundle.getMessage(OpcoesGrafico.class, "OpcoesGrafico.panelJanela.border.title"))); // NOI18N
 
         cbNivel.setText(org.openide.util.NbBundle.getMessage(OpcoesGrafico.class, "OpcoesGrafico.cbNivel.text")); // NOI18N
 
@@ -136,7 +136,7 @@ public class OpcoesGrafico extends javax.swing.JDialog {
 
         panelCard.add(panelJanela, "card_janela");
 
-        panelConfiguracao.setBorder(javax.swing.BorderFactory.createTitledBorder(org.openide.util.NbBundle.getMessage(OpcoesGrafico.class, "OpcoesGerais.panelServidor.border.title"))); // NOI18N
+        panelConfiguracao.setBorder(javax.swing.BorderFactory.createTitledBorder(org.openide.util.NbBundle.getMessage(OpcoesGrafico.class, "OpcoesGrafico.panelConfiguracao.border.title"))); // NOI18N
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Gráfico Nível x Tempo", "Gráfico Sinal de Controle", "Gráfico Ação de Controle" }));
 
@@ -253,7 +253,7 @@ public class OpcoesGrafico extends javax.swing.JDialog {
 
         panelCard.add(panelLayout, "card_layout");
 
-        buttonLayout.setText(org.openide.util.NbBundle.getMessage(OpcoesGrafico.class, "OpcoesGerais.buttonConf.text")); // NOI18N
+        buttonLayout.setText("Layout");
         buttonLayout.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
         buttonLayout.setContentAreaFilled(false);
         buttonLayout.addActionListener(new java.awt.event.ActionListener() {
@@ -262,7 +262,7 @@ public class OpcoesGrafico extends javax.swing.JDialog {
             }
         });
 
-        buttonConf.setText(org.openide.util.NbBundle.getMessage(OpcoesGrafico.class, "OpcoesGerais.buttonCalibracao.text")); // NOI18N
+        buttonConf.setText("Configuração");
         buttonConf.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
         buttonConf.setContentAreaFilled(false);
         buttonConf.addActionListener(new java.awt.event.ActionListener() {
@@ -271,7 +271,7 @@ public class OpcoesGrafico extends javax.swing.JDialog {
             }
         });
 
-        buttonJanela.setText(org.openide.util.NbBundle.getMessage(OpcoesGrafico.class, "OpcoesGerais.buttonServidor.text")); // NOI18N
+        buttonJanela.setText("Janela Extra");
         buttonJanela.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
         buttonJanela.setContentAreaFilled(false);
         buttonJanela.addActionListener(new java.awt.event.ActionListener() {
@@ -365,7 +365,6 @@ public class OpcoesGrafico extends javax.swing.JDialog {
 
     private void rbModo1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rbModo1ItemStateChanged
         buttonLayout1.setIcon(janela1);
-
     }//GEN-LAST:event_rbModo1ItemStateChanged
 
     private void rbModo2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rbModo2ItemStateChanged
