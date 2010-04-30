@@ -23,7 +23,7 @@ import r2d2e.solution.moduloteste.view.TanquePanel;
  */
 public class AlgController extends Timer implements ActionListener {
 
-    public static final int NIVEL_MAX = 26;
+    public static final int NIVEL_MAX = 25;
     public static final int NIVEL_MIN = 3;
     public static int CONTROLAR_TANQUE = ConfigControle.CONTROLE_UM;
     private Controller controller;
@@ -31,6 +31,7 @@ public class AlgController extends Timer implements ActionListener {
     private TanquePanel tanquePanel;
     private double nivelAnte = 0;
     private long initT;
+    private boolean limiteMaxTank2 = false;
     private boolean ativo = true;
 
     public AlgController(int delay, Controller controller, TanquePanel tanquePanel, Quanser quanser, boolean intCond) {
@@ -74,41 +75,48 @@ public class AlgController extends Timer implements ActionListener {
 
         double nivel;
         System.out.println("CONTROLAR_TANQUE " + CONTROLAR_TANQUE);
-        if(CONTROLAR_TANQUE == ConfigControle.CONTROLE_UM){
+        if (CONTROLAR_TANQUE == ConfigControle.CONTROLE_UM) {
             nivel = nivel1;
-        }else{
+        } else {
             nivel = nivel2;
         }
 
         if (ativo) {
             double setP = controller.getSetPoint();
 
-            System.out.println("nivel " + nivel);
+            System.out.println("NIVEL 1 " + nivel1);
+            System.out.println("NIVEL 2 " + nivel2);
+
             //calcular valor de tensão
             double tensao = controller.calculateOutput(nivel);
+
             double tensaoAtual = travaTensao(tensao);
 
-            writeBomb(nivel, tensaoAtual);
+            tensaoAtual = travaNivel2(nivel2, tensaoAtual);
+
+            tensaoAtual = travaNivel1(nivel1, tensaoAtual);
+
+            nivelAnte = nivel;
+
+            quanser.writeBomb(tensaoAtual);
 
             atualizarGrafico(nivel, setP, tensao, tensaoAtual);
         }
 
     }
 
-    private void updateTanks(double nivel1, double nivel2) {
-        tanquePanel.setLevelWater1(nivel1);
-        tanquePanel.setLevelWater2(nivel2);
-    }
-
-    private void writeBomb(double nivel, double tensaoAtual) {
+    private double travaNivel1(double nivel, double tensaoAtual) {
         if (nivel < NIVEL_MIN && tensaoAtual < 0) {
             tensaoAtual = 0.0;
         } else {
             tensaoAtual = limiteSuperior(nivel, tensaoAtual);
         }
-        nivelAnte = nivel;
+        return tensaoAtual;
+    }
 
-        quanser.writeBomb(tensaoAtual);
+    private void updateTanks(double nivel1, double nivel2) {
+        tanquePanel.setLevelWater1(nivel1);
+        tanquePanel.setLevelWater2(nivel2);
     }
 
     private double travaTensao(double tensaoAtual) {
@@ -127,10 +135,13 @@ public class AlgController extends Timer implements ActionListener {
     }
 
     private double limiteSuperior(double nivel, double tensaoAtual) {
-        if (nivel >= NIVEL_MAX && tensaoAtual > 0) {
+        if(limiteMaxTank2){
+            return tensaoAtual;
+        }
+        if (nivel > NIVEL_MAX && tensaoAtual > 0) {
             System.out.println("nivelAnte " + nivelAnte);
             tensaoAtual = 1.8;
-            if (nivel >= 30) {
+            if (nivel >= 28) {
                 tensaoAtual = -2;
             }
             System.out.println("tensao " + tensaoAtual);
@@ -153,5 +164,15 @@ public class AlgController extends Timer implements ActionListener {
 
     public void setAtivo(boolean ativo) {
         this.ativo = ativo;
+    }
+
+    private double travaNivel2(double nivel2, double tensaoAtual) {
+        if(nivel2 > NIVEL_MAX && tensaoAtual >= 0){
+            limiteMaxTank2 = true;
+            return -3;
+        }else{
+            limiteMaxTank2 = false;
+            return tensaoAtual;
+        }
     }
 }
