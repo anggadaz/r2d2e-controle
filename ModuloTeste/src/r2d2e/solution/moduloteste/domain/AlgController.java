@@ -51,7 +51,7 @@ public class AlgController extends Timer implements ActionListener {
         calcOvershoot = new CalcOvershoot();
         timeOfAccommodation = new TimeAccommodation(2, controller.getSetPoint());
         riseTime = new RiseTime(controller.getSetPoint());
-        peakTime = new PeakTime(controller.getSetPoint());
+        peakTime = new PeakTime();
     }
 
     private void atualizarGrafico(final double nivel, final double set, final double tensao, final double trava) {
@@ -107,7 +107,8 @@ public class AlgController extends Timer implements ActionListener {
             atualizarGrafico(nivel, setP, tensao, tensaoAtual);
 
             peakTime.calcPeakTime(setP, nivel);
-
+            Double over = calcOvershoot.CalcPercentOvershoot(setP, nivel);
+            controlerInterface.atualizarOverShoot(over);
         }
 
     }

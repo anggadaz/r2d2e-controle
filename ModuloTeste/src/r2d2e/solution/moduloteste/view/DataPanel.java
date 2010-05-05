@@ -11,6 +11,8 @@
 
 package r2d2e.solution.moduloteste.view;
 
+import javax.swing.JTextField;
+
 /**
  *
  * @author Rivaldo Jr
@@ -123,5 +125,9 @@ public class DataPanel extends javax.swing.JPanel {
     private javax.swing.JTextField tfPeak;
     private javax.swing.JTextField tfRise;
     // End of variables declaration//GEN-END:variables
+
+    public JTextField getTfOvershoot() {
+        return tfOvershoot;
+    }
 
 }

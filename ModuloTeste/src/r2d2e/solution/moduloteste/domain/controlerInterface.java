@@ -1,8 +1,10 @@
 
 package r2d2e.solution.moduloteste.domain;
 
+import java.text.DecimalFormat;
 import javax.swing.Timer;
 import r2d2e.solution.moduloteste.handler.TestModeHandler;
+import r2d2e.solution.moduloteste.view.DataPanel;
 import r2d2e.solution.moduloteste.view.TanquePanel;
 
 /**
@@ -14,6 +16,7 @@ public class controlerInterface {
 
     public static TanquePanel tanquePanel;
     public static TestModeHandler testModeHandler;
+    public static DataPanel dataPanel;
 
     public static boolean isDrying = false;
     public static boolean end = false;
@@ -46,6 +49,19 @@ public class controlerInterface {
     }
     static void ciclyEnable(){
         testModeHandler.ciclyEnable();
+    }
+
+    public static void setDataPanel(DataPanel dataPanel) {
+        controlerInterface.dataPanel = dataPanel;
+}
+
+    static void atualizarOverShoot(Double over) {
+        if(over == null){}
+        else{
+            DecimalFormat decimal = new DecimalFormat("0.00");
+            String valorFormatado = decimal.format(over);
+            dataPanel.getTfOvershoot().setText(valorFormatado);
+        }
     }
 
 }

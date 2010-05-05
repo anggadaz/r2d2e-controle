@@ -28,7 +28,6 @@ public class CalcOvershoot {
     }
 
     public Double CalcOvershoot(Double setpoint, Double nivelAtual) {
-
         if(setpoint > setpointAnterior) {
 
             if (nivelAtual > setpoint) {
@@ -59,5 +58,27 @@ public class CalcOvershoot {
     public void clear() {
         nivelAnterior = setpointAnterior = 0.0;
         overshootOK = false;
+    }
+
+    public Double CalcPercentOvershoot(Double setpoint, Double nivelAtual){
+        Double over = CalcOvershoot(setpoint, nivelAtual);
+
+        if(over == null){
+            return null;
+        }
+        else{
+            Double ret;
+            if(over >= setpoint ){
+                ret = (((over-setpoint)*100)/setpoint);
+                System.out.println("oversoot: " + over);
+                System.out.println("oversoot(%): " + ret);
+            }
+            else{
+                ret = (((setpoint-over)*100)/setpoint);
+                System.out.println("oversoot: " + over);
+                System.out.println("oversoot(%): " + ret);
+            }
+            return ret;
+        }
     }
 }

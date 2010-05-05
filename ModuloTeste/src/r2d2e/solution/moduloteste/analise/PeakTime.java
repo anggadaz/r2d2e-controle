@@ -10,46 +10,56 @@ package r2d2e.solution.moduloteste.analise;
  */
 public class PeakTime {
 
-    private double setPointAnt;
     private double initTime;
-    private double nivelAnt = -100;
     private double time = 0;
-    private boolean weGotIt = false;
-    private boolean rising = true;
+    private double nivelAnterior;
+    private double setpointAnterior = 0.0;
+    private boolean initTimeUpdated = true;
+    private double peakValue = 0.0;
 
-    public PeakTime(double setPointAnt) {
-        this.setPointAnt = setPointAnt;
+    public PeakTime() {
         this.initTime = System.currentTimeMillis();
     }
 
-    public double calcPeakTime(double setPoint, double nivel) {
+    public double calcPeakTime(double setPoint, double nivelAtual) {
 
-        System.out.println("SETPOINT " + setPoint);
-        System.out.println("SETPOINTANT " + setPointAnt);
-        System.out.println("NIVEL " + nivel);
-        System.out.println("NIVELANT " + nivelAnt);
+        updateInitTime(setPoint);
 
-        if (setPoint == setPointAnt) {
-            if (!weGotIt) {
-                if (criterio(nivel)) {
-                    time = System.currentTimeMillis() - initTime;
+        peakValue = getPeakValue(setPoint, nivelAtual);
+
+        if (peakValue != 0.0) {
+            time = convertToTwoPlaces(System.currentTimeMillis() - initTime) / 1000;
+        }
+
+        System.out.println("TIME " + time);
+        System.out.println("peakValue " + peakValue);
+        return time;
+    }
+
+    private double getPeakValue(double setPoint, double nivelAtual) {
+        double peakValueTemp = 0.0;
+        if (setPoint > setpointAnterior) {
+            if (nivelAtual > setPoint) {
+                if (nivelAtual >= nivelAnterior) {
+                    nivelAnterior = nivelAtual;
+                } else {
+                    setpointAnterior = setPoint;
+                    peakValueTemp = nivelAnterior;
                 }
             }
         } else {
-
-            initTime = System.currentTimeMillis();
-
-            risingUpdate(setPoint);
-
-            setPointAnt = setPoint;
-
-            time = 0;
-
-            weGotIt = false;
+            if (setPoint < setpointAnterior) {
+                if (nivelAtual < setPoint) {
+                    if (nivelAtual <= nivelAnterior) {
+                        nivelAnterior = nivelAtual;
+                    } else {
+                        setpointAnterior = setPoint;
+                        peakValueTemp = nivelAnterior;
+                    }
+                }
+            }
         }
-        double s = convertToTwoPlaces(time / 1000);
-        System.out.println("TIME " + s);
-        return s;
+        return peakValueTemp;
     }
 
     public double getInitTime() {
@@ -60,40 +70,6 @@ public class PeakTime {
         this.initTime = initTime;
     }
 
-    public double getSetPointAnt() {
-        return setPointAnt;
-    }
-
-    public void setSetPointAnt(double setPointAnt) {
-        this.setPointAnt = setPointAnt;
-    }
-
-    private boolean criterio(double nivel) {
-        if (rising) {
-            System.out.println("RISING");
-            if (nivel+0.2 >= nivelAnt) {
-                System.out.println("true");
-                nivelAnt = nivel;
-                return true;
-            } else {
-                System.out.println("false");
-                weGotIt = true;
-                return false;
-            }
-        } else {
-            System.out.println("NOT RISING");
-            if (nivel <= nivelAnt) {
-                System.out.println("true");
-                nivelAnt = nivel;
-                return true;
-            } else {
-                System.out.println("false");
-                weGotIt = true;
-                return false;
-            }
-        }
-    }
-
     public double convertToTwoPlaces(double num) {
         num *= 100;
         num = Math.floor(num);
@@ -101,11 +77,17 @@ public class PeakTime {
         return num;
     }
 
-    private void risingUpdate(double setPoint) {
-        if (setPoint > setPointAnt) {
-            rising = true;
+    private void updateInitTime(double setPoint) {
+        System.out.println("SETPOINT " + setPoint);
+        System.out.println("SETPOINTANT " + setpointAnterior);
+        if (setPoint != setpointAnterior) {
+            if (!initTimeUpdated) {
+                System.out.println("atualizando tempo");
+                initTime = System.currentTimeMillis();
+                initTimeUpdated = true;
+            }
         } else {
-            rising = false;
+            initTimeUpdated = false;
         }
     }
 }
