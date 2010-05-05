@@ -111,15 +111,17 @@ public class AlgController extends Timer implements ActionListener {
 
             atualizarGrafico(nivel, setP, tensao, tensaoAtual);
 
-//            peakTime.calcPeakTime(setP, nivel);
-            Double over = calcOvershoot.CalcPercentOvershoot(setP, nivel);
+            Double over = calcOvershoot.calcPercentOvershoot(setP, nivel);
             controlerInterface.atualizarOverShoot(over);
             
             Double rise = riseTime.calcRiseTime(setP, nivel);
             controlerInterface.atualizarRiseTime(rise);
 
-            Double acomodation = timeOfAccommodation.CalcTimeOfAcoomodation(setP, nivel);
+            Double acomodation = timeOfAccommodation.calcTimeOfAcoomodation(setP, nivel);
             controlerInterface.atualizaAcomodationTime(acomodation);
+
+            double peak = peakTime.calcPeakTime(setP, nivel);
+            controlerInterface.atualizarPeakTime(peak);
         }
 
     }

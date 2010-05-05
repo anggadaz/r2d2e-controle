@@ -15,6 +15,7 @@ public class CalcOvershoot {
     public Double nivelAnterior = 0.0;
     public boolean overshootOK = false;
     public Double setpointAnterior = 0.0;
+    public Double referencia = 0.0;
 
     public CalcOvershoot() {
     }
@@ -33,6 +34,7 @@ public class CalcOvershoot {
             if (nivelAtual > setpoint) {
                 if (nivelAtual >= nivelAnterior) {
                     nivelAnterior = nivelAtual;
+                    referencia = setpointAnterior;
                 } else {
                     setpointAnterior = setpoint;
                     return nivelAnterior;
@@ -45,6 +47,7 @@ public class CalcOvershoot {
             if (nivelAtual < setpoint) {
                 if (nivelAtual < nivelAnterior) {
                     nivelAnterior = nivelAtual;
+                    referencia = setpointAnterior;
                 } else {
                     setpointAnterior = setpoint;
                     return nivelAnterior;
@@ -60,7 +63,7 @@ public class CalcOvershoot {
         overshootOK = false;
     }
 
-    public Double CalcPercentOvershoot(Double setpoint, Double nivelAtual){
+    public Double calcPercentOvershoot(Double setpoint, Double nivelAtual){
         Double over = CalcOvershoot(setpoint, nivelAtual);
 
         if(over == null){
@@ -69,14 +72,10 @@ public class CalcOvershoot {
         else{
             Double ret;
             if(over >= setpoint ){
-                ret = (((over-setpoint)*100)/setpoint);
-                System.out.println("oversoot: " + over);
-                System.out.println("oversoot(%): " + ret);
+                ret = (((over-setpoint)*100)/Math.abs(setpoint-referencia));
             }
             else{
-                ret = (((setpoint-over)*100)/setpoint);
-                System.out.println("oversoot: " + over);
-                System.out.println("oversoot(%): " + ret);
+                ret = (((setpoint-over)*100)/Math.abs(setpoint-referencia));
             }
             return ret;
         }

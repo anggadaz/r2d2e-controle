@@ -55,7 +55,7 @@ public class controlerInterface {
         controlerInterface.dataPanel = dataPanel;
 }
 
-    static void atualizarOverShoot(Double over) {
+    public static void atualizarOverShoot(Double over) {
         if(over != null) {
             DecimalFormat decimal = new DecimalFormat("0.00");
             String valorFormatado = decimal.format(over);
@@ -63,7 +63,7 @@ public class controlerInterface {
         }
     }
 
-    static void atualizarRiseTime(Double rise){
+    public static void atualizarRiseTime(Double rise){
         if(rise != null) {
             DecimalFormat decimal = new DecimalFormat("0.00");
             String valorFormatado = decimal.format(rise);
@@ -71,7 +71,7 @@ public class controlerInterface {
         }
     }
 
-    static void atualizaAcomodationTime(Double acom) {
+    public static void atualizaAcomodationTime(Double acom) {
         if(acom != null) {
             DecimalFormat decimal = new DecimalFormat("0.00");
             String valorFormatado = decimal.format(acom);
@@ -79,4 +79,9 @@ public class controlerInterface {
         }
     }
 
+    public static void atualizarPeakTime(double peak){
+            DecimalFormat decimal = new DecimalFormat("0.00");
+            String valorFormatado = decimal.format(peak);
+            dataPanel.getTfPeak().setText(valorFormatado);
+    }
 }

@@ -48,9 +48,9 @@ public class TimeAccommodation {
     }
 
     public void setCriterio(int criterio) {
-
+        System.out.println("criterio " + criterio);
         //Condição de erro criterio.
-        if (criterio != 2 || criterio != 5 || criterio != 7) {
+        if (criterio != 2 && criterio != 5 && criterio != 7) {
             System.out.println("Parametro invalido");
         } else {
             this.criterio = criterio;
@@ -104,7 +104,7 @@ public class TimeAccommodation {
     }
 
     //Função chamada a cada tempo de execução da thread.
-    public double CalcTimeOfAcoomodation(double setPoint, double sensor) {
+    public double calcTimeOfAcoomodation(double setPoint, double sensor) {
 
 
         if (this.setPoint == setPoint) {

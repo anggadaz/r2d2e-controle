@@ -4,8 +4,6 @@
  */
 package r2d2e.solution.moduloteste.analise;
 
-import java.util.ArrayList;
-
 /**
  *
  * @author demetrios
@@ -18,11 +16,9 @@ public class PeakTime {
     private double setpointAnterior = 0.0;
     private boolean initTimeUpdated = true;
     private double peakValue = 0.0;
-    private ArrayList<ArrayList<Double>> data;
 
     public PeakTime() {
         this.initTime = System.currentTimeMillis();
-        data = new ArrayList<ArrayList<Double>>();
     }
 
     public double calcPeakTime(double setPoint, double nivelAtual) {
@@ -34,9 +30,6 @@ public class PeakTime {
         if (peakValue != 0.0) {
             time = convertToTwoPlaces(System.currentTimeMillis() - initTime) / 1000;
         }
-
-        System.out.println("TIME " + time);
-        System.out.println("peakValue " + peakValue);
         return time;
     }
 
@@ -82,11 +75,8 @@ public class PeakTime {
     }
 
     private void updateInitTime(double setPoint) {
-        System.out.println("SETPOINT " + setPoint);
-        System.out.println("SETPOINTANT " + setpointAnterior);
         if (setPoint != setpointAnterior) {
             if (!initTimeUpdated) {
-                System.out.println("atualizando tempo");
                 initTime = System.currentTimeMillis();
                 initTimeUpdated = true;
             }
