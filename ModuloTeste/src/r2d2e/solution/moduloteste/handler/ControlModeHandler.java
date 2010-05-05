@@ -140,7 +140,9 @@ public class ControlModeHandler {
         }
         if (algController != null) {
             algController.setController(controllerSelected);
+            algController.atualizarCriterioAcomodacao();
         }
+
     }
 
     public void init(Quanser quanser) {

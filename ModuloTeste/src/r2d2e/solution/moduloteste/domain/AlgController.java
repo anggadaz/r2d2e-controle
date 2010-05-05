@@ -27,13 +27,17 @@ public class AlgController extends Timer implements ActionListener {
 
     public static final int NIVEL_MAX = 25;
     public static final int NIVEL_MIN = 3;
+
     public static int CONTROLAR_TANQUE = ConfigControle.CONTROLE_UM;
+
     private Controller controller;
     private Quanser quanser;
     private TanquePanel tanquePanel;
+
     private long initT;
     private boolean limiteMaxTank2 = false;
     private boolean ativo = true;
+
     private CalcOvershoot calcOvershoot;
     private TimeAccommodation timeOfAccommodation;
     private RiseTime riseTime;
@@ -49,7 +53,8 @@ public class AlgController extends Timer implements ActionListener {
 
         controller.setInteCondi(intCond);
         calcOvershoot = new CalcOvershoot();
-        timeOfAccommodation = new TimeAccommodation(2, controller.getSetPoint());
+        timeOfAccommodation = new TimeAccommodation(controlerInterface.dataPanel.getCriterio(),
+                controller.getSetPoint());
         riseTime = new RiseTime(controller.getSetPoint());
         peakTime = new PeakTime();
     }
@@ -106,9 +111,15 @@ public class AlgController extends Timer implements ActionListener {
 
             atualizarGrafico(nivel, setP, tensao, tensaoAtual);
 
-            peakTime.calcPeakTime(setP, nivel);
+//            peakTime.calcPeakTime(setP, nivel);
             Double over = calcOvershoot.CalcPercentOvershoot(setP, nivel);
             controlerInterface.atualizarOverShoot(over);
+            
+            Double rise = riseTime.calcRiseTime(setP, nivel);
+            controlerInterface.atualizarRiseTime(rise);
+
+            Double acomodation = timeOfAccommodation.CalcTimeOfAcoomodation(setP, nivel);
+            controlerInterface.atualizaAcomodationTime(acomodation);
         }
 
     }
@@ -182,5 +193,9 @@ public class AlgController extends Timer implements ActionListener {
             limiteMaxTank2 = false;
             return tensaoAtual;
         }
+    }
+
+    public void atualizarCriterioAcomodacao() {
+        timeOfAccommodation.setCriterio(controlerInterface.dataPanel.getCriterio());
     }
 }

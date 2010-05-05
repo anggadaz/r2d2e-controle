@@ -56,11 +56,26 @@ public class controlerInterface {
 }
 
     static void atualizarOverShoot(Double over) {
-        if(over == null){}
-        else{
+        if(over != null) {
             DecimalFormat decimal = new DecimalFormat("0.00");
             String valorFormatado = decimal.format(over);
             dataPanel.getTfOvershoot().setText(valorFormatado);
+        }
+    }
+
+    static void atualizarRiseTime(Double rise){
+        if(rise != null) {
+            DecimalFormat decimal = new DecimalFormat("0.00");
+            String valorFormatado = decimal.format(rise);
+            dataPanel.getTfRise().setText(valorFormatado);
+        }
+    }
+
+    static void atualizaAcomodationTime(Double acom) {
+        if(acom != null) {
+            DecimalFormat decimal = new DecimalFormat("0.00");
+            String valorFormatado = decimal.format(acom);
+            dataPanel.getTfAcomodation().setText(valorFormatado);
         }
     }
 
