@@ -19,7 +19,7 @@ public class GraphNivel extends IGraphTime {
     public GraphNivel(int maxAge) {
 
         xAxis = "Tempo (s)";
-        yAxis = "N;ivel (cm)";
+        yAxis = "Nível (cm)";
         name = "Nível x Tempo";
 
         series = new XYSeries[3];
@@ -31,7 +31,7 @@ public class GraphNivel extends IGraphTime {
         JFreeChart chart = config();
 
         panel = new ChartPanel(chart);
-        panel.setPreferredSize(new Dimension(750, 200));
+        panel.setPreferredSize(new Dimension(570, 410));
     }
 
     public void addNivel(long time, double y, int tipo) {

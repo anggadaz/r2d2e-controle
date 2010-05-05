@@ -29,7 +29,7 @@ public class GraphAction extends IGraphTime {
         JFreeChart chart = config();
         
         panel = new ChartPanel(chart);
-        panel.setPreferredSize(new Dimension(380, 208));
+        panel.setPreferredSize(new Dimension(570, 410));
     }
 
     public void addTensao(long time, double y, int tipo) {

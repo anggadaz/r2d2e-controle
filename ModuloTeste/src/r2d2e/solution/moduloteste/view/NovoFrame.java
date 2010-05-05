@@ -23,6 +23,8 @@ public class NovoFrame extends javax.swing.JFrame {
     public static final String CARD_MAIN_TESTE = "cardMainTeste";
     public static final String CARD_MAIN_CONTROLE = "cardMainControle";
 
+    public static JanelaGraficos JANELA_EXTRA= new JanelaGraficos(null, false);
+
     public NovoFrame() {
         initComponents();
         mainFrameHandler = new MainFrameHandler(this);

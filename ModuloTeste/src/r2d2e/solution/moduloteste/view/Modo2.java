@@ -1,5 +1,6 @@
 package r2d2e.solution.moduloteste.view;
 
+import java.awt.Dimension;
 import javax.swing.JPanel;
 import org.jfree.chart.ChartPanel;
 import r2d2e.solution.moduloteste.domain.graph.ModoVisualizacao;
@@ -24,6 +25,8 @@ public class Modo2 extends JPanel implements ModoVisualizacao {
             return;
         }
 
+        chart.setPreferredSize(new Dimension(570, 200));
+        chart.setSize(new Dimension(570, 200));
         graphs[ix].removeAll();
         graphs[ix].add(chart);
     }
@@ -43,8 +46,10 @@ public class Modo2 extends JPanel implements ModoVisualizacao {
         setOpaque(false);
 
         graph1.setBackground(new java.awt.Color(102, 153, 255));
+        graph1.setOpaque(false);
 
         graph2.setBackground(new java.awt.Color(102, 153, 255));
+        graph2.setOpaque(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

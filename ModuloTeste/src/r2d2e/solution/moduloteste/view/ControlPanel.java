@@ -105,6 +105,7 @@ public class ControlPanel extends javax.swing.JPanel {
                 .addContainerGap(233, Short.MAX_VALUE))
         );
 
+        panelGrafico.setOpaque(false);
         panelGrafico.setLayout(new java.awt.CardLayout());
         panelGrafico.add(modo3, "cardModo3");
         panelGrafico.add(modo2, "cardModo2");
@@ -122,7 +123,7 @@ public class ControlPanel extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(panelDados, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(panelGrafico, javax.swing.GroupLayout.DEFAULT_SIZE, 433, Short.MAX_VALUE)
+            .addComponent(panelGrafico, javax.swing.GroupLayout.DEFAULT_SIZE, 482, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 

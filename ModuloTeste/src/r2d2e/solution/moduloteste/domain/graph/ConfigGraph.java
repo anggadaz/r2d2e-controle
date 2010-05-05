@@ -14,8 +14,11 @@ public class ConfigGraph {
     public static int GRAFICOS[] = {0,1,2};
     public static boolean EXTRA[] = {false, false, false};
 
+    public static boolean JANELAEXTRA = false;
+
     public static void setExtra(int ix, boolean active) {
         EXTRA[ix] = active;
+        JANELAEXTRA = EXTRA[0] || EXTRA[1] || EXTRA[2];
     }
 
     public static void setGrafos(int ix, int grafico) {

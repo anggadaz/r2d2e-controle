@@ -9,6 +9,7 @@ import java.awt.CardLayout;
 import java.net.URL;
 import javax.swing.ImageIcon;
 import r2d2e.solution.moduloteste.domain.graph.ConfigGraph;
+import r2d2e.solution.moduloteste.domain.graph.IGraphTime;
 import r2d2e.solution.moduloteste.handler.ControlModeHandler;
 
 /**
@@ -25,6 +26,8 @@ public class OpcoesGrafico extends javax.swing.JDialog {
     ImageIcon janela2 = new ImageIcon(getClass().getResource("/r2d2e/solution/moduloteste/view/resources/janela2.png"));
     ImageIcon janela3 = new ImageIcon(getClass().getResource("/r2d2e/solution/moduloteste/view/resources/janela3.png"));
 
+    private boolean modificado = false;
+
     /** Creates new form OpcoesGerais */
     public OpcoesGrafico(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -37,6 +40,7 @@ public class OpcoesGrafico extends javax.swing.JDialog {
 
         changeCard(CARD_LAYOUT);
         getConfig();
+        extraConfig(false);
     }
 
     /** This method is called from within the constructor to
@@ -380,16 +384,19 @@ public class OpcoesGrafico extends javax.swing.JDialog {
     private void rbModo1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rbModo1ItemStateChanged
         buttonLayout1.setIcon(janela1);
         ConfigGraph.setModo(1);
+        modificado = true;
     }//GEN-LAST:event_rbModo1ItemStateChanged
 
     private void rbModo2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rbModo2ItemStateChanged
         buttonLayout1.setIcon(janela2);
         ConfigGraph.setModo(2);
+        modificado = true;
     }//GEN-LAST:event_rbModo2ItemStateChanged
 
     private void rbModo3ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rbModo3ItemStateChanged
         buttonLayout1.setIcon(janela3);
         ConfigGraph.setModo(3);
+        modificado = true;
     }//GEN-LAST:event_rbModo3ItemStateChanged
 
     private void cbNivelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbNivelActionPerformed
@@ -406,19 +413,46 @@ public class OpcoesGrafico extends javax.swing.JDialog {
 
     private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
         ConfigGraph.setGrafos(0, jComboBox1.getSelectedIndex());
+        modificado = true;
     }//GEN-LAST:event_jComboBox1ItemStateChanged
 
     private void jComboBox2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox2ItemStateChanged
         ConfigGraph.setGrafos(1, jComboBox2.getSelectedIndex());
+        modificado = true;
     }//GEN-LAST:event_jComboBox2ItemStateChanged
 
     private void jComboBox3ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox3ItemStateChanged
         ConfigGraph.setGrafos(2, jComboBox3.getSelectedIndex());
+        modificado = true;
     }//GEN-LAST:event_jComboBox3ItemStateChanged
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        ControlModeHandler.getControlPanel().initChart();
+        if(modificado) {
+            ControlModeHandler.getControlPanel().initChart();
+            ControlModeHandler.getControlPanel().repaint();
+            modificado = false;
+            extraConfig(ConfigGraph.JANELAEXTRA);
+        }
     }//GEN-LAST:event_formWindowClosed
+
+    private void extraConfig(boolean show) {
+
+        NovoFrame.JANELA_EXTRA.clear();
+
+        if(show) {
+            boolean extra[] = ConfigGraph.EXTRA;
+            IGraphTime[] graphs = ControlModeHandler.getChart();
+
+            for(int i = 0; i < 3; i++) {
+                if(extra[i]) {
+                    NovoFrame.JANELA_EXTRA.addGraph(graphs[i].getChart());
+                }
+            }
+        }
+
+        NovoFrame.JANELA_EXTRA.setVisible(show);
+
+    }
 
     private void getConfig() {
 
