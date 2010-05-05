@@ -45,9 +45,7 @@ public class Quanser {
         try {
             read = quanserClient.read(0);
             read *= VOLT_TO_LEVEL;
-            System.out.println("read " + read);
             read -= CALIBRATION1;
-            System.out.println("read " + read);
         } catch (QuanserClientException e) {
             e.printStackTrace();
         }

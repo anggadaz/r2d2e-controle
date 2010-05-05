@@ -6,10 +6,12 @@ package r2d2e.solution.moduloteste.domain;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.sound.sampled.CompoundControl;
 import javax.swing.Timer;
+import r2d2e.solution.moduloteste.analise.CalcOvershoot;
+import r2d2e.solution.moduloteste.analise.PeakTime;
+import r2d2e.solution.moduloteste.analise.RiseTime;
+import r2d2e.solution.moduloteste.analise.TimeAccommodation;
 import r2d2e.solution.moduloteste.controlers.Controller;
-import r2d2e.solution.moduloteste.controlers.PController;
 import r2d2e.solution.moduloteste.domain.graph.GraphNivel;
 import r2d2e.solution.moduloteste.domain.graph.GraphControl;
 import r2d2e.solution.moduloteste.domain.graph.GraphAction;
@@ -29,10 +31,13 @@ public class AlgController extends Timer implements ActionListener {
     private Controller controller;
     private Quanser quanser;
     private TanquePanel tanquePanel;
-    private double nivelAnte = 0;
     private long initT;
     private boolean limiteMaxTank2 = false;
     private boolean ativo = true;
+    private CalcOvershoot calcOvershoot;
+    private TimeAccommodation timeOfAccommodation;
+    private RiseTime riseTime;
+    private PeakTime peakTime;
 
     public AlgController(int delay, Controller controller, TanquePanel tanquePanel, Quanser quanser, boolean intCond) {
         super(delay, null);
@@ -43,38 +48,43 @@ public class AlgController extends Timer implements ActionListener {
         this.initT = System.currentTimeMillis();
 
         controller.setInteCondi(intCond);
+        calcOvershoot = new CalcOvershoot();
+        timeOfAccommodation = new TimeAccommodation(2, controller.getSetPoint());
+        riseTime = new RiseTime(controller.getSetPoint());
+        peakTime = new PeakTime(controller.getSetPoint());
     }
 
-    private void atualizarGrafico(double nivel, double set, double tensao, double trava) {
+    private void atualizarGrafico(final double nivel, final double set, final double tensao, final double trava) {
 
-        long tempo = System.currentTimeMillis() - initT;
+        new Thread() {
 
-        ControlModeHandler.graphNivel.addNivel(tempo, nivel, GraphNivel.NIVEL);
-        ControlModeHandler.graphNivel.addNivel(tempo, set, GraphNivel.SP);
-        ControlModeHandler.graphNivel.addNivel(tempo, set - nivel, GraphNivel.ERRO);
+            @Override
+            public void run() {
+                long tempo = System.currentTimeMillis() - initT;
 
-        ControlModeHandler.graphTensao1.addTensao(tempo, controller.getProporcional(), GraphControl.P);
-        ControlModeHandler.graphTensao1.addTensao(tempo, controller.getIntegral(), GraphControl.I);
-        ControlModeHandler.graphTensao1.addTensao(tempo, controller.getDerivative(), GraphControl.D);
-        ControlModeHandler.graphTensao1.addTensao(tempo, controller.getDerivative2(), GraphControl.D2);
+                ControlModeHandler.graphNivel.addNivel(tempo, nivel, GraphNivel.NIVEL);
+                ControlModeHandler.graphNivel.addNivel(tempo, set, GraphNivel.SP);
+                ControlModeHandler.graphNivel.addNivel(tempo, set - nivel, GraphNivel.ERRO);
 
-        ControlModeHandler.graphTensao2.addTensao(tempo, tensao, GraphAction.ATUAL);
-        ControlModeHandler.graphTensao2.addTensao(tempo, trava, GraphAction.TRAVA);
+                ControlModeHandler.graphTensao1.addTensao(tempo, controller.getProporcional(), GraphControl.P);
+                ControlModeHandler.graphTensao1.addTensao(tempo, controller.getIntegral(), GraphControl.I);
+                ControlModeHandler.graphTensao1.addTensao(tempo, controller.getDerivative(), GraphControl.D);
+                ControlModeHandler.graphTensao1.addTensao(tempo, controller.getDerivative2(), GraphControl.D2);
+
+                ControlModeHandler.graphTensao2.addTensao(tempo, tensao, GraphAction.ATUAL);
+                ControlModeHandler.graphTensao2.addTensao(tempo, trava, GraphAction.TRAVA);
+            }
+        }.start();
     }
 
     public void actionPerformed(ActionEvent e) {
 
-        System.out.println("\n------------------------------");
-        System.out.println("controller " + controller);
-
-        //Ler do tank
         double nivel1 = quanser.readSensor1();
         double nivel2 = quanser.readSensor2();
 
         updateTanks(nivel1, nivel2);
 
         double nivel;
-        System.out.println("CONTROLAR_TANQUE " + CONTROLAR_TANQUE);
         if (CONTROLAR_TANQUE == ConfigControle.CONTROLE_UM) {
             nivel = nivel1;
         } else {
@@ -84,10 +94,6 @@ public class AlgController extends Timer implements ActionListener {
         if (ativo) {
             double setP = controller.getSetPoint();
 
-            System.out.println("NIVEL 1 " + nivel1);
-            System.out.println("NIVEL 2 " + nivel2);
-
-            //calcular valor de tensão
             double tensao = controller.calculateOutput(nivel);
 
             double tensaoAtual = travaTensao(tensao);
@@ -96,11 +102,12 @@ public class AlgController extends Timer implements ActionListener {
 
             tensaoAtual = travaNivel1(nivel1, tensaoAtual);
 
-            nivelAnte = nivel;
-
             quanser.writeBomb(tensaoAtual);
 
             atualizarGrafico(nivel, setP, tensao, tensaoAtual);
+
+            peakTime.calcPeakTime(setP, nivel);
+
         }
 
     }
@@ -135,16 +142,16 @@ public class AlgController extends Timer implements ActionListener {
     }
 
     private double limiteSuperior(double nivel, double tensaoAtual) {
-        if(limiteMaxTank2){
+        if (limiteMaxTank2) {
             return tensaoAtual;
         }
         if (nivel > NIVEL_MAX && tensaoAtual > 0) {
-            System.out.println("nivelAnte " + nivelAnte);
+//            System.out.println("nivelAnte " + nivelAnte);
             tensaoAtual = 1.8;
             if (nivel >= 28) {
                 tensaoAtual = -2;
             }
-            System.out.println("tensao " + tensaoAtual);
+//            System.out.println("tensao " + tensaoAtual);
             return tensaoAtual;
         }
         return tensaoAtual;
@@ -167,10 +174,10 @@ public class AlgController extends Timer implements ActionListener {
     }
 
     private double travaNivel2(double nivel2, double tensaoAtual) {
-        if(nivel2 > NIVEL_MAX && tensaoAtual >= 0){
+        if (nivel2 > NIVEL_MAX && tensaoAtual >= 0) {
             limiteMaxTank2 = true;
             return -3;
-        }else{
+        } else {
             limiteMaxTank2 = false;
             return tensaoAtual;
         }

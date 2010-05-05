@@ -102,7 +102,6 @@ public class MainFrameHandler {
         Quanser.setCALIBRATION1(nivel_Min);
         Quanser.setCALIBRATION2(nivel_Min2);
         controlerInterface.NIVEL_LOW_CALIBRATION = nivel_Min + 0.1;
-        System.out.println("nivelMIN " + nivel_Min);
     }
 
     public void initOpcoesGrafico() {
