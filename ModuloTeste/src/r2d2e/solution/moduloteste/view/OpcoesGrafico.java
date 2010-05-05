@@ -7,10 +7,9 @@ package r2d2e.solution.moduloteste.view;
 
 import java.awt.CardLayout;
 import java.net.URL;
-import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
-import javax.swing.JCheckBox;
-import javax.swing.ListModel;
+import r2d2e.solution.moduloteste.domain.graph.ConfigGraph;
+import r2d2e.solution.moduloteste.handler.ControlModeHandler;
 
 /**
  *
@@ -37,6 +36,7 @@ public class OpcoesGrafico extends javax.swing.JDialog {
         setLocationRelativeTo(parent);
 
         changeCard(CARD_LAYOUT);
+        getConfig();
     }
 
     /** This method is called from within the constructor to
@@ -49,7 +49,6 @@ public class OpcoesGrafico extends javax.swing.JDialog {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
-        buttonSalvar = new javax.swing.JButton();
         buttonFechar = new javax.swing.JButton();
         panelCard = new javax.swing.JPanel();
         panelJanela = new javax.swing.JPanel();
@@ -78,15 +77,9 @@ public class OpcoesGrafico extends javax.swing.JDialog {
         setTitle(org.openide.util.NbBundle.getMessage(OpcoesGrafico.class, "OpcoesGrafico.title")); // NOI18N
         setModal(true);
         setResizable(false);
-
-        buttonSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/r2d2e/solution/moduloteste/view/resources/save.png"))); // NOI18N
-        buttonSalvar.setText(org.openide.util.NbBundle.getMessage(OpcoesGrafico.class, "OpcoesGerais.buttonSalvar.text")); // NOI18N
-        buttonSalvar.setToolTipText(org.openide.util.NbBundle.getMessage(OpcoesGrafico.class, "OpcoesGerais.buttonSalvar.toolTipText")); // NOI18N
-        buttonSalvar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
-        buttonSalvar.setContentAreaFilled(false);
-        buttonSalvar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonSalvarActionPerformed(evt);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
             }
         });
 
@@ -106,10 +99,25 @@ public class OpcoesGrafico extends javax.swing.JDialog {
         panelJanela.setBorder(javax.swing.BorderFactory.createTitledBorder(org.openide.util.NbBundle.getMessage(OpcoesGrafico.class, "OpcoesGrafico.panelJanela.border.title"))); // NOI18N
 
         cbNivel.setText(org.openide.util.NbBundle.getMessage(OpcoesGrafico.class, "OpcoesGrafico.cbNivel.text")); // NOI18N
+        cbNivel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbNivelActionPerformed(evt);
+            }
+        });
 
         cbSinal.setText(org.openide.util.NbBundle.getMessage(OpcoesGrafico.class, "OpcoesGrafico.cbSinal.text")); // NOI18N
+        cbSinal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbSinalActionPerformed(evt);
+            }
+        });
 
         cbAcao.setText(org.openide.util.NbBundle.getMessage(OpcoesGrafico.class, "OpcoesGrafico.cbAcao.text")); // NOI18N
+        cbAcao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbAcaoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelJanelaLayout = new javax.swing.GroupLayout(panelJanela);
         panelJanela.setLayout(panelJanelaLayout);
@@ -139,16 +147,31 @@ public class OpcoesGrafico extends javax.swing.JDialog {
         panelConfiguracao.setBorder(javax.swing.BorderFactory.createTitledBorder(org.openide.util.NbBundle.getMessage(OpcoesGrafico.class, "OpcoesGrafico.panelConfiguracao.border.title"))); // NOI18N
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Gráfico Nível x Tempo", "Gráfico Sinal de Controle", "Gráfico Ação de Controle" }));
+        jComboBox1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBox1ItemStateChanged(evt);
+            }
+        });
 
         jLabel1.setText(org.openide.util.NbBundle.getMessage(OpcoesGrafico.class, "OpcoesGrafico.jLabel1.text")); // NOI18N
 
         jLabel2.setText(org.openide.util.NbBundle.getMessage(OpcoesGrafico.class, "OpcoesGrafico.jLabel2.text")); // NOI18N
 
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Gráfico Nível x Tempo", "Gráfico Sinal de Controle", "Gráfico Ação de Controle" }));
+        jComboBox2.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBox2ItemStateChanged(evt);
+            }
+        });
 
         jLabel3.setText(org.openide.util.NbBundle.getMessage(OpcoesGrafico.class, "OpcoesGrafico.jLabel3.text")); // NOI18N
 
         jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Gráfico Nível x Tempo", "Gráfico Sinal de Controle", "Gráfico Ação de Controle" }));
+        jComboBox3.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBox3ItemStateChanged(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelConfiguracaoLayout = new javax.swing.GroupLayout(panelConfiguracao);
         panelConfiguracao.setLayout(panelConfiguracaoLayout);
@@ -309,17 +332,15 @@ public class OpcoesGrafico extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(panelButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(buttonFechar, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(buttonSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(4, 4, 4)
                         .addComponent(separator, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(panelCard, javax.swing.GroupLayout.DEFAULT_SIZE, 241, Short.MAX_VALUE)))
+                        .addComponent(panelCard, javax.swing.GroupLayout.DEFAULT_SIZE, 241, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(buttonFechar, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -333,9 +354,7 @@ public class OpcoesGrafico extends javax.swing.JDialog {
                             .addComponent(panelCard, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
                             .addComponent(separator, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(buttonFechar, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(buttonSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(buttonFechar, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
 
@@ -345,11 +364,6 @@ public class OpcoesGrafico extends javax.swing.JDialog {
     private void buttonFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonFecharActionPerformed
         dispose();
     }//GEN-LAST:event_buttonFecharActionPerformed
-
-    private void buttonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSalvarActionPerformed
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_buttonSalvarActionPerformed
 
     private void buttonLayoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLayoutActionPerformed
         changeCard(CARD_LAYOUT);
@@ -365,16 +379,73 @@ public class OpcoesGrafico extends javax.swing.JDialog {
 
     private void rbModo1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rbModo1ItemStateChanged
         buttonLayout1.setIcon(janela1);
+        ConfigGraph.setModo(1);
     }//GEN-LAST:event_rbModo1ItemStateChanged
 
     private void rbModo2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rbModo2ItemStateChanged
         buttonLayout1.setIcon(janela2);
+        ConfigGraph.setModo(2);
     }//GEN-LAST:event_rbModo2ItemStateChanged
 
     private void rbModo3ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rbModo3ItemStateChanged
         buttonLayout1.setIcon(janela3);
-
+        ConfigGraph.setModo(3);
     }//GEN-LAST:event_rbModo3ItemStateChanged
+
+    private void cbNivelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbNivelActionPerformed
+        ConfigGraph.setExtra(ConfigGraph.NIVEL_TEMPO, cbNivel.isSelected());
+    }//GEN-LAST:event_cbNivelActionPerformed
+
+    private void cbSinalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSinalActionPerformed
+        ConfigGraph.setExtra(ConfigGraph.SINAl_CONTROLE, cbSinal.isSelected());
+    }//GEN-LAST:event_cbSinalActionPerformed
+
+    private void cbAcaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbAcaoActionPerformed
+        ConfigGraph.setExtra(ConfigGraph.ACAO_CONTROLE, cbAcao.isSelected());
+    }//GEN-LAST:event_cbAcaoActionPerformed
+
+    private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
+        ConfigGraph.setGrafos(0, jComboBox1.getSelectedIndex());
+    }//GEN-LAST:event_jComboBox1ItemStateChanged
+
+    private void jComboBox2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox2ItemStateChanged
+        ConfigGraph.setGrafos(1, jComboBox2.getSelectedIndex());
+    }//GEN-LAST:event_jComboBox2ItemStateChanged
+
+    private void jComboBox3ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox3ItemStateChanged
+        ConfigGraph.setGrafos(2, jComboBox3.getSelectedIndex());
+    }//GEN-LAST:event_jComboBox3ItemStateChanged
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        ControlModeHandler.getControlPanel().initChart();
+    }//GEN-LAST:event_formWindowClosed
+
+    private void getConfig() {
+
+        switch(ConfigGraph.MODO) {
+            case 1:
+                rbModo1.setSelected(true);
+                break;
+            case 2:
+                rbModo2.setSelected(true);
+                break;
+            case 3:
+                rbModo3.setSelected(true);
+                break;
+        }
+
+        int graph[] = ConfigGraph.GRAFICOS;
+
+        jComboBox1.setSelectedIndex(graph[0]);
+        jComboBox2.setSelectedIndex(graph[1]);
+        jComboBox3.setSelectedIndex(graph[2]);
+
+        boolean extra[] = ConfigGraph.EXTRA;
+
+        cbNivel.setSelected(extra[0]);
+        cbSinal.setSelected(extra[1]);
+        cbAcao.setSelected(extra[2]);
+    }
 
     private void changeCard(String card){
         CardLayout cardLayout = (CardLayout) panelCard.getLayout();
@@ -406,7 +477,6 @@ public class OpcoesGrafico extends javax.swing.JDialog {
     private javax.swing.JButton buttonJanela;
     private javax.swing.JButton buttonLayout;
     private javax.swing.JButton buttonLayout1;
-    private javax.swing.JButton buttonSalvar;
     private javax.swing.JCheckBox cbAcao;
     private javax.swing.JCheckBox cbNivel;
     private javax.swing.JCheckBox cbSinal;

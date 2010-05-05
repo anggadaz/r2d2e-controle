@@ -1,9 +1,16 @@
+/*
+ * ControlPanel.java
+ *
+ * Created on 04/05/2010, 14:35:40
+ */
+
 package r2d2e.solution.moduloteste.view;
 
-import javax.swing.JPanel;
-import javax.swing.JTable;
-import javax.swing.JTextField;
-import org.jfree.chart.ChartPanel;
+import java.awt.CardLayout;
+import r2d2e.solution.moduloteste.domain.graph.ConfigGraph;
+import r2d2e.solution.moduloteste.domain.graph.IGraphTime;
+import r2d2e.solution.moduloteste.domain.graph.ModoVisualizacao;
+import r2d2e.solution.moduloteste.handler.ControlModeHandler;
 
 /**
  *
@@ -11,21 +18,55 @@ import org.jfree.chart.ChartPanel;
  */
 public class ControlPanel extends javax.swing.JPanel {
 
-    /** Creates new form TestePanel */
+    public static final String CARD_MODO1 = "cardModo1";
+    public static final String CARD_MODO2 = "cardModo2";
+    public static final String CARD_MODO3 = "cardModo3";
+
+    private static ModoVisualizacao modo;
+
+    /** Creates new form ControlPanel */
     public ControlPanel() {
         initComponents();
     }
 
-    public void addChartNivel(ChartPanel chart) {
-        graph1.add(chart);
+    public void setModo() {
+
+        if(modo != null) {
+            modo.clear();
+        }
+
+        switch(ConfigGraph.MODO) {
+            case 1:
+                modo = modo1;
+                changeCard(CARD_MODO1);
+                break;
+            case 2:
+                modo = modo2;
+                changeCard(CARD_MODO2);
+                break;
+            case 3:
+                modo = modo3;
+                changeCard(CARD_MODO3);
+                break;
+        }
     }
 
-    public void addChartTensao1(ChartPanel chart) {
-        graph2.add(chart);
+    public void initChart() {
+
+        setModo();
+        IGraphTime[] graphs = ControlModeHandler.getChart();
+
+        int gIx = 0;
+
+        for (int i = 0; i < ConfigGraph.MODO; i++) {
+            gIx = ConfigGraph.GRAFICOS[i];
+            modo.addChart(i, graphs[gIx].getChart());
+        }
     }
 
-    public void addChartTensao2(ChartPanel chart) {
-        graph3.add(chart);
+    public void changeCard(String card) {
+        CardLayout layout = (CardLayout) panelGrafico.getLayout();
+        layout.show(panelGrafico, card);
     }
 
     /** This method is called from within the constructor to
@@ -37,47 +78,62 @@ public class ControlPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        graph1 = new javax.swing.JPanel();
-        graph2 = new javax.swing.JPanel();
-        graph3 = new javax.swing.JPanel();
+        panelDados = new javax.swing.JPanel();
+        dataPanel1 = new r2d2e.solution.moduloteste.view.DataPanel();
+        panelGrafico = new javax.swing.JPanel();
+        modo3 = new r2d2e.solution.moduloteste.view.Modo3();
+        modo2 = new r2d2e.solution.moduloteste.view.Modo2();
+        modo1 = new r2d2e.solution.moduloteste.view.Modo1();
 
         setOpaque(false);
 
-        graph1.setBackground(new java.awt.Color(102, 153, 255));
-        graph1.setOpaque(false);
+        panelDados.setOpaque(false);
 
-        graph2.setBackground(new java.awt.Color(102, 153, 255));
-        graph2.setOpaque(false);
+        javax.swing.GroupLayout panelDadosLayout = new javax.swing.GroupLayout(panelDados);
+        panelDados.setLayout(panelDadosLayout);
+        panelDadosLayout.setHorizontalGroup(
+            panelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelDadosLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(dataPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        panelDadosLayout.setVerticalGroup(
+            panelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelDadosLayout.createSequentialGroup()
+                .addComponent(dataPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(233, Short.MAX_VALUE))
+        );
 
-        graph3.setBackground(new java.awt.Color(102, 153, 255));
-        graph3.setOpaque(false);
+        panelGrafico.setLayout(new java.awt.CardLayout());
+        panelGrafico.add(modo3, "cardModo3");
+        panelGrafico.add(modo2, "cardModo2");
+        panelGrafico.add(modo1, "cardModo1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(graph1, javax.swing.GroupLayout.DEFAULT_SIZE, 590, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(graph2, javax.swing.GroupLayout.DEFAULT_SIZE, 289, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(graph3, javax.swing.GroupLayout.DEFAULT_SIZE, 291, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(panelGrafico, javax.swing.GroupLayout.DEFAULT_SIZE, 495, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panelDados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(graph1, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(graph2, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
-                    .addComponent(graph3, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)))
+            .addComponent(panelDados, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panelGrafico, javax.swing.GroupLayout.DEFAULT_SIZE, 433, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel graph1;
-    private javax.swing.JPanel graph2;
-    private javax.swing.JPanel graph3;
+    private r2d2e.solution.moduloteste.view.DataPanel dataPanel1;
+    private r2d2e.solution.moduloteste.view.Modo1 modo1;
+    private r2d2e.solution.moduloteste.view.Modo2 modo2;
+    private r2d2e.solution.moduloteste.view.Modo3 modo3;
+    private javax.swing.JPanel panelDados;
+    private javax.swing.JPanel panelGrafico;
     // End of variables declaration//GEN-END:variables
 
 }
