@@ -1,11 +1,11 @@
 package r2d2e.solution.moduloteste.analise;
 
+import r2d2e.solution.moduloteste.domain.controlerInterface;
+
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
-
 /**
  *
  * @author controle
@@ -14,9 +14,10 @@ public class CalcOvershoot {
 
     public Double nivelAnterior = 0.0;
     public boolean overshootOK = false;
-    public Double setpointAnterior = 0.0;
-    public Double referencia = 0.0;
+//    public Double setpointAnterior = 0.0;
+//    public Double referencia = 0.0;
     public Double overShoot = null;
+    public static boolean passouPeloSetPoint = false;
 
     public CalcOvershoot() {
     }
@@ -25,76 +26,55 @@ public class CalcOvershoot {
         return overshootOK;
     }
 
-    public Double getSetpointAnterior() {
-        return setpointAnterior;
-    }
+//    public Double getSetpointAnterior() {
+//        return setpointAnterior;
+//    }
+    public Double CalcOvershoot(Double nivelAtual, Double setPoint, Double setPointAnterior) {
 
-    public Double CalcOvershoot(Double setpoint, Double nivelAtual) {
-        if(setpoint >= setpointAnterior) {
+        if (setPoint > setPointAnterior) {
 
-            if (nivelAtual > setpoint) {
+            if (nivelAtual > setPoint) {
                 if (nivelAtual >= nivelAnterior) {
                     nivelAnterior = nivelAtual;
-                    referencia = setpointAnterior;
                     overShoot = null;
-                }else{
+                } else {
                     overShoot = nivelAnterior;
-                    setpointAnterior = setpoint;
                 }
-//                } else {
-//                    setpointAnterior = setpoint;
-//                    return nivelAnterior;
-//                }
             }
         }
 
-        if(setpoint < setpointAnterior) {
-            System.out.println("dsgdrs1");
-            if (nivelAtual < setpoint) {
-                System.out.println("dsgdrs2");
+        if (setPoint < setPointAnterior) {
+            if (nivelAtual < setPoint) {
                 if (nivelAtual < nivelAnterior) {
-                    System.out.println("dsgdrs3");
                     nivelAnterior = nivelAtual;
-                    referencia = setpointAnterior;
                     overShoot = null;
-                }else{
-                    System.out.println("dsgdrs4");
+                } else {
                     overShoot = nivelAnterior;
-                    setpointAnterior = setpoint;
                 }
-//                else {
-//                    setpointAnterior = setpoint;
-//                    return nivelAnterior;
-//                }
             }
         }
-
         return overShoot;
     }
-    
-    public void clear() {
-        nivelAnterior = setpointAnterior = 0.0;
-        overshootOK = false;
-    }
 
-    public Double calcPercentOvershoot(Double setpoint, Double nivelAtual){
-        Double over = CalcOvershoot(setpoint, nivelAtual);
+    public Double calcPercentOvershoot(Double nivelAtual) {
+        double setPoint = controlerInterface.SETPOINT;
+        double setPointAnterior = controlerInterface.SETPOINT_ANTERIOR;
 
-        if(over == null){
+        Double over = CalcOvershoot(nivelAtual, setPoint, setPointAnterior);
+
+        if (over == null) {
             return null;
-        }
-        else{
+        } else {
             Double ret;
 
             System.out.println("OVER " + over);
-            System.out.println("SETPOINT " + setpoint);
-            System.out.println("REFERENCIA " + referencia);
+            System.out.println("SETPOINT " + setPoint);
+            System.out.println("REFERENCIA " + setPointAnterior);
 
-            if(over >= setpoint ){
-                ret = (((over-setpoint)*100)/Math.abs(setpoint-referencia));
-            }
-            else{
-                ret = (((setpoint-over)*100)/Math.abs(setpoint-referencia));
+            if (over >= setPoint) {
+                ret = (((over - setPoint) * 100) / Math.abs(setPoint - setPointAnterior));
+            } else {
+                ret = (((setPoint - over) * 100) / Math.abs(setPoint - setPointAnterior));
             }
             return ret;
         }

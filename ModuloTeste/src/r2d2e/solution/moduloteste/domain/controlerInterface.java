@@ -21,6 +21,8 @@ public class controlerInterface {
     public static boolean isDrying = false;
     public static boolean end = false;
     public static Double NIVEL_LOW_CALIBRATION;
+    public static Double SETPOINT_ANTERIOR = 0.0;
+    public static Double SETPOINT = 15.0;
 
     public static void tanquePanelUpdate(double nivel) {
         tanquePanel.setLevelWater1(nivel);

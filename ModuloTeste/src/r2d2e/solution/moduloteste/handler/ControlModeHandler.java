@@ -1,5 +1,6 @@
 package r2d2e.solution.moduloteste.handler;
 
+import r2d2e.solution.moduloteste.analise.CalcOvershoot;
 import r2d2e.solution.moduloteste.controlers.Controller;
 import r2d2e.solution.moduloteste.controlers.PController;
 import r2d2e.solution.moduloteste.controlers.PDController;
@@ -8,6 +9,7 @@ import r2d2e.solution.moduloteste.controlers.PID2Controller;
 import r2d2e.solution.moduloteste.controlers.PIDController;
 import r2d2e.solution.moduloteste.domain.AlgController;
 import r2d2e.solution.moduloteste.domain.Quanser;
+import r2d2e.solution.moduloteste.domain.controlerInterface;
 import r2d2e.solution.moduloteste.domain.graph.GraphNivel;
 import r2d2e.solution.moduloteste.domain.graph.GraphControl;
 import r2d2e.solution.moduloteste.domain.graph.GraphAction;
@@ -28,16 +30,22 @@ public class ControlModeHandler {
     private static ControlPanel controlPanel;
     private static ConfParametros confControle;
     private static AlgController algController;
-
     public static GraphNivel graphNivel;
     public static GraphControl graphTensao1;
     public static GraphAction graphTensao2;
-
     private static Controller controllerSelected;
 
     public static void setIntegracaoCondi(boolean chk) {
         if (algController != null) {
             algController.setInteCondi(chk);
+        }
+    }
+
+    private static void updateSetPointAnterior(double nivelNumb) {
+        if(controlerInterface.SETPOINT != nivelNumb){
+            controlerInterface.SETPOINT_ANTERIOR = controlerInterface.SETPOINT;
+            controlerInterface.SETPOINT = nivelNumb;
+            CalcOvershoot.passouPeloSetPoint = false;
         }
     }
 
@@ -70,70 +78,72 @@ public class ControlModeHandler {
     }
 
     public static void updateVariables() {
+        String nivel = confControle.getTextSetPoint().getText();
+        nivel = fixNumber(nivel);
+        double nivelNumb = Double.parseDouble(nivel);
+
+        updateSetPointAnterior(nivelNumb);
+
         if (controllerSelected instanceof PController) {
-            String nivel = confControle.getTextSetPoint().getText();
+
             String kp = confControle.getTextKP().getText();
 
-            nivel = fixNumber(nivel);
+//            nivel = fixNumber(nivel);
             kp = fixNumber(kp);
 
-            controllerSelected.setSetPoint(Double.parseDouble(nivel));
+            controllerSelected.setSetPoint(nivelNumb);
             ((PController) controllerSelected).setKp(Double.parseDouble(kp));
         }
         if (controllerSelected instanceof PDController) {
-            String nivel = confControle.getTextSetPoint().getText();
             String kp = confControle.getTextKP().getText();
             String kd = getKdValue();
 
-            nivel = fixNumber(nivel);
+//            nivel = fixNumber(nivel);
             kp = fixNumber(kp);
             kd = fixNumber(kd);
 
-            controllerSelected.setSetPoint(Double.parseDouble(nivel));
+            controllerSelected.setSetPoint(nivelNumb);
             ((PDController) controllerSelected).setKp(Double.parseDouble(kp));
             ((PDController) controllerSelected).setKd(Double.parseDouble(kd));
         }
         if (controllerSelected instanceof PIController) {
-            String nivel = confControle.getTextSetPoint().getText();
             String kp = confControle.getTextKP().getText();
             String ki = getKIValue();
 
-            nivel = fixNumber(nivel);
+//            nivel = fixNumber(nivel);
             kp = fixNumber(kp);
             ki = fixNumber(ki);
 
-            controllerSelected.setSetPoint(Double.parseDouble(nivel));
+            controllerSelected.setSetPoint(nivelNumb);
             ((PIController) controllerSelected).setKp(Double.parseDouble(kp));
             ((PIController) controllerSelected).setKi(Double.parseDouble(ki));
         }
         if (controllerSelected instanceof PIDController) {
-            String nivel = confControle.getTextSetPoint().getText();
             String kp = confControle.getTextKP().getText();
             String ki = getKIValue();
             String kd = getKdValue();
 
-            nivel = fixNumber(nivel);
+//            nivel = fixNumber(nivel);
             kp = fixNumber(kp);
             ki = fixNumber(ki);
             kd = fixNumber(kd);
 
-            controllerSelected.setSetPoint(Double.parseDouble(nivel));
+            controllerSelected.setSetPoint(nivelNumb);
             ((PIDController) controllerSelected).setKp(Double.parseDouble(kp));
             ((PIDController) controllerSelected).setKi(Double.parseDouble(ki));
             ((PIDController) controllerSelected).setKd(Double.parseDouble(kd));
         }
         if (controllerSelected instanceof PID2Controller) {
-            String nivel = confControle.getTextSetPoint().getText();
             String kp = confControle.getTextKP().getText();
             String ki = getKIValue();
             String kd2 = getKdValue();
 
-            nivel = fixNumber(nivel);
+//            nivel = fixNumber(nivel);
             kp = fixNumber(kp);
             ki = fixNumber(ki);
             kd2 = fixNumber(kd2);
 
-            controllerSelected.setSetPoint(Double.parseDouble(nivel));
+            controllerSelected.setSetPoint(nivelNumb);
             ((PID2Controller) controllerSelected).setKp(Double.parseDouble(kp));
             ((PID2Controller) controllerSelected).setKi(Double.parseDouble(ki));
             ((PID2Controller) controllerSelected).setKd2(Double.parseDouble(kd2));
@@ -147,7 +157,7 @@ public class ControlModeHandler {
 
     public void init(Quanser quanser) {
         boolean ok = confControle.getChkIntCond().isSelected();
-        algController = new AlgController(100, controllerSelected,tanquePanel,quanser,ok);
+        algController = new AlgController(100, controllerSelected, tanquePanel, quanser, ok);
         algController.start();
         graphNivel.clear();
         graphTensao1.clear();
@@ -229,5 +239,4 @@ public class ControlModeHandler {
     public static ControlPanel getControlPanel() {
         return controlPanel;
     }
-
 }

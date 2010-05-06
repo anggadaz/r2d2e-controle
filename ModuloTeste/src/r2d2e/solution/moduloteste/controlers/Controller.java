@@ -15,7 +15,7 @@ public abstract class Controller {
     //taxa de amostragem - default 0.1
     protected Double sampleRate = 0.1;
     //setpoint - default 20 cm.
-    protected Double setPoint = 20.0;
+    protected Double setPoint = 15.0;
     //valor do integral passado
     protected Double pastIntegral;
     //valor do erro passado

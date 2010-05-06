@@ -111,7 +111,7 @@ public class AlgController extends Timer implements ActionListener {
 
             atualizarGrafico(nivel, setP, tensao, tensaoAtual);
 
-            Double over = calcOvershoot.calcPercentOvershoot(setP, nivel);
+            Double over = calcOvershoot.calcPercentOvershoot(nivel);
             controlerInterface.atualizarOverShoot(over);
             
             Double rise = riseTime.calcRiseTime(setP, nivel);
