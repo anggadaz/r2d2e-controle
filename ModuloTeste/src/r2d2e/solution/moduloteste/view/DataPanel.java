@@ -70,7 +70,7 @@ public class DataPanel extends javax.swing.JPanel {
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText(org.openide.util.NbBundle.getMessage(DataPanel.class, "DataPanel.jLabel4.text")); // NOI18N
 
-        cbRise.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2 %", "5 %", "7 %" }));
+        cbRise.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2 %", "5 %", "7 %", "10 %" }));
 
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText(org.openide.util.NbBundle.getMessage(DataPanel.class, "DataPanel.jLabel5.text")); // NOI18N
@@ -179,7 +179,11 @@ public class DataPanel extends javax.swing.JPanel {
         if("7 %".equals(atual)) {
             return 7;
         }
-        
+
+        if("10 %".equals(atual)) {
+            return 10;
+        }
+
         return 2;
     }
 
