@@ -4,67 +4,100 @@
  */
 package r2d2e.solution.moduloteste.analise;
 
+import r2d2e.solution.moduloteste.domain.controlerInterface;
+
 /**
  *
  * @author demetrios
  */
 public class PeakTime {
 
-    private double initTime;
-    private double time = 0;
-    private double nivelAnterior;
-    private double setpointAnterior = 0.0;
-    private boolean initTimeUpdated = true;
-    private double peakValue = 0.0;
+    public static final int NONE = 0;
+    public static final int CALCULANDO = 1;
+    public static final int FINALIZADO = 2;
 
-    public PeakTime() {
-        this.initTime = System.currentTimeMillis();
+    private int estado = NONE;
+    private Long initTime = null;
+
+    private Double nivelAnterior = 0.0;
+
+    private Double setpointAtual = 0.0;
+    private Double setpointAnterior = 0.0;
+
+    public PeakTime(Double set) {
+        controlerInterface.atualizarPeakTime(0.0);
+        setSetpoint(set);
     }
 
-    public double calcPeakTime(double setPoint, double nivelAtual) {
-
-        updateInitTime(setPoint);
-
-        peakValue = getPeakValue(setPoint, nivelAtual);
-
-        if (peakValue != 0.0) {
-            time = convertToTwoPlaces(System.currentTimeMillis() - initTime) / 1000;
+    public void setSetpoint(Double set) {
+        if(set != null) {
+            setpointAnterior = setpointAtual;
+            setpointAtual = set;
+            initTime = null;
+            estado = NONE;
         }
-        return time;
     }
 
-    private double getPeakValue(double setPoint, double nivelAtual) {
-        double peakValueTemp = 0.0;
-        if (setPoint > setpointAnterior) {
-            if (nivelAtual > setPoint) {
-                if (nivelAtual >= nivelAnterior) {
+    public void calcPeakTime(Double nivelAtual) {
+
+        if(estado == FINALIZADO) {
+            return;
+        }
+
+        if(initTime == null) {
+            initTime = System.currentTimeMillis();
+        }
+
+        // Calcula nível máximo
+        if (setpointAtual > setpointAnterior) {
+
+            // Eita piula, passou do setpoint, vou calcular
+            if (nivelAtual > setpointAtual) {
+
+                estado = CALCULANDO;
+
+                // Achei um maior
+                if (nivelAtual > nivelAnterior) {
                     nivelAnterior = nivelAtual;
-                } else {
-                    setpointAnterior = setPoint;
-                    peakValueTemp = nivelAnterior;
+                } else { // Diminiu então pode ser tu
+                    Double time = convertToTwoPlaces(System.currentTimeMillis() - initTime) / 1000;
+                    controlerInterface.atualizarPeakTime(time);
                 }
+
+            } else {
+
+                // Subiu do setpoint e depois desceu, não calculo mais
+                if( estado == CALCULANDO) {
+                    estado = FINALIZADO;
+                }
+
             }
-        } else {
-            if (setPoint < setpointAnterior) {
-                if (nivelAtual < setPoint) {
-                    if (nivelAtual <= nivelAnterior) {
-                        nivelAnterior = nivelAtual;
-                    } else {
-                        setpointAnterior = setPoint;
-                        peakValueTemp = nivelAnterior;
-                    }
+        }
+
+        // Calcula nível mínimo
+        if (setpointAtual < setpointAnterior) {
+
+            // Eita piula, passou do setpoint, vou calcular
+            if (nivelAtual < setpointAtual) {
+
+                estado = CALCULANDO;
+
+                // Achei um menor
+                if (nivelAtual < nivelAnterior) {
+                    nivelAnterior = nivelAtual;
+                } else { // Diminiu então pode ser tu
+                    Double time = convertToTwoPlaces(System.currentTimeMillis() - initTime) / 1000;
+                    controlerInterface.atualizarPeakTime(time);
+                }
+            } else {
+
+                // Desceu do setpoint e depois subiu, não calculo mais
+                if( estado == CALCULANDO) {
+                    estado = FINALIZADO;
                 }
             }
         }
-        return peakValueTemp;
-    }
 
-    public double getInitTime() {
-        return initTime;
-    }
-
-    public void setInitTime(double initTime) {
-        this.initTime = initTime;
     }
 
     public double convertToTwoPlaces(double num) {
@@ -74,14 +107,4 @@ public class PeakTime {
         return num;
     }
 
-    private void updateInitTime(double setPoint) {
-        if (setPoint != setpointAnterior) {
-            if (!initTimeUpdated) {
-                initTime = System.currentTimeMillis();
-                initTimeUpdated = true;
-            }
-        } else {
-            initTimeUpdated = false;
-        }
-    }
 }

@@ -2,65 +2,96 @@ package r2d2e.solution.moduloteste.analise;
 
 import r2d2e.solution.moduloteste.domain.controlerInterface;
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 /**
  *
- * @author controle
+ * @author Rivaldo Jr
  */
 public class CalcOvershoot {
 
-    public Double nivelAnterior = 0.0;
-    public boolean overshootOK = false;
-//    public Double setpointAnterior = 0.0;
-//    public Double referencia = 0.0;
-    public Double overShoot = null;
-    public static boolean passouPeloSetPoint = false;
+    public static final int NONE = 0;
+    public static final int CALCULANDO = 1;
+    public static final int FINALIZADO = 2;
 
-    public CalcOvershoot() {
+    private int estado = NONE;
+
+    private Double nivelAnterior = 0.0;
+    
+    private Double setpointAtual = 0.0;
+    private Double setpointAnterior = 0.0;
+
+    public CalcOvershoot(Double set) {
+        controlerInterface.atualizarOverShoot(0.0);
+        setSetpoint(set);
     }
 
-    public boolean isOvershootOK() {
-        return overshootOK;
+    public void setSetpoint(Double set) {
+        if(set != null) {
+            setpointAnterior = setpointAtual;
+            setpointAtual = set;
+            estado = NONE;
+        }
     }
 
-//    public Double getSetpointAnterior() {
-//        return setpointAnterior;
-//    }
-    public Double CalcOvershoot(Double nivelAtual, Double setPoint, Double setPointAnterior) {
+    public void CalcOvershoot(Double nivelAtual) {
+        
+        // Overshoot já calculado
+        if(estado == FINALIZADO) {
+            return;
+        }
 
-        if (setPoint > setPointAnterior) {
+        // Calcula nível máximo
+        if (setpointAtual > setpointAnterior) {
 
-            if (nivelAtual > setPoint) {
-                if (nivelAtual >= nivelAnterior) {
+            // Eita piula, passou do setpoint, vou calcular
+            if (nivelAtual > setpointAtual) {
+
+                estado = CALCULANDO;
+
+                // Achei um maior
+                if (nivelAtual > nivelAnterior) {
                     nivelAnterior = nivelAtual;
-                    overShoot = null;
-                } else {
-                    overShoot = nivelAnterior;
+                } else { // Diminiu então pode ser tu
+                    Double over = calcPercentOvershoot(nivelAnterior);
+                    controlerInterface.atualizarOverShoot(over);
                 }
+
+            } else {
+
+                // Subiu do setpoint e depois desceu, não calculo mais
+                if( estado == CALCULANDO) {
+                    estado = FINALIZADO;
+                }
+
             }
         }
 
-        if (setPoint < setPointAnterior) {
-            if (nivelAtual < setPoint) {
+        // Calcula nível mínimo
+        if (setpointAtual < setpointAnterior) {
+
+            // Eita piula, passou do setpoint, vou calcular
+            if (nivelAtual < setpointAtual) {
+
+                estado = CALCULANDO;
+
+                // Achei um menor
                 if (nivelAtual < nivelAnterior) {
                     nivelAnterior = nivelAtual;
-                    overShoot = null;
-                } else {
-                    overShoot = nivelAnterior;
+                } else { // Diminiu então pode ser tu
+                    Double over = calcPercentOvershoot(nivelAnterior);
+                    controlerInterface.atualizarOverShoot(over);
+                }
+            } else {
+
+                // Desceu do setpoint e depois subiu, não calculo mais
+                if( estado == CALCULANDO) {
+                    estado = FINALIZADO;
                 }
             }
         }
-        return overShoot;
+
     }
 
-    public Double calcPercentOvershoot(Double nivelAtual) {
-        double setPoint = controlerInterface.SETPOINT;
-        double setPointAnterior = controlerInterface.SETPOINT_ANTERIOR;
-
-        Double over = CalcOvershoot(nivelAtual, setPoint, setPointAnterior);
+    private Double calcPercentOvershoot(Double over) {
 
         if (over == null) {
             return null;
@@ -68,13 +99,13 @@ public class CalcOvershoot {
             Double ret;
 
             System.out.println("OVER " + over);
-            System.out.println("SETPOINT " + setPoint);
-            System.out.println("REFERENCIA " + setPointAnterior);
+            System.out.println("SETPOINT " + setpointAtual);
+            System.out.println("REFERENCIA " + setpointAnterior);
 
-            if (over >= setPoint) {
-                ret = (((over - setPoint) * 100) / Math.abs(setPoint - setPointAnterior));
+            if (over >= setpointAtual) {
+                ret = (((over - setpointAtual) * 100) / Math.abs(setpointAtual - setpointAnterior));
             } else {
-                ret = (((setPoint - over) * 100) / Math.abs(setPoint - setPointAnterior));
+                ret = (((setpointAtual - over) * 100) / Math.abs(setpointAtual - setpointAnterior));
             }
             return ret;
         }

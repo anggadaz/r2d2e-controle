@@ -52,11 +52,10 @@ public class AlgController extends Timer implements ActionListener {
         this.initT = System.currentTimeMillis();
 
         controller.setInteCondi(intCond);
-        calcOvershoot = new CalcOvershoot();
-        timeOfAccommodation = new TimeAccommodation(controlerInterface.dataPanel.getCriterio(),
-                controller.getSetPoint());
+        calcOvershoot = new CalcOvershoot(controller.getSetPoint());
+        timeOfAccommodation = new TimeAccommodation(controlerInterface.dataPanel.getCriterio(),controller.getSetPoint());
         riseTime = new RiseTime(controller.getSetPoint());
-        peakTime = new PeakTime();
+        peakTime = new PeakTime(controller.getSetPoint());
     }
 
     private void atualizarGrafico(final double nivel, final double set, final double tensao, final double trava) {
@@ -111,8 +110,7 @@ public class AlgController extends Timer implements ActionListener {
 
             atualizarGrafico(nivel, setP, tensao, tensaoAtual);
 
-            Double over = calcOvershoot.calcPercentOvershoot(nivel);
-            controlerInterface.atualizarOverShoot(over);
+            calcOvershoot.CalcOvershoot(nivel);
             
             Double rise = riseTime.calcRiseTime(setP, nivel);
             controlerInterface.atualizarRiseTime(rise);
@@ -120,8 +118,7 @@ public class AlgController extends Timer implements ActionListener {
             Double acomodation = timeOfAccommodation.calcTimeOfAcoomodation(setP, nivel);
             controlerInterface.atualizaAcomodationTime(acomodation);
 
-            double peak = peakTime.calcPeakTime(setP, nivel);
-            controlerInterface.atualizarPeakTime(peak);
+            peakTime.calcPeakTime(nivel);
         }
 
     }
@@ -200,4 +197,9 @@ public class AlgController extends Timer implements ActionListener {
     public void atualizarCriterioAcomodacao() {
         timeOfAccommodation.setCriterio(controlerInterface.dataPanel.getCriterio());
     }
+
+    public void atualizarSetPoint(Double set) {
+        calcOvershoot.setSetpoint(set);
+    }
+
 }

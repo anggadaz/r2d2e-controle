@@ -41,14 +41,6 @@ public class ControlModeHandler {
         }
     }
 
-    private static void updateSetPointAnterior(double nivelNumb) {
-        if(controlerInterface.SETPOINT != nivelNumb){
-            controlerInterface.SETPOINT_ANTERIOR = controlerInterface.SETPOINT;
-            controlerInterface.SETPOINT = nivelNumb;
-            CalcOvershoot.passouPeloSetPoint = false;
-        }
-    }
-
     public ControlModeHandler(NovoFrame frame) {
         tanquePanel = frame.getTanquePanel();
         controlPanel = frame.getControlPanel();
@@ -77,12 +69,23 @@ public class ControlModeHandler {
         controllerSelected = control;
     }
 
-    public static void updateVariables() {
+    private static Double getSetPoint() {
         String nivel = confControle.getTextSetPoint().getText();
         nivel = fixNumber(nivel);
-        double nivelNumb = Double.parseDouble(nivel);
 
-        updateSetPointAnterior(nivelNumb);
+        if(nivel != null) {
+            return Double.parseDouble(nivel);
+        }
+
+        return null;
+
+    }
+
+    public static void updateVariables() {
+
+        Double nivelNumb = getSetPoint();
+
+        //updateSetPointAnterior(getSetPoint());
 
         if (controllerSelected instanceof PController) {
 
@@ -151,6 +154,7 @@ public class ControlModeHandler {
         if (algController != null) {
             algController.setController(controllerSelected);
             algController.atualizarCriterioAcomodacao();
+            algController.atualizarSetPoint(getSetPoint());
         }
 
     }
