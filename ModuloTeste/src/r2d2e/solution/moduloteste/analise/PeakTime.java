@@ -18,6 +18,7 @@ public class PeakTime {
 
     private int estado = NONE;
     private Long initTime = null;
+    private Long finalTime = 0l;
 
     private Double nivelAnterior = 0.0;
 
@@ -34,6 +35,7 @@ public class PeakTime {
             setpointAnterior = setpointAtual;
             setpointAtual = set;
             initTime = null;
+            finalTime = 0l;
             estado = NONE;
         }
     }
@@ -46,6 +48,7 @@ public class PeakTime {
 
         if(initTime == null) {
             initTime = System.currentTimeMillis();
+            System.out.println("NOVO INIT TIME " + initTime);
         }
 
         // Calcula nível máximo
@@ -59,9 +62,13 @@ public class PeakTime {
                 // Achei um maior
                 if (nivelAtual > nivelAnterior) {
                     nivelAnterior = nivelAtual;
+                    finalTime = System.currentTimeMillis();
                 } else { // Diminiu então pode ser tu
-                    Double time = convertToTwoPlaces(System.currentTimeMillis() - initTime) / 1000;
+                    Double time = convertToTwoPlaces(finalTime - initTime) / 1000;
                     controlerInterface.atualizarPeakTime(time);
+                    System.out.println("TEMPO FINAL " + finalTime);
+                    System.out.println("TIME " + time);
+                    System.out.println("NIVELPICO " + nivelAnterior);
                 }
 
             } else {

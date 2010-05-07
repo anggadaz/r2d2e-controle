@@ -199,6 +199,7 @@ public class AlgController extends Timer implements ActionListener {
     }
 
     public void atualizarSetPoint(Double set) {
+        peakTime.setSetpoint(set);
         calcOvershoot.setSetpoint(set);
     }
 
