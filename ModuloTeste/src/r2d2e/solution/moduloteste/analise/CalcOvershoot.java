@@ -58,9 +58,9 @@ public class CalcOvershoot {
             } else {
 
                 // Subiu do setpoint e depois desceu, não calculo mais
-                if( estado == CALCULANDO) {
+                /*if( estado == CALCULANDO) {
                     estado = FINALIZADO;
-                }
+                }*/
 
             }
         }
@@ -83,9 +83,9 @@ public class CalcOvershoot {
             } else {
 
                 // Desceu do setpoint e depois subiu, não calculo mais
-                if( estado == CALCULANDO) {
+                /*if( estado == CALCULANDO) {
                     estado = FINALIZADO;
-                }
+                }*/
             }
         }
 

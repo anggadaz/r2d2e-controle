@@ -74,9 +74,9 @@ public class PeakTime {
             } else {
 
                 // Subiu do setpoint e depois desceu, não calculo mais
-                if( estado == CALCULANDO) {
+                /*if( estado == CALCULANDO) {
                     estado = FINALIZADO;
-                }
+                }*/
 
             }
         }
@@ -99,9 +99,9 @@ public class PeakTime {
             } else {
 
                 // Desceu do setpoint e depois subiu, não calculo mais
-                if( estado == CALCULANDO) {
+                /*if( estado == CALCULANDO) {
                     estado = FINALIZADO;
-                }
+                }*/
             }
         }
 
