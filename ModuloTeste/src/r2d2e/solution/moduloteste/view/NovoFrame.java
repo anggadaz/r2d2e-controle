@@ -19,6 +19,7 @@ public class NovoFrame extends javax.swing.JFrame {
     private MainFrameHandler mainFrameHandler;
     public static final String CARD_CONF_TESTE = "cardConfTeste";
     public static final String CARD_CONF_CONTROLE = "cardConfControle";
+    public static final String CARD_CONF_CONTROLE_CASCATA = "cardCascata";
 
     public static final String CARD_MAIN_TESTE = "cardMainTeste";
     public static final String CARD_MAIN_CONTROLE = "cardMainControle";
@@ -34,6 +35,8 @@ public class NovoFrame extends javax.swing.JFrame {
         setIconImage(new ImageIcon(imgURL).getImage());
 
         setLocationRelativeTo(null);
+
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         Splash.getInstance().finalizaSplash();
     }
@@ -101,6 +104,9 @@ public class NovoFrame extends javax.swing.JFrame {
         opcoesPanel = new javax.swing.JPanel();
         confTeste = new r2d2e.solution.moduloteste.view.ConfTeste();
         confControle = new r2d2e.solution.moduloteste.view.ConfParametros();
+        panelCascata = new javax.swing.JPanel();
+        confParametroMestre = new r2d2e.solution.moduloteste.view.ConfParametros();
+        confParametrosEscravo = new r2d2e.solution.moduloteste.view.ConfParametros();
         menuBar = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         menuSair = new javax.swing.JMenuItem();
@@ -244,7 +250,7 @@ public class NovoFrame extends javax.swing.JFrame {
         );
         tanquePanelLayout.setVerticalGroup(
             tanquePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 571, Short.MAX_VALUE)
+            .addGap(0, 427, Short.MAX_VALUE)
         );
 
         mainPanel.setOpaque(false);
@@ -252,7 +258,9 @@ public class NovoFrame extends javax.swing.JFrame {
         mainPanel.add(testePanel, "cardMainTeste");
         mainPanel.add(controlPanel, "cardMainControle");
 
+        opcoesPanel.setMinimumSize(new java.awt.Dimension(424, 150));
         opcoesPanel.setOpaque(false);
+        opcoesPanel.setPreferredSize(new java.awt.Dimension(424, 150));
         opcoesPanel.setLayout(new java.awt.CardLayout());
 
         confTeste.setOpaque(false);
@@ -261,18 +269,55 @@ public class NovoFrame extends javax.swing.JFrame {
         confControle.setOpaque(false);
         opcoesPanel.add(confControle, "cardConfControle");
 
+        panelCascata.setMaximumSize(new java.awt.Dimension(424, 150));
+        panelCascata.setMinimumSize(new java.awt.Dimension(424, 150));
+        panelCascata.setOpaque(false);
+        panelCascata.setPreferredSize(new java.awt.Dimension(424, 150));
+
+        confParametroMestre.setBorder(javax.swing.BorderFactory.createTitledBorder(null, org.openide.util.NbBundle.getMessage(NovoFrame.class, "NovoFrame.confParametroMestre.border.title"), javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(255, 255, 255))); // NOI18N
+        confParametroMestre.setMaximumSize(new java.awt.Dimension(353, 150));
+        confParametroMestre.setMinimumSize(new java.awt.Dimension(353, 150));
+        confParametroMestre.setOpaque(false);
+        confParametroMestre.setPreferredSize(new java.awt.Dimension(353, 150));
+
+        confParametrosEscravo.setBorder(javax.swing.BorderFactory.createTitledBorder(null, org.openide.util.NbBundle.getMessage(NovoFrame.class, "NovoFrame.confParametrosEscravo.border.title"), javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(255, 255, 255))); // NOI18N
+        confParametrosEscravo.setMaximumSize(new java.awt.Dimension(353, 150));
+        confParametrosEscravo.setMinimumSize(new java.awt.Dimension(353, 150));
+        confParametrosEscravo.setOpaque(false);
+        confParametrosEscravo.setPreferredSize(new java.awt.Dimension(353, 150));
+
+        javax.swing.GroupLayout panelCascataLayout = new javax.swing.GroupLayout(panelCascata);
+        panelCascata.setLayout(panelCascataLayout);
+        panelCascataLayout.setHorizontalGroup(
+            panelCascataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelCascataLayout.createSequentialGroup()
+                .addComponent(confParametroMestre, javax.swing.GroupLayout.DEFAULT_SIZE, 473, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(confParametrosEscravo, javax.swing.GroupLayout.DEFAULT_SIZE, 474, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        panelCascataLayout.setVerticalGroup(
+            panelCascataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelCascataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(confParametroMestre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(confParametrosEscravo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        opcoesPanel.add(panelCascata, "cardCascata");
+
         javax.swing.GroupLayout backgroundPanelLayout = new javax.swing.GroupLayout(backgroundPanel);
         backgroundPanel.setLayout(backgroundPanelLayout);
         backgroundPanelLayout.setHorizontalGroup(
             backgroundPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(toolbarPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(backgroundPanelLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backgroundPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(tanquePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(backgroundPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(opcoesPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 707, Short.MAX_VALUE)
-                    .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 707, Short.MAX_VALUE))
+                .addGroup(backgroundPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(opcoesPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 963, Short.MAX_VALUE)
+                    .addGroup(backgroundPanelLayout.createSequentialGroup()
+                        .addComponent(tanquePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 707, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         backgroundPanelLayout.setVerticalGroup(
@@ -281,11 +326,10 @@ public class NovoFrame extends javax.swing.JFrame {
                 .addComponent(toolbarPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(backgroundPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(backgroundPanelLayout.createSequentialGroup()
-                        .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 423, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(opcoesPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(tanquePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(tanquePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 427, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(opcoesPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -430,6 +474,8 @@ public class NovoFrame extends javax.swing.JFrame {
     private javax.swing.JButton buttonOpcoesGrafico;
     private javax.swing.JButton buttonParar;
     private r2d2e.solution.moduloteste.view.ConfParametros confControle;
+    private r2d2e.solution.moduloteste.view.ConfParametros confParametroMestre;
+    private r2d2e.solution.moduloteste.view.ConfParametros confParametrosEscravo;
     private r2d2e.solution.moduloteste.view.ConfTeste confTeste;
     private r2d2e.solution.moduloteste.view.ControlPanel controlPanel;
     private javax.swing.JMenuItem itemSobre;
@@ -443,6 +489,7 @@ public class NovoFrame extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuSair;
     private javax.swing.JCheckBoxMenuItem menuTeste;
     private javax.swing.JPanel opcoesPanel;
+    private javax.swing.JPanel panelCascata;
     private r2d2e.solution.moduloteste.view.TanquePanel tanquePanel;
     private r2d2e.solution.moduloteste.view.TestePanel testePanel;
     private javax.swing.JPanel toolbarPanel;

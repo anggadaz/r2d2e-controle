@@ -15,7 +15,6 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
-import javax.swing.border.TitledBorder;
 import r2d2e.solution.moduloteste.controlers.Controller;
 import r2d2e.solution.moduloteste.controlers.PController;
 import r2d2e.solution.moduloteste.controlers.PDController;
@@ -28,23 +27,17 @@ import r2d2e.solution.moduloteste.handler.ControlModeHandler;
  *
  * @author Rivaldo Jr
  */
-public class ConfParametros extends javax.swing.JPanel {
+public class ConfParametrosCascata extends javax.swing.JPanel {
 
     private double sampleRate = 0.1;
 
     /** Creates new form ConfControle */
-    public ConfParametros() {
+    public ConfParametrosCascata() {
         initComponents();
         popularComboBox();
         setP();
 
         ControlModeHandler.setControllerSelected((Controller) comboControladores.getItemAt(0));
-    }
-
-    public ConfParametros(String title){
-        this();
-        TitledBorder border = (TitledBorder) getBorder();
-        border.setTitle(title);
     }
 
     public void popularComboBox() {
@@ -141,14 +134,15 @@ public class ConfParametros extends javax.swing.JPanel {
         chkKI = new javax.swing.JCheckBox();
         chkTD = new javax.swing.JCheckBox();
         chkTI = new javax.swing.JCheckBox();
-        SeparatorCtrl = new javax.swing.JSeparator();
-        buttonReload = new javax.swing.JButton();
         chkIntCond = new javax.swing.JCheckBox();
         textSetPoint = new javax.swing.JFormattedTextField();
+        SeparatorCtrl = new javax.swing.JSeparator();
 
         setBackground(new java.awt.Color(0, 0, 0));
-        setBorder(javax.swing.BorderFactory.createTitledBorder(null, org.openide.util.NbBundle.getMessage(ConfParametros.class, "ConfParametros.border.title"), javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(255, 255, 255))); // NOI18N
+        setBorder(javax.swing.BorderFactory.createTitledBorder(null, org.openide.util.NbBundle.getMessage(ConfParametrosCascata.class, "ConfParametrosCascata.border.title"), javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(255, 255, 255))); // NOI18N
         setMaximumSize(null);
+        setMinimumSize(new java.awt.Dimension(0, 0));
+        setPreferredSize(new java.awt.Dimension(454, 132));
 
         comboControladores.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -157,50 +151,50 @@ public class ConfParametros extends javax.swing.JPanel {
         });
 
         labelTipoCtrl.setForeground(new java.awt.Color(255, 255, 255));
-        labelTipoCtrl.setText(org.openide.util.NbBundle.getMessage(ConfParametros.class, "ConfParametros.labelTipoCtrl.text")); // NOI18N
+        labelTipoCtrl.setText(org.openide.util.NbBundle.getMessage(ConfParametrosCascata.class, "ConfParametrosCascata.labelTipoCtrl.text")); // NOI18N
 
         labelSetPoint.setForeground(new java.awt.Color(255, 255, 255));
-        labelSetPoint.setText(org.openide.util.NbBundle.getMessage(ConfParametros.class, "ConfParametros.labelSetPoint.text")); // NOI18N
+        labelSetPoint.setText(org.openide.util.NbBundle.getMessage(ConfParametrosCascata.class, "ConfParametrosCascata.labelSetPoint.text")); // NOI18N
 
         panelGanhos.setBackground(new java.awt.Color(0, 0, 0));
-        panelGanhos.setBorder(javax.swing.BorderFactory.createTitledBorder(null, org.openide.util.NbBundle.getMessage(ConfParametros.class, "ConfParametros.panelGanhos.border.title"), javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(255, 255, 255))); // NOI18N
+        panelGanhos.setBorder(javax.swing.BorderFactory.createTitledBorder(null, org.openide.util.NbBundle.getMessage(ConfParametrosCascata.class, "ConfParametrosCascata.panelGanhos.border.title"), javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(255, 255, 255))); // NOI18N
         panelGanhos.setOpaque(false);
         panelGanhos.setPreferredSize(new java.awt.Dimension(597, 132));
 
         labelKp.setForeground(new java.awt.Color(255, 255, 255));
-        labelKp.setText(org.openide.util.NbBundle.getMessage(ConfParametros.class, "ConfParametros.labelKp.text")); // NOI18N
+        labelKp.setText(org.openide.util.NbBundle.getMessage(ConfParametrosCascata.class, "ConfParametrosCascata.labelKp.text")); // NOI18N
 
         textKP.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.0000"))));
         textKP.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        textKP.setText(org.openide.util.NbBundle.getMessage(ConfParametros.class, "ConfParametros.textKP.text")); // NOI18N
-        textKP.setToolTipText(org.openide.util.NbBundle.getMessage(ConfParametros.class, "ConfParametros.textKP.toolTipText")); // NOI18N
+        textKP.setText(org.openide.util.NbBundle.getMessage(ConfParametrosCascata.class, "ConfParametrosCascata.textKP.text")); // NOI18N
+        textKP.setToolTipText(org.openide.util.NbBundle.getMessage(ConfParametrosCascata.class, "ConfParametrosCascata.textKP.toolTipText")); // NOI18N
 
         textKD.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.0000"))));
         textKD.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        textKD.setText(org.openide.util.NbBundle.getMessage(ConfParametros.class, "ConfParametros.textKD.text")); // NOI18N
-        textKD.setToolTipText(org.openide.util.NbBundle.getMessage(ConfParametros.class, "ConfParametros.textKD.toolTipText")); // NOI18N
+        textKD.setText(org.openide.util.NbBundle.getMessage(ConfParametrosCascata.class, "ConfParametrosCascata.textKD.text")); // NOI18N
+        textKD.setToolTipText(org.openide.util.NbBundle.getMessage(ConfParametrosCascata.class, "ConfParametrosCascata.textKD.toolTipText")); // NOI18N
 
         textTI.setEditable(false);
         textTI.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.0000"))));
         textTI.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        textTI.setText(org.openide.util.NbBundle.getMessage(ConfParametros.class, "ConfParametros.textTI.text")); // NOI18N
-        textTI.setToolTipText(org.openide.util.NbBundle.getMessage(ConfParametros.class, "ConfParametros.textTI.toolTipText")); // NOI18N
+        textTI.setText(org.openide.util.NbBundle.getMessage(ConfParametrosCascata.class, "ConfParametrosCascata.textTI.text")); // NOI18N
+        textTI.setToolTipText(org.openide.util.NbBundle.getMessage(ConfParametrosCascata.class, "ConfParametrosCascata.textTI.toolTipText")); // NOI18N
 
         textTD.setEditable(false);
         textTD.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.0000"))));
         textTD.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        textTD.setText(org.openide.util.NbBundle.getMessage(ConfParametros.class, "ConfParametros.textTD.text")); // NOI18N
-        textTD.setToolTipText(org.openide.util.NbBundle.getMessage(ConfParametros.class, "ConfParametros.textTD.toolTipText")); // NOI18N
+        textTD.setText(org.openide.util.NbBundle.getMessage(ConfParametrosCascata.class, "ConfParametrosCascata.textTD.text")); // NOI18N
+        textTD.setToolTipText(org.openide.util.NbBundle.getMessage(ConfParametrosCascata.class, "ConfParametrosCascata.textTD.toolTipText")); // NOI18N
 
         textKI.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.0000"))));
         textKI.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        textKI.setText(org.openide.util.NbBundle.getMessage(ConfParametros.class, "ConfParametros.textKI.text")); // NOI18N
-        textKI.setToolTipText(org.openide.util.NbBundle.getMessage(ConfParametros.class, "ConfParametros.textKI.toolTipText")); // NOI18N
+        textKI.setText(org.openide.util.NbBundle.getMessage(ConfParametrosCascata.class, "ConfParametrosCascata.textKI.text")); // NOI18N
+        textKI.setToolTipText(org.openide.util.NbBundle.getMessage(ConfParametrosCascata.class, "ConfParametrosCascata.textKI.toolTipText")); // NOI18N
 
         buttonGroup1.add(chkKD);
         chkKD.setForeground(new java.awt.Color(255, 255, 255));
         chkKD.setSelected(true);
-        chkKD.setText(org.openide.util.NbBundle.getMessage(ConfParametros.class, "ConfParametros.chkKD.text")); // NOI18N
+        chkKD.setText(org.openide.util.NbBundle.getMessage(ConfParametrosCascata.class, "ConfParametrosCascata.chkKD.text")); // NOI18N
         chkKD.setOpaque(false);
         chkKD.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -211,7 +205,7 @@ public class ConfParametros extends javax.swing.JPanel {
         buttonGroup2.add(chkKI);
         chkKI.setForeground(new java.awt.Color(255, 255, 255));
         chkKI.setSelected(true);
-        chkKI.setText(org.openide.util.NbBundle.getMessage(ConfParametros.class, "ConfParametros.chkKI.text")); // NOI18N
+        chkKI.setText(org.openide.util.NbBundle.getMessage(ConfParametrosCascata.class, "ConfParametrosCascata.chkKI.text")); // NOI18N
         chkKI.setOpaque(false);
         chkKI.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -221,7 +215,7 @@ public class ConfParametros extends javax.swing.JPanel {
 
         buttonGroup1.add(chkTD);
         chkTD.setForeground(new java.awt.Color(255, 255, 255));
-        chkTD.setText(org.openide.util.NbBundle.getMessage(ConfParametros.class, "ConfParametros.chkTD.text")); // NOI18N
+        chkTD.setText(org.openide.util.NbBundle.getMessage(ConfParametrosCascata.class, "ConfParametrosCascata.chkTD.text")); // NOI18N
         chkTD.setOpaque(false);
         chkTD.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -231,7 +225,7 @@ public class ConfParametros extends javax.swing.JPanel {
 
         buttonGroup2.add(chkTI);
         chkTI.setForeground(new java.awt.Color(255, 255, 255));
-        chkTI.setText(org.openide.util.NbBundle.getMessage(ConfParametros.class, "ConfParametros.chkTI.text")); // NOI18N
+        chkTI.setText(org.openide.util.NbBundle.getMessage(ConfParametrosCascata.class, "ConfParametrosCascata.chkTI.text")); // NOI18N
         chkTI.setOpaque(false);
         chkTI.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -257,19 +251,19 @@ public class ConfParametros extends javax.swing.JPanel {
                 .addGroup(panelGanhosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelGanhosLayout.createSequentialGroup()
                         .addGroup(panelGanhosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(textKD, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
+                            .addComponent(textKD, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)
                             .addGroup(panelGanhosLayout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(textKI, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)))
+                                .addComponent(textKI, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(panelGanhosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(chkTD)
                             .addComponent(chkTI))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(panelGanhosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(textTI, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
-                            .addComponent(textTD, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)))
-                    .addComponent(textKP, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE))
+                            .addComponent(textTI, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)
+                            .addComponent(textTD, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)))
+                    .addComponent(textKP, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE))
                 .addContainerGap())
         );
         panelGanhosLayout.setVerticalGroup(
@@ -296,71 +290,66 @@ public class ConfParametros extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        SeparatorCtrl.setOrientation(javax.swing.SwingConstants.VERTICAL);
-
-        buttonReload.setIcon(new javax.swing.ImageIcon(getClass().getResource("/r2d2e/solution/moduloteste/view/resources/reload.png"))); // NOI18N
-        buttonReload.setText(org.openide.util.NbBundle.getMessage(ConfParametros.class, "ConfParametros.buttonReload.text")); // NOI18N
-        buttonReload.setToolTipText(org.openide.util.NbBundle.getMessage(ConfParametros.class, "ConfParametros.buttonReload.toolTipText")); // NOI18N
-        buttonReload.setBorder(null);
-        buttonReload.setBorderPainted(false);
-        buttonReload.setContentAreaFilled(false);
-        buttonReload.addActionListener(new java.awt.event.ActionListener() {
+        chkIntCond.setForeground(new java.awt.Color(255, 255, 255));
+        chkIntCond.setSelected(true);
+        chkIntCond.setText(org.openide.util.NbBundle.getMessage(ConfParametrosCascata.class, "ConfParametrosCascata.chkIntCond.text")); // NOI18N
+        chkIntCond.setToolTipText(org.openide.util.NbBundle.getMessage(ConfParametrosCascata.class, "ConfParametrosCascata.chkIntCond.toolTipText")); // NOI18N
+        chkIntCond.setOpaque(false);
+        chkIntCond.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonReloadActionPerformed(evt);
+                chkIntCondActionPerformed(evt);
             }
         });
 
-        chkIntCond.setForeground(new java.awt.Color(255, 255, 255));
-        chkIntCond.setSelected(true);
-        chkIntCond.setText(org.openide.util.NbBundle.getMessage(ConfParametros.class, "ConfParametros.chkIntCond.text")); // NOI18N
-        chkIntCond.setToolTipText(org.openide.util.NbBundle.getMessage(ConfParametros.class, "ConfParametros.chkIntCond.toolTipText")); // NOI18N
-        chkIntCond.setOpaque(false);
-
         textSetPoint.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
         textSetPoint.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        textSetPoint.setText(org.openide.util.NbBundle.getMessage(ConfParametros.class, "ConfParametros.textSetPoint.text")); // NOI18N
-        textSetPoint.setToolTipText(org.openide.util.NbBundle.getMessage(ConfParametros.class, "ConfParametros.textSetPoint.toolTipText")); // NOI18N
+        textSetPoint.setText(org.openide.util.NbBundle.getMessage(ConfParametrosCascata.class, "ConfParametrosCascata.textSetPoint.text")); // NOI18N
+        textSetPoint.setToolTipText(org.openide.util.NbBundle.getMessage(ConfParametrosCascata.class, "ConfParametrosCascata.textSetPoint.toolTipText")); // NOI18N
+
+        SeparatorCtrl.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(labelTipoCtrl, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(comboControladores, 0, 135, Short.MAX_VALUE)
-                    .addComponent(labelSetPoint, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
-                    .addComponent(textSetPoint, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
-                    .addComponent(chkIntCond, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(labelTipoCtrl)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(comboControladores, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(34, 34, 34))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(labelSetPoint)
+                        .addGap(20, 20, 20))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(textSetPoint, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(SeparatorCtrl, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(panelGanhos, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
+                .addComponent(SeparatorCtrl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(buttonReload, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(panelGanhos, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(chkIntCond)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(SeparatorCtrl)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addComponent(labelTipoCtrl)
-                            .addGap(4, 4, 4)
-                            .addComponent(comboControladores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(labelSetPoint)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(textSetPoint, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(chkIntCond)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(buttonReload)
-                        .addComponent(panelGanhos, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(SeparatorCtrl, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(labelTipoCtrl)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(comboControladores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(labelSetPoint)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(textSetPoint, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(chkIntCond))
+                    .addComponent(panelGanhos, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -381,98 +370,6 @@ public class ConfParametros extends javax.swing.JPanel {
         }
         ControlModeHandler.setControllerSelected(c);
     }//GEN-LAST:event_comboControladoresItemStateChanged
-
-    private void buttonReloadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonReloadActionPerformed
-        // TODO add your handling code here:
-
-        ControlModeHandler.updateVariables();
-        boolean chk = chkIntCond.isSelected();
-        ControlModeHandler.setIntegracaoCondi(chk);
-    }
-
-    public JComboBox getComboControladores() {
-        return comboControladores;
-    }
-
-    public void setComboControladores(JComboBox comboControladores) {
-        this.comboControladores = comboControladores;
-    }
-
-    public JFormattedTextField getTextKD() {
-        return textKD;
-    }
-
-    public void setTextKD(JFormattedTextField textKD) {
-        this.textKD = textKD;
-    }
-
-    public JFormattedTextField getTextKP() {
-        return textKP;
-    }
-
-    public void setTextKP(JFormattedTextField textKP) {
-        this.textKP = textKP;
-    }
-
-    public JFormattedTextField getTextSetPoint() {
-        return textSetPoint;
-    }
-
-    public JFormattedTextField getTextTD() {
-        return textTD;
-    }
-
-    public JFormattedTextField getTextTI() {
-        return textTI;
-    }
-
-    public JCheckBox getChkKD() {
-        return chkKD;
-    }
-
-    public void setChkKD(JCheckBox chkKD) {
-        this.chkKD = chkKD;
-    }
-
-    public JCheckBox getChkKI() {
-        return chkKI;
-    }
-
-    public void setChkKI(JCheckBox chkKI) {
-        this.chkKI = chkKI;
-    }
-
-    public JCheckBox getChkTD() {
-        return chkTD;
-    }
-
-    public void setChkTD(JCheckBox chkTD) {
-        this.chkTD = chkTD;
-    }
-
-    public JCheckBox getChkTI() {
-        return chkTI;
-    }
-
-    public void setChkTI(JCheckBox chkTI) {
-        this.chkTI = chkTI;
-    }
-
-    public JFormattedTextField getTextKI() {
-        return textKI;
-    }
-
-    public void setTextKI(JFormattedTextField textKI) {
-        this.textKI = textKI;
-    }
-
-    public JCheckBox getChkIntCond() {
-        return chkIntCond;
-    }
-
-    public void setTextSetPoint(JFormattedTextField textSetPoint) {
-        this.textSetPoint = textSetPoint;
-    }//GEN-LAST:event_buttonReloadActionPerformed
 
     private void chkKDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkKDActionPerformed
         // TODO add your handling code here:
@@ -501,11 +398,15 @@ public class ConfParametros extends javax.swing.JPanel {
         textKI.setEditable(!chkd);
         textTI.setEditable(chkd);
     }//GEN-LAST:event_chkTIActionPerformed
+
+    private void chkIntCondActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkIntCondActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_chkIntCondActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JSeparator SeparatorCtrl;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
-    private javax.swing.JButton buttonReload;
     private javax.swing.JCheckBox chkIntCond;
     private javax.swing.JCheckBox chkKD;
     private javax.swing.JCheckBox chkKI;

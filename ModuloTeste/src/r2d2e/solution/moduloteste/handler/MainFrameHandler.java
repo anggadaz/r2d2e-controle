@@ -1,7 +1,9 @@
 package r2d2e.solution.moduloteste.handler;
 
+import r2d2e.solution.moduloteste.domain.AlgController;
 import r2d2e.solution.moduloteste.domain.Quanser;
 import r2d2e.solution.moduloteste.domain.controlerInterface;
+import r2d2e.solution.moduloteste.view.ConfigControle;
 import r2d2e.solution.moduloteste.view.NovoFrame;
 import r2d2e.solution.moduloteste.view.OpcoesGerais;
 import r2d2e.solution.moduloteste.view.OpcoesGrafico;
@@ -25,7 +27,7 @@ public class MainFrameHandler {
         quanser = new Quanser();
         testModeHandler = new TestModeHandler(mainFrame, quanser);
         controlModeHandler = new ControlModeHandler(mainFrame);
-       //updateWater = new UpdateWater(100, mainFrame.getTanquePanel(), );
+        //updateWater = new UpdateWater(100, mainFrame.getTanquePanel(), );
     }
 
     public void enterTestMode() {
@@ -48,8 +50,15 @@ public class MainFrameHandler {
 
         mode = CONTROL_MOD;
         // Trocar a carta
-        mainFrame.changeCardConf(NovoFrame.CARD_CONF_CONTROLE);
+
         mainFrame.changeCardMain(NovoFrame.CARD_MAIN_CONTROLE);
+
+        if (AlgController.CONTROLAR_TANQUE == ConfigControle.CONTROLE_DOIS_COM_CASCATA) {
+            mainFrame.changeCardConf(NovoFrame.CARD_CONF_CONTROLE_CASCATA);
+        } else {
+            mainFrame.changeCardConf(NovoFrame.CARD_CONF_CONTROLE);
+        }
+
     }
 
     public void play() {

@@ -17,7 +17,8 @@ package r2d2e.solution.moduloteste.view;
 public class ConfigControle extends javax.swing.JPanel {
 
     public static final int CONTROLE_UM = 1;
-    public static final int CONTROLE_DOIS = 2;
+    public static final int CONTROLE_DOIS_COM_CASCATA = 2;
+    public static final int CONTROLE_DOIS_SEM_CASCATA = 3;
 
     /** Creates new form Config */
     public ConfigControle() {
@@ -53,6 +54,11 @@ public class ConfigControle extends javax.swing.JPanel {
         buttonRadio.add(radio2);
         radio2.setText(org.openide.util.NbBundle.getMessage(ConfigControle.class, "ConfigControle.radio2.text")); // NOI18N
         radio2.setOpaque(false);
+        radio2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radio2ActionPerformed(evt);
+            }
+        });
 
         chkCascata.setText(org.openide.util.NbBundle.getMessage(ConfigControle.class, "ConfigControle.chkCascata.text")); // NOI18N
         chkCascata.setEnabled(false);
@@ -82,9 +88,18 @@ public class ConfigControle extends javax.swing.JPanel {
                 .addComponent(radio2)
                 .addGap(3, 3, 3)
                 .addComponent(chkCascata)
-                .addContainerGap(7, Short.MAX_VALUE))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void radio2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radio2ActionPerformed
+        // TODO add your handling code here:
+        if (radio2.isSelected()) {
+            chkCascata.setEnabled(true);
+        } else {
+            chkCascata.setEnabled(false);
+        }
+    }//GEN-LAST:event_radio2ActionPerformed
 
     public int getSelectedControl() {
 
@@ -93,7 +108,10 @@ public class ConfigControle extends javax.swing.JPanel {
         if (sel1) {
             return CONTROLE_UM;
         }
-        return CONTROLE_DOIS;
+        if (chkCascata.isSelected()) {
+            return CONTROLE_DOIS_COM_CASCATA;
+        }
+        return CONTROLE_DOIS_SEM_CASCATA;
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonRadio;
