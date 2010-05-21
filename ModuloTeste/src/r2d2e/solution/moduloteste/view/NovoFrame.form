@@ -401,7 +401,7 @@
                 </Constraint>
               </Constraints>
             </Component>
-            <Component class="r2d2e.solution.moduloteste.view.ConfParametros" name="confControle">
+            <Component class="r2d2e.solution.moduloteste.view.ConfParametros" name="confParametroNormal">
               <Properties>
                 <Property name="opaque" type="boolean" value="false"/>
               </Properties>
@@ -434,9 +434,9 @@
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="confParametroMestre" pref="473" max="32767" attributes="0"/>
+                          <Component id="confParametroMaster" pref="473" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="confParametrosEscravo" pref="474" max="32767" attributes="0"/>
+                          <Component id="confParametrosSlave" pref="474" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -444,19 +444,19 @@
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                          <Component id="confParametroMestre" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="confParametrosEscravo" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="confParametroMaster" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="confParametrosSlave" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Component class="r2d2e.solution.moduloteste.view.ConfParametros" name="confParametroMestre">
+                <Component class="r2d2e.solution.moduloteste.view.ConfParametros" name="confParametroMaster">
                   <Properties>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                         <TitledBorder title="Mestre">
-                          <ResourceString PropertyName="titleX" bundle="r2d2e/solution/moduloteste/view/Bundle.properties" key="NovoFrame.confParametroMestre.border.title" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
+                          <ResourceString PropertyName="titleX" bundle="r2d2e/solution/moduloteste/view/Bundle.properties" key="NovoFrame.confParametroMaster.border.title" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
                           <Color PropertyName="color" blue="ff" green="ff" red="ff" type="rgb"/>
                         </TitledBorder>
                       </Border>
@@ -473,12 +473,12 @@
                     </Property>
                   </Properties>
                 </Component>
-                <Component class="r2d2e.solution.moduloteste.view.ConfParametros" name="confParametrosEscravo">
+                <Component class="r2d2e.solution.moduloteste.view.ConfParametros" name="confParametrosSlave">
                   <Properties>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                         <TitledBorder title="Escravo">
-                          <ResourceString PropertyName="titleX" bundle="r2d2e/solution/moduloteste/view/Bundle.properties" key="NovoFrame.confParametrosEscravo.border.title" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
+                          <ResourceString PropertyName="titleX" bundle="r2d2e/solution/moduloteste/view/Bundle.properties" key="NovoFrame.confParametrosSlave.border.title" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
                           <Color PropertyName="color" blue="ff" green="ff" red="ff" type="rgb"/>
                         </TitledBorder>
                       </Border>

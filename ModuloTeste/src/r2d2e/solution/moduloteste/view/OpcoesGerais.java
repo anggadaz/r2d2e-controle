@@ -13,8 +13,11 @@ package r2d2e.solution.moduloteste.view;
 import java.awt.CardLayout;
 import java.net.URL;
 import javax.swing.ImageIcon;
+import r2d2e.solution.moduloteste.controlers.ControllerCascade;
 import r2d2e.solution.moduloteste.domain.AlgController;
 import r2d2e.solution.moduloteste.domain.Quanser;
+import r2d2e.solution.moduloteste.handler.ControlModeHandler;
+import r2d2e.solution.moduloteste.handler.MainFrameHandler;
 
 /**
  *
@@ -25,11 +28,14 @@ public class OpcoesGerais extends javax.swing.JDialog {
     private final static String CARD_CONFIGURACAO = "card_configuracao";
     private final static String CARD_CALIBRACAO = "card_calibracao";
     private final static String CARD_SERVIDOR = "card_servidor";
+    private NovoFrame novoFrame;
 
     /** Creates new form OpcoesGerais */
     public OpcoesGerais(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+
+        novoFrame = (NovoFrame) parent;
 
         URL imgURL = getClass().getResource("/r2d2e/solution/moduloteste/view/resources/r2d2e.jpg");
 
@@ -43,7 +49,7 @@ public class OpcoesGerais extends javax.swing.JDialog {
 
         textTanque1.setText(Double.toString(cal1));
         textTanque2.setText(Double.toString(cal2));
-        
+
         textIP.setText(ip);
     }
 
@@ -288,7 +294,7 @@ public class OpcoesGerais extends javax.swing.JDialog {
 
     private void buttonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSalvarActionPerformed
         // TODO add your handling code here:
-        
+
         String cal1 = textTanque1.getText();
         String cal2 = textTanque2.getText();
         String ip = textIP.getText();
@@ -301,6 +307,17 @@ public class OpcoesGerais extends javax.swing.JDialog {
         Quanser.setIP_QUANSER(ip);
 
         AlgController.CONTROLAR_TANQUE = configControle.getSelectedControl();
+
+        if (configControle.getRadio1().isSelected()) {
+            novoFrame.changeCardConf(NovoFrame.CARD_CONF_CONTROLE);
+        } else {
+            if (configControle.getRadio2().isSelected() && configControle.getChkCascata().isSelected()) {
+                novoFrame.changeCardConf(NovoFrame.CARD_CONF_CONTROLE_CASCATA);
+                ControlModeHandler.setControllerSelected(new ControllerCascade(ConfParametros.SAMPLE_RATE, 15d));
+            } else {
+                novoFrame.changeCardConf(NovoFrame.CARD_CONF_CONTROLE);
+            }
+        }
     }//GEN-LAST:event_buttonSalvarActionPerformed
 
     private void buttonConfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonConfActionPerformed
@@ -321,7 +338,7 @@ public class OpcoesGerais extends javax.swing.JDialog {
         return numb.replace(",", ".");
     }
 
-    private void changeCard(String card){
+    private void changeCard(String card) {
         CardLayout cardLayout = (CardLayout) panelCard.getLayout();
         cardLayout.show(panelCard, card);
     }

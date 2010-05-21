@@ -30,7 +30,7 @@ import r2d2e.solution.moduloteste.handler.ControlModeHandler;
  */
 public class ConfParametros extends javax.swing.JPanel {
 
-    private double sampleRate = 0.1;
+    public static double SAMPLE_RATE = 0.1;
 
     /** Creates new form ConfControle */
     public ConfParametros() {
@@ -38,7 +38,7 @@ public class ConfParametros extends javax.swing.JPanel {
         popularComboBox();
         setP();
 
-        ControlModeHandler.setControllerSelected((Controller) comboControladores.getItemAt(0));
+//        ControlModeHandler.setControllerSelected((Controller) comboControladores.getItemAt(0));
     }
 
     public ConfParametros(String title){
@@ -54,11 +54,11 @@ public class ConfParametros extends javax.swing.JPanel {
         text = ControlModeHandler.fixNumber(text);
         double sp = Double.parseDouble(text);
 
-        controllers.add(new PController(sampleRate, sp));
-        controllers.add(new PDController(sampleRate, sp));
-        controllers.add(new PIController(sampleRate, sp));
-        controllers.add(new PIDController(sampleRate, sp));
-        controllers.add(new PID2Controller(sampleRate, sp));
+        controllers.add(new PController(SAMPLE_RATE, sp));
+        controllers.add(new PDController(SAMPLE_RATE, sp));
+        controllers.add(new PIController(SAMPLE_RATE, sp));
+        controllers.add(new PIDController(SAMPLE_RATE, sp));
+        controllers.add(new PID2Controller(SAMPLE_RATE, sp));
 
         DefaultComboBoxModel boxModel = new DefaultComboBoxModel(controllers);
 
@@ -327,7 +327,7 @@ public class ConfParametros extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(labelTipoCtrl, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(comboControladores, 0, 135, Short.MAX_VALUE)
                     .addComponent(labelSetPoint, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
@@ -355,8 +355,7 @@ public class ConfParametros extends javax.swing.JPanel {
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(textSetPoint, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(chkIntCond)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                            .addComponent(chkIntCond)))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(buttonReload)
                         .addComponent(panelGanhos, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -379,7 +378,7 @@ public class ConfParametros extends javax.swing.JPanel {
         if (c instanceof PIDController || c instanceof PID2Controller) {
             setPID();
         }
-        ControlModeHandler.setControllerSelected(c);
+//        ControlModeHandler.setControllerSelected(c);
     }//GEN-LAST:event_comboControladoresItemStateChanged
 
     private void buttonReloadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonReloadActionPerformed
@@ -468,6 +467,10 @@ public class ConfParametros extends javax.swing.JPanel {
 
     public JCheckBox getChkIntCond() {
         return chkIntCond;
+    }
+
+    public Controller getSelectedController(){
+        return (Controller) comboControladores.getSelectedItem();
     }
 
     public void setTextSetPoint(JFormattedTextField textSetPoint) {

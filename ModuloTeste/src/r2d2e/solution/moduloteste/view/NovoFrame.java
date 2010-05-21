@@ -1,6 +1,7 @@
 package r2d2e.solution.moduloteste.view;
 
 import java.awt.CardLayout;
+import java.awt.Dimension;
 import java.net.URL;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -20,11 +21,9 @@ public class NovoFrame extends javax.swing.JFrame {
     public static final String CARD_CONF_TESTE = "cardConfTeste";
     public static final String CARD_CONF_CONTROLE = "cardConfControle";
     public static final String CARD_CONF_CONTROLE_CASCATA = "cardCascata";
-
     public static final String CARD_MAIN_TESTE = "cardMainTeste";
     public static final String CARD_MAIN_CONTROLE = "cardMainControle";
-
-    public static JanelaGraficos JANELA_EXTRA= new JanelaGraficos(null, false);
+    public static JanelaGraficos JANELA_EXTRA = new JanelaGraficos(null, false);
 
     public NovoFrame() {
         initComponents();
@@ -36,7 +35,7 @@ public class NovoFrame extends javax.swing.JFrame {
 
         setLocationRelativeTo(null);
 
-        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        setMinimumSize(new Dimension(getWidth(), getHeight() + 60));
 
         Splash.getInstance().finalizaSplash();
     }
@@ -103,10 +102,10 @@ public class NovoFrame extends javax.swing.JFrame {
         controlPanel = new r2d2e.solution.moduloteste.view.ControlPanel();
         opcoesPanel = new javax.swing.JPanel();
         confTeste = new r2d2e.solution.moduloteste.view.ConfTeste();
-        confControle = new r2d2e.solution.moduloteste.view.ConfParametros();
+        confParametroNormal = new r2d2e.solution.moduloteste.view.ConfParametros();
         panelCascata = new javax.swing.JPanel();
-        confParametroMestre = new r2d2e.solution.moduloteste.view.ConfParametros();
-        confParametrosEscravo = new r2d2e.solution.moduloteste.view.ConfParametros();
+        confParametroMaster = new r2d2e.solution.moduloteste.view.ConfParametros();
+        confParametrosSlave = new r2d2e.solution.moduloteste.view.ConfParametros();
         menuBar = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         menuSair = new javax.swing.JMenuItem();
@@ -266,41 +265,41 @@ public class NovoFrame extends javax.swing.JFrame {
         confTeste.setOpaque(false);
         opcoesPanel.add(confTeste, "cardConfTeste");
 
-        confControle.setOpaque(false);
-        opcoesPanel.add(confControle, "cardConfControle");
+        confParametroNormal.setOpaque(false);
+        opcoesPanel.add(confParametroNormal, "cardConfControle");
 
         panelCascata.setMaximumSize(new java.awt.Dimension(424, 150));
         panelCascata.setMinimumSize(new java.awt.Dimension(424, 150));
         panelCascata.setOpaque(false);
         panelCascata.setPreferredSize(new java.awt.Dimension(424, 150));
 
-        confParametroMestre.setBorder(javax.swing.BorderFactory.createTitledBorder(null, org.openide.util.NbBundle.getMessage(NovoFrame.class, "NovoFrame.confParametroMestre.border.title"), javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(255, 255, 255))); // NOI18N
-        confParametroMestre.setMaximumSize(new java.awt.Dimension(353, 150));
-        confParametroMestre.setMinimumSize(new java.awt.Dimension(353, 150));
-        confParametroMestre.setOpaque(false);
-        confParametroMestre.setPreferredSize(new java.awt.Dimension(353, 150));
+        confParametroMaster.setBorder(javax.swing.BorderFactory.createTitledBorder(null, org.openide.util.NbBundle.getMessage(NovoFrame.class, "NovoFrame.confParametroMaster.border.title"), javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(255, 255, 255))); // NOI18N
+        confParametroMaster.setMaximumSize(new java.awt.Dimension(353, 150));
+        confParametroMaster.setMinimumSize(new java.awt.Dimension(353, 150));
+        confParametroMaster.setOpaque(false);
+        confParametroMaster.setPreferredSize(new java.awt.Dimension(353, 150));
 
-        confParametrosEscravo.setBorder(javax.swing.BorderFactory.createTitledBorder(null, org.openide.util.NbBundle.getMessage(NovoFrame.class, "NovoFrame.confParametrosEscravo.border.title"), javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(255, 255, 255))); // NOI18N
-        confParametrosEscravo.setMaximumSize(new java.awt.Dimension(353, 150));
-        confParametrosEscravo.setMinimumSize(new java.awt.Dimension(353, 150));
-        confParametrosEscravo.setOpaque(false);
-        confParametrosEscravo.setPreferredSize(new java.awt.Dimension(353, 150));
+        confParametrosSlave.setBorder(javax.swing.BorderFactory.createTitledBorder(null, org.openide.util.NbBundle.getMessage(NovoFrame.class, "NovoFrame.confParametrosSlave.border.title"), javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(255, 255, 255))); // NOI18N
+        confParametrosSlave.setMaximumSize(new java.awt.Dimension(353, 150));
+        confParametrosSlave.setMinimumSize(new java.awt.Dimension(353, 150));
+        confParametrosSlave.setOpaque(false);
+        confParametrosSlave.setPreferredSize(new java.awt.Dimension(353, 150));
 
         javax.swing.GroupLayout panelCascataLayout = new javax.swing.GroupLayout(panelCascata);
         panelCascata.setLayout(panelCascataLayout);
         panelCascataLayout.setHorizontalGroup(
             panelCascataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelCascataLayout.createSequentialGroup()
-                .addComponent(confParametroMestre, javax.swing.GroupLayout.DEFAULT_SIZE, 473, Short.MAX_VALUE)
+                .addComponent(confParametroMaster, javax.swing.GroupLayout.DEFAULT_SIZE, 473, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(confParametrosEscravo, javax.swing.GroupLayout.DEFAULT_SIZE, 474, Short.MAX_VALUE)
+                .addComponent(confParametrosSlave, javax.swing.GroupLayout.DEFAULT_SIZE, 474, Short.MAX_VALUE)
                 .addContainerGap())
         );
         panelCascataLayout.setVerticalGroup(
             panelCascataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelCascataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(confParametroMestre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(confParametrosEscravo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(confParametroMaster, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(confParametrosSlave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         opcoesPanel.add(panelCascata, "cardCascata");
@@ -317,7 +316,7 @@ public class NovoFrame extends javax.swing.JFrame {
                     .addGroup(backgroundPanelLayout.createSequentialGroup()
                         .addComponent(tanquePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 707, Short.MAX_VALUE)))
+                        .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 707, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         backgroundPanelLayout.setVerticalGroup(
@@ -445,12 +444,28 @@ public class NovoFrame extends javax.swing.JFrame {
         layout.show(mainPanel, card);
     }
 
-    public ConfParametros getConfControle() {
-        return confControle;
+    public ConfParametros getConfParametroMaster() {
+        return confParametroMaster;
     }
 
-    public void setConfControle(ConfParametros confControle) {
-        this.confControle = confControle;
+    public void setConfParametroMaster(ConfParametros confParametroMaster) {
+        this.confParametroMaster = confParametroMaster;
+    }
+
+    public ConfParametros getConfParametrosSlave() {
+        return confParametrosSlave;
+    }
+
+    public void setConfParametrosSlave(ConfParametros confParametrosSlave) {
+        this.confParametrosSlave = confParametrosSlave;
+    }
+
+    public ConfParametros getConfParametroNormal() {
+        return confParametroNormal;
+    }
+
+    public void setConfParametroNormal(ConfParametros confParametroNormal) {
+        this.confParametroNormal = confParametroNormal;
     }
 
     /**
@@ -473,9 +488,9 @@ public class NovoFrame extends javax.swing.JFrame {
     private javax.swing.JButton buttonOpcoesGeral;
     private javax.swing.JButton buttonOpcoesGrafico;
     private javax.swing.JButton buttonParar;
-    private r2d2e.solution.moduloteste.view.ConfParametros confControle;
-    private r2d2e.solution.moduloteste.view.ConfParametros confParametroMestre;
-    private r2d2e.solution.moduloteste.view.ConfParametros confParametrosEscravo;
+    private r2d2e.solution.moduloteste.view.ConfParametros confParametroMaster;
+    private r2d2e.solution.moduloteste.view.ConfParametros confParametroNormal;
+    private r2d2e.solution.moduloteste.view.ConfParametros confParametrosSlave;
     private r2d2e.solution.moduloteste.view.ConfTeste confTeste;
     private r2d2e.solution.moduloteste.view.ControlPanel controlPanel;
     private javax.swing.JMenuItem itemSobre;
