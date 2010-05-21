@@ -10,6 +10,10 @@
  */
 package r2d2e.solution.moduloteste.view;
 
+import javax.swing.JCheckBox;
+import javax.swing.JRadioButton;
+import r2d2e.solution.moduloteste.domain.AlgController;
+
 /**
  *
  * @author demetrios
@@ -23,6 +27,18 @@ public class ConfigControle extends javax.swing.JPanel {
     /** Creates new form Config */
     public ConfigControle() {
         initComponents();
+
+        int controle = AlgController.CONTROLAR_TANQUE;
+
+        if (controle == ConfigControle.CONTROLE_UM) {
+            radio1.setSelected(true);
+        } else {
+            radio2.setSelected(true);
+            chkCascata.setEnabled(true);
+            if (controle == ConfigControle.CONTROLE_DOIS_COM_CASCATA) {
+                chkCascata.setSelected(true);
+            }
+        }
     }
 
     /** This method is called from within the constructor to
@@ -112,6 +128,30 @@ public class ConfigControle extends javax.swing.JPanel {
             return CONTROLE_DOIS_COM_CASCATA;
         }
         return CONTROLE_DOIS_SEM_CASCATA;
+    }
+
+    public JCheckBox getChkCascata() {
+        return chkCascata;
+    }
+
+    public void setChkCascata(JCheckBox chkCascata) {
+        this.chkCascata = chkCascata;
+    }
+
+    public JRadioButton getRadio1() {
+        return radio1;
+    }
+
+    public void setRadio1(JRadioButton radio1) {
+        this.radio1 = radio1;
+    }
+
+    public JRadioButton getRadio2() {
+        return radio2;
+    }
+
+    public void setRadio2(JRadioButton radio2) {
+        this.radio2 = radio2;
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonRadio;

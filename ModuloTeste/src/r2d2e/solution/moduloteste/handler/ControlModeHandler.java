@@ -15,6 +15,7 @@ import r2d2e.solution.moduloteste.domain.graph.GraphControl;
 import r2d2e.solution.moduloteste.domain.graph.GraphAction;
 import r2d2e.solution.moduloteste.domain.graph.IGraphTime;
 import r2d2e.solution.moduloteste.view.ConfParametros;
+import r2d2e.solution.moduloteste.view.ConfigControle;
 import r2d2e.solution.moduloteste.view.ControlPanel;
 import r2d2e.solution.moduloteste.view.Modo3;
 import r2d2e.solution.moduloteste.view.NovoFrame;
@@ -28,12 +29,14 @@ public class ControlModeHandler {
 
     private static TanquePanel tanquePanel;
     private static ControlPanel controlPanel;
-    private static ConfParametros confControle;
     private static AlgController algController;
     public static GraphNivel graphNivel;
     public static GraphControl graphTensao1;
     public static GraphAction graphTensao2;
     private static Controller controllerSelected;
+    private static ConfParametros parametroNormal;
+    private static ConfParametros parametrosMaster;
+    private static ConfParametros parametrosSlave;
 
     public static void setIntegracaoCondi(boolean chk) {
         if (algController != null) {
@@ -41,10 +44,71 @@ public class ControlModeHandler {
         }
     }
 
+    private static Controller UpdateParametros(Double nivelNumb,ConfParametros parametros,Controller controller) throws NumberFormatException {
+        if (controllerSelected instanceof PController) {
+            String kp = parametros.getTextKP().getText();
+            //            nivel = fixNumber(nivel);
+            kp = fixNumber(kp);
+            controllerSelected.setSetPoint(nivelNumb);
+            ((PController) controllerSelected).setKp(Double.parseDouble(kp));
+        }
+        if (controllerSelected instanceof PDController) {
+            String kp = parametros.getTextKP().getText();
+            String kd = getKdValue(parametros);
+            //            nivel = fixNumber(nivel);
+            kp = fixNumber(kp);
+            kd = fixNumber(kd);
+            controllerSelected.setSetPoint(nivelNumb);
+            ((PDController) controllerSelected).setKp(Double.parseDouble(kp));
+            ((PDController) controllerSelected).setKd(Double.parseDouble(kd));
+        }
+        if (controllerSelected instanceof PIController) {
+            String kp = parametros.getTextKP().getText();
+            String ki = getKIValue(parametros);
+            //            nivel = fixNumber(nivel);
+            kp = fixNumber(kp);
+            ki = fixNumber(ki);
+            controllerSelected.setSetPoint(nivelNumb);
+            ((PIController) controllerSelected).setKp(Double.parseDouble(kp));
+            ((PIController) controllerSelected).setKi(Double.parseDouble(ki));
+        }
+        if (controllerSelected instanceof PIDController) {
+            String kp = parametros.getTextKP().getText();
+            String ki = getKIValue(parametros);
+            String kd = getKdValue(parametros);
+            //            nivel = fixNumber(nivel);
+            kp = fixNumber(kp);
+            ki = fixNumber(ki);
+            kd = fixNumber(kd);
+            controllerSelected.setSetPoint(nivelNumb);
+            ((PIDController) controllerSelected).setKp(Double.parseDouble(kp));
+            ((PIDController) controllerSelected).setKi(Double.parseDouble(ki));
+            ((PIDController) controllerSelected).setKd(Double.parseDouble(kd));
+        }
+        if (controllerSelected instanceof PID2Controller) {
+            String kp = parametros.getTextKP().getText();
+            String ki = getKIValue(parametros);
+            String kd2 = getKdValue(parametros);
+            //            nivel = fixNumber(nivel);
+            kp = fixNumber(kp);
+            ki = fixNumber(ki);
+            kd2 = fixNumber(kd2);
+            controllerSelected.setSetPoint(nivelNumb);
+            ((PID2Controller) controllerSelected).setKp(Double.parseDouble(kp));
+            ((PID2Controller) controllerSelected).setKi(Double.parseDouble(ki));
+            ((PID2Controller) controllerSelected).setKd2(Double.parseDouble(kd2));
+        }
+        return controller;
+    }
+
     public ControlModeHandler(NovoFrame frame) {
         tanquePanel = frame.getTanquePanel();
         controlPanel = frame.getControlPanel();
-        confControle = frame.getConfControle();
+
+        parametroNormal = frame.getConfParametroNormal();
+        parametrosMaster = frame.getConfParametroMaster();
+        parametrosSlave = frame.getConfParametrosSlave();
+
         initChart();
     }
 
@@ -61,19 +125,11 @@ public class ControlModeHandler {
         return new IGraphTime[]{graphNivel, graphTensao1, graphTensao2};
     }
 
-    public static Controller getControllerSelected() {
-        return controllerSelected;
-    }
-
-    public static void setControllerSelected(Controller control) {
-        controllerSelected = control;
-    }
-
     private static Double getSetPoint() {
-        String nivel = confControle.getTextSetPoint().getText();
+        String nivel = parametroNormal.getTextSetPoint().getText();
         nivel = fixNumber(nivel);
 
-        if(nivel != null) {
+        if (nivel != null) {
             return Double.parseDouble(nivel);
         }
 
@@ -81,76 +137,32 @@ public class ControlModeHandler {
 
     }
 
+    public static Controller getControllerSelected() {
+        return controllerSelected;
+    }
+
+    public static void setControllerSelected(Controller controllerSelected) {
+        ControlModeHandler.controllerSelected = controllerSelected;
+    }
+
     public static void updateVariables() {
 
         Double nivelNumb = getSetPoint();
 
         //updateSetPointAnterior(getSetPoint());
+        if (AlgController.CONTROLAR_TANQUE == ConfigControle.CONTROLE_DOIS_COM_CASCATA) {
 
-        if (controllerSelected instanceof PController) {
+            Controller controllerMaster = parametrosMaster.getSelectedController();
+            Controller controllerSlave = parametrosSlave.getSelectedController();
 
-            String kp = confControle.getTextKP().getText();
+        } else {
 
-//            nivel = fixNumber(nivel);
-            kp = fixNumber(kp);
-
-            controllerSelected.setSetPoint(nivelNumb);
-            ((PController) controllerSelected).setKp(Double.parseDouble(kp));
+            Controller control = parametroNormal.getSelectedController();
+            controllerSelected = UpdateParametros(nivelNumb,parametroNormal,control);
         }
-        if (controllerSelected instanceof PDController) {
-            String kp = confControle.getTextKP().getText();
-            String kd = getKdValue();
 
-//            nivel = fixNumber(nivel);
-            kp = fixNumber(kp);
-            kd = fixNumber(kd);
 
-            controllerSelected.setSetPoint(nivelNumb);
-            ((PDController) controllerSelected).setKp(Double.parseDouble(kp));
-            ((PDController) controllerSelected).setKd(Double.parseDouble(kd));
-        }
-        if (controllerSelected instanceof PIController) {
-            String kp = confControle.getTextKP().getText();
-            String ki = getKIValue();
 
-//            nivel = fixNumber(nivel);
-            kp = fixNumber(kp);
-            ki = fixNumber(ki);
-
-            controllerSelected.setSetPoint(nivelNumb);
-            ((PIController) controllerSelected).setKp(Double.parseDouble(kp));
-            ((PIController) controllerSelected).setKi(Double.parseDouble(ki));
-        }
-        if (controllerSelected instanceof PIDController) {
-            String kp = confControle.getTextKP().getText();
-            String ki = getKIValue();
-            String kd = getKdValue();
-
-//            nivel = fixNumber(nivel);
-            kp = fixNumber(kp);
-            ki = fixNumber(ki);
-            kd = fixNumber(kd);
-
-            controllerSelected.setSetPoint(nivelNumb);
-            ((PIDController) controllerSelected).setKp(Double.parseDouble(kp));
-            ((PIDController) controllerSelected).setKi(Double.parseDouble(ki));
-            ((PIDController) controllerSelected).setKd(Double.parseDouble(kd));
-        }
-        if (controllerSelected instanceof PID2Controller) {
-            String kp = confControle.getTextKP().getText();
-            String ki = getKIValue();
-            String kd2 = getKdValue();
-
-//            nivel = fixNumber(nivel);
-            kp = fixNumber(kp);
-            ki = fixNumber(ki);
-            kd2 = fixNumber(kd2);
-
-            controllerSelected.setSetPoint(nivelNumb);
-            ((PID2Controller) controllerSelected).setKp(Double.parseDouble(kp));
-            ((PID2Controller) controllerSelected).setKi(Double.parseDouble(ki));
-            ((PID2Controller) controllerSelected).setKd2(Double.parseDouble(kd2));
-        }
         if (algController != null) {
             algController.setController(controllerSelected);
             algController.atualizarCriterioAcomodacao();
@@ -160,7 +172,7 @@ public class ControlModeHandler {
     }
 
     public void init(Quanser quanser) {
-        boolean ok = confControle.getChkIntCond().isSelected();
+        boolean ok = parametroNormal.getChkIntCond().isSelected();
         algController = new AlgController(100, controllerSelected, tanquePanel, quanser, ok);
         algController.start();
         graphNivel.clear();
@@ -178,60 +190,60 @@ public class ControlModeHandler {
     }
 
     public static void updateKD() {
-        String d = confControle.getTextTD().getText();
-        confControle.getTextKD().setText(d);
+        String d = parametroNormal.getTextTD().getText();
+        parametroNormal.getTextKD().setText(d);
     }
 
     public static void updateKI() {
-        String ti = confControle.getTextTI().getText();
+        String ti = parametroNormal.getTextTI().getText();
         if (ti != null && !ti.isEmpty()) {
             ti = fixNumber(ti);
             double d = Double.parseDouble(ti);
             Double resultado = 1.0 / d;
-            confControle.getTextKI().setText(resultado.toString());
+            parametroNormal.getTextKI().setText(resultado.toString());
         }
-        System.out.println("ki2 " + confControle.getTextKI().getText());
-        System.out.println("ti2 " + confControle.getTextTI().getText());
+        System.out.println("ki2 " + parametroNormal.getTextKI().getText());
+        System.out.println("ti2 " + parametroNormal.getTextTI().getText());
     }
 
     public static void updateTD() {
-        String kd = confControle.getTextKD().getText();
-        confControle.getTextTD().setText(kd);
+        String kd = parametroNormal.getTextKD().getText();
+        parametroNormal.getTextTD().setText(kd);
     }
 
     public static void updateTI() {
-        String td = confControle.getTextKI().getText();
+        String td = parametroNormal.getTextKI().getText();
         if (td != null && !td.isEmpty()) {
             td = fixNumber(td);
             double d = Double.parseDouble(td);
             Double resultado = 1.0 / d;
-            confControle.getTextTI().setText(resultado.toString());
+            parametroNormal.getTextTI().setText(resultado.toString());
         }
-        System.out.println("ki " + confControle.getTextKI().getText());
-        System.out.println("ti " + confControle.getTextTI().getText());
+        System.out.println("ki " + parametroNormal.getTextKI().getText());
+        System.out.println("ti " + parametroNormal.getTextTI().getText());
 
     }
 
-    private static String getKdValue() {
-        boolean ok = confControle.getChkKD().isSelected();
+    private static String getKdValue(ConfParametros parametros) {
+        boolean ok = parametros.getChkKD().isSelected();
         String kd = null;
         if (ok) {
-            kd = confControle.getTextKD().getText();
+            kd = parametros.getTextKD().getText();
         } else {
-            kd = confControle.getTextTD().getText();
+            kd = parametros.getTextTD().getText();
         }
         kd = fixNumber(kd);
         return kd;
     }
 
-    private static String getKIValue() {
-        boolean ok = confControle.getChkKI().isSelected();
+    private static String getKIValue(ConfParametros parametros) {
+        boolean ok = parametros.getChkKI().isSelected();
         String ki = null;
         if (ok) {
-            ki = confControle.getTextKI().getText();
+            ki = parametros.getTextKI().getText();
             ki = fixNumber(ki);
         } else {
-            String ti = confControle.getTextTI().getText();
+            String ti = parametros.getTextTI().getText();
             ti = fixNumber(ti);
             double d = Double.parseDouble(ti);
             Double resultado = 1.0 / d;
