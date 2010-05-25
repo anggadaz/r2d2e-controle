@@ -37,7 +37,7 @@ public class ControlPanel extends javax.swing.JPanel {
             modo.clear();
         }
 
-        switch(ConfigGraph.MODO) {
+        switch(ControlModeHandler.configGraph.MODO) {
             case 1:
                 modo = modo1;
                 changeCard(CARD_MODO1);
@@ -60,8 +60,8 @@ public class ControlPanel extends javax.swing.JPanel {
 
         int gIx = 0;
 
-        for (int i = 0; i < ConfigGraph.MODO; i++) {
-            gIx = ConfigGraph.GRAFICOS[i];
+        for (int i = 0; i < ControlModeHandler.configGraph.MODO; i++) {
+            gIx = ControlModeHandler.configGraph.GRAFICOS[i];
             modo.addChart(i, graphs[gIx].getChart());
         }
     }

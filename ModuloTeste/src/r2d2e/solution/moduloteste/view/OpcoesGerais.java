@@ -1,9 +1,4 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/*
  * OpcoesGerais.java
  *
  * Created on 08/04/2010, 11:34:27
@@ -13,11 +8,9 @@ package r2d2e.solution.moduloteste.view;
 import java.awt.CardLayout;
 import java.net.URL;
 import javax.swing.ImageIcon;
-import r2d2e.solution.moduloteste.controlers.ControllerCascade;
-import r2d2e.solution.moduloteste.domain.AlgController;
-import r2d2e.solution.moduloteste.domain.Quanser;
+import r2d2e.solution.moduloteste.domain.ConfigGerais;
 import r2d2e.solution.moduloteste.handler.ControlModeHandler;
-import r2d2e.solution.moduloteste.handler.MainFrameHandler;
+import r2d2e.solution.moduloteste.handler.SUtil;
 
 /**
  *
@@ -28,29 +21,24 @@ public class OpcoesGerais extends javax.swing.JDialog {
     private final static String CARD_CONFIGURACAO = "card_configuracao";
     private final static String CARD_CALIBRACAO = "card_calibracao";
     private final static String CARD_SERVIDOR = "card_servidor";
+
     private NovoFrame novoFrame;
+    private boolean modificado = false;
 
     /** Creates new form OpcoesGerais */
     public OpcoesGerais(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
 
-        novoFrame = (NovoFrame) parent;
-
         URL imgURL = getClass().getResource("/r2d2e/solution/moduloteste/view/resources/r2d2e.jpg");
 
         setIconImage(new ImageIcon(imgURL).getImage());
         setLocationRelativeTo(parent);
 
-        double cal1 = Quanser.getCALIBRATION1();
-        double cal2 = Quanser.getCALIBRATION2();
+        novoFrame = (NovoFrame) parent;
 
-        String ip = Quanser.getIP_QUANSER();
-
-        textTanque1.setText(Double.toString(cal1));
-        textTanque2.setText(Double.toString(cal2));
-
-        textIP.setText(ip);
+        changeCard(CARD_CONFIGURACAO);
+        getConfig();
     }
 
     /** This method is called from within the constructor to
@@ -63,17 +51,19 @@ public class OpcoesGerais extends javax.swing.JDialog {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
-        buttonGroup2 = new javax.swing.ButtonGroup();
         buttonSalvar = new javax.swing.JButton();
         buttonFechar = new javax.swing.JButton();
         panelCard = new javax.swing.JPanel();
-        configControle = new r2d2e.solution.moduloteste.view.ConfigControle();
+        panelConfiguracao = new javax.swing.JPanel();
+        rbTanque1 = new javax.swing.JRadioButton();
+        rbTanque2 = new javax.swing.JRadioButton();
+        cbCascata = new javax.swing.JCheckBox();
         panelCalibracao = new javax.swing.JPanel();
         labelTanque1 = new javax.swing.JLabel();
         textTanque1 = new javax.swing.JFormattedTextField();
         labelTanque2 = new javax.swing.JLabel();
         textTanque2 = new javax.swing.JFormattedTextField();
-        chkCalibracaoInicial = new javax.swing.JCheckBox();
+        cbCalibracaoInicial = new javax.swing.JCheckBox();
         panelServidor = new javax.swing.JPanel();
         textIP = new javax.swing.JTextField();
         labelIP = new javax.swing.JLabel();
@@ -111,7 +101,60 @@ public class OpcoesGerais extends javax.swing.JDialog {
         });
 
         panelCard.setLayout(new java.awt.CardLayout());
-        panelCard.add(configControle, "card_configuracao");
+
+        panelConfiguracao.setBackground(new java.awt.Color(0, 0, 0));
+        panelConfiguracao.setBorder(javax.swing.BorderFactory.createTitledBorder(org.openide.util.NbBundle.getMessage(OpcoesGerais.class, "OpcoesGerais.panelConfiguracao.border.title"))); // NOI18N
+        panelConfiguracao.setMaximumSize(new java.awt.Dimension(217, 149));
+        panelConfiguracao.setOpaque(false);
+        panelConfiguracao.setPreferredSize(new java.awt.Dimension(217, 149));
+
+        buttonGroup1.add(rbTanque1);
+        rbTanque1.setSelected(true);
+        rbTanque1.setText(org.openide.util.NbBundle.getMessage(OpcoesGerais.class, "OpcoesGerais.rbTanque1.text")); // NOI18N
+        rbTanque1.setToolTipText(org.openide.util.NbBundle.getMessage(OpcoesGerais.class, "OpcoesGerais.rbTanque1.toolTipText")); // NOI18N
+        rbTanque1.setOpaque(false);
+
+        buttonGroup1.add(rbTanque2);
+        rbTanque2.setText(org.openide.util.NbBundle.getMessage(OpcoesGerais.class, "OpcoesGerais.rbTanque2.text")); // NOI18N
+        rbTanque2.setOpaque(false);
+        rbTanque2.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                rbTanque2ItemStateChanged(evt);
+            }
+        });
+
+        cbCascata.setText(org.openide.util.NbBundle.getMessage(OpcoesGerais.class, "OpcoesGerais.cbCascata.text")); // NOI18N
+        cbCascata.setEnabled(false);
+        cbCascata.setOpaque(false);
+
+        javax.swing.GroupLayout panelConfiguracaoLayout = new javax.swing.GroupLayout(panelConfiguracao);
+        panelConfiguracao.setLayout(panelConfiguracaoLayout);
+        panelConfiguracaoLayout.setHorizontalGroup(
+            panelConfiguracaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelConfiguracaoLayout.createSequentialGroup()
+                .addGroup(panelConfiguracaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelConfiguracaoLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(panelConfiguracaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(rbTanque1, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
+                            .addComponent(rbTanque2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelConfiguracaoLayout.createSequentialGroup()
+                        .addGap(68, 68, 68)
+                        .addComponent(cbCascata, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        panelConfiguracaoLayout.setVerticalGroup(
+            panelConfiguracaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelConfiguracaoLayout.createSequentialGroup()
+                .addComponent(rbTanque1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(rbTanque2)
+                .addGap(3, 3, 3)
+                .addComponent(cbCascata)
+                .addContainerGap(20, Short.MAX_VALUE))
+        );
+
+        panelCard.add(panelConfiguracao, "card5");
 
         panelCalibracao.setBorder(javax.swing.BorderFactory.createTitledBorder(org.openide.util.NbBundle.getMessage(OpcoesGerais.class, "OpcoesGerais.panelCalibracao.border.title"))); // NOI18N
 
@@ -129,8 +172,8 @@ public class OpcoesGerais extends javax.swing.JDialog {
         textTanque2.setText(org.openide.util.NbBundle.getMessage(OpcoesGerais.class, "OpcoesGerais.textTanque2.text")); // NOI18N
         textTanque2.setToolTipText(org.openide.util.NbBundle.getMessage(OpcoesGerais.class, "OpcoesGerais.textTanque2.toolTipText")); // NOI18N
 
-        chkCalibracaoInicial.setSelected(true);
-        chkCalibracaoInicial.setText(org.openide.util.NbBundle.getMessage(OpcoesGerais.class, "OpcoesGerais.chkCalibracaoInicial.text")); // NOI18N
+        cbCalibracaoInicial.setSelected(true);
+        cbCalibracaoInicial.setText(org.openide.util.NbBundle.getMessage(OpcoesGerais.class, "OpcoesGerais.cbCalibracaoInicial.text")); // NOI18N
 
         javax.swing.GroupLayout panelCalibracaoLayout = new javax.swing.GroupLayout(panelCalibracao);
         panelCalibracao.setLayout(panelCalibracaoLayout);
@@ -139,7 +182,7 @@ public class OpcoesGerais extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelCalibracaoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelCalibracaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(chkCalibracaoInicial, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
+                    .addComponent(cbCalibracaoInicial, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
                     .addGroup(panelCalibracaoLayout.createSequentialGroup()
                         .addGroup(panelCalibracaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(labelTanque1)
@@ -162,7 +205,7 @@ public class OpcoesGerais extends javax.swing.JDialog {
                     .addComponent(labelTanque2)
                     .addComponent(textTanque2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 3, Short.MAX_VALUE)
-                .addComponent(chkCalibracaoInicial)
+                .addComponent(cbCalibracaoInicial)
                 .addContainerGap())
         );
 
@@ -288,54 +331,84 @@ public class OpcoesGerais extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonFecharActionPerformed
-        // TODO add your handling code here:
         dispose();
     }//GEN-LAST:event_buttonFecharActionPerformed
 
-    private void buttonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSalvarActionPerformed
-        // TODO add your handling code here:
-
-        String cal1 = textTanque1.getText();
-        String cal2 = textTanque2.getText();
-        String ip = textIP.getText();
-
-        cal1 = fixNumber(cal1);
-        cal2 = fixNumber(cal2);
-
-        Quanser.setCALIBRATION1(Double.parseDouble(cal1));
-        Quanser.setCALIBRATION2(Double.parseDouble(cal2));
-        Quanser.setIP_QUANSER(ip);
-
-        AlgController.CONTROLAR_TANQUE = configControle.getSelectedControl();
-
-        if (configControle.getRadio1().isSelected()) {
-            novoFrame.changeCardConf(NovoFrame.CARD_CONF_CONTROLE);
-        } else {
-            if (configControle.getRadio2().isSelected() && configControle.getChkCascata().isSelected()) {
-                novoFrame.changeCardConf(NovoFrame.CARD_CONF_CONTROLE_CASCATA);
-                ControlModeHandler.setControllerSelected(new ControllerCascade(ConfParametros.SAMPLE_RATE, 15d));
-            } else {
-                novoFrame.changeCardConf(NovoFrame.CARD_CONF_CONTROLE);
-            }
+    public void getConfig() {
+        
+        switch(ControlModeHandler.configGerais.TANQUE) {
+            case 0:
+                rbTanque1.setSelected(true);
+                break;
+            case 1:
+                rbTanque2.setSelected(true);
+                break;
+            case 2:
+                rbTanque2.setSelected(true);
+                cbCascata.setSelected(true);
+                break;
         }
+        
+        double cal1 = ControlModeHandler.configGerais.getCalibration(ConfigGerais.TANQUE1);
+        double cal2 = ControlModeHandler.configGerais.getCalibration(ConfigGerais.TANQUE2);
+        
+        boolean init = ControlModeHandler.configGerais.CAL_INICIAL;
+
+        String ip = ControlModeHandler.configGerais.SERVIDOR;
+
+        textTanque1.setText(Double.toString(cal1));
+        textTanque2.setText(Double.toString(cal2));
+        
+        cbCalibracaoInicial.setSelected(init);
+
+        textIP.setText(ip);
+    }
+    
+    private void buttonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSalvarActionPerformed
+        save();
     }//GEN-LAST:event_buttonSalvarActionPerformed
 
     private void buttonConfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonConfActionPerformed
-        // TODO add your handling code here:
         changeCard(CARD_CONFIGURACAO);
     }//GEN-LAST:event_buttonConfActionPerformed
 
     private void buttonCalibracaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCalibracaoActionPerformed
-        // TODO add your handling code here:
         changeCard(CARD_CALIBRACAO);
     }//GEN-LAST:event_buttonCalibracaoActionPerformed
 
     private void buttonServidorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonServidorActionPerformed
-        // TODO add your handling code here:
         changeCard(CARD_SERVIDOR);
     }//GEN-LAST:event_buttonServidorActionPerformed
-    private String fixNumber(String numb) {
-        return numb.replace(",", ".");
+
+    private void rbTanque2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rbTanque2ItemStateChanged
+        cbCascata.setEnabled(rbTanque2.isSelected());       
+    }//GEN-LAST:event_rbTanque2ItemStateChanged
+
+    void save() {
+        String cal1 = textTanque1.getText();
+        String cal2 = textTanque2.getText();
+
+        String ip = textIP.getText();
+
+        cal1 = SUtil.fixNumber(cal1);
+        cal2 = SUtil.fixNumber(cal2);
+
+        ControlModeHandler.configGerais.CAL_INICIAL = cbCalibracaoInicial.isSelected();
+        ControlModeHandler.configGerais.setCalibration(ConfigGerais.TANQUE1, Double.parseDouble(cal1));
+        ControlModeHandler.configGerais.setCalibration(ConfigGerais.TANQUE2, Double.parseDouble(cal2));
+
+        if(rbTanque1.isSelected()) {
+            ControlModeHandler.configGerais.TANQUE = ConfigGerais.TANQUE1;
+            novoFrame.changeCardConf(NovoFrame.CARD_CONF_CONTROLE);
+        } else if(cbCascata.isSelected()) {
+            ControlModeHandler.configGerais.TANQUE = ConfigGerais.TANQUE_CASCATA;
+            novoFrame.changeCardConf(NovoFrame.CARD_CONF_CONTROLE_CASCATA);
+        } else {
+            ControlModeHandler.configGerais.TANQUE = ConfigGerais.TANQUE2;
+            novoFrame.changeCardConf(NovoFrame.CARD_CONF_CONTROLE);
+        }
+
+        ControlModeHandler.atualizaOpcoes();
     }
 
     private void changeCard(String card) {
@@ -361,26 +434,30 @@ public class OpcoesGerais extends javax.swing.JDialog {
             }
         });
     }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonCalibracao;
     private javax.swing.JButton buttonConf;
     private javax.swing.JButton buttonFechar;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JButton buttonSalvar;
     private javax.swing.JButton buttonServidor;
-    private javax.swing.JCheckBox chkCalibracaoInicial;
-    private r2d2e.solution.moduloteste.view.ConfigControle configControle;
+    private javax.swing.JCheckBox cbCalibracaoInicial;
+    private javax.swing.JCheckBox cbCascata;
     private javax.swing.JLabel labelIP;
     private javax.swing.JLabel labelTanque1;
     private javax.swing.JLabel labelTanque2;
     private javax.swing.JPanel panelButton;
     private javax.swing.JPanel panelCalibracao;
     private javax.swing.JPanel panelCard;
+    private javax.swing.JPanel panelConfiguracao;
     private javax.swing.JPanel panelServidor;
+    private javax.swing.JRadioButton rbTanque1;
+    private javax.swing.JRadioButton rbTanque2;
     private javax.swing.JSeparator separator;
     private javax.swing.JTextField textIP;
     private javax.swing.JFormattedTextField textTanque1;
     private javax.swing.JFormattedTextField textTanque2;
     // End of variables declaration//GEN-END:variables
+
 }

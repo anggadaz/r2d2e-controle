@@ -1,8 +1,8 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package r2d2e.solution.moduloteste.controlers;
+
+import r2d2e.solution.moduloteste.handler.ControlModeHandler;
+import r2d2e.solution.moduloteste.handler.SUtil;
+import r2d2e.solution.moduloteste.view.ConfParametros;
 
 /**
  *
@@ -32,6 +32,17 @@ public class PController extends Controller {
     @Override
     public String toString() {
         return "P";
+    }
+
+    @Override
+    public void updateParametros(ConfParametros parametros) {
+
+        Double nivelNumb = SUtil.getSetPoint(parametros);
+
+        String kp = parametros.getTextKP().getText();
+        kp = SUtil.fixNumber(kp);
+        setSetPoint(nivelNumb);
+        setKp(Double.parseDouble(kp));
     }
 
 }

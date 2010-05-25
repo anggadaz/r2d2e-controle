@@ -4,6 +4,10 @@
  */
 package r2d2e.solution.moduloteste.controlers;
 
+import r2d2e.solution.moduloteste.handler.ControlModeHandler;
+import r2d2e.solution.moduloteste.handler.SUtil;
+import r2d2e.solution.moduloteste.view.ConfParametros;
+
 /**
  *
  * @author demetrios
@@ -41,5 +45,19 @@ public class PDController extends Controller {
     @Override
     public String toString() {
         return "PD";
+    }
+
+    @Override
+    public void updateParametros(ConfParametros parametros) {
+
+        Double nivelNumb = SUtil.getSetPoint(parametros);
+
+        String kp = parametros.getTextKP().getText();
+        String kd = SUtil.getKdValue(parametros);
+        kp = SUtil.fixNumber(kp);
+        kd = SUtil.fixNumber(kd);
+        setSetPoint(nivelNumb);
+        setKp(Double.parseDouble(kp));
+        setKd(Double.parseDouble(kd));
     }
 }

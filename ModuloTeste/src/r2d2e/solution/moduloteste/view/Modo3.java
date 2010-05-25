@@ -26,11 +26,11 @@ public class Modo3 extends JPanel implements ModoVisualizacao {
         }
 
         if(ix == 0) {
-            chart.setPreferredSize(new Dimension(570, 200));
-            chart.setSize(new Dimension(570, 200));
+            chart.setPreferredSize(new Dimension(570, 230));
+            chart.setSize(new Dimension(570, 230));
         } else {
-            chart.setPreferredSize(new Dimension(280, 208));
-            chart.setSize(new Dimension(280, 208));
+            chart.setPreferredSize(new Dimension(290, 235));
+            chart.setSize(new Dimension(290, 235));
         }
 
         graphs[ix].removeAll();

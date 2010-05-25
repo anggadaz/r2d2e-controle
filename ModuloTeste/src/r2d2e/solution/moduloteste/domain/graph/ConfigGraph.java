@@ -1,5 +1,7 @@
 package r2d2e.solution.moduloteste.domain.graph;
 
+import r2d2e.solution.moduloteste.domain.GenericXML;
+
 /**
  *
  * @author Rivaldo Jr
@@ -10,23 +12,28 @@ public class ConfigGraph {
     public static int SINAl_CONTROLE = 1;
     public static int ACAO_CONTROLE = 2;
 
-    public static int MODO = 3;
-    public static int GRAFICOS[] = {0,1,2};
-    public static boolean EXTRA[] = {false, false, false};
+    public int MODO = 3;
+    public int GRAFICOS[] = {0,1,2};
+    public boolean EXTRA[] = {false, false, false};
 
-    public static boolean JANELAEXTRA = false;
+    public boolean JANELAEXTRA = false;
 
-    public static void setExtra(int ix, boolean active) {
+    public void setExtra(int ix, boolean active) {
         EXTRA[ix] = active;
         JANELAEXTRA = EXTRA[0] || EXTRA[1] || EXTRA[2];
     }
 
-    public static void setGrafos(int ix, int grafico) {
+    public void setGrafos(int ix, int grafico) {
         GRAFICOS[ix] = grafico;
     }
 
-    public static void setModo(int m) {
+    public void setModo(int m) {
         MODO = m;
+    }
+
+    public void save() {
+        GenericXML genericXML = new GenericXML();
+        genericXML.createXML(this);
     }
 
 }

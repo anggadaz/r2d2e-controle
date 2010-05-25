@@ -63,7 +63,7 @@ public class HistoChart {
 
         panel = new ChartPanel(chart);
         //panel.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createEmptyBorder(4, 4, 4, 4), BorderFactory.createLineBorder(Color.black)));
-        panel.setPreferredSize(new Dimension(500, 380));
+        panel.setPreferredSize(new Dimension(500, 450));
     }
 
     public ChartPanel getChart() {

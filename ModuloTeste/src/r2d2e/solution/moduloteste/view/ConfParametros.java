@@ -23,6 +23,7 @@ import r2d2e.solution.moduloteste.controlers.PIController;
 import r2d2e.solution.moduloteste.controlers.PID2Controller;
 import r2d2e.solution.moduloteste.controlers.PIDController;
 import r2d2e.solution.moduloteste.handler.ControlModeHandler;
+import r2d2e.solution.moduloteste.handler.SUtil;
 
 /**
  *
@@ -51,7 +52,7 @@ public class ConfParametros extends javax.swing.JPanel {
         Vector<Controller> controllers = new Vector<Controller>();
 
         String text = textSetPoint.getText();
-        text = ControlModeHandler.fixNumber(text);
+        text = SUtil.fixNumber(text);
         double sp = Double.parseDouble(text);
 
         controllers.add(new PController(SAMPLE_RATE, sp));

@@ -16,7 +16,6 @@ import r2d2e.solution.moduloteste.domain.graph.GraphNivel;
 import r2d2e.solution.moduloteste.domain.graph.GraphControl;
 import r2d2e.solution.moduloteste.domain.graph.GraphAction;
 import r2d2e.solution.moduloteste.handler.ControlModeHandler;
-import r2d2e.solution.moduloteste.view.ConfigControle;
 import r2d2e.solution.moduloteste.view.TanquePanel;
 
 /**
@@ -27,8 +26,6 @@ public class AlgController extends Timer implements ActionListener {
 
     public static final int NIVEL_MAX = 25;
     public static final int NIVEL_MIN = 3;
-
-    public static int CONTROLAR_TANQUE = ConfigControle.CONTROLE_UM;
 
     private Controller controller;
     private Quanser quanser;
@@ -89,7 +86,8 @@ public class AlgController extends Timer implements ActionListener {
         updateTanks(nivel1, nivel2);
 
         double nivel;
-        if (CONTROLAR_TANQUE == ConfigControle.CONTROLE_UM) {
+
+        if (ControlModeHandler.configGerais.TANQUE == ConfigGerais.TANQUE1) {
             nivel = nivel1;
         } else {
             nivel = nivel2;
@@ -120,7 +118,6 @@ public class AlgController extends Timer implements ActionListener {
 
             peakTime.calcPeakTime(nivel);
         }
-
     }
 
     private double travaNivel1(double nivel, double tensaoAtual) {

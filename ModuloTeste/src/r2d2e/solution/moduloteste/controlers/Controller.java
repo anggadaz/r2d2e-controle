@@ -1,10 +1,6 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package r2d2e.solution.moduloteste.controlers;
 
-import java.util.ArrayList;
+import r2d2e.solution.moduloteste.view.ConfParametros;
 
 /**
  *
@@ -14,7 +10,7 @@ public abstract class Controller {
 
     //taxa de amostragem - default 0.1
     protected Double sampleRate = 0.1;
-    //setpoint - default 20 cm.
+    //setpoint - default 15 cm.
     protected Double setPoint = 15.0;
     //valor do integral passado
     protected Double pastIntegral;
@@ -22,6 +18,7 @@ public abstract class Controller {
     private Double pastError;
     //valor da variavel de processo passado
     private Double pastprocessVariable;
+
     private double proporcional = 0;
     private double integral = 0;
     private double derivative = 0;
@@ -30,7 +27,6 @@ public abstract class Controller {
 
     //Contrutor default
     public Controller() {
-
         pastIntegral = 0.0;
         pastError = 0.0;
         pastprocessVariable = 0.0;
@@ -94,12 +90,14 @@ public abstract class Controller {
 
         return s;
     }
+
     /*
      * Método que deve ser sobrecarregado pelos que irao herdar essa classe.
      * Cada classe deve calcular o valor que se deve aplicar no tanque
      */
-
     public abstract double calculateOutput(double processVariable);
+
+    public abstract void updateParametros(ConfParametros parametros);
 
     public Double getSampleRate() {
         return sampleRate;

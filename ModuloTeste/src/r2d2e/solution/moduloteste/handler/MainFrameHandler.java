@@ -1,9 +1,8 @@
 package r2d2e.solution.moduloteste.handler;
 
-import r2d2e.solution.moduloteste.domain.AlgController;
+import r2d2e.solution.moduloteste.domain.ConfigGerais;
 import r2d2e.solution.moduloteste.domain.Quanser;
 import r2d2e.solution.moduloteste.domain.controlerInterface;
-import r2d2e.solution.moduloteste.view.ConfigControle;
 import r2d2e.solution.moduloteste.view.NovoFrame;
 import r2d2e.solution.moduloteste.view.OpcoesGerais;
 import r2d2e.solution.moduloteste.view.OpcoesGrafico;
@@ -49,11 +48,10 @@ public class MainFrameHandler {
         }
 
         mode = CONTROL_MOD;
-        // Trocar a carta
-
+        OpcoesGrafico.reloadInterface();
         mainFrame.changeCardMain(NovoFrame.CARD_MAIN_CONTROLE);
 
-        if (AlgController.CONTROLAR_TANQUE == ConfigControle.CONTROLE_DOIS_COM_CASCATA) {
+        if (ControlModeHandler.configGerais.TANQUE == ConfigGerais.TANQUE_CASCATA) {
             mainFrame.changeCardConf(NovoFrame.CARD_CONF_CONTROLE_CASCATA);
         } else {
             mainFrame.changeCardConf(NovoFrame.CARD_CONF_CONTROLE);

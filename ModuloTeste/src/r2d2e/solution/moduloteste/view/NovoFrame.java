@@ -9,6 +9,8 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
 import org.jvnet.substance.skin.SubstanceBusinessBlackSteelLookAndFeel;
+import r2d2e.solution.moduloteste.domain.ConfigGerais;
+import r2d2e.solution.moduloteste.handler.ControlModeHandler;
 import r2d2e.solution.moduloteste.handler.MainFrameHandler;
 
 /**
@@ -25,15 +27,29 @@ public class NovoFrame extends javax.swing.JFrame {
     public static final String CARD_MAIN_CONTROLE = "cardMainControle";
     public static JanelaGraficos JANELA_EXTRA = new JanelaGraficos(null, false);
 
+    public static String ABSOLUTE_PATH = "";
+
     public NovoFrame() {
         initComponents();
         mainFrameHandler = new MainFrameHandler(this);
-        mainFrameHandler.enterTestMode();
+
+        if(ControlModeHandler.configGerais.MODO == ConfigGerais.MODO_TESTE) {
+            mainFrameHandler.enterTestMode();
+            menuTesteActionPerformed(null);
+        } else {
+            mainFrameHandler.enterControlMode();
+            menuControleActionPerformed(null);
+        }
 
         URL imgURL = getClass().getResource("/r2d2e/solution/moduloteste/view/resources/r2d2e.jpg");
         setIconImage(new ImageIcon(imgURL).getImage());
 
         setLocationRelativeTo(null);
+
+        OpcoesGerais opcoesGerais = new OpcoesGerais(this, true);
+        opcoesGerais.getConfig();
+        opcoesGerais.save();
+
 
         setMinimumSize(new Dimension(getWidth(), getHeight() + 60));
 
@@ -409,12 +425,14 @@ public class NovoFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonNovoCicloActionPerformed
 
     private void menuTesteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuTesteActionPerformed
+        ControlModeHandler.configGerais.setModo(ConfigGerais.MODO_TESTE);
         menuTeste.setSelected(true);
         menuControle.setSelected(false);
         mainFrameHandler.enterTestMode();
     }//GEN-LAST:event_menuTesteActionPerformed
 
     private void menuControleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuControleActionPerformed
+        ControlModeHandler.configGerais.setModo(ConfigGerais.MODO_CONTROLE);
         menuControle.setSelected(true);
         menuTeste.setSelected(false);
         mainFrameHandler.enterControlMode();
@@ -422,6 +440,8 @@ public class NovoFrame extends javax.swing.JFrame {
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         // TODO add your handling code here:
+        ControlModeHandler.configGraph.save();
+        ControlModeHandler.configGerais.save();
         mainFrameHandler.closeConnection();
     }//GEN-LAST:event_formWindowClosing
 
@@ -472,6 +492,13 @@ public class NovoFrame extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+
+        if (args != null && args.length > 0) {
+            ABSOLUTE_PATH = args[0];
+        } else {
+            ABSOLUTE_PATH = System.getProperty("user.dir");
+        }
+
         java.awt.EventQueue.invokeLater(new Runnable() {
 
             public void run() {

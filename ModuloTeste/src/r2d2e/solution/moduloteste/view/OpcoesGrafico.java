@@ -1,8 +1,3 @@
-/*
- * OpcoesGerais.java
- *
- * Created on 08/04/2010, 11:34:27
- */
 package r2d2e.solution.moduloteste.view;
 
 import java.awt.CardLayout;
@@ -383,64 +378,68 @@ public class OpcoesGrafico extends javax.swing.JDialog {
 
     private void rbModo1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rbModo1ItemStateChanged
         buttonLayout1.setIcon(janela1);
-        ConfigGraph.setModo(1);
+        ControlModeHandler.configGraph.setModo(1);
         modificado = true;
     }//GEN-LAST:event_rbModo1ItemStateChanged
 
     private void rbModo2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rbModo2ItemStateChanged
         buttonLayout1.setIcon(janela2);
-        ConfigGraph.setModo(2);
+        ControlModeHandler.configGraph.setModo(2);
         modificado = true;
     }//GEN-LAST:event_rbModo2ItemStateChanged
 
     private void rbModo3ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rbModo3ItemStateChanged
         buttonLayout1.setIcon(janela3);
-        ConfigGraph.setModo(3);
+        ControlModeHandler.configGraph.setModo(3);
         modificado = true;
     }//GEN-LAST:event_rbModo3ItemStateChanged
 
     private void cbNivelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbNivelActionPerformed
-        ConfigGraph.setExtra(ConfigGraph.NIVEL_TEMPO, cbNivel.isSelected());
+        ControlModeHandler.configGraph.setExtra(ConfigGraph.NIVEL_TEMPO, cbNivel.isSelected());
     }//GEN-LAST:event_cbNivelActionPerformed
 
     private void cbSinalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSinalActionPerformed
-        ConfigGraph.setExtra(ConfigGraph.SINAl_CONTROLE, cbSinal.isSelected());
+        ControlModeHandler.configGraph.setExtra(ConfigGraph.SINAl_CONTROLE, cbSinal.isSelected());
     }//GEN-LAST:event_cbSinalActionPerformed
 
     private void cbAcaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbAcaoActionPerformed
-        ConfigGraph.setExtra(ConfigGraph.ACAO_CONTROLE, cbAcao.isSelected());
+        ControlModeHandler.configGraph.setExtra(ConfigGraph.ACAO_CONTROLE, cbAcao.isSelected());
     }//GEN-LAST:event_cbAcaoActionPerformed
 
     private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
-        ConfigGraph.setGrafos(0, jComboBox1.getSelectedIndex());
+        ControlModeHandler.configGraph.setGrafos(0, jComboBox1.getSelectedIndex());
         modificado = true;
     }//GEN-LAST:event_jComboBox1ItemStateChanged
 
     private void jComboBox2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox2ItemStateChanged
-        ConfigGraph.setGrafos(1, jComboBox2.getSelectedIndex());
+        ControlModeHandler.configGraph.setGrafos(1, jComboBox2.getSelectedIndex());
         modificado = true;
     }//GEN-LAST:event_jComboBox2ItemStateChanged
 
     private void jComboBox3ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox3ItemStateChanged
-        ConfigGraph.setGrafos(2, jComboBox3.getSelectedIndex());
+        ControlModeHandler.configGraph.setGrafos(2, jComboBox3.getSelectedIndex());
         modificado = true;
     }//GEN-LAST:event_jComboBox3ItemStateChanged
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         if(modificado) {
-            ControlModeHandler.getControlPanel().initChart();
-            ControlModeHandler.getControlPanel().repaint();
+            reloadInterface();
             modificado = false;
-            extraConfig(ConfigGraph.JANELAEXTRA);
         }
     }//GEN-LAST:event_formWindowClosed
 
-    private void extraConfig(boolean show) {
+    public static void reloadInterface() {
+        ControlModeHandler.getControlPanel().initChart();
+        ControlModeHandler.getControlPanel().repaint();
+        extraConfig(ControlModeHandler.configGraph.JANELAEXTRA);
+    }
+
+    private static void extraConfig(boolean show) {
 
         NovoFrame.JANELA_EXTRA.clear();
 
         if(show) {
-            boolean extra[] = ConfigGraph.EXTRA;
+            boolean extra[] = ControlModeHandler.configGraph.EXTRA;
             IGraphTime[] graphs = ControlModeHandler.getChart();
 
             for(int i = 0; i < 3; i++) {
@@ -456,7 +455,7 @@ public class OpcoesGrafico extends javax.swing.JDialog {
 
     private void getConfig() {
 
-        switch(ConfigGraph.MODO) {
+        switch(ControlModeHandler.configGraph.MODO) {
             case 1:
                 rbModo1.setSelected(true);
                 break;
@@ -468,13 +467,13 @@ public class OpcoesGrafico extends javax.swing.JDialog {
                 break;
         }
 
-        int graph[] = ConfigGraph.GRAFICOS;
+        int graph[] = ControlModeHandler.configGraph.GRAFICOS;
 
         jComboBox1.setSelectedIndex(graph[0]);
         jComboBox2.setSelectedIndex(graph[1]);
         jComboBox3.setSelectedIndex(graph[2]);
 
-        boolean extra[] = ConfigGraph.EXTRA;
+        boolean extra[] = ControlModeHandler.configGraph.EXTRA;
 
         cbNivel.setSelected(extra[0]);
         cbSinal.setSelected(extra[1]);

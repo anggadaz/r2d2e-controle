@@ -1,8 +1,6 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package r2d2e.solution.moduloteste.controlers;
+
+import r2d2e.solution.moduloteste.view.ConfParametros;
 
 /**
  *
@@ -13,14 +11,10 @@ public class ControllerCascade extends Controller {
     private Controller master;
     private Controller slave;
 
-    public ControllerCascade(Double sampleRate, Double setPoint) {
-        super(sampleRate, setPoint);
-    }
-
-    public ControllerCascade(Double sampleRate, Double setPoint, Controller master, Controller slave) {
-        super(sampleRate, setPoint);
-        this.master = master;
-        this.slave = slave;
+    public ControllerCascade() {
+        super(ConfParametros.SAMPLE_RATE, 15d);
+        master = null;
+        slave = null;
     }
 
     @Override
@@ -28,6 +22,11 @@ public class ControllerCascade extends Controller {
         double level1 = master.calculateOutput(processVariable);
         double tensao = slave.calculateOutput(level1);
         return tensao;
+    }
+
+    @Override
+    public Double getSetPoint() {
+        return slave.getSetPoint();
     }
 
     public Controller getMaster() {
@@ -45,4 +44,17 @@ public class ControllerCascade extends Controller {
     public void setSlave(Controller slave) {
         this.slave = slave;
     }
+
+    public void updateParametros(ConfParametros paramMaster,ConfParametros paramSlave ) {
+        master = paramMaster.getSelectedController();
+        slave = paramSlave.getSelectedController();
+
+        master.updateParametros(paramMaster);
+        slave.updateParametros(paramSlave);
+    }
+
+    @Override
+    public void updateParametros(ConfParametros parametros) {
+    }
+
 }

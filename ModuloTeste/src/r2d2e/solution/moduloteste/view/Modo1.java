@@ -18,8 +18,8 @@ public class Modo1 extends JPanel implements ModoVisualizacao {
 
     public void addChart(int ix, ChartPanel chart) {
         if(ix == 0) {
-            chart.setPreferredSize(new Dimension(570, 410));
-            chart.setSize(new Dimension(570, 410));
+            chart.setPreferredSize(new Dimension(570, 480));
+            chart.setSize(new Dimension(570, 480));
             graph1.removeAll();
             graph1.add(chart);
         }

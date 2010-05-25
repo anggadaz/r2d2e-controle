@@ -4,6 +4,9 @@
  */
 package r2d2e.solution.moduloteste.controlers;
 
+import r2d2e.solution.moduloteste.handler.SUtil;
+import r2d2e.solution.moduloteste.view.ConfParametros;
+
 /**
  *
  * @author demetrios
@@ -47,5 +50,19 @@ public class PIController extends Controller {
     @Override
     public String toString() {
         return "PI";
+    }
+
+    @Override
+    public void updateParametros(ConfParametros parametros) {
+
+        Double nivelNumb = SUtil.getSetPoint(parametros);
+
+        String kp = parametros.getTextKP().getText();
+        String ki = SUtil.getKIValue(parametros);
+        kp = SUtil.fixNumber(kp);
+        ki = SUtil.fixNumber(ki);
+        setSetPoint(nivelNumb);
+        setKp(Double.parseDouble(kp));
+        setKi(Double.parseDouble(ki));
     }
 }
