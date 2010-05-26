@@ -12,6 +12,7 @@ import r2d2e.solution.moduloteste.analise.PeakTime;
 import r2d2e.solution.moduloteste.analise.RiseTime;
 import r2d2e.solution.moduloteste.analise.TimeAccommodation;
 import r2d2e.solution.moduloteste.controlers.Controller;
+import r2d2e.solution.moduloteste.controlers.ControllerCascade;
 import r2d2e.solution.moduloteste.domain.graph.GraphNivel;
 import r2d2e.solution.moduloteste.domain.graph.GraphControl;
 import r2d2e.solution.moduloteste.domain.graph.GraphAction;
@@ -91,9 +92,15 @@ public class AlgController extends Timer implements ActionListener {
             nivel = nivel1;
         } else {
             nivel = nivel2;
+            System.out.println("dddfesgrgtr");
         }
 
         if (ativo) {
+
+            if(controller instanceof ControllerCascade){
+                ((ControllerCascade)controller).setProcessVariable2(nivel1);
+            }
+
             double setP = controller.getSetPoint();
 
             double tensao = controller.calculateOutput(nivel);

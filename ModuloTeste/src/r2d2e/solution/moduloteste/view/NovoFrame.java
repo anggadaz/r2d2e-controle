@@ -50,8 +50,10 @@ public class NovoFrame extends javax.swing.JFrame {
         opcoesGerais.getConfig();
         opcoesGerais.save();
 
-
         setMinimumSize(new Dimension(getWidth(), getHeight() + 60));
+
+        confParametrosSlave.getLabelSetPoint().setVisible(false);
+        confParametrosSlave.getTextSetPoint().setVisible(false);
 
         Splash.getInstance().finalizaSplash();
     }

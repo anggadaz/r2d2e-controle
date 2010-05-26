@@ -18,14 +18,14 @@ public abstract class Controller {
     private Double pastError;
     //valor da variavel de processo passado
     private Double pastprocessVariable;
-
     private double proporcional = 0;
     private double integral = 0;
     private double derivative = 0;
     private double derivative2 = 0;
     private boolean inteCondi = true;
-
+    private boolean limitesNivel = false;
     //Contrutor default
+
     public Controller() {
         pastIntegral = 0.0;
         pastError = 0.0;
@@ -52,6 +52,7 @@ public abstract class Controller {
 
     //Funçao que calcula a ação integrativa de controle.
     public double integralTerm(double ki, double processVariable) {
+        System.out.println("PASTINT " + pastIntegral);
         integral = pastIntegral + ki * sampleRate * error(processVariable);
         return integral;
     }
@@ -78,8 +79,10 @@ public abstract class Controller {
     }
 
     protected double IntegralTest(double s, double p, double i, double d) {
+        System.out.println("INTEGRAÇAO " + inteCondi);
         if (inteCondi) {
-            if (s > 3 || s < -3) {
+            if (limites(s)) {
+                System.out.println("e ai????");
                 s = p + d + pastIntegral;
             } else {
                 pastIntegral = i;
@@ -89,6 +92,15 @@ public abstract class Controller {
         }
 
         return s;
+    }
+
+    private boolean limites(double s) {
+        System.out.println("LIMITES " + limitesNivel);
+        if (limitesNivel) {
+            return s > 30 || s < 0;
+        } else {
+            return s > 3 || s < -3;
+        }
     }
 
     /*
@@ -133,5 +145,17 @@ public abstract class Controller {
 
     public void setInteCondi(boolean inteCondi) {
         this.inteCondi = inteCondi;
+    }
+
+    public boolean isInteCondi() {
+        return inteCondi;
+    }
+
+    public boolean isLimitesNivel() {
+        return limitesNivel;
+    }
+
+    public void setLimitesNivel(boolean limitesNivel) {
+        this.limitesNivel = limitesNivel;
     }
 }

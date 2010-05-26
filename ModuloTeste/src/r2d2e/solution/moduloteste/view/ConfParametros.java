@@ -15,6 +15,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
+import javax.swing.JLabel;
 import javax.swing.border.TitledBorder;
 import r2d2e.solution.moduloteste.controlers.Controller;
 import r2d2e.solution.moduloteste.controlers.PController;
@@ -468,6 +469,14 @@ public class ConfParametros extends javax.swing.JPanel {
 
     public JCheckBox getChkIntCond() {
         return chkIntCond;
+    }
+
+    public JLabel getLabelSetPoint() {
+        return labelSetPoint;
+    }
+
+    public void setLabelSetPoint(JLabel labelSetPoint) {
+        this.labelSetPoint = labelSetPoint;
     }
 
     public Controller getSelectedController(){

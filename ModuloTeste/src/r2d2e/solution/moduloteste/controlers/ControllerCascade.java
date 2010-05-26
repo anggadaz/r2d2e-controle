@@ -10,6 +10,7 @@ public class ControllerCascade extends Controller {
 
     private Controller master;
     private Controller slave;
+    private double processVariable2;
 
     public ControllerCascade() {
         super(ConfParametros.SAMPLE_RATE, 15d);
@@ -19,14 +20,54 @@ public class ControllerCascade extends Controller {
 
     @Override
     public double calculateOutput(double processVariable) {
+        System.out.println("---MASTER---");
+        System.out.println("PV " + processVariable);
+
         double level1 = master.calculateOutput(processVariable);
-        double tensao = slave.calculateOutput(level1);
+        
+        level1 = travaLevel1(level1);
+
+        System.out.println("LEVEL1 " + level1);
+
+        System.out.println("---SLAVE---");
+        
+        slave.setSetPoint(level1);
+
+        System.out.println("PV2 " + processVariable2);
+        double tensao = slave.calculateOutput(processVariable2);
+        
+        System.out.println("tensao " + tensao);
         return tensao;
+    }
+
+    private double travaLevel1(double level1) {
+        if (master.isInteCondi()) {
+            System.out.println("VERIFICANDO TRAVA LEVEL1");
+            if (level1 > 30) {
+                level1 = 30;
+            } else if (level1 < 0) {
+                level1 = 0;
+            }
+        }
+        return level1;
+    }
+
+    public double getProcessVariable2() {
+        return processVariable2;
+    }
+
+    public void setProcessVariable2(double processVariable2) {
+        this.processVariable2 = processVariable2;
     }
 
     @Override
     public Double getSetPoint() {
-        return slave.getSetPoint();
+        return master.getSetPoint();
+    }
+
+    @Override
+    public void setSetPoint(Double setPoint) {
+        master.setSetPoint(setPoint);
     }
 
     public Controller getMaster() {
@@ -45,16 +86,22 @@ public class ControllerCascade extends Controller {
         this.slave = slave;
     }
 
-    public void updateParametros(ConfParametros paramMaster,ConfParametros paramSlave ) {
+    public void updateParametros(ConfParametros paramMaster, ConfParametros paramSlave) {
         master = paramMaster.getSelectedController();
         slave = paramSlave.getSelectedController();
 
         master.updateParametros(paramMaster);
         slave.updateParametros(paramSlave);
-    }
 
+        boolean ciMaster = paramMaster.getChkIntCond().isSelected();
+        boolean ciSlave = paramSlave.getChkIntCond().isSelected();
+
+        master.setInteCondi(ciMaster);
+        master.setLimitesNivel(true);
+        slave.setInteCondi(ciSlave);
+    }
+    
     @Override
     public void updateParametros(ConfParametros parametros) {
     }
-
 }

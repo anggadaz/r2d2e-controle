@@ -396,7 +396,8 @@ public class OpcoesGerais extends javax.swing.JDialog {
         ControlModeHandler.configGerais.CAL_INICIAL = cbCalibracaoInicial.isSelected();
         ControlModeHandler.configGerais.setCalibration(ConfigGerais.TANQUE1, Double.parseDouble(cal1));
         ControlModeHandler.configGerais.setCalibration(ConfigGerais.TANQUE2, Double.parseDouble(cal2));
-
+        ControlModeHandler.configGerais.SERVIDOR = ip;
+        
         if(rbTanque1.isSelected()) {
             ControlModeHandler.configGerais.TANQUE = ConfigGerais.TANQUE1;
             novoFrame.changeCardConf(NovoFrame.CARD_CONF_CONTROLE);
