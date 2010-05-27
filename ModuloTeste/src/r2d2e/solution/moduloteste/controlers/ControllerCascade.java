@@ -12,6 +12,9 @@ public class ControllerCascade extends Controller {
     private Controller slave;
     private double processVariable2;
 
+    private double nivelD;
+    private double nivelS;
+
     public ControllerCascade() {
         super(ConfParametros.SAMPLE_RATE, 15d);
         master = null;
@@ -23,15 +26,15 @@ public class ControllerCascade extends Controller {
         System.out.println("---MASTER---");
         System.out.println("PV " + processVariable);
 
-        double level1 = master.calculateOutput(processVariable);
+        nivelD = master.calculateOutput(processVariable);
         
-        level1 = travaLevel1(level1);
+        nivelD = travaLevel1(nivelD);
 
-        System.out.println("LEVEL1 " + level1);
+        System.out.println("LEVEL1 " + nivelD);
 
         System.out.println("---SLAVE---");
         
-        slave.setSetPoint(level1);
+        slave.setSetPoint(nivelD);
 
         System.out.println("PV2 " + processVariable2);
         double tensao = slave.calculateOutput(processVariable2);
@@ -48,8 +51,19 @@ public class ControllerCascade extends Controller {
             } else if (level1 < 0) {
                 level1 = 0;
             }
+            nivelS = level1;
+        } else {
+            nivelS = 0;
         }
         return level1;
+    }
+
+    public double getNivelD() {
+        return nivelD;
+    }
+
+    public double getNivelS() {
+        return nivelS;
     }
 
     public double getProcessVariable2() {
@@ -58,6 +72,26 @@ public class ControllerCascade extends Controller {
 
     public void setProcessVariable2(double processVariable2) {
         this.processVariable2 = processVariable2;
+    }
+
+    @Override
+    public double getDerivative() {
+        return slave.getDerivative();
+    }
+
+    @Override
+    public double getDerivative2() {
+        return slave.getDerivative2();
+    }
+
+    @Override
+    public double getIntegral() {
+        return slave.getIntegral();
+    }
+
+    @Override
+    public double getProporcional() {
+        return slave.getProporcional();
     }
 
     @Override

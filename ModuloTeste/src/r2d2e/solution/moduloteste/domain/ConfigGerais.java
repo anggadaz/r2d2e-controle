@@ -9,12 +9,12 @@ public class ConfigGerais {
     public static int MODO_TESTE = 0;
     public static int MODO_CONTROLE = 1;
 
-    public static int TANQUE1 = 0;
-    public static int TANQUE2 = 1;
-    public static int TANQUE_CASCATA = 2;
+    public static int C_TANQUE1 = 0;
+    public static int C_TANQUE2 = 1;
+    public static int C_TANQUE_CASCATA = 2;
 
     public int MODO = 1;
-    public int TANQUE = 0;
+    public int CONTROLE = 0;
 
     public double CALIBRATION[] = {0,0};
     public boolean CAL_INICIAL = true;

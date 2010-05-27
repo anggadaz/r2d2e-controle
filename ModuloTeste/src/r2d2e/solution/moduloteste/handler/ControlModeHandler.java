@@ -71,12 +71,13 @@ public class ControlModeHandler {
         initChart();
     }
 
-    private void initChart() {
-        graphNivel = new GraphNivel(300000);
-        graphTensao1 = new GraphControl(300000);
-        graphTensao2 = new GraphAction(300000);
+    public static void initChart() {
+        graphNivel = new GraphNivel(300000, configGerais.CONTROLE);
+        graphTensao1 = new GraphControl(300000, configGerais.CONTROLE);
+        graphTensao2 = new GraphAction(300000, configGerais.CONTROLE);
 
         controlPanel.initChart();
+        controlPanel.repaint();
     }
 
     public static IGraphTime[] getChart() {
@@ -93,7 +94,7 @@ public class ControlModeHandler {
 
     public static void updateVariables() {
 
-        if (configGerais.TANQUE == ConfigGerais.TANQUE_CASCATA) {
+        if (configGerais.CONTROLE == ConfigGerais.C_TANQUE_CASCATA) {
             controllerCascade.updateParametros(parametrosMaster, parametrosSlave);
             controllerSelected = controllerCascade;
 
@@ -129,8 +130,8 @@ public class ControlModeHandler {
     }
 
     public static void atualizaOpcoes() {
-        Quanser.setCALIBRATION1(configGerais.getCalibration(ConfigGerais.TANQUE1));
-        Quanser.setCALIBRATION2(configGerais.getCalibration(ConfigGerais.TANQUE2));
+        Quanser.setCALIBRATION1(configGerais.getCalibration(ConfigGerais.C_TANQUE1));
+        Quanser.setCALIBRATION2(configGerais.getCalibration(ConfigGerais.C_TANQUE2));
 
         Quanser.setIP_QUANSER(configGerais.SERVIDOR);
     }

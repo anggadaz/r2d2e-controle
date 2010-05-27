@@ -51,7 +51,7 @@ public class MainFrameHandler {
         OpcoesGrafico.reloadInterface();
         mainFrame.changeCardMain(NovoFrame.CARD_MAIN_CONTROLE);
 
-        if (ControlModeHandler.configGerais.TANQUE == ConfigGerais.TANQUE_CASCATA) {
+        if (ControlModeHandler.configGerais.CONTROLE == ConfigGerais.C_TANQUE_CASCATA) {
             mainFrame.changeCardConf(NovoFrame.CARD_CONF_CONTROLE_CASCATA);
         } else {
             mainFrame.changeCardConf(NovoFrame.CARD_CONF_CONTROLE);

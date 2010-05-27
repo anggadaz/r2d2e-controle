@@ -64,17 +64,42 @@ public class AlgController extends Timer implements ActionListener {
             public void run() {
                 long tempo = System.currentTimeMillis() - initT;
 
-                ControlModeHandler.graphNivel.addNivel(tempo, nivel, GraphNivel.NIVEL);
-                ControlModeHandler.graphNivel.addNivel(tempo, set, GraphNivel.SP);
-                ControlModeHandler.graphNivel.addNivel(tempo, set - nivel, GraphNivel.ERRO);
+                ControlModeHandler.graphNivel.addNivel(tempo, nivel, GraphNivel.S_NIVEL);
+                ControlModeHandler.graphNivel.addNivel(tempo, set, GraphNivel.S_SP);
+                ControlModeHandler.graphNivel.addNivel(tempo, set - nivel, GraphNivel.S_ERRO);
 
-                ControlModeHandler.graphTensao1.addTensao(tempo, controller.getProporcional(), GraphControl.P);
-                ControlModeHandler.graphTensao1.addTensao(tempo, controller.getIntegral(), GraphControl.I);
-                ControlModeHandler.graphTensao1.addTensao(tempo, controller.getDerivative(), GraphControl.D);
-                ControlModeHandler.graphTensao1.addTensao(tempo, controller.getDerivative2(), GraphControl.D2);
+                ControlModeHandler.graphTensao1.addTensao(tempo, controller.getProporcional(), GraphControl.S_P);
+                ControlModeHandler.graphTensao1.addTensao(tempo, controller.getIntegral(), GraphControl.S_I);
+                ControlModeHandler.graphTensao1.addTensao(tempo, controller.getDerivative(), GraphControl.S_D);
+                ControlModeHandler.graphTensao1.addTensao(tempo, controller.getDerivative2(), GraphControl.S_D2);
 
-                ControlModeHandler.graphTensao2.addTensao(tempo, tensao, GraphAction.ATUAL);
-                ControlModeHandler.graphTensao2.addTensao(tempo, trava, GraphAction.TRAVA);
+                ControlModeHandler.graphTensao2.addTensao(tempo, tensao, GraphAction.S_ATUAL);
+                ControlModeHandler.graphTensao2.addTensao(tempo, trava, GraphAction.S_TRAVA);
+            }
+        }.start();
+    }
+
+    private void atualizarGraficoMaster(final double nivel, final double set, final double tensao, final double trava) {
+
+        new Thread() {
+
+            @Override
+            public void run() {
+                long tempo = System.currentTimeMillis() - initT;
+
+                Controller cascade = ((ControllerCascade) controller).getMaster();
+
+                ControlModeHandler.graphNivel.addNivel(tempo, nivel, GraphNivel.M_NIVEL);
+                ControlModeHandler.graphNivel.addNivel(tempo, set, GraphNivel.M_SP);
+                ControlModeHandler.graphNivel.addNivel(tempo, set - nivel, GraphNivel.M_ERRO);
+
+                ControlModeHandler.graphTensao1.addTensao(tempo, cascade.getProporcional(), GraphControl.M_P);
+                ControlModeHandler.graphTensao1.addTensao(tempo, cascade.getIntegral(), GraphControl.M_I);
+                ControlModeHandler.graphTensao1.addTensao(tempo, cascade.getDerivative(), GraphControl.M_D);
+                ControlModeHandler.graphTensao1.addTensao(tempo, cascade.getDerivative2(), GraphControl.M_D2);
+
+                ControlModeHandler.graphTensao2.addTensao(tempo, tensao, GraphAction.M_ATUAL);
+                ControlModeHandler.graphTensao2.addTensao(tempo, trava, GraphAction.M_TRAVA);
             }
         }.start();
     }
@@ -88,7 +113,7 @@ public class AlgController extends Timer implements ActionListener {
 
         double nivel;
 
-        if (ControlModeHandler.configGerais.TANQUE == ConfigGerais.TANQUE1) {
+        if (ControlModeHandler.configGerais.CONTROLE == ConfigGerais.C_TANQUE1) {
             nivel = nivel1;
         } else {
             nivel = nivel2;
@@ -124,6 +149,12 @@ public class AlgController extends Timer implements ActionListener {
             controlerInterface.atualizaAcomodationTime(acomodation);
 
             peakTime.calcPeakTime(nivel);
+
+            if (ControlModeHandler.configGerais.CONTROLE == ConfigGerais.C_TANQUE_CASCATA) {
+                ControllerCascade cascade = (ControllerCascade) controller;
+                atualizarGraficoMaster(nivel1, cascade.getNivelD(), cascade.getNivelD(), cascade.getNivelS());
+            }
+
         }
     }
 

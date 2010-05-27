@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.data.xy.XYSeries;
+import r2d2e.solution.moduloteste.domain.ConfigGerais;
 
 /**
  *
@@ -12,21 +13,35 @@ import org.jfree.data.xy.XYSeries;
 
 public class GraphNivel extends IGraphTime {
 
-    public static final int SP = 0;
-    public static final int NIVEL = 1;
-    public static final int ERRO = 2;
+    public static final int S_SP = 0;
+    public static final int S_NIVEL = 1;
+    public static final int S_ERRO = 2;
+    public static final int M_SP = 3;
+    public static final int M_NIVEL = 4;
+    public static final int M_ERRO = 5;
 
-    public GraphNivel(int maxAge) {
+    public GraphNivel(int maxAge, int modo) {
 
         xAxis = "Tempo (s)";
         yAxis = "Nível (cm)";
         name = "Nível x Tempo";
 
-        series = new XYSeries[3];
+        String[] names = {"S-Slave","N-Slave", "E-Slave","S-Mestre", "N-Mestre", "E-Mestre"};
 
-        series[NIVEL] = new XYSeries("Nível");
-        series[SP] = new XYSeries("Setpoint");
-        series[ERRO] = new XYSeries("Erro");
+        if(modo == ConfigGerais.C_TANQUE_CASCATA) {
+            series = new XYSeries[6];
+
+            for (int i = 0; i < 6; i++) {
+                series[i] = new XYSeries(names[i]);
+            }
+
+        } else {
+            series = new XYSeries[3];
+
+            series[S_SP] = new XYSeries("Setpoint");
+            series[S_NIVEL] = new XYSeries("Nível");
+            series[S_ERRO] = new XYSeries("Erro");
+        }
 
         JFreeChart chart = config();
 

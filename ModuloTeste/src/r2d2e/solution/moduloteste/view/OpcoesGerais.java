@@ -336,12 +336,13 @@ public class OpcoesGerais extends javax.swing.JDialog {
 
     public void getConfig() {
         
-        switch(ControlModeHandler.configGerais.TANQUE) {
+        switch(ControlModeHandler.configGerais.CONTROLE) {
             case 0:
                 rbTanque1.setSelected(true);
                 break;
             case 1:
                 rbTanque2.setSelected(true);
+                cbCascata.setSelected(false);
                 break;
             case 2:
                 rbTanque2.setSelected(true);
@@ -349,8 +350,8 @@ public class OpcoesGerais extends javax.swing.JDialog {
                 break;
         }
         
-        double cal1 = ControlModeHandler.configGerais.getCalibration(ConfigGerais.TANQUE1);
-        double cal2 = ControlModeHandler.configGerais.getCalibration(ConfigGerais.TANQUE2);
+        double cal1 = ControlModeHandler.configGerais.getCalibration(ConfigGerais.C_TANQUE1);
+        double cal2 = ControlModeHandler.configGerais.getCalibration(ConfigGerais.C_TANQUE2);
         
         boolean init = ControlModeHandler.configGerais.CAL_INICIAL;
 
@@ -394,22 +395,31 @@ public class OpcoesGerais extends javax.swing.JDialog {
         cal2 = SUtil.fixNumber(cal2);
 
         ControlModeHandler.configGerais.CAL_INICIAL = cbCalibracaoInicial.isSelected();
-        ControlModeHandler.configGerais.setCalibration(ConfigGerais.TANQUE1, Double.parseDouble(cal1));
-        ControlModeHandler.configGerais.setCalibration(ConfigGerais.TANQUE2, Double.parseDouble(cal2));
+        ControlModeHandler.configGerais.setCalibration(ConfigGerais.C_TANQUE1, Double.parseDouble(cal1));
+        ControlModeHandler.configGerais.setCalibration(ConfigGerais.C_TANQUE2, Double.parseDouble(cal2));
         ControlModeHandler.configGerais.SERVIDOR = ip;
-        
+
+        boolean modificado = false;
+
         if(rbTanque1.isSelected()) {
-            ControlModeHandler.configGerais.TANQUE = ConfigGerais.TANQUE1;
+            modificado = (ControlModeHandler.configGerais.CONTROLE != ConfigGerais.C_TANQUE1);
+            ControlModeHandler.configGerais.CONTROLE = ConfigGerais.C_TANQUE1;
             novoFrame.changeCardConf(NovoFrame.CARD_CONF_CONTROLE);
         } else if(cbCascata.isSelected()) {
-            ControlModeHandler.configGerais.TANQUE = ConfigGerais.TANQUE_CASCATA;
+            modificado = (ControlModeHandler.configGerais.CONTROLE != ConfigGerais.C_TANQUE_CASCATA);
+            ControlModeHandler.configGerais.CONTROLE = ConfigGerais.C_TANQUE_CASCATA;
             novoFrame.changeCardConf(NovoFrame.CARD_CONF_CONTROLE_CASCATA);
         } else {
-            ControlModeHandler.configGerais.TANQUE = ConfigGerais.TANQUE2;
+            modificado = (ControlModeHandler.configGerais.CONTROLE != ConfigGerais.C_TANQUE2);
+            ControlModeHandler.configGerais.CONTROLE = ConfigGerais.C_TANQUE2;
             novoFrame.changeCardConf(NovoFrame.CARD_CONF_CONTROLE);
         }
 
         ControlModeHandler.atualizaOpcoes();
+
+        if(modificado) {
+            ControlModeHandler.initChart();
+        }
     }
 
     private void changeCard(String card) {

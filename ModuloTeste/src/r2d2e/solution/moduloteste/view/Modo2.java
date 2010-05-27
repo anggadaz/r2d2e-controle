@@ -25,8 +25,8 @@ public class Modo2 extends JPanel implements ModoVisualizacao {
             return;
         }
 
-        chart.setPreferredSize(new Dimension(570, 230));
-        chart.setSize(new Dimension(570, 230));
+        chart.setPreferredSize(graphs[ix].getSize());
+        chart.setSize(graphs[ix].getSize());
         graphs[ix].removeAll();
         graphs[ix].add(chart);
     }

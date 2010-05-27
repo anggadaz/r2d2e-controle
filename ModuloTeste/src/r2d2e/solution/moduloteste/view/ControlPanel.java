@@ -8,7 +8,6 @@ package r2d2e.solution.moduloteste.view;
 
 import java.awt.CardLayout;
 import r2d2e.solution.moduloteste.domain.controlerInterface;
-import r2d2e.solution.moduloteste.domain.graph.ConfigGraph;
 import r2d2e.solution.moduloteste.domain.graph.IGraphTime;
 import r2d2e.solution.moduloteste.domain.graph.ModoVisualizacao;
 import r2d2e.solution.moduloteste.handler.ControlModeHandler;
@@ -88,6 +87,11 @@ public class ControlPanel extends javax.swing.JPanel {
         modo1 = new r2d2e.solution.moduloteste.view.Modo1();
 
         setOpaque(false);
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentResized(java.awt.event.ComponentEvent evt) {
+                formComponentResized(evt);
+            }
+        });
 
         panelDados.setOpaque(false);
 
@@ -125,6 +129,10 @@ public class ControlPanel extends javax.swing.JPanel {
             .addComponent(panelGrafico, javax.swing.GroupLayout.DEFAULT_SIZE, 506, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void formComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentResized
+        initChart();
+    }//GEN-LAST:event_formComponentResized
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -52,6 +52,11 @@ public abstract class IGraphTime {
         renderer.setSeriesPaint(1, Color.blue);
         renderer.setSeriesPaint(2, Color.green);
         renderer.setSeriesPaint(3, Color.YELLOW);
+        renderer.setSeriesPaint(4, Color.MAGENTA);
+        renderer.setSeriesPaint(5, Color.CYAN);
+        renderer.setSeriesPaint(6, Color.DARK_GRAY);
+        renderer.setSeriesPaint(7, Color.ORANGE);
+
         renderer.setStroke(new BasicStroke(1f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL));
 
         XYPlot plot = new XYPlot(dataset, domain, range, renderer);

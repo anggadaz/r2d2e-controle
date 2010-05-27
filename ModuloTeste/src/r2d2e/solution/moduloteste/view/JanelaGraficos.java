@@ -1,9 +1,4 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/*
  * JanelaGraficos.java
  *
  * Created on 05/05/2010, 11:32:50
@@ -11,8 +6,10 @@
 
 package r2d2e.solution.moduloteste.view;
 
+import java.awt.Component;
 import java.awt.Dimension;
 import java.net.URL;
+import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import org.jfree.chart.ChartPanel;
 
@@ -21,6 +18,8 @@ import org.jfree.chart.ChartPanel;
  * @author Rivaldo Jr
  */
 public class JanelaGraficos extends javax.swing.JDialog {
+
+    ArrayList<ChartPanel> charts = new ArrayList<ChartPanel>();
 
     /** Creates new form JanelaGraficos */
     public JanelaGraficos(java.awt.Frame parent, boolean modal) {
@@ -38,9 +37,28 @@ public class JanelaGraficos extends javax.swing.JDialog {
     }
 
     public void addGraph(ChartPanel chart) {
-        chart.setPreferredSize(new Dimension(570, 200));
-        chart.setSize(new Dimension(570, 200));
-        panelGraph.add(chart);
+        charts.add(chart);
+        resizeCharts();
+    }
+
+    private void resizeCharts() {
+
+        panelGraph.removeAll();
+
+        if(charts.size() == 0) {
+            return;
+        }
+
+        int w = panelGraph.getWidth();
+        int h = panelGraph.getHeight() / charts.size();
+
+        for (ChartPanel chart : charts) {
+            chart.setPreferredSize(new Dimension(w, h));
+            chart.setSize(new Dimension(w, h));
+            panelGraph.add(chart);
+        }
+
+        repaint();
     }
 
     /** This method is called from within the constructor to
@@ -60,6 +78,13 @@ public class JanelaGraficos extends javax.swing.JDialog {
                 formWindowClosed(evt);
             }
         });
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentResized(java.awt.event.ComponentEvent evt) {
+                formComponentResized(evt);
+            }
+        });
+
+        panelGraph.setName("Gráficos"); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -78,6 +103,10 @@ public class JanelaGraficos extends javax.swing.JDialog {
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         clear();
     }//GEN-LAST:event_formWindowClosed
+
+    private void formComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentResized
+        resizeCharts();
+    }//GEN-LAST:event_formComponentResized
 
     /**
     * @param args the command line arguments
