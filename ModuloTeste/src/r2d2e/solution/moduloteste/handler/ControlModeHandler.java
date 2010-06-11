@@ -2,6 +2,7 @@ package r2d2e.solution.moduloteste.handler;
 
 import r2d2e.solution.moduloteste.controlers.Controller;
 import r2d2e.solution.moduloteste.controlers.ControllerCascade;
+import r2d2e.solution.moduloteste.controlers.FollowerReference;
 import r2d2e.solution.moduloteste.domain.AlgController;
 import r2d2e.solution.moduloteste.domain.ConfigGerais;
 import r2d2e.solution.moduloteste.domain.GenericXML;
@@ -12,6 +13,7 @@ import r2d2e.solution.moduloteste.domain.graph.GraphControl;
 import r2d2e.solution.moduloteste.domain.graph.GraphAction;
 import r2d2e.solution.moduloteste.domain.graph.IGraphTime;
 import r2d2e.solution.moduloteste.view.ConfParametros;
+import r2d2e.solution.moduloteste.view.ConfSeguidor;
 import r2d2e.solution.moduloteste.view.ControlPanel;
 import r2d2e.solution.moduloteste.view.NovoFrame;
 import r2d2e.solution.moduloteste.view.TanquePanel;
@@ -35,10 +37,13 @@ public class ControlModeHandler {
     private static AlgController algController;
     private static Controller controllerSelected;
     private static ControllerCascade controllerCascade = new ControllerCascade();
+    private static FollowerReference followerReference = new FollowerReference();
 
     private static ConfParametros parametroNormal;
     private static ConfParametros parametrosMaster;
     private static ConfParametros parametrosSlave;
+    
+    private static ConfSeguidor confSeguidor;
 
 
     public static void setIntegracaoCondi(boolean chk) {
@@ -55,6 +60,7 @@ public class ControlModeHandler {
         parametroNormal = frame.getConfParametroNormal();
         parametrosMaster = frame.getConfParametroMaster();
         parametrosSlave = frame.getConfParametrosSlave();
+        confSeguidor = frame.getConfSeguidor();
 
         GenericXML genericXML = new GenericXML();
         configGraph = genericXML.readConfigGrafics();
@@ -97,7 +103,9 @@ public class ControlModeHandler {
         if (configGerais.CONTROLE == ConfigGerais.C_TANQUE_CASCATA) {
             controllerCascade.updateParametros(parametrosMaster, parametrosSlave);
             controllerSelected = controllerCascade;
-
+        } else if(configGerais.CONTROLE == ConfigGerais.TANQUE_SEGUIDOR){
+            followerReference.updateParametros(confSeguidor);
+            controllerSelected = followerReference;
         } else {
             controllerSelected = parametroNormal.getSelectedController();
             controllerSelected.updateParametros(parametroNormal);

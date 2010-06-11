@@ -24,8 +24,10 @@ public class ControllerCascade extends Controller {
     @Override
     public double calculateOutput(double processVariable) {
         System.out.println("---MASTER---");
+        
         System.out.println("PV " + processVariable);
-
+        System.out.println("SETPOINT " + master.setPoint);
+        
         nivelD = master.calculateOutput(processVariable);
         
         nivelD = travaLevel1(nivelD);
@@ -35,7 +37,7 @@ public class ControllerCascade extends Controller {
         System.out.println("---SLAVE---");
         
         slave.setSetPoint(nivelD);
-
+        System.out.println("SETPOINT " + slave.setPoint);
         System.out.println("PV2 " + processVariable2);
         double tensao = slave.calculateOutput(processVariable2);
         

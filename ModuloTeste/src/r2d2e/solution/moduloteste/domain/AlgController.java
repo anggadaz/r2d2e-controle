@@ -13,6 +13,7 @@ import r2d2e.solution.moduloteste.analise.RiseTime;
 import r2d2e.solution.moduloteste.analise.TimeAccommodation;
 import r2d2e.solution.moduloteste.controlers.Controller;
 import r2d2e.solution.moduloteste.controlers.ControllerCascade;
+import r2d2e.solution.moduloteste.controlers.FollowerReference;
 import r2d2e.solution.moduloteste.domain.graph.GraphNivel;
 import r2d2e.solution.moduloteste.domain.graph.GraphControl;
 import r2d2e.solution.moduloteste.domain.graph.GraphAction;
@@ -27,15 +28,12 @@ public class AlgController extends Timer implements ActionListener {
 
     public static final int NIVEL_MAX = 25;
     public static final int NIVEL_MIN = 3;
-
     private Controller controller;
     private Quanser quanser;
     private TanquePanel tanquePanel;
-
     private long initT;
     private boolean limiteMaxTank2 = false;
     private boolean ativo = true;
-
     private CalcOvershoot calcOvershoot;
     private TimeAccommodation timeOfAccommodation;
     private RiseTime riseTime;
@@ -51,7 +49,7 @@ public class AlgController extends Timer implements ActionListener {
 
         controller.setInteCondi(intCond);
         calcOvershoot = new CalcOvershoot(controller.getSetPoint());
-        timeOfAccommodation = new TimeAccommodation(controlerInterface.dataPanel.getCriterio(),controller.getSetPoint());
+        timeOfAccommodation = new TimeAccommodation(controlerInterface.dataPanel.getCriterio(), controller.getSetPoint());
         riseTime = new RiseTime(controller.getSetPoint());
         peakTime = new PeakTime(controller.getSetPoint());
     }
@@ -122,13 +120,19 @@ public class AlgController extends Timer implements ActionListener {
 
         if (ativo) {
 
-            if(controller instanceof ControllerCascade){
-                ((ControllerCascade)controller).setProcessVariable2(nivel1);
+            if (controller instanceof ControllerCascade) {
+                ((ControllerCascade) controller).setProcessVariable2(nivel1);
             }
 
             double setP = controller.getSetPoint();
 
-            double tensao = controller.calculateOutput(nivel);
+            double tensao = 0;
+            
+            if (controller instanceof FollowerReference) {
+                tensao = ((FollowerReference) controller).calculateOutput(nivel1, nivel2);
+            } else {
+                tensao = controller.calculateOutput(nivel);
+            }
 
             double tensaoAtual = travaTensao(tensao);
 
@@ -141,7 +145,7 @@ public class AlgController extends Timer implements ActionListener {
             atualizarGrafico(nivel, setP, tensao, tensaoAtual);
 
             calcOvershoot.CalcOvershoot(nivel);
-            
+
             Double rise = riseTime.calcRiseTime(setP, nivel);
             controlerInterface.atualizarRiseTime(rise);
 
@@ -237,5 +241,4 @@ public class AlgController extends Timer implements ActionListener {
         peakTime.setSetpoint(set);
         calcOvershoot.setSetpoint(set);
     }
-
 }

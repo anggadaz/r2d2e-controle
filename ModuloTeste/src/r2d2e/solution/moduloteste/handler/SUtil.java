@@ -34,7 +34,7 @@ public class SUtil {
         return kd;
     }
 
-        public static String getKIValue(ConfParametros parametros) {
+    public static String getKIValue(ConfParametros parametros) {
         boolean ok = parametros.getChkKI().isSelected();
         String ki = null;
         if (ok) {
@@ -48,5 +48,10 @@ public class SUtil {
             ki = resultado.toString();
         }
         return ki;
+    }
+    public static double twoPlaces(double n){
+        double temp = n*100;
+        temp = Math.ceil(temp);
+        return temp/100;
     }
 }

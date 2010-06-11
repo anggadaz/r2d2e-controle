@@ -53,7 +53,9 @@ public class MainFrameHandler {
 
         if (ControlModeHandler.configGerais.CONTROLE == ConfigGerais.C_TANQUE_CASCATA) {
             mainFrame.changeCardConf(NovoFrame.CARD_CONF_CONTROLE_CASCATA);
-        } else {
+        } else if(ControlModeHandler.configGerais.CONTROLE == ConfigGerais.TANQUE_SEGUIDOR){
+            mainFrame.changeCardConf(NovoFrame.CARD_CONF_CONTROLE_SEGUIDOR);
+        }else {
             mainFrame.changeCardConf(NovoFrame.CARD_CONF_CONTROLE);
         }
 

@@ -12,6 +12,7 @@ public class ConfigGerais {
     public static int C_TANQUE1 = 0;
     public static int C_TANQUE2 = 1;
     public static int C_TANQUE_CASCATA = 2;
+    public static int TANQUE_SEGUIDOR = 3;
 
     public int MODO = 1;
     public int CONTROLE = 0;

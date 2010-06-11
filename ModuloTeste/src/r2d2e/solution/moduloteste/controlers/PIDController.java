@@ -23,22 +23,13 @@ public class PIDController extends Controller {
 
     @Override
     public double calculateOutput(double processVariable) {
-        System.out.println("kp " + kp);
-        System.out.println("ki " + ki);
-        System.out.println("kd " + kd);
-        System.out.println("SP " + setPoint);
-
-        System.out.println("-----");
-        System.out.println("erro " + error(processVariable));
         
         double k = proporcionalTerm(kp, processVariable);
         double i = integralTerm(ki, processVariable);
         double d = derivativeTerm(kd, processVariable);
-
-        System.out.println("propo " + k);
-        System.out.println("int " + i);
-        System.out.println("der " + d);
+        
         double s = k + i + d;
+
         s = IntegralTest(s, k, i, d);
 
         return s;

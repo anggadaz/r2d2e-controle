@@ -391,6 +391,16 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.DesignCardLayout"/>
           <SubComponents>
+            <Component class="r2d2e.solution.moduloteste.view.ConfSeguidor" name="confSeguidor">
+              <Properties>
+                <Property name="opaque" type="boolean" value="false"/>
+              </Properties>
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
+                  <CardConstraints cardName="cardSeguidor"/>
+                </Constraint>
+              </Constraints>
+            </Component>
             <Component class="r2d2e.solution.moduloteste.view.ConfTeste" name="confTeste">
               <Properties>
                 <Property name="opaque" type="boolean" value="false"/>

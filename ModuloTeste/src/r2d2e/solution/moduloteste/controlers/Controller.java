@@ -44,24 +44,31 @@ public abstract class Controller {
 
     //Funçao que calcula a ação proporcional de controle.
     public double proporcionalTerm(double kp, double processVariable) {
+        System.out.println("ERRO "+ error(processVariable));
+        System.out.println("kp " + kp);
         double erro = error(processVariable);
         proporcional = kp * erro;
-
+        System.out.println("PROPOR " + proporcional);
         return proporcional;
     }
 
     //Funçao que calcula a ação integrativa de controle.
     public double integralTerm(double ki, double processVariable) {
         System.out.println("PASTINT " + pastIntegral);
+        System.out.println("ki " + ki);
         integral = pastIntegral + ki * sampleRate * error(processVariable);
+        System.out.println("INTE " + integral);
         return integral;
     }
 
     //Funçao que calcula a ação derivativa de controle.
     public double derivativeTerm(double kd, double processVariable) {
         double erro = error(processVariable);
+        System.out.println("kd " + kd);
+        System.out.println("pastError " + pastError);
         derivative = kd * ((erro - pastError) / sampleRate);
         pastError = erro;
+        System.out.println("DERI " + derivative);
         return derivative;
     }
 

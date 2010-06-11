@@ -51,6 +51,7 @@ public class OpcoesGerais extends javax.swing.JDialog {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
+        buttonGroup2 = new javax.swing.ButtonGroup();
         buttonSalvar = new javax.swing.JButton();
         buttonFechar = new javax.swing.JButton();
         panelCard = new javax.swing.JPanel();
@@ -58,6 +59,7 @@ public class OpcoesGerais extends javax.swing.JDialog {
         rbTanque1 = new javax.swing.JRadioButton();
         rbTanque2 = new javax.swing.JRadioButton();
         cbCascata = new javax.swing.JCheckBox();
+        cbSeguidorReferencia = new javax.swing.JCheckBox();
         panelCalibracao = new javax.swing.JPanel();
         labelTanque1 = new javax.swing.JLabel();
         textTanque1 = new javax.swing.JFormattedTextField();
@@ -123,9 +125,21 @@ public class OpcoesGerais extends javax.swing.JDialog {
             }
         });
 
+        buttonGroup2.add(cbCascata);
+        cbCascata.setSelected(true);
         cbCascata.setText(org.openide.util.NbBundle.getMessage(OpcoesGerais.class, "OpcoesGerais.cbCascata.text")); // NOI18N
         cbCascata.setEnabled(false);
         cbCascata.setOpaque(false);
+
+        buttonGroup2.add(cbSeguidorReferencia);
+        cbSeguidorReferencia.setText(org.openide.util.NbBundle.getMessage(OpcoesGerais.class, "OpcoesGerais.cbSeguidorReferencia.text")); // NOI18N
+        cbSeguidorReferencia.setEnabled(false);
+        cbSeguidorReferencia.setOpaque(false);
+        cbSeguidorReferencia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbSeguidorReferenciaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelConfiguracaoLayout = new javax.swing.GroupLayout(panelConfiguracao);
         panelConfiguracao.setLayout(panelConfiguracaoLayout);
@@ -136,11 +150,14 @@ public class OpcoesGerais extends javax.swing.JDialog {
                     .addGroup(panelConfiguracaoLayout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(panelConfiguracaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(rbTanque1, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
-                            .addComponent(rbTanque2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)))
+                            .addComponent(rbTanque1, javax.swing.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE)
+                            .addComponent(rbTanque2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelConfiguracaoLayout.createSequentialGroup()
                         .addGap(68, 68, 68)
-                        .addComponent(cbCascata, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)))
+                        .addComponent(cbCascata, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelConfiguracaoLayout.createSequentialGroup()
+                        .addGap(68, 68, 68)
+                        .addComponent(cbSeguidorReferencia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         panelConfiguracaoLayout.setVerticalGroup(
@@ -151,10 +168,11 @@ public class OpcoesGerais extends javax.swing.JDialog {
                 .addComponent(rbTanque2)
                 .addGap(3, 3, 3)
                 .addComponent(cbCascata)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 6, Short.MAX_VALUE)
+                .addComponent(cbSeguidorReferencia))
         );
 
-        panelCard.add(panelConfiguracao, "card5");
+        panelCard.add(panelConfiguracao, "card_configuracao");
 
         panelCalibracao.setBorder(javax.swing.BorderFactory.createTitledBorder(org.openide.util.NbBundle.getMessage(OpcoesGerais.class, "OpcoesGerais.panelCalibracao.border.title"))); // NOI18N
 
@@ -182,15 +200,15 @@ public class OpcoesGerais extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelCalibracaoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelCalibracaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(cbCalibracaoInicial, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
+                    .addComponent(cbCalibracaoInicial, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
                     .addGroup(panelCalibracaoLayout.createSequentialGroup()
                         .addGroup(panelCalibracaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(labelTanque1)
                             .addComponent(labelTanque2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(panelCalibracaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(textTanque2, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
-                            .addComponent(textTanque1, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE))))
+                            .addComponent(textTanque2, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
+                            .addComponent(textTanque1, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         panelCalibracaoLayout.setVerticalGroup(
@@ -204,7 +222,7 @@ public class OpcoesGerais extends javax.swing.JDialog {
                 .addGroup(panelCalibracaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelTanque2)
                     .addComponent(textTanque2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 3, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addComponent(cbCalibracaoInicial)
                 .addContainerGap())
         );
@@ -226,7 +244,7 @@ public class OpcoesGerais extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(labelIP)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(textIP, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
+                .addComponent(textIP, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
                 .addContainerGap())
         );
         panelServidorLayout.setVerticalGroup(
@@ -236,7 +254,7 @@ public class OpcoesGerais extends javax.swing.JDialog {
                 .addGroup(panelServidorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(labelIP, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(textIP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(64, Short.MAX_VALUE))
+                .addContainerGap(73, Short.MAX_VALUE))
         );
 
         panelCard.add(panelServidor, "card_servidor");
@@ -285,7 +303,7 @@ public class OpcoesGerais extends javax.swing.JDialog {
                 .addComponent(buttonCalibracao, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(buttonServidor, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addContainerGap(55, Short.MAX_VALUE))
         );
 
         separator.setOrientation(javax.swing.SwingConstants.VERTICAL);
@@ -307,7 +325,7 @@ public class OpcoesGerais extends javax.swing.JDialog {
                         .addGap(4, 4, 4)
                         .addComponent(separator, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(panelCard, javax.swing.GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE)))
+                        .addComponent(panelCard, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -318,8 +336,8 @@ public class OpcoesGerais extends javax.swing.JDialog {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(separator, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)
-                            .addComponent(panelCard, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(panelCard, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
+                            .addComponent(separator, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(buttonFechar, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -347,6 +365,10 @@ public class OpcoesGerais extends javax.swing.JDialog {
             case 2:
                 rbTanque2.setSelected(true);
                 cbCascata.setSelected(true);
+                break;
+            case 3:
+                rbTanque2.setSelected(true);
+                cbSeguidorReferencia.setSelected(true);
                 break;
         }
         
@@ -382,8 +404,13 @@ public class OpcoesGerais extends javax.swing.JDialog {
     }//GEN-LAST:event_buttonServidorActionPerformed
 
     private void rbTanque2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rbTanque2ItemStateChanged
-        cbCascata.setEnabled(rbTanque2.isSelected());       
+        cbCascata.setEnabled(rbTanque2.isSelected());
+        cbSeguidorReferencia.setEnabled(rbTanque2.isSelected());
     }//GEN-LAST:event_rbTanque2ItemStateChanged
+
+    private void cbSeguidorReferenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSeguidorReferenciaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbSeguidorReferenciaActionPerformed
 
     void save() {
         String cal1 = textTanque1.getText();
@@ -409,7 +436,10 @@ public class OpcoesGerais extends javax.swing.JDialog {
             modificado = (ControlModeHandler.configGerais.CONTROLE != ConfigGerais.C_TANQUE_CASCATA);
             ControlModeHandler.configGerais.CONTROLE = ConfigGerais.C_TANQUE_CASCATA;
             novoFrame.changeCardConf(NovoFrame.CARD_CONF_CONTROLE_CASCATA);
-        } else {
+        } else if(cbSeguidorReferencia.isSelected()){
+            ControlModeHandler.configGerais.CONTROLE = ConfigGerais.TANQUE_SEGUIDOR;
+            novoFrame.changeCardConf(NovoFrame.CARD_CONF_CONTROLE_SEGUIDOR);
+        } else{
             modificado = (ControlModeHandler.configGerais.CONTROLE != ConfigGerais.C_TANQUE2);
             ControlModeHandler.configGerais.CONTROLE = ConfigGerais.C_TANQUE2;
             novoFrame.changeCardConf(NovoFrame.CARD_CONF_CONTROLE);
@@ -451,10 +481,12 @@ public class OpcoesGerais extends javax.swing.JDialog {
     private javax.swing.JButton buttonConf;
     private javax.swing.JButton buttonFechar;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JButton buttonSalvar;
     private javax.swing.JButton buttonServidor;
     private javax.swing.JCheckBox cbCalibracaoInicial;
     private javax.swing.JCheckBox cbCascata;
+    private javax.swing.JCheckBox cbSeguidorReferencia;
     private javax.swing.JLabel labelIP;
     private javax.swing.JLabel labelTanque1;
     private javax.swing.JLabel labelTanque2;

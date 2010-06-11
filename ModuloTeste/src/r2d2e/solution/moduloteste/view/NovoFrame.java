@@ -23,17 +23,17 @@ public class NovoFrame extends javax.swing.JFrame {
     public static final String CARD_CONF_TESTE = "cardConfTeste";
     public static final String CARD_CONF_CONTROLE = "cardConfControle";
     public static final String CARD_CONF_CONTROLE_CASCATA = "cardCascata";
+    public static final String CARD_CONF_CONTROLE_SEGUIDOR = "cardSeguidor";
     public static final String CARD_MAIN_TESTE = "cardMainTeste";
     public static final String CARD_MAIN_CONTROLE = "cardMainControle";
     public static JanelaGraficos JANELA_EXTRA = new JanelaGraficos(null, false);
-
     public static String ABSOLUTE_PATH = "";
 
     public NovoFrame() {
         initComponents();
         mainFrameHandler = new MainFrameHandler(this);
 
-        if(ControlModeHandler.configGerais.MODO == ConfigGerais.MODO_TESTE) {
+        if (ControlModeHandler.configGerais.MODO == ConfigGerais.MODO_TESTE) {
             mainFrameHandler.enterTestMode();
             menuTesteActionPerformed(null);
         } else {
@@ -47,7 +47,6 @@ public class NovoFrame extends javax.swing.JFrame {
         setLocationRelativeTo(null);
 
         OpcoesGerais opcoesGerais = new OpcoesGerais(this, true);
-        opcoesGerais.getConfig();
         opcoesGerais.save();
 
         setMinimumSize(new Dimension(getWidth(), getHeight() + 60));
@@ -119,6 +118,7 @@ public class NovoFrame extends javax.swing.JFrame {
         testePanel = new r2d2e.solution.moduloteste.view.TestePanel();
         controlPanel = new r2d2e.solution.moduloteste.view.ControlPanel();
         opcoesPanel = new javax.swing.JPanel();
+        confSeguidor = new r2d2e.solution.moduloteste.view.ConfSeguidor();
         confTeste = new r2d2e.solution.moduloteste.view.ConfTeste();
         confParametroNormal = new r2d2e.solution.moduloteste.view.ConfParametros();
         panelCascata = new javax.swing.JPanel();
@@ -279,6 +279,9 @@ public class NovoFrame extends javax.swing.JFrame {
         opcoesPanel.setOpaque(false);
         opcoesPanel.setPreferredSize(new java.awt.Dimension(424, 150));
         opcoesPanel.setLayout(new java.awt.CardLayout());
+
+        confSeguidor.setOpaque(false);
+        opcoesPanel.add(confSeguidor, "cardSeguidor");
 
         confTeste.setOpaque(false);
         opcoesPanel.add(confTeste, "cardConfTeste");
@@ -490,6 +493,14 @@ public class NovoFrame extends javax.swing.JFrame {
         this.confParametroNormal = confParametroNormal;
     }
 
+    public ConfSeguidor getConfSeguidor() {
+        return confSeguidor;
+    }
+
+    public void setConfSeguidor(ConfSeguidor confSeguidor) {
+        this.confSeguidor = confSeguidor;
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -520,6 +531,7 @@ public class NovoFrame extends javax.swing.JFrame {
     private r2d2e.solution.moduloteste.view.ConfParametros confParametroMaster;
     private r2d2e.solution.moduloteste.view.ConfParametros confParametroNormal;
     private r2d2e.solution.moduloteste.view.ConfParametros confParametrosSlave;
+    private r2d2e.solution.moduloteste.view.ConfSeguidor confSeguidor;
     private r2d2e.solution.moduloteste.view.ConfTeste confTeste;
     private r2d2e.solution.moduloteste.view.ControlPanel controlPanel;
     private javax.swing.JMenuItem itemSobre;
