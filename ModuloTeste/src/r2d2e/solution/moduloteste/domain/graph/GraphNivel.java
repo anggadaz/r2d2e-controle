@@ -1,5 +1,6 @@
 package r2d2e.solution.moduloteste.domain.graph;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -26,7 +27,7 @@ public class GraphNivel extends IGraphTime {
         yAxis = "Nível (cm)";
         name = "Nível x Tempo";
 
-        String[] names = {"S-Slave","N-Slave", "E-Slave","S-Mestre", "N-Mestre", "E-Mestre"};
+        String[] names = {"Setpoint-T2","Nível-T2", "Erro-T2","Setpoint-T1", "Nível-T1", "Erro-T1"};
 
         if(modo == ConfigGerais.C_TANQUE_CASCATA) {
             series = new XYSeries[6];
@@ -44,6 +45,17 @@ public class GraphNivel extends IGraphTime {
         }
 
         JFreeChart chart = config();
+
+        renderer.setSeriesPaint(0, Color.red);
+        renderer.setSeriesPaint(1, Color.red);
+        renderer.setSeriesPaint(2, Color.yellow);
+        renderer.setSeriesPaint(3, Color.cyan);
+        renderer.setSeriesPaint(4, Color.cyan);
+        renderer.setSeriesPaint(5, Color.blue);
+
+        renderer.setSeriesStroke(3, pontilhado);
+        renderer.setSeriesStroke(4, pontilhado);
+        renderer.setSeriesStroke(5, pontilhado);
 
         panel = new ChartPanel(chart);
         panel.setPreferredSize(new Dimension(570, 410));

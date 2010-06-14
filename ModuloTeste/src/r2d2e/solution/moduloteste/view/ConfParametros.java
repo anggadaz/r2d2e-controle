@@ -152,6 +152,7 @@ public class ConfParametros extends javax.swing.JPanel {
         setBorder(javax.swing.BorderFactory.createTitledBorder(null, org.openide.util.NbBundle.getMessage(ConfParametros.class, "ConfParametros.border.title"), javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(255, 255, 255))); // NOI18N
         setMaximumSize(null);
 
+        comboControladores.setNextFocusableComponent(textSetPoint);
         comboControladores.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 comboControladoresItemStateChanged(evt);
@@ -176,11 +177,13 @@ public class ConfParametros extends javax.swing.JPanel {
         textKP.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         textKP.setText(org.openide.util.NbBundle.getMessage(ConfParametros.class, "ConfParametros.textKP.text")); // NOI18N
         textKP.setToolTipText(org.openide.util.NbBundle.getMessage(ConfParametros.class, "ConfParametros.textKP.toolTipText")); // NOI18N
+        textKP.setNextFocusableComponent(textKD);
 
         textKD.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.0000"))));
         textKD.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         textKD.setText(org.openide.util.NbBundle.getMessage(ConfParametros.class, "ConfParametros.textKD.text")); // NOI18N
         textKD.setToolTipText(org.openide.util.NbBundle.getMessage(ConfParametros.class, "ConfParametros.textKD.toolTipText")); // NOI18N
+        textKD.setNextFocusableComponent(textKI);
 
         textTI.setEditable(false);
         textTI.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.0000"))));
@@ -193,11 +196,13 @@ public class ConfParametros extends javax.swing.JPanel {
         textTD.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         textTD.setText(org.openide.util.NbBundle.getMessage(ConfParametros.class, "ConfParametros.textTD.text")); // NOI18N
         textTD.setToolTipText(org.openide.util.NbBundle.getMessage(ConfParametros.class, "ConfParametros.textTD.toolTipText")); // NOI18N
+        textTD.setNextFocusableComponent(textTI);
 
         textKI.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.0000"))));
         textKI.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         textKI.setText(org.openide.util.NbBundle.getMessage(ConfParametros.class, "ConfParametros.textKI.text")); // NOI18N
         textKI.setToolTipText(org.openide.util.NbBundle.getMessage(ConfParametros.class, "ConfParametros.textKI.toolTipText")); // NOI18N
+        textKI.setNextFocusableComponent(textTD);
 
         buttonGroup1.add(chkKD);
         chkKD.setForeground(new java.awt.Color(255, 255, 255));
@@ -322,6 +327,7 @@ public class ConfParametros extends javax.swing.JPanel {
         textSetPoint.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         textSetPoint.setText(org.openide.util.NbBundle.getMessage(ConfParametros.class, "ConfParametros.textSetPoint.text")); // NOI18N
         textSetPoint.setToolTipText(org.openide.util.NbBundle.getMessage(ConfParametros.class, "ConfParametros.textSetPoint.toolTipText")); // NOI18N
+        textSetPoint.setNextFocusableComponent(textKP);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

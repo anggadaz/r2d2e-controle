@@ -16,6 +16,7 @@ public class OpcoesGrafico extends javax.swing.JDialog {
     private final static String CARD_LAYOUT = "card_layout";
     private final static String CARD_CONFIGURACAO = "card_configuracao";
     private final static String CARD_JANELA = "card_janela";
+    private final static String CARD_SERIES = "card_series";
 
     ImageIcon janela1 = new ImageIcon(getClass().getResource("/r2d2e/solution/moduloteste/view/resources/janela1.png"));
     ImageIcon janela2 = new ImageIcon(getClass().getResource("/r2d2e/solution/moduloteste/view/resources/janela2.png"));
@@ -50,6 +51,8 @@ public class OpcoesGrafico extends javax.swing.JDialog {
         buttonGroup1 = new javax.swing.ButtonGroup();
         buttonFechar = new javax.swing.JButton();
         panelCard = new javax.swing.JPanel();
+        panelSeries = new javax.swing.JPanel();
+        G1 = new javax.swing.JPanel();
         panelJanela = new javax.swing.JPanel();
         cbNivel = new javax.swing.JCheckBox();
         cbSinal = new javax.swing.JCheckBox();
@@ -70,6 +73,7 @@ public class OpcoesGrafico extends javax.swing.JDialog {
         buttonLayout = new javax.swing.JButton();
         buttonConf = new javax.swing.JButton();
         buttonJanela = new javax.swing.JButton();
+        buttonJanela1 = new javax.swing.JButton();
         separator = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -94,6 +98,35 @@ public class OpcoesGrafico extends javax.swing.JDialog {
         });
 
         panelCard.setLayout(new java.awt.CardLayout());
+
+        G1.setBorder(javax.swing.BorderFactory.createTitledBorder(org.openide.util.NbBundle.getMessage(OpcoesGrafico.class, "OpcoesGrafico.G1.border.title"))); // NOI18N
+
+        javax.swing.GroupLayout G1Layout = new javax.swing.GroupLayout(G1);
+        G1.setLayout(G1Layout);
+        G1Layout.setHorizontalGroup(
+            G1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 260, Short.MAX_VALUE)
+        );
+        G1Layout.setVerticalGroup(
+            G1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 90, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout panelSeriesLayout = new javax.swing.GroupLayout(panelSeries);
+        panelSeries.setLayout(panelSeriesLayout);
+        panelSeriesLayout.setHorizontalGroup(
+            panelSeriesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(G1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        panelSeriesLayout.setVerticalGroup(
+            panelSeriesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelSeriesLayout.createSequentialGroup()
+                .addComponent(G1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(52, Short.MAX_VALUE))
+        );
+
+        panelCard.add(panelSeries, "card_series");
+        panelSeries.getAccessibleContext().setAccessibleName(org.openide.util.NbBundle.getMessage(OpcoesGrafico.class, "OpcoesGrafico.panelSeries.AccessibleContext.accessibleName")); // NOI18N
 
         panelJanela.setBorder(javax.swing.BorderFactory.createTitledBorder(org.openide.util.NbBundle.getMessage(OpcoesGrafico.class, "OpcoesGrafico.panelJanela.border.title"))); // NOI18N
 
@@ -128,7 +161,7 @@ public class OpcoesGrafico extends javax.swing.JDialog {
                     .addComponent(cbNivel)
                     .addComponent(cbSinal)
                     .addComponent(cbAcao))
-                .addContainerGap(78, Short.MAX_VALUE))
+                .addContainerGap(54, Short.MAX_VALUE))
         );
         panelJanelaLayout.setVerticalGroup(
             panelJanelaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -138,7 +171,7 @@ public class OpcoesGrafico extends javax.swing.JDialog {
                 .addComponent(cbSinal)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cbAcao)
-                .addContainerGap(74, Short.MAX_VALUE))
+                .addContainerGap(73, Short.MAX_VALUE))
         );
 
         panelCard.add(panelJanela, "card_janela");
@@ -191,7 +224,7 @@ public class OpcoesGrafico extends javax.swing.JDialog {
                     .addComponent(jLabel1)
                     .addComponent(jLabel2)
                     .addComponent(jLabel3))
-                .addContainerGap(64, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelConfiguracaoLayout.setVerticalGroup(
             panelConfiguracaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -254,7 +287,7 @@ public class OpcoesGrafico extends javax.swing.JDialog {
                     .addComponent(rbModo1)
                     .addComponent(rbModo2)
                     .addComponent(rbModo3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
                 .addComponent(buttonLayout1)
                 .addContainerGap())
         );
@@ -262,14 +295,15 @@ public class OpcoesGrafico extends javax.swing.JDialog {
             panelLayoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelLayoutLayout.createSequentialGroup()
                 .addGroup(panelLayoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(buttonLayout1, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
                     .addGroup(panelLayoutLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(rbModo1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(rbModo2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(rbModo3))
-                    .addComponent(buttonLayout1, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE))
+                        .addComponent(rbModo3)
+                        .addGap(17, 17, 17)))
                 .addContainerGap())
         );
 
@@ -302,13 +336,23 @@ public class OpcoesGrafico extends javax.swing.JDialog {
             }
         });
 
+        buttonJanela1.setText("Séries");
+        buttonJanela1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
+        buttonJanela1.setContentAreaFilled(false);
+        buttonJanela1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonJanela1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelButtonLayout = new javax.swing.GroupLayout(panelButton);
         panelButton.setLayout(panelButtonLayout);
         panelButtonLayout.setHorizontalGroup(
             panelButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(buttonLayout, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
-            .addComponent(buttonConf, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
-            .addComponent(buttonJanela, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
+            .addComponent(buttonLayout, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)
+            .addComponent(buttonConf, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)
+            .addComponent(buttonJanela, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)
+            .addComponent(buttonJanela1, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)
         );
         panelButtonLayout.setVerticalGroup(
             panelButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -319,7 +363,9 @@ public class OpcoesGrafico extends javax.swing.JDialog {
                 .addComponent(buttonConf, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(buttonJanela, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(94, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(buttonJanela1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(74, Short.MAX_VALUE))
         );
 
         separator.setOrientation(javax.swing.SwingConstants.VERTICAL);
@@ -331,12 +377,13 @@ public class OpcoesGrafico extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(panelButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(4, 4, 4)
                         .addComponent(separator, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(panelCard, javax.swing.GroupLayout.DEFAULT_SIZE, 241, Short.MAX_VALUE))
+                        .addComponent(panelCard, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(buttonFechar, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -428,6 +475,10 @@ public class OpcoesGrafico extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_formWindowClosed
 
+    private void buttonJanela1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonJanela1ActionPerformed
+        changeCard(CARD_SERIES);
+    }//GEN-LAST:event_buttonJanela1ActionPerformed
+
     public static void reloadInterface() {
         ControlModeHandler.getControlPanel().initChart();
         ControlModeHandler.getControlPanel().repaint();
@@ -504,10 +555,12 @@ public class OpcoesGrafico extends javax.swing.JDialog {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel G1;
     private javax.swing.JButton buttonConf;
     private javax.swing.JButton buttonFechar;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton buttonJanela;
+    private javax.swing.JButton buttonJanela1;
     private javax.swing.JButton buttonLayout;
     private javax.swing.JButton buttonLayout1;
     private javax.swing.JCheckBox cbAcao;
@@ -524,6 +577,7 @@ public class OpcoesGrafico extends javax.swing.JDialog {
     private javax.swing.JPanel panelConfiguracao;
     private javax.swing.JPanel panelJanela;
     private javax.swing.JPanel panelLayout;
+    private javax.swing.JPanel panelSeries;
     private javax.swing.JRadioButton rbModo1;
     private javax.swing.JRadioButton rbModo2;
     private javax.swing.JRadioButton rbModo3;

@@ -113,6 +113,7 @@ public class NovoFrame extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         buttonOpcoesGrafico = new javax.swing.JButton();
         buttonOpcoesGeral = new javax.swing.JButton();
+        buttonGraphWindow = new javax.swing.JButton();
         tanquePanel = new r2d2e.solution.moduloteste.view.TanquePanel();
         mainPanel = new javax.swing.JPanel();
         testePanel = new r2d2e.solution.moduloteste.view.TestePanel();
@@ -217,6 +218,18 @@ public class NovoFrame extends javax.swing.JFrame {
             }
         });
 
+        buttonGraphWindow.setIcon(new javax.swing.ImageIcon(getClass().getResource("/r2d2e/solution/moduloteste/view/resources/windows.png"))); // NOI18N
+        buttonGraphWindow.setToolTipText("Janela de Gráficos");
+        buttonGraphWindow.setBorder(null);
+        buttonGraphWindow.setBorderPainted(false);
+        buttonGraphWindow.setContentAreaFilled(false);
+        buttonGraphWindow.setFocusable(false);
+        buttonGraphWindow.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonGraphWindowActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout toolbarPanelLayout = new javax.swing.GroupLayout(toolbarPanel);
         toolbarPanel.setLayout(toolbarPanelLayout);
         toolbarPanelLayout.setHorizontalGroup(
@@ -234,16 +247,19 @@ public class NovoFrame extends javax.swing.JFrame {
                 .addComponent(buttonOpcoesGrafico)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(buttonOpcoesGeral)
-                .addContainerGap(756, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 915, Short.MAX_VALUE)
+                .addComponent(buttonGraphWindow)
+                .addContainerGap())
         );
         toolbarPanelLayout.setVerticalGroup(
             toolbarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, toolbarPanelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(toolbarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(buttonOpcoesGeral, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(buttonOpcoesGrafico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
+                    .addComponent(buttonGraphWindow)
+                    .addComponent(buttonOpcoesGeral, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
+                    .addComponent(buttonOpcoesGrafico, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, toolbarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(buttonParar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(buttonNovoCiclo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -267,7 +283,7 @@ public class NovoFrame extends javax.swing.JFrame {
         );
         tanquePanelLayout.setVerticalGroup(
             tanquePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 427, Short.MAX_VALUE)
+            .addGap(0, 419, Short.MAX_VALUE)
         );
 
         mainPanel.setOpaque(false);
@@ -311,9 +327,9 @@ public class NovoFrame extends javax.swing.JFrame {
         panelCascataLayout.setHorizontalGroup(
             panelCascataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelCascataLayout.createSequentialGroup()
-                .addComponent(confParametroMaster, javax.swing.GroupLayout.DEFAULT_SIZE, 473, Short.MAX_VALUE)
+                .addComponent(confParametroMaster, javax.swing.GroupLayout.DEFAULT_SIZE, 574, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(confParametrosSlave, javax.swing.GroupLayout.DEFAULT_SIZE, 474, Short.MAX_VALUE)
+                .addComponent(confParametrosSlave, javax.swing.GroupLayout.DEFAULT_SIZE, 575, Short.MAX_VALUE)
                 .addContainerGap())
         );
         panelCascataLayout.setVerticalGroup(
@@ -333,11 +349,11 @@ public class NovoFrame extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backgroundPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(backgroundPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(opcoesPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 963, Short.MAX_VALUE)
+                    .addComponent(opcoesPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 1165, Short.MAX_VALUE)
                     .addGroup(backgroundPanelLayout.createSequentialGroup()
                         .addComponent(tanquePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 707, Short.MAX_VALUE)))
+                        .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 909, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         backgroundPanelLayout.setVerticalGroup(
@@ -347,7 +363,7 @@ public class NovoFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(backgroundPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(tanquePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 427, Short.MAX_VALUE))
+                    .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 419, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(opcoesPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -459,6 +475,10 @@ public class NovoFrame extends javax.swing.JFrame {
         mainFrameHandler.initOpcoesGrafico();
     }//GEN-LAST:event_buttonOpcoesGraficoActionPerformed
 
+    private void buttonGraphWindowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonGraphWindowActionPerformed
+        JANELA_EXTRA.setVisible(!JANELA_EXTRA.isVisible());
+    }//GEN-LAST:event_buttonGraphWindowActionPerformed
+
     public void changeCardConf(String card) {
         CardLayout layout = (CardLayout) opcoesPanel.getLayout();
         layout.show(opcoesPanel, card);
@@ -523,6 +543,7 @@ public class NovoFrame extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private r2d2e.solution.moduloteste.view.BackgroundPanel backgroundPanel;
+    private javax.swing.JButton buttonGraphWindow;
     private javax.swing.JButton buttonIniciar;
     private javax.swing.JButton buttonNovoCiclo;
     private javax.swing.JButton buttonOpcoesGeral;

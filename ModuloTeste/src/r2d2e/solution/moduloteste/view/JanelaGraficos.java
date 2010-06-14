@@ -33,6 +33,7 @@ public class JanelaGraficos extends javax.swing.JDialog {
     }
 
     public void clear() {
+        charts = new ArrayList<ChartPanel>();
         panelGraph.removeAll();
     }
 
@@ -73,11 +74,6 @@ public class JanelaGraficos extends javax.swing.JDialog {
         panelGraph = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowClosed(java.awt.event.WindowEvent evt) {
-                formWindowClosed(evt);
-            }
-        });
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentResized(java.awt.event.ComponentEvent evt) {
                 formComponentResized(evt);
@@ -99,10 +95,6 @@ public class JanelaGraficos extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        clear();
-    }//GEN-LAST:event_formWindowClosed
 
     private void formComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentResized
         resizeCharts();

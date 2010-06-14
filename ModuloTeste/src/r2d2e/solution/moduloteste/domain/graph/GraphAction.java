@@ -1,5 +1,7 @@
 package r2d2e.solution.moduloteste.domain.graph;
 
+import java.awt.BasicStroke;
+import java.awt.Color;
 import java.awt.Dimension;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -22,9 +24,9 @@ public class GraphAction extends IGraphTime {
 
         xAxis = "Tempo (s)";
         yAxis = "Tensão (v)";
-        name = "Ação do controle";
+        name = "Sinal de controle";
 
-        String[] names = {"Calc-Slave","Sat-Slave","Calc-Master","Sat-Master"};
+        String[] names = {"Calc-Escravo","Sat-Escravo","Calc-Mestre","Sat-Mestre"};
 
         if(modo == ConfigGerais.C_TANQUE_CASCATA) {
             series = new XYSeries[4];
@@ -41,7 +43,13 @@ public class GraphAction extends IGraphTime {
         }
               
         JFreeChart chart = config();
+
+        renderer.setSeriesPaint(0, Color.red);
+        renderer.setSeriesPaint(1, Color.blue);
         
+        renderer.setSeriesStroke(2, pontilhado);
+        renderer.setSeriesStroke(3, pontilhado);
+
         panel = new ChartPanel(chart);
         panel.setPreferredSize(new Dimension(570, 410));
     }

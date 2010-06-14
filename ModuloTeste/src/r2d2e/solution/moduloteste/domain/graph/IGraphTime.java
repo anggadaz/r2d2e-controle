@@ -28,6 +28,12 @@ public abstract class IGraphTime {
 
     XYSeriesCollection dataset = new XYSeriesCollection();
 
+    XYItemRenderer renderer;
+    BasicStroke pontilhado = new BasicStroke(
+                2.0f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND,
+                1.0f, new float[] {10.0f, 6.0f}, 0.0f
+            );
+
     public ChartPanel getChart() {
         return panel;
     }
@@ -47,17 +53,7 @@ public abstract class IGraphTime {
         domain.setLabelFont(new Font("SansSerif", Font.PLAIN, 14));
         range.setLabelFont(new Font("SansSerif", Font.PLAIN, 14));
 
-        XYItemRenderer renderer = new XYLineAndShapeRenderer(true, false);
-        renderer.setSeriesPaint(0, Color.red);
-        renderer.setSeriesPaint(1, Color.blue);
-        renderer.setSeriesPaint(2, Color.green);
-        renderer.setSeriesPaint(3, Color.YELLOW);
-        renderer.setSeriesPaint(4, Color.MAGENTA);
-        renderer.setSeriesPaint(5, Color.CYAN);
-        renderer.setSeriesPaint(6, Color.DARK_GRAY);
-        renderer.setSeriesPaint(7, Color.ORANGE);
-
-        renderer.setStroke(new BasicStroke(1f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL));
+        renderer = new XYLineAndShapeRenderer(true, false);
 
         XYPlot plot = new XYPlot(dataset, domain, range, renderer);
         plot.setBackgroundPaint(Color.lightGray);
