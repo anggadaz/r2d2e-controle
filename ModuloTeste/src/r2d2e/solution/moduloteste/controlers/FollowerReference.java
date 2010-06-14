@@ -22,8 +22,20 @@ public class FollowerReference extends Controller {
     }
 
     public double calculateOutput(double processVariable1, double processVariable2) {
+        System.out.println("erro  " + error(processVariable2));
+        System.out.println("v " + v);
+
+        double e = (-gains[0] * processVariable1 - gains[1] * processVariable2);
+        double t = gains[2] * v;
+
+        System.out.println("VARIAVEIS " + e);
+        System.out.println("ERRO " + t);
+
+        double ret = e + t;
+
         v += error(processVariable2);
-        return (-(gains[0] * processVariable1 + gains[1] * processVariable2) + gains[2] * v);
+
+        return ret;
     }
 
     @Override

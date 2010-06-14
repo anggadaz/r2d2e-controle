@@ -49,7 +49,6 @@ public class Quanser {
         } catch (QuanserClientException e) {
             e.printStackTrace();
         }
-        System.out.println("READ1 " + read);
         return read;
     }
 
@@ -62,7 +61,6 @@ public class Quanser {
         } catch (QuanserClientException e) {
             e.printStackTrace();
         }
-        System.out.println("READ2 " + read);
         return read;
     }
 

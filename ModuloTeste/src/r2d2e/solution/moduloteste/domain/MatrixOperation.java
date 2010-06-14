@@ -19,7 +19,7 @@ public class MatrixOperation {
     private ComplexMatrix matrixC;
     private ComplexMatrix matrixGIncreased;
     private ComplexMatrix matrixHIncreased;
-    private ComplexMatrix matrixWcInverse;
+    private ComplexMatrix matrixWc;
     private ComplexMatrix matrixLast;
 
     public MatrixOperation() {
@@ -43,13 +43,41 @@ public class MatrixOperation {
             {Complex.valueOf(0, 0), Complex.valueOf(0, 0), Complex.valueOf(1, 0)},
             {Complex.valueOf(50.8, 0), Complex.valueOf(-5085.5, 0), Complex.valueOf(0, 0)},
             {Complex.valueOf(-17, 0), Complex.valueOf(5118.9, 0), Complex.valueOf(0, 0)}};
+        Complex[][] wcTemp = {
+            {Complex.valueOf(0, 0), Complex.valueOf(0.0295, 0), Complex.valueOf(0.0293, 0)},
+            {Complex.valueOf(0, 0), Complex.valueOf(0.0001, 0), Complex.valueOf(0.0003, 0)},
+            {Complex.valueOf(1, 0), Complex.valueOf(0, 0), Complex.valueOf(0, 0)}};
+//        Complex[][] gTemp = {
+//            {Complex.valueOf(1.0006559, 0), Complex.valueOf(0, 0)},
+//            {Complex.valueOf(0.0065613, 0), Complex.valueOf(1.0006559, 0)}};
+//        Complex[][] hTemp = {
+//            {Complex.valueOf(0.029652907, 0)},
+//            {Complex.valueOf(0.059315536, 0)}};
+//        Complex[][] cTemp = {
+//            {Complex.valueOf(0, 0), Complex.valueOf(1, 0)}};
+//        Complex[][] gIncreasedTemp = {
+//            {Complex.valueOf(1.0006559, 0), Complex.valueOf(0, 0), Complex.valueOf(0.029652907, 0)},
+//            {Complex.valueOf(0.0065613, 0), Complex.valueOf(1.0006559, 0), Complex.valueOf(0.059315536, 0)},
+//            {Complex.valueOf(0, 0), Complex.valueOf(0, 0), Complex.valueOf(0, 0)}};
+//        Complex[][] hIncreasedTemp = {
+//            {Complex.valueOf(0, 0)},
+//            {Complex.valueOf(0, 0)},
+//            {Complex.valueOf(1, 0)}};
+//        Complex[][] wcInverseTemp = {
+//            {Complex.valueOf(0, 0), Complex.valueOf(0, 0), Complex.valueOf(1, 0)},
+//            {Complex.valueOf(50.8, 0), Complex.valueOf(-5085.5, 0), Complex.valueOf(0, 0)},
+//            {Complex.valueOf(-17, 0), Complex.valueOf(5118.9, 0), Complex.valueOf(0, 0)}};
+//        Complex[][] wcTemp = {
+//            {Complex.valueOf(0, 0), Complex.valueOf(0.0296529, 0), Complex.valueOf(0.0296724, 0)},
+//            {Complex.valueOf(0, 0), Complex.valueOf(-0.0593155, 0), Complex.valueOf(-0.0591599, 0)},
+//            {Complex.valueOf(1, 0), Complex.valueOf(0, 0), Complex.valueOf(0, 0)}};
 
         this.matrixG = ComplexMatrix.valueOf(gTemp);
         this.matrixH = ComplexMatrix.valueOf(hTemp);
         this.matrixC = ComplexMatrix.valueOf(cTemp);
         this.matrixGIncreased = ComplexMatrix.valueOf(gIncreasedTemp);
         this.matrixHIncreased = ComplexMatrix.valueOf(hIncreasedTemp);
-        this.matrixWcInverse = ComplexMatrix.valueOf(wcInverseTemp);
+        this.matrixWc = ComplexMatrix.valueOf(wcTemp);
         matrixLast = generateMatrixLast();
         System.out.println("matrixLast " + matrixLast);
     }
@@ -57,9 +85,14 @@ public class MatrixOperation {
     public double[] gains(ArrayList<Complex> polos) {
         ComplexMatrix kChapeu = calculateAckermmann(polos);
 
+//        Complex[][] cha = {{Complex.valueOf(261.640410709, 0), Complex.valueOf(38959.4137421529, 0), Complex.valueOf(4.8819414356, 0)}};
+
+//        ComplexMatrix kChapeu = ComplexMatrix.valueOf(cha);
+        
         System.out.println("kchapeu " + kChapeu);
 
         ComplexMatrix zo = ComplexMatrix.valueOf(zerosOne(kChapeu.getNumberOfColumns()));
+
 
         ComplexMatrix aux = kChapeu.plus(zo).times(matrixLast.inverse());
 
@@ -79,11 +112,11 @@ public class MatrixOperation {
 
         System.out.println("qc " + qc);
 
-        Complex[][] vec2 = zerosOne(matrixWcInverse.getNumberOfColumns());
+        Complex[][] vec2 = zerosOne(matrixWc.getNumberOfColumns());
 
         ComplexMatrix aux = ComplexMatrix.valueOf(vec2);
 
-        ComplexMatrix result = aux.times(matrixWcInverse.times(qc));
+        ComplexMatrix result = aux.times(Complex.valueOf(-1,0)).times(matrixWc.inverse().times(qc));
 
         return result;
     }

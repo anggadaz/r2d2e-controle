@@ -98,10 +98,6 @@ public class CalcOvershoot {
         } else {
             Double ret;
 
-            System.out.println("OVER " + over);
-            System.out.println("SETPOINT " + setpointAtual);
-            System.out.println("REFERENCIA " + setpointAnterior);
-
             if (over >= setpointAtual) {
                 ret = (((over - setpointAtual) * 100) / Math.abs(setpointAtual - setpointAnterior));
             } else {

@@ -48,7 +48,6 @@ public class TimeAccommodation {
     }
 
     public void setCriterio(int criterio) {
-        System.out.println("criterio " + criterio);
         //Condição de erro criterio.
         if (criterio != 2 && criterio != 5 && criterio != 7 && criterio != 10) {
             System.out.println("Parametro invalido");

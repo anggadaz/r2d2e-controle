@@ -48,7 +48,6 @@ public class PeakTime {
 
         if(initTime == null) {
             initTime = System.currentTimeMillis();
-            System.out.println("NOVO INIT TIME " + initTime);
         }
 
         // Calcula nível máximo
@@ -66,9 +65,6 @@ public class PeakTime {
                 } else { // Diminiu então pode ser tu
                     Double time = convertToTwoPlaces(finalTime - initTime) / 1000;
                     controlerInterface.atualizarPeakTime(time);
-                    System.out.println("TEMPO FINAL " + finalTime);
-                    System.out.println("TIME " + time);
-                    System.out.println("NIVELPICO " + nivelAnterior);
                 }
 
             } else {

@@ -140,6 +140,8 @@ public class AlgController extends Timer implements ActionListener {
 
             tensaoAtual = travaNivel1(nivel1, tensaoAtual);
 
+            System.out.println("TENSAO " + tensaoAtual);
+            
             quanser.writeBomb(tensaoAtual);
 
             atualizarGrafico(nivel, setP, tensao, tensaoAtual);
