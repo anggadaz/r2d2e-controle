@@ -66,9 +66,9 @@ public class ConfSeguidor extends javax.swing.JPanel {
         txtReal2 = new javax.swing.JFormattedTextField();
         panelGanhos = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        txtGanho1k1 = new javax.swing.JFormattedTextField();
-        txtGanho2k1 = new javax.swing.JFormattedTextField();
-        txtGanhoK2 = new javax.swing.JFormattedTextField();
+        txtGanho1k2 = new javax.swing.JFormattedTextField();
+        txtGanho2k2 = new javax.swing.JFormattedTextField();
+        txtGanhoK1 = new javax.swing.JFormattedTextField();
         jLabel5 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(0, 0, 0));
@@ -238,17 +238,17 @@ public class ConfSeguidor extends javax.swing.JPanel {
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText(org.openide.util.NbBundle.getMessage(ConfSeguidor.class, "ConfSeguidor.jLabel4.text_1")); // NOI18N
 
-        txtGanho1k1.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        txtGanho1k1.setText(org.openide.util.NbBundle.getMessage(ConfSeguidor.class, "ConfSeguidor.txtGanho1k1.text")); // NOI18N
-        txtGanho1k1.setToolTipText(org.openide.util.NbBundle.getMessage(ConfSeguidor.class, "ConfSeguidor.txtGanho1k1.toolTipText")); // NOI18N
+        txtGanho1k2.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtGanho1k2.setText(org.openide.util.NbBundle.getMessage(ConfSeguidor.class, "ConfSeguidor.txtGanho1k2.text")); // NOI18N
+        txtGanho1k2.setToolTipText(org.openide.util.NbBundle.getMessage(ConfSeguidor.class, "ConfSeguidor.txtGanho1k2.toolTipText")); // NOI18N
 
-        txtGanho2k1.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        txtGanho2k1.setText(org.openide.util.NbBundle.getMessage(ConfSeguidor.class, "ConfSeguidor.txtGanho2k1.text")); // NOI18N
-        txtGanho2k1.setToolTipText(org.openide.util.NbBundle.getMessage(ConfSeguidor.class, "ConfSeguidor.txtGanho2k1.toolTipText")); // NOI18N
+        txtGanho2k2.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtGanho2k2.setText(org.openide.util.NbBundle.getMessage(ConfSeguidor.class, "ConfSeguidor.txtGanho2k2.text")); // NOI18N
+        txtGanho2k2.setToolTipText(org.openide.util.NbBundle.getMessage(ConfSeguidor.class, "ConfSeguidor.txtGanho2k2.toolTipText")); // NOI18N
 
-        txtGanhoK2.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        txtGanhoK2.setText(org.openide.util.NbBundle.getMessage(ConfSeguidor.class, "ConfSeguidor.txtGanhoK2.text")); // NOI18N
-        txtGanhoK2.setToolTipText(org.openide.util.NbBundle.getMessage(ConfSeguidor.class, "ConfSeguidor.txtGanhoK2.toolTipText")); // NOI18N
+        txtGanhoK1.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtGanhoK1.setText(org.openide.util.NbBundle.getMessage(ConfSeguidor.class, "ConfSeguidor.txtGanhoK1.text")); // NOI18N
+        txtGanhoK1.setToolTipText(org.openide.util.NbBundle.getMessage(ConfSeguidor.class, "ConfSeguidor.txtGanhoK1.toolTipText")); // NOI18N
 
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText(org.openide.util.NbBundle.getMessage(ConfSeguidor.class, "ConfSeguidor.jLabel5.text_1")); // NOI18N
@@ -262,25 +262,25 @@ public class ConfSeguidor extends javax.swing.JPanel {
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelGanhosLayout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtGanhoK2, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE))
+                        .addComponent(txtGanhoK1, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelGanhosLayout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtGanho1k1, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)))
+                        .addComponent(txtGanho1k2, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtGanho2k1, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE))
+                .addComponent(txtGanho2k2, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE))
         );
         panelGanhosLayout.setVerticalGroup(
             panelGanhosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelGanhosLayout.createSequentialGroup()
                 .addGroup(panelGanhosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(txtGanho1k1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtGanho2k1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtGanho1k2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtGanho2k2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelGanhosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(txtGanhoK2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtGanhoK1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(45, Short.MAX_VALUE))
         );
 
@@ -330,9 +330,9 @@ public class ConfSeguidor extends javax.swing.JPanel {
         polos.add(Complex.valueOf(Double.parseDouble(txtReal2.getText()), Double.parseDouble(txtImaginario2.getText())));
 
         ganhos = matrixOperation.gains(polos);
-        txtGanho1k1.setText(Double.toString(ganhos[0]));
-        txtGanho2k1.setText(Double.toString(ganhos[1]));
-        txtGanhoK2.setText(Double.toString(ganhos[2]));
+        txtGanho1k2.setText(Double.toString(ganhos[0]));
+        txtGanho2k2.setText(Double.toString(ganhos[1]));
+        txtGanhoK1.setText(Double.toString(ganhos[2]));
 
 //        ganhos[0] = Double.parseDouble(txtGanho1k1.getText());
 //        ganhos[1] = Double.parseDouble(txtGanho2k1.getText());
@@ -375,9 +375,9 @@ public class ConfSeguidor extends javax.swing.JPanel {
     private javax.swing.JPanel panelGanhos;
     private javax.swing.JPanel panelPolo;
     private javax.swing.JFormattedTextField textSetPoint;
-    private javax.swing.JFormattedTextField txtGanho1k1;
-    private javax.swing.JFormattedTextField txtGanho2k1;
-    private javax.swing.JFormattedTextField txtGanhoK2;
+    private javax.swing.JFormattedTextField txtGanho1k2;
+    private javax.swing.JFormattedTextField txtGanho2k2;
+    private javax.swing.JFormattedTextField txtGanhoK1;
     private javax.swing.JFormattedTextField txtImaginario;
     private javax.swing.JFormattedTextField txtImaginario1;
     private javax.swing.JFormattedTextField txtImaginario2;

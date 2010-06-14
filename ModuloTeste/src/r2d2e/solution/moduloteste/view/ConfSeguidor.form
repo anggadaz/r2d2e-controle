@@ -416,16 +416,16 @@
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="txtGanhoK2" pref="162" max="32767" attributes="0"/>
+                          <Component id="txtGanhoK1" pref="162" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" max="-2" attributes="0"/>
-                          <Component id="txtGanho1k1" pref="162" max="32767" attributes="0"/>
+                          <Component id="txtGanho1k2" pref="162" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace min="-2" max="-2" attributes="0"/>
-                  <Component id="txtGanho2k1" pref="162" max="32767" attributes="0"/>
+                  <Component id="txtGanho2k2" pref="162" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -434,13 +434,13 @@
               <Group type="102" alignment="0" attributes="0">
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtGanho1k1" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtGanho2k1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtGanho1k2" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtGanho2k2" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtGanhoK2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtGanhoK1" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="45" max="32767" attributes="0"/>
               </Group>
@@ -458,36 +458,36 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JFormattedTextField" name="txtGanho1k1">
+        <Component class="javax.swing.JFormattedTextField" name="txtGanho1k2">
           <Properties>
             <Property name="horizontalAlignment" type="int" value="4"/>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="r2d2e/solution/moduloteste/view/Bundle.properties" key="ConfSeguidor.txtGanho1k1.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
+              <ResourceString bundle="r2d2e/solution/moduloteste/view/Bundle.properties" key="ConfSeguidor.txtGanho1k2.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="r2d2e/solution/moduloteste/view/Bundle.properties" key="ConfSeguidor.txtGanho1k1.toolTipText" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
+              <ResourceString bundle="r2d2e/solution/moduloteste/view/Bundle.properties" key="ConfSeguidor.txtGanho1k2.toolTipText" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JFormattedTextField" name="txtGanho2k1">
+        <Component class="javax.swing.JFormattedTextField" name="txtGanho2k2">
           <Properties>
             <Property name="horizontalAlignment" type="int" value="4"/>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="r2d2e/solution/moduloteste/view/Bundle.properties" key="ConfSeguidor.txtGanho2k1.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
+              <ResourceString bundle="r2d2e/solution/moduloteste/view/Bundle.properties" key="ConfSeguidor.txtGanho2k2.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="r2d2e/solution/moduloteste/view/Bundle.properties" key="ConfSeguidor.txtGanho2k1.toolTipText" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
+              <ResourceString bundle="r2d2e/solution/moduloteste/view/Bundle.properties" key="ConfSeguidor.txtGanho2k2.toolTipText" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JFormattedTextField" name="txtGanhoK2">
+        <Component class="javax.swing.JFormattedTextField" name="txtGanhoK1">
           <Properties>
             <Property name="horizontalAlignment" type="int" value="4"/>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="r2d2e/solution/moduloteste/view/Bundle.properties" key="ConfSeguidor.txtGanhoK2.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
+              <ResourceString bundle="r2d2e/solution/moduloteste/view/Bundle.properties" key="ConfSeguidor.txtGanhoK1.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="r2d2e/solution/moduloteste/view/Bundle.properties" key="ConfSeguidor.txtGanhoK2.toolTipText" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
+              <ResourceString bundle="r2d2e/solution/moduloteste/view/Bundle.properties" key="ConfSeguidor.txtGanhoK1.toolTipText" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
             </Property>
           </Properties>
         </Component>
