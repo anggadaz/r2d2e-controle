@@ -72,13 +72,13 @@ public class ConfSeguidor extends javax.swing.JPanel {
         jLabel5 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(0, 0, 0));
-        setBorder(javax.swing.BorderFactory.createTitledBorder(null, org.openide.util.NbBundle.getMessage(ConfSeguidor.class, "ConfSeguidor.border.title_1"), javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(255, 255, 255))); // NOI18N
+        setBorder(javax.swing.BorderFactory.createTitledBorder(null, org.openide.util.NbBundle.getMessage(ConfSeguidor.class, "ConfSeguidor.border.title"), javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(255, 255, 255))); // NOI18N
         setMaximumSize(null);
         setMinimumSize(new java.awt.Dimension(963, 150));
         setPreferredSize(new java.awt.Dimension(963, 150));
 
         labelSetPoint.setForeground(new java.awt.Color(255, 255, 255));
-        labelSetPoint.setText(org.openide.util.NbBundle.getMessage(ConfSeguidor.class, "ConfSeguidor.labelSetPoint.text")); // NOI18N
+        labelSetPoint.setText("Set Point: Nível");
 
         buttonReload.setIcon(new javax.swing.ImageIcon(getClass().getResource("/r2d2e/solution/moduloteste/view/resources/reload.png"))); // NOI18N
         buttonReload.setText(org.openide.util.NbBundle.getMessage(ConfSeguidor.class, "ConfSeguidor.buttonReload.text")); // NOI18N
@@ -94,7 +94,7 @@ public class ConfSeguidor extends javax.swing.JPanel {
 
         textSetPoint.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
         textSetPoint.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        textSetPoint.setText(org.openide.util.NbBundle.getMessage(ConfSeguidor.class, "ConfSeguidor.textSetPoint.text")); // NOI18N
+        textSetPoint.setText("15.00");
         textSetPoint.setToolTipText(org.openide.util.NbBundle.getMessage(ConfSeguidor.class, "ConfSeguidor.textSetPoint.toolTipText")); // NOI18N
 
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
@@ -107,7 +107,7 @@ public class ConfSeguidor extends javax.swing.JPanel {
         txtReal.setToolTipText(org.openide.util.NbBundle.getMessage(ConfSeguidor.class, "ConfSeguidor.txtReal.toolTipText")); // NOI18N
 
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText(org.openide.util.NbBundle.getMessage(ConfSeguidor.class, "ConfSeguidor.jLabel1.text")); // NOI18N
+        jLabel1.setText("+");
 
         txtImaginario.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtImaginario.setText(org.openide.util.NbBundle.getMessage(ConfSeguidor.class, "ConfSeguidor.txtImaginario.text")); // NOI18N
@@ -119,17 +119,17 @@ public class ConfSeguidor extends javax.swing.JPanel {
         });
 
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText(org.openide.util.NbBundle.getMessage(ConfSeguidor.class, "ConfSeguidor.jLabel2.text")); // NOI18N
+        jLabel2.setText("*");
 
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText(org.openide.util.NbBundle.getMessage(ConfSeguidor.class, "ConfSeguidor.jLabel3.text")); // NOI18N
+        jLabel3.setText("i");
 
         txtReal1.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtReal1.setText(org.openide.util.NbBundle.getMessage(ConfSeguidor.class, "ConfSeguidor.txtReal1.text")); // NOI18N
         txtReal1.setToolTipText(org.openide.util.NbBundle.getMessage(ConfSeguidor.class, "ConfSeguidor.txtReal1.toolTipText")); // NOI18N
 
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText(org.openide.util.NbBundle.getMessage(ConfSeguidor.class, "ConfSeguidor.jLabel6.text")); // NOI18N
+        jLabel6.setText("+");
 
         txtImaginario1.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtImaginario1.setText(org.openide.util.NbBundle.getMessage(ConfSeguidor.class, "ConfSeguidor.txtImaginario1.text")); // NOI18N
@@ -141,13 +141,13 @@ public class ConfSeguidor extends javax.swing.JPanel {
         });
 
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText(org.openide.util.NbBundle.getMessage(ConfSeguidor.class, "ConfSeguidor.jLabel7.text")); // NOI18N
+        jLabel7.setText("*");
 
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setText(org.openide.util.NbBundle.getMessage(ConfSeguidor.class, "ConfSeguidor.jLabel8.text")); // NOI18N
+        jLabel8.setText("i");
 
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel9.setText(org.openide.util.NbBundle.getMessage(ConfSeguidor.class, "ConfSeguidor.jLabel9.text")); // NOI18N
+        jLabel9.setText("i");
 
         txtImaginario2.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtImaginario2.setText(org.openide.util.NbBundle.getMessage(ConfSeguidor.class, "ConfSeguidor.txtImaginario2.text")); // NOI18N
@@ -162,7 +162,7 @@ public class ConfSeguidor extends javax.swing.JPanel {
         jLabel10.setText(org.openide.util.NbBundle.getMessage(ConfSeguidor.class, "ConfSeguidor.jLabel10.text")); // NOI18N
 
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel11.setText(org.openide.util.NbBundle.getMessage(ConfSeguidor.class, "ConfSeguidor.jLabel11.text")); // NOI18N
+        jLabel11.setText("+");
 
         txtReal2.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtReal2.setText(org.openide.util.NbBundle.getMessage(ConfSeguidor.class, "ConfSeguidor.txtReal2.text")); // NOI18N
@@ -236,7 +236,7 @@ public class ConfSeguidor extends javax.swing.JPanel {
         panelGanhos.setOpaque(false);
 
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText(org.openide.util.NbBundle.getMessage(ConfSeguidor.class, "ConfSeguidor.jLabel4.text_1")); // NOI18N
+        jLabel4.setText("K2 =");
 
         txtGanho1k2.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtGanho1k2.setText(org.openide.util.NbBundle.getMessage(ConfSeguidor.class, "ConfSeguidor.txtGanho1k2.text")); // NOI18N
@@ -251,7 +251,7 @@ public class ConfSeguidor extends javax.swing.JPanel {
         txtGanhoK1.setToolTipText(org.openide.util.NbBundle.getMessage(ConfSeguidor.class, "ConfSeguidor.txtGanhoK1.toolTipText")); // NOI18N
 
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText(org.openide.util.NbBundle.getMessage(ConfSeguidor.class, "ConfSeguidor.jLabel5.text_1")); // NOI18N
+        jLabel5.setText("K1 =");
 
         javax.swing.GroupLayout panelGanhosLayout = new javax.swing.GroupLayout(panelGanhos);
         panelGanhos.setLayout(panelGanhosLayout);
