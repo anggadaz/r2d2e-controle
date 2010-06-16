@@ -35,19 +35,19 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
               <Component id="panelButton" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
                   <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
                       <Component id="separator" min="-2" pref="2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="panelCard" pref="244" max="32767" attributes="0"/>
+                      <Component id="panelCard" pref="232" max="32767" attributes="0"/>
                   </Group>
                   <Component id="buttonFechar" alignment="1" min="-2" pref="75" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -55,18 +55,18 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
               <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="panelButton" alignment="1" max="32767" attributes="1"/>
+                  <Component id="panelButton" alignment="1" max="32767" attributes="2"/>
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="panelCard" pref="170" max="32767" attributes="1"/>
-                          <Component id="separator" alignment="1" pref="170" max="32767" attributes="1"/>
+                          <Component id="panelCard" pref="322" max="32767" attributes="2"/>
+                          <Component id="separator" alignment="1" pref="322" max="32767" attributes="1"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Component id="buttonFechar" min="-2" pref="29" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -118,11 +118,9 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Component id="G2" max="32767" attributes="0"/>
-                              <EmptySpace min="10" pref="10" max="10" attributes="0"/>
-                          </Group>
                           <Component id="G1" alignment="0" max="32767" attributes="0"/>
+                          <Component id="G2" alignment="0" max="32767" attributes="0"/>
+                          <Component id="G3" alignment="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -134,7 +132,9 @@
                       <Component id="G1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="G2" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="39" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="G3" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -166,7 +166,7 @@
                               <Component id="cbSE" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="cbEE" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="22" max="32767" attributes="0"/>
+                          <EmptySpace pref="10" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -237,19 +237,196 @@
               </SubComponents>
             </Container>
             <Container class="javax.swing.JPanel" name="G2">
+              <Properties>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                  <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+                    <TitledBorder title="A&#xe7;&#xe3;o de Controle">
+                      <ResourceString PropertyName="titleX" bundle="r2d2e/solution/moduloteste/view/Bundle.properties" key="OpcoesGrafico.G2.border.title" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
+                    </TitledBorder>
+                  </Border>
+                </Property>
+              </Properties>
 
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <EmptySpace min="0" pref="224" max="32767" attributes="0"/>
+                      <Group type="102" alignment="1" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="cbSM2" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="cbSM3" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="cbSM4" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="cbSM5" alignment="0" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace pref="30" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="cbSM6" min="-2" max="-2" attributes="0"/>
+                              <Component id="cbSM7" min="-2" max="-2" attributes="0"/>
+                              <Component id="cbSM8" min="-2" max="-2" attributes="0"/>
+                              <Component id="cbSM9" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace pref="24" max="32767" attributes="0"/>
+                      </Group>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <EmptySpace min="0" pref="18" max="32767" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="cbSM2" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="cbSM6" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="cbSM3" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="cbSM7" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="cbSM4" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="cbSM8" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="cbSM5" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="cbSM9" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
                   </Group>
                 </DimensionLayout>
               </Layout>
+              <SubComponents>
+                <Component class="javax.swing.JCheckBox" name="cbSM2">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="r2d2e/solution/moduloteste/view/Bundle.properties" key="OpcoesGrafico.cbSM2.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
+                    </Property>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JCheckBox" name="cbSM3">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="r2d2e/solution/moduloteste/view/Bundle.properties" key="OpcoesGrafico.cbSM3.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
+                    </Property>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JCheckBox" name="cbSM4">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="r2d2e/solution/moduloteste/view/Bundle.properties" key="OpcoesGrafico.cbSM4.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
+                    </Property>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JCheckBox" name="cbSM5">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="r2d2e/solution/moduloteste/view/Bundle.properties" key="OpcoesGrafico.cbSM5.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
+                    </Property>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JCheckBox" name="cbSM6">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="r2d2e/solution/moduloteste/view/Bundle.properties" key="OpcoesGrafico.cbSM6.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
+                    </Property>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JCheckBox" name="cbSM7">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="r2d2e/solution/moduloteste/view/Bundle.properties" key="OpcoesGrafico.cbSM7.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
+                    </Property>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JCheckBox" name="cbSM8">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="r2d2e/solution/moduloteste/view/Bundle.properties" key="OpcoesGrafico.cbSM8.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
+                    </Property>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JCheckBox" name="cbSM9">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="r2d2e/solution/moduloteste/view/Bundle.properties" key="OpcoesGrafico.cbSM9.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
+                    </Property>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
+            <Container class="javax.swing.JPanel" name="G3">
+              <Properties>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                  <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+                    <TitledBorder title="Sinal de Controle">
+                      <ResourceString PropertyName="titleX" bundle="r2d2e/solution/moduloteste/view/Bundle.properties" key="OpcoesGrafico.G3.border.title" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
+                    </TitledBorder>
+                  </Border>
+                </Property>
+              </Properties>
+
+              <Layout>
+                <DimensionLayout dim="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="cbSM1" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="cbNM1" alignment="0" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace pref="24" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="cbSE1" min="-2" max="-2" attributes="0"/>
+                              <Component id="cbNE1" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+                <DimensionLayout dim="1">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="cbSM1" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="cbSE1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="cbNM1" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="cbNE1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+              </Layout>
+              <SubComponents>
+                <Component class="javax.swing.JCheckBox" name="cbSM1">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="r2d2e/solution/moduloteste/view/Bundle.properties" key="OpcoesGrafico.cbSM1.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
+                    </Property>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JCheckBox" name="cbNM1">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="r2d2e/solution/moduloteste/view/Bundle.properties" key="OpcoesGrafico.cbNM1.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
+                    </Property>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JCheckBox" name="cbSE1">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="r2d2e/solution/moduloteste/view/Bundle.properties" key="OpcoesGrafico.cbSE1.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
+                    </Property>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JCheckBox" name="cbNE1">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="r2d2e/solution/moduloteste/view/Bundle.properties" key="OpcoesGrafico.cbNE1.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
+                    </Property>
+                  </Properties>
+                </Component>
+              </SubComponents>
             </Container>
           </SubComponents>
         </Container>
@@ -279,7 +456,7 @@
                           <Component id="cbSinal" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="cbAcao" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="81" max="32767" attributes="0"/>
+                      <EmptySpace pref="69" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -291,7 +468,7 @@
                       <Component id="cbSinal" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="cbAcao" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="74" max="32767" attributes="0"/>
+                      <EmptySpace pref="226" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -367,7 +544,7 @@
                           <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="67" max="32767" attributes="0"/>
+                      <EmptySpace pref="55" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -385,7 +562,7 @@
                       <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jComboBox3" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="163" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -396,8 +573,8 @@
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="3">
                     <StringItem index="0" value="Gr&#xe1;fico N&#xed;vel x Tempo"/>
-                    <StringItem index="1" value="Gr&#xe1;fico Sinal de Controle"/>
-                    <StringItem index="2" value="Gr&#xe1;fico A&#xe7;&#xe3;o de Controle"/>
+                    <StringItem index="1" value="Gr&#xe1;fico A&#xe7;&#xe3;o de Controle"/>
+                    <StringItem index="2" value="Gr&#xe1;fico Sinal de Controle"/>
                   </StringArray>
                 </Property>
               </Properties>
@@ -424,8 +601,8 @@
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="3">
                     <StringItem index="0" value="Gr&#xe1;fico N&#xed;vel x Tempo"/>
-                    <StringItem index="1" value="Gr&#xe1;fico Sinal de Controle"/>
-                    <StringItem index="2" value="Gr&#xe1;fico A&#xe7;&#xe3;o de Controle"/>
+                    <StringItem index="1" value="Gr&#xe1;fico A&#xe7;&#xe3;o de Controle"/>
+                    <StringItem index="2" value="Gr&#xe1;fico Sinal de Controle"/>
                   </StringArray>
                 </Property>
               </Properties>
@@ -445,8 +622,8 @@
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="3">
                     <StringItem index="0" value="Gr&#xe1;fico N&#xed;vel x Tempo"/>
-                    <StringItem index="1" value="Gr&#xe1;fico Sinal de Controle"/>
-                    <StringItem index="2" value="Gr&#xe1;fico A&#xe7;&#xe3;o de Controle"/>
+                    <StringItem index="1" value="Gr&#xe1;fico A&#xe7;&#xe3;o de Controle"/>
+                    <StringItem index="2" value="Gr&#xe1;fico Sinal de Controle"/>
                   </StringArray>
                 </Property>
               </Properties>
@@ -481,7 +658,7 @@
                           <Component id="rbModo2" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="rbModo3" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="48" max="32767" attributes="0"/>
+                      <EmptySpace pref="36" max="32767" attributes="0"/>
                       <Component id="buttonLayout1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -491,7 +668,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="buttonLayout1" alignment="0" pref="132" max="32767" attributes="0"/>
+                          <Component id="buttonLayout1" alignment="0" pref="284" max="32767" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="rbModo1" min="-2" max="-2" attributes="0"/>
@@ -572,10 +749,10 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="buttonLayout" alignment="0" pref="109" max="32767" attributes="0"/>
-              <Component id="buttonConf" alignment="0" pref="109" max="32767" attributes="0"/>
-              <Component id="buttonJanela" alignment="0" pref="109" max="32767" attributes="0"/>
-              <Component id="buttonJanela1" alignment="0" pref="109" max="32767" attributes="0"/>
+              <Component id="buttonLayout" alignment="0" pref="111" max="32767" attributes="0"/>
+              <Component id="buttonConf" alignment="0" pref="111" max="32767" attributes="0"/>
+              <Component id="buttonJanela" alignment="0" pref="111" max="32767" attributes="0"/>
+              <Component id="buttonJanela1" alignment="0" pref="111" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
@@ -589,7 +766,7 @@
                   <Component id="buttonJanela" min="-2" pref="28" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="buttonJanela1" min="-2" pref="28" max="-2" attributes="0"/>
-                  <EmptySpace pref="60" max="32767" attributes="0"/>
+                  <EmptySpace pref="212" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
