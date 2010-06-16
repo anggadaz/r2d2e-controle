@@ -296,13 +296,12 @@ public class ConfSeguidor extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panelPolo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(385, 385, 385)
-                        .addComponent(buttonReload, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(panelGanhos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addComponent(panelPolo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(22, 22, 22)
+                .addComponent(panelGanhos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(buttonReload, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -323,16 +322,43 @@ public class ConfSeguidor extends javax.swing.JPanel {
 
     private void buttonReloadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonReloadActionPerformed
         // TODO add your handling code here:
-        ArrayList<Complex> polos = new ArrayList<Complex>();
 
-        polos.add(Complex.valueOf(Double.parseDouble(txtReal.getText()), Double.parseDouble(txtImaginario.getText())));
-        polos.add(Complex.valueOf(Double.parseDouble(txtReal1.getText()), Double.parseDouble(txtImaginario1.getText())));
-        polos.add(Complex.valueOf(Double.parseDouble(txtReal2.getText()), Double.parseDouble(txtImaginario2.getText())));
+        double[] gainsTemp = new double[3];
+        gainsTemp[0] = Double.parseDouble(txtGanho1k2.getText());
+        gainsTemp[1] = Double.parseDouble(txtGanho2k2.getText());
+        gainsTemp[2] = Double.parseDouble(txtGanhoK1.getText());
 
-        ganhos = matrixOperation.gains(polos);
-        txtGanho1k2.setText(Double.toString(ganhos[0]));
-        txtGanho2k2.setText(Double.toString(ganhos[1]));
-        txtGanhoK1.setText(Double.toString(ganhos[2]));
+        if (verificarMudancaGanhos(gainsTemp)) {
+            ganhos = gainsTemp;
+            ArrayList<Complex> polos = matrixOperation.polos(ganhos);
+
+            System.out.println("POLOS ");
+            for(int i = 0; i < polos.size();i++){
+                System.out.println(polos.get(i));
+            }
+
+            txtReal.setText(Double.toString(polos.get(0).getReal()));
+            txtReal1.setText(Double.toString(polos.get(1).getReal()));
+            txtReal2.setText(Double.toString(polos.get(2).getReal()));
+
+            txtImaginario.setText(Double.toString(polos.get(0).getImaginary()));
+            txtImaginario1.setText(Double.toString(polos.get(1).getImaginary()));
+            txtImaginario2.setText(Double.toString(polos.get(2).getImaginary()));
+
+        } else {
+            ArrayList<Complex> polos = new ArrayList<Complex>();
+
+            polos.add(Complex.valueOf(Double.parseDouble(txtReal.getText()), Double.parseDouble(txtImaginario.getText())));
+            polos.add(Complex.valueOf(Double.parseDouble(txtReal1.getText()), Double.parseDouble(txtImaginario1.getText())));
+            polos.add(Complex.valueOf(Double.parseDouble(txtReal2.getText()), Double.parseDouble(txtImaginario2.getText())));
+
+            ganhos = matrixOperation.gains(polos);
+            txtGanho1k2.setText(Double.toString(ganhos[0]));
+            txtGanho2k2.setText(Double.toString(ganhos[1]));
+            txtGanhoK1.setText(Double.toString(ganhos[2]));
+        }
+
+
 
 //        ganhos[0] = Double.parseDouble(txtGanho1k1.getText());
 //        ganhos[1] = Double.parseDouble(txtGanho2k1.getText());
@@ -392,5 +418,14 @@ public class ConfSeguidor extends javax.swing.JPanel {
 
     public double[] getGains() {
         return ganhos;
+    }
+
+    private boolean verificarMudancaGanhos(double[] gainsTemp) {
+        for (int i = 0; i < ganhos.length; i++) {
+            if (ganhos[i] != gainsTemp[i]) {
+                return true;
+            }
+        }
+        return false;
     }
 }
