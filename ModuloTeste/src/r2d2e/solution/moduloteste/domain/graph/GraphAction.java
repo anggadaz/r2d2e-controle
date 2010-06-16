@@ -20,7 +20,9 @@ public class GraphAction extends IGraphTime {
     public static final int M_ATUAL = 2;
     public static final int M_TRAVA = 3;
 
-    public GraphAction(int maxAge, int modo) {
+    public GraphAction(int maxAge, int modo, boolean show[]) {
+
+        showSeries = show;
 
         xAxis = "Tempo (s)";
         yAxis = "Tensão (v)";

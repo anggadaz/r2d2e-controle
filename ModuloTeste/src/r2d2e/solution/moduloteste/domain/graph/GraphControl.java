@@ -26,7 +26,9 @@ public class GraphControl extends IGraphTime {
     public static final String[] names = {"P-Escravo", "I-Escravo", "D-Escravo","D2-Escravo",
         "P-Mestre", "I-Mestre", "D-Mestre", "D2-Mestre"};
 
-    public GraphControl(int maxAge, int modo) {
+    public GraphControl(int maxAge, int modo, boolean show[]) {
+
+        showSeries = show;
 
         xAxis = "Tempo (s)";
         yAxis = "Tensão (v)";

@@ -26,6 +26,8 @@ public abstract class IGraphTime {
     ChartPanel panel;
     XYSeries series[];
 
+    boolean showSeries[] = null;
+
     XYSeriesCollection dataset = new XYSeriesCollection();
 
     XYItemRenderer renderer;
@@ -38,10 +40,29 @@ public abstract class IGraphTime {
         return panel;
     }
 
+    public void atualizaShowSeries(boolean show[]) {
+        if (showSeries == null || show == null) {
+            return;
+        }
+
+        for (int i = 0; i < showSeries.length; i++) {
+            if (showSeries[i] != show[i]) {
+                showSeries[i] = show[i];
+                if(showSeries[i]) {
+                    dataset.addSeries(series[i]);
+                } else {
+                    dataset.removeSeries(series[i]);
+                }
+            }
+        }
+    }
+
     JFreeChart config() {
 
-        for (XYSeries serie : series) {
-            dataset.addSeries(serie);
+        for (int i = 0; i < series.length; i++) {
+            if(showSeries[i]) {
+                dataset.addSeries(series[i]);
+            }
         }
 
         NumberAxis domain = new NumberAxis(xAxis);

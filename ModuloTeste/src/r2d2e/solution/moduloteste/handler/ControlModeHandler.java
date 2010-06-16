@@ -52,6 +52,10 @@ public class ControlModeHandler {
         }
     }
 
+    public static void atualizaSeries() {
+        graphNivel.atualizaShowSeries(configGraph.seriesNivel);
+    }
+
     public ControlModeHandler(NovoFrame frame) {
 
         tanquePanel = frame.getTanquePanel();
@@ -78,9 +82,9 @@ public class ControlModeHandler {
     }
 
     public static void initChart() {
-        graphNivel = new GraphNivel(300000, configGerais.CONTROLE);
-        graphTensao1 = new GraphControl(300000, configGerais.CONTROLE);
-        graphTensao2 = new GraphAction(300000, configGerais.CONTROLE);
+        graphNivel = new GraphNivel(300000, configGerais.CONTROLE, configGraph.seriesNivel);
+        graphTensao1 = new GraphControl(300000, configGerais.CONTROLE, configGraph.seriesControl);
+        graphTensao2 = new GraphAction(300000, configGerais.CONTROLE, configGraph.seriesAction);
 
         controlPanel.initChart();
         controlPanel.repaint();

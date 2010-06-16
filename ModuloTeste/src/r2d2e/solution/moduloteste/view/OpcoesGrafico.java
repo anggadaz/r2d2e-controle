@@ -4,6 +4,7 @@ import java.awt.CardLayout;
 import java.net.URL;
 import javax.swing.ImageIcon;
 import r2d2e.solution.moduloteste.domain.graph.ConfigGraph;
+import r2d2e.solution.moduloteste.domain.graph.GraphNivel;
 import r2d2e.solution.moduloteste.domain.graph.IGraphTime;
 import r2d2e.solution.moduloteste.handler.ControlModeHandler;
 
@@ -53,6 +54,13 @@ public class OpcoesGrafico extends javax.swing.JDialog {
         panelCard = new javax.swing.JPanel();
         panelSeries = new javax.swing.JPanel();
         G1 = new javax.swing.JPanel();
+        cbSM = new javax.swing.JCheckBox();
+        cbNM = new javax.swing.JCheckBox();
+        cbEM = new javax.swing.JCheckBox();
+        cbSE = new javax.swing.JCheckBox();
+        cbNE = new javax.swing.JCheckBox();
+        cbEE = new javax.swing.JCheckBox();
+        G2 = new javax.swing.JPanel();
         panelJanela = new javax.swing.JPanel();
         cbNivel = new javax.swing.JCheckBox();
         cbSinal = new javax.swing.JCheckBox();
@@ -101,28 +109,81 @@ public class OpcoesGrafico extends javax.swing.JDialog {
 
         G1.setBorder(javax.swing.BorderFactory.createTitledBorder(org.openide.util.NbBundle.getMessage(OpcoesGrafico.class, "OpcoesGrafico.G1.border.title"))); // NOI18N
 
+        cbSM.setText(org.openide.util.NbBundle.getMessage(OpcoesGrafico.class, "OpcoesGrafico.cbSM.text")); // NOI18N
+
+        cbNM.setText(org.openide.util.NbBundle.getMessage(OpcoesGrafico.class, "OpcoesGrafico.cbNM.text")); // NOI18N
+
+        cbEM.setText(org.openide.util.NbBundle.getMessage(OpcoesGrafico.class, "OpcoesGrafico.cbEM.text")); // NOI18N
+
+        cbSE.setText(org.openide.util.NbBundle.getMessage(OpcoesGrafico.class, "OpcoesGrafico.cbSE.text")); // NOI18N
+
+        cbNE.setText(org.openide.util.NbBundle.getMessage(OpcoesGrafico.class, "OpcoesGrafico.cbNE.text")); // NOI18N
+
+        cbEE.setText(org.openide.util.NbBundle.getMessage(OpcoesGrafico.class, "OpcoesGrafico.cbEE.text")); // NOI18N
+
         javax.swing.GroupLayout G1Layout = new javax.swing.GroupLayout(G1);
         G1.setLayout(G1Layout);
         G1Layout.setHorizontalGroup(
             G1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 260, Short.MAX_VALUE)
+            .addGroup(G1Layout.createSequentialGroup()
+                .addGroup(G1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cbSM)
+                    .addComponent(cbNM)
+                    .addComponent(cbEM))
+                .addGap(18, 18, 18)
+                .addGroup(G1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cbNE)
+                    .addComponent(cbSE)
+                    .addComponent(cbEE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
         G1Layout.setVerticalGroup(
             G1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 90, Short.MAX_VALUE)
+            .addGroup(G1Layout.createSequentialGroup()
+                .addGroup(G1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbSM)
+                    .addComponent(cbSE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(G1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbNM)
+                    .addComponent(cbNE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(G1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbEM)
+                    .addComponent(cbEE)))
+        );
+
+        javax.swing.GroupLayout G2Layout = new javax.swing.GroupLayout(G2);
+        G2.setLayout(G2Layout);
+        G2Layout.setHorizontalGroup(
+            G2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 224, Short.MAX_VALUE)
+        );
+        G2Layout.setVerticalGroup(
+            G2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout panelSeriesLayout = new javax.swing.GroupLayout(panelSeries);
         panelSeries.setLayout(panelSeriesLayout);
         panelSeriesLayout.setHorizontalGroup(
             panelSeriesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(G1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(panelSeriesLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelSeriesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelSeriesLayout.createSequentialGroup()
+                        .addComponent(G2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addComponent(G1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         panelSeriesLayout.setVerticalGroup(
             panelSeriesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelSeriesLayout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(G1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(52, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(G2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         panelCard.add(panelSeries, "card_series");
@@ -161,7 +222,7 @@ public class OpcoesGrafico extends javax.swing.JDialog {
                     .addComponent(cbNivel)
                     .addComponent(cbSinal)
                     .addComponent(cbAcao))
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addContainerGap(81, Short.MAX_VALUE))
         );
         panelJanelaLayout.setVerticalGroup(
             panelJanelaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -171,7 +232,7 @@ public class OpcoesGrafico extends javax.swing.JDialog {
                 .addComponent(cbSinal)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cbAcao)
-                .addContainerGap(73, Short.MAX_VALUE))
+                .addContainerGap(128, Short.MAX_VALUE))
         );
 
         panelCard.add(panelJanela, "card_janela");
@@ -224,7 +285,7 @@ public class OpcoesGrafico extends javax.swing.JDialog {
                     .addComponent(jLabel1)
                     .addComponent(jLabel2)
                     .addComponent(jLabel3))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(67, Short.MAX_VALUE))
         );
         panelConfiguracaoLayout.setVerticalGroup(
             panelConfiguracaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -240,7 +301,7 @@ public class OpcoesGrafico extends javax.swing.JDialog {
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(65, Short.MAX_VALUE))
         );
 
         panelCard.add(panelConfiguracao, "card_configuracao");
@@ -287,7 +348,7 @@ public class OpcoesGrafico extends javax.swing.JDialog {
                     .addComponent(rbModo1)
                     .addComponent(rbModo2)
                     .addComponent(rbModo3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
                 .addComponent(buttonLayout1)
                 .addContainerGap())
         );
@@ -295,7 +356,7 @@ public class OpcoesGrafico extends javax.swing.JDialog {
             panelLayoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelLayoutLayout.createSequentialGroup()
                 .addGroup(panelLayoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(buttonLayout1, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
+                    .addComponent(buttonLayout1, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
                     .addGroup(panelLayoutLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(rbModo1)
@@ -365,7 +426,7 @@ public class OpcoesGrafico extends javax.swing.JDialog {
                 .addComponent(buttonJanela, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(buttonJanela1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(74, Short.MAX_VALUE))
+                .addContainerGap(114, Short.MAX_VALUE))
         );
 
         separator.setOrientation(javax.swing.SwingConstants.VERTICAL);
@@ -383,10 +444,8 @@ public class OpcoesGrafico extends javax.swing.JDialog {
                         .addGap(4, 4, 4)
                         .addComponent(separator, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(panelCard, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(buttonFechar, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(panelCard, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE))
+                    .addComponent(buttonFechar, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -397,8 +456,8 @@ public class OpcoesGrafico extends javax.swing.JDialog {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(panelCard, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
-                            .addComponent(separator, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE))
+                            .addComponent(panelCard, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(separator, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(buttonFechar, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
@@ -469,6 +528,7 @@ public class OpcoesGrafico extends javax.swing.JDialog {
     }//GEN-LAST:event_jComboBox3ItemStateChanged
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        reloadSeries();
         if(modificado) {
             reloadInterface();
             modificado = false;
@@ -478,6 +538,35 @@ public class OpcoesGrafico extends javax.swing.JDialog {
     private void buttonJanela1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonJanela1ActionPerformed
         changeCard(CARD_SERIES);
     }//GEN-LAST:event_buttonJanela1ActionPerformed
+
+    private void getSeries() {
+        boolean nivel[] = ControlModeHandler.configGraph.seriesNivel;
+
+        cbSM.setSelected(nivel[GraphNivel.M_SP]);
+        cbNM.setSelected(nivel[GraphNivel.M_NIVEL]);
+        cbEM.setSelected(nivel[GraphNivel.M_ERRO]);
+        cbSE.setSelected(nivel[GraphNivel.S_SP]);
+        cbNE.setSelected(nivel[GraphNivel.S_NIVEL]);
+        cbEE.setSelected(nivel[GraphNivel.S_ERRO]);
+
+    }
+
+    private void reloadSeries() {
+
+        boolean nivel[] = new boolean[6];
+
+        // Nível x Tempo
+        nivel[GraphNivel.M_SP] = cbSM.isSelected();
+        nivel[GraphNivel.M_NIVEL] = cbNM.isSelected();
+        nivel[GraphNivel.M_ERRO] = cbEM.isSelected();
+        nivel[GraphNivel.S_SP] = cbSE.isSelected();
+        nivel[GraphNivel.S_NIVEL] = cbNE.isSelected();
+        nivel[GraphNivel.S_ERRO] = cbEE.isSelected();
+
+        ControlModeHandler.configGraph.setSeriesNivel(nivel);
+        ControlModeHandler.atualizaSeries();
+        
+    }
 
     public static void reloadInterface() {
         ControlModeHandler.getControlPanel().initChart();
@@ -529,6 +618,8 @@ public class OpcoesGrafico extends javax.swing.JDialog {
         cbNivel.setSelected(extra[0]);
         cbSinal.setSelected(extra[1]);
         cbAcao.setSelected(extra[2]);
+
+        getSeries();
     }
 
     private void changeCard(String card){
@@ -556,6 +647,7 @@ public class OpcoesGrafico extends javax.swing.JDialog {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel G1;
+    private javax.swing.JPanel G2;
     private javax.swing.JButton buttonConf;
     private javax.swing.JButton buttonFechar;
     private javax.swing.ButtonGroup buttonGroup1;
@@ -564,7 +656,13 @@ public class OpcoesGrafico extends javax.swing.JDialog {
     private javax.swing.JButton buttonLayout;
     private javax.swing.JButton buttonLayout1;
     private javax.swing.JCheckBox cbAcao;
+    private javax.swing.JCheckBox cbEE;
+    private javax.swing.JCheckBox cbEM;
+    private javax.swing.JCheckBox cbNE;
+    private javax.swing.JCheckBox cbNM;
     private javax.swing.JCheckBox cbNivel;
+    private javax.swing.JCheckBox cbSE;
+    private javax.swing.JCheckBox cbSM;
     private javax.swing.JCheckBox cbSinal;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JComboBox jComboBox2;

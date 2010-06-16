@@ -18,6 +18,14 @@ public class ConfigGraph {
 
     public boolean JANELAEXTRA = false;
 
+    public boolean seriesAction[] = {true, true, true, true};
+    public boolean seriesNivel[] = {true, true, true, true, true, true};
+    public boolean seriesControl[] = {true, true, true, true, true, true, true, true};
+
+    public void setSeriesNivel(boolean serie[]) {
+        seriesNivel = serie;
+    }
+
     public void setExtra(int ix, boolean active) {
         EXTRA[ix] = active;
         JANELAEXTRA = EXTRA[0] || EXTRA[1] || EXTRA[2];

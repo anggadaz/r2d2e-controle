@@ -21,7 +21,9 @@ public class GraphNivel extends IGraphTime {
     public static final int M_NIVEL = 4;
     public static final int M_ERRO = 5;
 
-    public GraphNivel(int maxAge, int modo) {
+    public GraphNivel(int maxAge, int modo, boolean show[]) {
+
+        showSeries = show;
 
         xAxis = "Tempo (s)";
         yAxis = "Nível (cm)";

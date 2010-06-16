@@ -1,5 +1,6 @@
 package r2d2e.solution.moduloteste.handler;
 
+import java.awt.Window;
 import r2d2e.solution.moduloteste.view.ConfParametros;
 
 /**
@@ -53,5 +54,54 @@ public class SUtil {
         double temp = n*100;
         temp = Math.ceil(temp);
         return temp/100;
+    }
+
+    public static void heightWindow(Window componente, int height, int duracao) {
+
+        Window me = componente;
+
+        int wInicial = me.getWidth();
+
+        int inicial = me.getHeight();
+        int change;
+        int t = 0;
+        int atual;
+
+        change = height - inicial;
+        atual = me.getHeight();
+
+        if (atual > height) {
+            while (atual > height) {
+
+                me.setSize(wInicial, Math.round(easeIn(t++, inicial, change,
+                        duracao)));
+                me.repaint();
+
+                try {
+                    Thread.sleep(1L);
+                } catch (InterruptedException e) {
+                }
+                atual = me.getHeight();
+            }
+
+        } else {
+            while (atual < height) {
+
+                me.setSize(wInicial, Math.round(easeIn(t++, inicial, change,
+                        duracao)));
+                me.repaint();
+
+                try {
+                    Thread.sleep(1L);
+                } catch (InterruptedException e) {
+                }
+                atual = me.getHeight();
+            }
+        }
+    }
+
+    private static float easeIn(int time, int begginer, double change,
+            int duration) {
+        return (float) (change * time / duration + begginer);
     }
 }
