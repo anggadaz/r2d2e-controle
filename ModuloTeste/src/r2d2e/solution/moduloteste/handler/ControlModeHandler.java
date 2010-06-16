@@ -54,6 +54,8 @@ public class ControlModeHandler {
 
     public static void atualizaSeries() {
         graphNivel.atualizaShowSeries(configGraph.seriesNivel);
+        graphTensao1.atualizaShowSeries(configGraph.seriesControl);
+        graphTensao2.atualizaShowSeries(configGraph.seriesAction);
     }
 
     public ControlModeHandler(NovoFrame frame) {

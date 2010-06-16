@@ -40,7 +40,7 @@ public class GraphNivel extends IGraphTime {
 
         } else {
             series = new XYSeries[3];
-
+            
             series[S_SP] = new XYSeries("Setpoint");
             series[S_NIVEL] = new XYSeries("Nível");
             series[S_ERRO] = new XYSeries("Erro");

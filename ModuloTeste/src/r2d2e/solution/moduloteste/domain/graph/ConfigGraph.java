@@ -26,6 +26,14 @@ public class ConfigGraph {
         seriesNivel = serie;
     }
 
+    public void setSeriesAction(boolean[] seriesAction) {
+        this.seriesAction = seriesAction;
+    }
+
+    public void setSeriesControl(boolean[] seriesControl) {
+        this.seriesControl = seriesControl;
+    }
+
     public void setExtra(int ix, boolean active) {
         EXTRA[ix] = active;
         JANELAEXTRA = EXTRA[0] || EXTRA[1] || EXTRA[2];
