@@ -4,6 +4,8 @@
  */
 package r2d2e.solution.moduloteste.domain;
 
+import Jama.EigenvalueDecomposition;
+import Jama.Matrix;
 import java.util.ArrayList;
 import org.jscience.mathematics.number.Complex;
 import org.jscience.mathematics.vector.ComplexMatrix;
@@ -107,6 +109,23 @@ public class MatrixOperation {
         return resu;
     }
 
+    public ArrayList<Complex> polos(double[] gains){
+        Complex[][] gainsComplex = {{
+                Complex.valueOf(gains[0], 0),
+                Complex.valueOf(gains[1], 0),
+                Complex.valueOf(gains[2], 0)}};
+
+        ComplexMatrix aux = ComplexMatrix.valueOf(gainsComplex);
+
+        Complex[] polos = autoValoresMatrix(ComplexMatrix2Matrix(matrixGIncreased.plus(matrixHIncreased.times(gainsToAckermann(aux)))));
+
+        ArrayList<Complex> resul = new ArrayList<Complex>();
+        resul.add(polos[0]);
+        resul.add(polos[1]);
+        resul.add(polos[2]);
+
+        return resul;
+    }
     private ComplexMatrix calculateAckermmann(ArrayList<Complex> polos) {
         ComplexMatrix qc = calculateMatrixQc(polos);
 
@@ -190,5 +209,32 @@ public class MatrixOperation {
 
         result[2][2] = quatro.get(0, 0);
         return ComplexMatrix.valueOf(result);
+    }
+    private Matrix ComplexMatrix2Matrix(ComplexMatrix CM) {
+        double[][] vec = new double[CM.getNumberOfRows()][CM.getNumberOfColumns()];
+        for (int i = 0; i < vec.length; i++) {
+            for (int j = 0; j < vec[0].length; j++) {
+                vec[i][j] = CM.get(i, j).getReal();
+            }
+        }
+        Matrix M = Matrix.constructWithCopy(vec);
+        return M;
+    }
+    private Complex[] autoValoresMatrix(Matrix M) {
+        EigenvalueDecomposition e = M.eig();
+        Complex[] vec = new Complex[e.getRealEigenvalues().length];
+        for (int i = 0; i < vec.length; i++) {
+            vec[i] = Complex.valueOf(e.getRealEigenvalues()[i], e.getImagEigenvalues()[i]);
+        }
+        return vec;
+    }
+    
+    private ComplexMatrix gainsToAckermann(ComplexMatrix gains) {
+        ComplexMatrix K = ComplexMatrix.valueOf(zeros(1, gains.getNumberOfColumns()));
+        Complex[][] vec2 = zerosOne(gains.getNumberOfColumns());
+        vec2[0][gains.getNumberOfColumns() - 1] = Complex.valueOf(1, 0);
+        ComplexMatrix aux = ComplexMatrix.valueOf(vec2);
+        K = gains.times(matrixLast).minus(aux);
+        return K;
     }
 }
