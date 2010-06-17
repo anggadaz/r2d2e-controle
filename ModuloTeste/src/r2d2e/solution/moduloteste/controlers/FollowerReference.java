@@ -47,6 +47,10 @@ public class FollowerReference extends Controller {
         gains = parametros.getGains();
     }
 
+    public void zerarAcumuloErros(){
+        v = 0;
+    }
+
     @Override
     public double calculateOutput(double processVariable) {
         return 0;

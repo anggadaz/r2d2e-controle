@@ -127,6 +127,11 @@ public class ControlModeHandler {
 
     public void init(Quanser quanser) {
         boolean ok = parametroNormal.getChkIntCond().isSelected();
+
+        if(controllerSelected instanceof FollowerReference){
+            ((FollowerReference)controllerSelected).zerarAcumuloErros();
+        }
+
         algController = new AlgController(100, controllerSelected, tanquePanel, quanser, ok);
         algController.start();
         graphNivel.clear();
