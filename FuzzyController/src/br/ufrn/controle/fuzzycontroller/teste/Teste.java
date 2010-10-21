@@ -104,7 +104,7 @@ public class Teste extends javax.swing.JFrame {
                     i++;
                     
                     try {
-                        sleep(1000);
+                        sleep(100);
                     } catch (InterruptedException ex) {
                         Logger.getLogger(Teste.class.getName()).log(Level.SEVERE, null, ex);
                     }

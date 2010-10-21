@@ -56,7 +56,7 @@ public class Graph extends ChartPanel {
 
     private static JFreeChart criarGrafico() {
 
-        chart = ChartFactory.createXYStepAreaChart(TITLE, TITLE, TITLE, seriesCollection, ORIENTATION, CREATE_URL, CREATE_URL, CREATE_URL);
+        chart = ChartFactory.createXYLineChart(TITLE, TITLE, TITLE, seriesCollection, ORIENTATION, CREATE_URL, CREATE_URL, CREATE_URL);
 
         return chart;
     }
@@ -99,23 +99,14 @@ public class Graph extends ChartPanel {
         plot.setBackgroundPaint(Color.white);
         plot.setDomainGridlinePaint(Color.white);
         plot.setRangeGridlinePaint(Color.white);
-        plot.setAxisOffset(new RectangleInsets(5.0, 5.0, 5.0, 5.0));
-        plot.setAxisOffset(new RectangleInsets(4D, 4D, 4D, 4D));
-
         plot.setAxisOffset(new RectangleInsets(4D, 4D, 4D, 4D));
 
         ValueAxis valueaxis = plot.getDomainAxis();
-        valueaxis.setAutoRange(false);
-        valueaxis.setFixedAutoRange(10000d);
+        valueaxis.setAutoRange(true);
+        valueaxis.setFixedAutoRange(10d);
 
         XYLineAndShapeRenderer renderer = new XYLineAndShapeRenderer(true, false);
         plot.setRenderer(renderer);
-
-        NumberAxis numberaxis = new NumberAxis("Range Axis 2");
-        numberaxis.setAutoRangeIncludesZero(false);
-        plot.setRenderer(1, new DefaultXYItemRenderer());
-        plot.setRangeAxis(1, numberaxis);
-        //plot.mapDatasetToRangeAxis(1, 1);
 
     }
 
