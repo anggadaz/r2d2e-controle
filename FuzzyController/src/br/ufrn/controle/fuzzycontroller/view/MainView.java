@@ -10,6 +10,10 @@
  */
 package br.ufrn.controle.fuzzycontroller.view;
 
+import br.ufrn.controle.fuzzycontroller.view.retractable.FuzzyRetractable;
+import br.ufrn.controle.fuzzycontroller.view.retractable.OpcoesTanque;
+import br.ufrn.siga.component.retractable.RetractablePanel;
+import java.awt.Color;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
@@ -21,9 +25,16 @@ import org.jvnet.substance.skin.SubstanceBusinessBlackSteelLookAndFeel;
  */
 public class MainView extends javax.swing.JFrame {
 
+    private FuzzyRetractable retractable;
+
     /** Creates new form MainView */
     public MainView() {
         initComponents();
+
+        retractable = new FuzzyRetractable(getLayeredPane());
+        retractable.add(new RetractablePanel(retractable, new OpcoesTanque(), "Loading",true));
+        retractable.add(new RetractablePanel(retractable, new OpcoesTanque(), "",false));
+        retractable.add(new RetractablePanel(retractable, new OpcoesTanque(), "B",true));
     }
 
     /** This method is called from within the constructor to
@@ -40,52 +51,45 @@ public class MainView extends javax.swing.JFrame {
         graphLevel = new br.ufrn.controle.fuzzycontroller.view.Graph();
         graphTension = new br.ufrn.controle.fuzzycontroller.view.Graph();
         tanquePanel = new br.ufrn.controle.fuzzycontroller.view.TanquePanel();
-        jPanel3 = new javax.swing.JPanel();
+        dataPanel = new br.ufrn.controle.fuzzycontroller.view.DataPanel();
+        pnlPadding = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         panelBackGround.setBackground(new java.awt.Color(255, 255, 255));
+        panelBackGround.setLayout(new java.awt.BorderLayout());
 
         panelGraphs.setBackground(new java.awt.Color(255, 255, 255));
         panelGraphs.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
+        panelGraphs.setLayout(new javax.swing.BoxLayout(panelGraphs, javax.swing.BoxLayout.PAGE_AXIS));
 
         javax.swing.GroupLayout graphLevelLayout = new javax.swing.GroupLayout(graphLevel);
         graphLevel.setLayout(graphLevelLayout);
         graphLevelLayout.setHorizontalGroup(
             graphLevelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 609, Short.MAX_VALUE)
+            .addGap(0, 725, Short.MAX_VALUE)
         );
         graphLevelLayout.setVerticalGroup(
             graphLevelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 246, Short.MAX_VALUE)
+            .addGap(0, 267, Short.MAX_VALUE)
         );
+
+        panelGraphs.add(graphLevel);
 
         javax.swing.GroupLayout graphTensionLayout = new javax.swing.GroupLayout(graphTension);
         graphTension.setLayout(graphTensionLayout);
         graphTensionLayout.setHorizontalGroup(
             graphTensionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 609, Short.MAX_VALUE)
+            .addGap(0, 725, Short.MAX_VALUE)
         );
         graphTensionLayout.setVerticalGroup(
             graphTensionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 238, Short.MAX_VALUE)
+            .addGap(0, 267, Short.MAX_VALUE)
         );
 
-        javax.swing.GroupLayout panelGraphsLayout = new javax.swing.GroupLayout(panelGraphs);
-        panelGraphs.setLayout(panelGraphsLayout);
-        panelGraphsLayout.setHorizontalGroup(
-            panelGraphsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(graphLevel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 609, Short.MAX_VALUE)
-            .addComponent(graphTension, javax.swing.GroupLayout.DEFAULT_SIZE, 609, Short.MAX_VALUE)
-        );
-        panelGraphsLayout.setVerticalGroup(
-            panelGraphsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelGraphsLayout.createSequentialGroup()
-                .addComponent(graphLevel, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(graphTension, javax.swing.GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE)
-                .addContainerGap())
-        );
+        panelGraphs.add(graphTension);
+
+        panelBackGround.add(panelGraphs, java.awt.BorderLayout.CENTER);
 
         tanquePanel.setOpaque(false);
 
@@ -93,54 +97,56 @@ public class MainView extends javax.swing.JFrame {
         tanquePanel.setLayout(tanquePanelLayout);
         tanquePanelLayout.setHorizontalGroup(
             tanquePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 239, Short.MAX_VALUE)
+            .addGap(0, 238, Short.MAX_VALUE)
         );
         tanquePanelLayout.setVerticalGroup(
             tanquePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 492, Short.MAX_VALUE)
+            .addGap(0, 537, Short.MAX_VALUE)
         );
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 110, Short.MAX_VALUE)
+        panelBackGround.add(tanquePanel, java.awt.BorderLayout.WEST);
+
+        dataPanel.setOpaque(false);
+
+        javax.swing.GroupLayout dataPanelLayout = new javax.swing.GroupLayout(dataPanel);
+        dataPanel.setLayout(dataPanelLayout);
+        dataPanelLayout.setHorizontalGroup(
+            dataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 142, Short.MAX_VALUE)
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 503, Short.MAX_VALUE)
+        dataPanelLayout.setVerticalGroup(
+            dataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 510, Short.MAX_VALUE)
         );
 
-        javax.swing.GroupLayout panelBackGroundLayout = new javax.swing.GroupLayout(panelBackGround);
-        panelBackGround.setLayout(panelBackGroundLayout);
-        panelBackGroundLayout.setHorizontalGroup(
-            panelBackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelBackGroundLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(tanquePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panelGraphs, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        panelBackGround.add(dataPanel, java.awt.BorderLayout.EAST);
+
+        pnlPadding.setBackground(new java.awt.Color(255, 255, 255));
+        pnlPadding.setOpaque(false);
+        pnlPadding.setPreferredSize(new java.awt.Dimension(50, 50));
+
+        javax.swing.GroupLayout pnlPaddingLayout = new javax.swing.GroupLayout(pnlPadding);
+        pnlPadding.setLayout(pnlPaddingLayout);
+        pnlPaddingLayout.setHorizontalGroup(
+            pnlPaddingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1119, Short.MAX_VALUE)
         );
-        panelBackGroundLayout.setVerticalGroup(
-            panelBackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelBackGroundLayout.createSequentialGroup()
-                .addGap(11, 11, 11)
-                .addComponent(tanquePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(panelGraphs, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        pnlPaddingLayout.setVerticalGroup(
+            pnlPaddingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 50, Short.MAX_VALUE)
         );
+
+        panelBackGround.add(pnlPadding, java.awt.BorderLayout.SOUTH);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelBackGround, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panelBackGround, javax.swing.GroupLayout.DEFAULT_SIZE, 1119, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelBackGround, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panelBackGround, javax.swing.GroupLayout.DEFAULT_SIZE, 587, Short.MAX_VALUE)
         );
 
         pack();
@@ -160,11 +166,12 @@ public class MainView extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private br.ufrn.controle.fuzzycontroller.view.DataPanel dataPanel;
     private br.ufrn.controle.fuzzycontroller.view.Graph graphLevel;
     private br.ufrn.controle.fuzzycontroller.view.Graph graphTension;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel panelBackGround;
     private javax.swing.JPanel panelGraphs;
+    private javax.swing.JPanel pnlPadding;
     private br.ufrn.controle.fuzzycontroller.view.TanquePanel tanquePanel;
     // End of variables declaration//GEN-END:variables
 

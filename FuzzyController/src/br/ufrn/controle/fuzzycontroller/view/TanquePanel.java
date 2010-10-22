@@ -71,9 +71,9 @@ public class TanquePanel extends javax.swing.JPanel {
 
     private void loadImage() {
         try {
-            tanques = ImageIO.read(getClass().getResource("/r2d2e/solution/moduloteste/view/resources/tanques.png"));
-            waterImage1 = ImageIO.read(getClass().getResource("/r2d2e/solution/moduloteste/view/resources/agua.png"));
-            waterImage2 = ImageIO.read(getClass().getResource("/r2d2e/solution/moduloteste/view/resources/agua.png"));
+            tanques = ImageIO.read(getClass().getResource("/br/ufrn/controle/fuzzycontroller/view/resources/tanques.png"));
+            waterImage1 = ImageIO.read(getClass().getResource("/br/ufrn/controle/fuzzycontroller/view/resources/agua.png"));
+            waterImage2 = ImageIO.read(getClass().getResource("/br/ufrn/controle/fuzzycontroller/view/resources/agua.png"));
 
             maxWidthWater1 = waterImage1.getHeight();
             maxWidthWater2 = waterImage2.getHeight();
