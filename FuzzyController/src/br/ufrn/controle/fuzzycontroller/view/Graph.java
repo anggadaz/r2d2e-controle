@@ -31,34 +31,31 @@ import org.jfree.ui.RectangleInsets;
  */
 public class Graph extends ChartPanel {
 
-    private static String TITLE = "Título";
-    private static String EIXO_X = "Eixo X";
-    private static String EIXO_Y = "Eixo Y";
-    private static PlotOrientation ORIENTATION = PlotOrientation.VERTICAL;
-    private static boolean CREATE_LEGENDS = false;
-    private static boolean SHOW_TOOLTIPS = true;
-    private static boolean CREATE_URL = true;
-    private static Color BACKGROUND_COLOR = Color.WHITE;
-    private static XYSeriesCollection seriesCollection = new XYSeriesCollection();
+    private String TITLE = "Título";
+    private String EIXO_X = "Eixo X";
+    private String EIXO_Y = "Eixo Y";
+    private PlotOrientation ORIENTATION = PlotOrientation.VERTICAL;
+    private boolean CREATE_LEGENDS = false;
+    private boolean SHOW_TOOLTIPS = true;
+    private boolean CREATE_URL = true;
+    private Color BACKGROUND_COLOR = Color.WHITE;
+    private XYSeriesCollection seriesCollection = new XYSeriesCollection();
     private HashMap<String, XYSeries> mapSeries;
-    private static JFreeChart chart;
+    private JFreeChart chart;
     private long initTime;
 
     /** Creates new form Graph */
     public Graph() {
-        super(criarGrafico());
+        super(null);
         initComponents();
+
+        chart = ChartFactory.createXYLineChart(TITLE, EIXO_X, EIXO_Y, seriesCollection, ORIENTATION, CREATE_LEGENDS, SHOW_TOOLTIPS, CREATE_URL);
+
+        setChart(chart);
 
         mapSeries = new HashMap<String, XYSeries>();
 
         config();
-    }
-
-    private static JFreeChart criarGrafico() {
-
-        chart = ChartFactory.createXYLineChart(TITLE, TITLE, TITLE, seriesCollection, ORIENTATION, CREATE_URL, CREATE_URL, CREATE_URL);
-
-        return chart;
     }
 
     public void init() {
@@ -110,68 +107,40 @@ public class Graph extends ChartPanel {
 
     }
 
-    public static Color getBACKGROUND_COLOR() {
+    public void setBACKGROUND_COLOR(Color BACKGROUND_COLOR) {
+        this.BACKGROUND_COLOR = BACKGROUND_COLOR;
+        chart.setBackgroundPaint(BACKGROUND_COLOR);
+    }
+
+    public void setEIXO_X(String EIXO_X) {
+        this.EIXO_X = EIXO_X;
+        chart.getXYPlot().getDomainAxis().setLabel(EIXO_X);
+    }
+
+    public void setEIXO_Y(String EIXO_Y) {
+        this.EIXO_Y = EIXO_Y;
+        chart.getXYPlot().getRangeAxis().setLabel(EIXO_Y);
+    }
+
+    public void setTITLE(String TITLE) {
+        this.TITLE = TITLE;
+        chart.setTitle(TITLE);
+    }
+
+    public Color getBACKGROUND_COLOR() {
         return BACKGROUND_COLOR;
     }
 
-    public static void setBACKGROUND_COLOR(Color BACKGROUND_COLOR) {
-        Graph.BACKGROUND_COLOR = BACKGROUND_COLOR;
-    }
-
-    public static boolean isCREATE_LEGENDS() {
-        return CREATE_LEGENDS;
-    }
-
-    public static void setCREATE_LEGENDS(boolean CREATE_LEGENDS) {
-        Graph.CREATE_LEGENDS = CREATE_LEGENDS;
-    }
-
-    public static boolean isCREATE_URL() {
-        return CREATE_URL;
-    }
-
-    public static void setCREATE_URL(boolean CREATE_URL) {
-        Graph.CREATE_URL = CREATE_URL;
-    }
-
-    public static String getEIXO_X() {
+    public String getEIXO_X() {
         return EIXO_X;
     }
 
-    public static void setEIXO_X(String EIXO_X) {
-        Graph.EIXO_X = EIXO_X;
-    }
-
-    public static String getEIXO_Y() {
+    public String getEIXO_Y() {
         return EIXO_Y;
     }
 
-    public static void setEIXO_Y(String EIXO_Y) {
-        Graph.EIXO_Y = EIXO_Y;
-    }
-
-    public static PlotOrientation getORIENTATION() {
-        return ORIENTATION;
-    }
-
-    public static void setORIENTATION(PlotOrientation ORIENTATION) {
-        Graph.ORIENTATION = ORIENTATION;
-    }
-
-    public static boolean isSHOW_TOOLTIPS() {
-        return SHOW_TOOLTIPS;
-    }
-
-    public static void setSHOW_TOOLTIPS(boolean SHOW_TOOLTIPS) {
-        Graph.SHOW_TOOLTIPS = SHOW_TOOLTIPS;
-    }
-
-    public static String getTITLE() {
+    public String getTITLE() {
         return TITLE;
-    }
-
-    public static void setTITLE(String TITLE) {
-        Graph.TITLE = TITLE;
     }
 
     /** This method is called from within the constructor to

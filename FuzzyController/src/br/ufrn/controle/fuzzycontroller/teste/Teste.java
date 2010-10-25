@@ -26,13 +26,13 @@ public class Teste extends javax.swing.JFrame {
         initComponents();
     }
 
-    public void addValue(String tipo, double value) {
-        graph.addValue(tipo, value);
-    }
-
-    public void init() {
-        graph.init();
-    }
+//    public void addValue(String tipo, double value) {
+//        graph.addValue(tipo, value);
+//    }
+//
+//    public void init() {
+//        graph.init();
+//    }
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -43,36 +43,17 @@ public class Teste extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        graph = new br.ufrn.controle.fuzzycontroller.view.Graph();
-
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        javax.swing.GroupLayout graphLayout = new javax.swing.GroupLayout(graph);
-        graph.setLayout(graphLayout);
-        graphLayout.setHorizontalGroup(
-            graphLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 680, Short.MAX_VALUE)
-        );
-        graphLayout.setVerticalGroup(
-            graphLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 420, Short.MAX_VALUE)
-        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(graph, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGap(0, 673, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(graph, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(11, Short.MAX_VALUE))
+            .addGap(0, 442, Short.MAX_VALUE)
         );
 
         pack();
@@ -93,26 +74,25 @@ public class Teste extends javax.swing.JFrame {
         });
 
 
-        new Thread() {
-
-            @Override
-            public void run() {
-                double i = 1;
-                e.init();
-                while (true) {
-                    e.addValue(ConstantsGraph.NIVEL1, Math.sin(i));
-                    i++;
-                    
-                    try {
-                        sleep(100);
-                    } catch (InterruptedException ex) {
-                        Logger.getLogger(Teste.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
-            }
-        }.start();
+//        new Thread() {
+//
+//            @Override
+//            public void run() {
+//                double i = 1;
+//                e.init();
+//                while (true) {
+//                    e.addValue(ConstantsGraph.NIVEL1, Math.sin(i));
+//                    i++;
+//
+//                    try {
+//                        sleep(100);
+//                    } catch (InterruptedException ex) {
+//                        Logger.getLogger(Teste.class.getName()).log(Level.SEVERE, null, ex);
+//                    }
+//                }
+//            }
+//        }.start();
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private br.ufrn.controle.fuzzycontroller.view.Graph graph;
     // End of variables declaration//GEN-END:variables
 }

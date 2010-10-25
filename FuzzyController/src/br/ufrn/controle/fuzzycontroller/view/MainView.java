@@ -10,12 +10,18 @@
  */
 package br.ufrn.controle.fuzzycontroller.view;
 
+import br.ufrn.controle.fuzzycontroller.view.retractable.EmptyPanel;
 import br.ufrn.controle.fuzzycontroller.view.retractable.FuzzyRetractable;
-import br.ufrn.controle.fuzzycontroller.view.retractable.OpcoesTanque;
+import br.ufrn.controle.fuzzycontroller.view.retractable.TankOptionsPanel;
+import br.ufrn.controle.fuzzycontroller.view.retractable.ToolsPanel;
 import br.ufrn.siga.component.retractable.RetractablePanel;
+import com.sun.java.swing.plaf.windows.WindowsLookAndFeel;
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.UIManager;
 import org.jvnet.substance.skin.SubstanceBusinessBlackSteelLookAndFeel;
 
@@ -26,15 +32,32 @@ import org.jvnet.substance.skin.SubstanceBusinessBlackSteelLookAndFeel;
 public class MainView extends javax.swing.JFrame {
 
     private FuzzyRetractable retractable;
+    private RetractablePanel panelEmpty;
+    private float crossSizeLock = 0.69f;
 
     /** Creates new form MainView */
     public MainView() {
         initComponents();
 
         retractable = new FuzzyRetractable(getLayeredPane());
-        retractable.add(new RetractablePanel(retractable, new OpcoesTanque(), "Loading",true));
-        retractable.add(new RetractablePanel(retractable, new OpcoesTanque(), "",false));
-        retractable.add(new RetractablePanel(retractable, new OpcoesTanque(), "B",true));
+
+        panelEmpty = new RetractablePanel(retractable, new EmptyPanel(), "", false);
+        panelEmpty.setCrossSizeLock(Math.round(getWidth() * crossSizeLock));
+
+        retractable.add(new RetractablePanel(retractable, new ToolsPanel(), "Configuração", true));
+        retractable.add(panelEmpty);
+        retractable.add(new RetractablePanel(retractable, new TankOptionsPanel(), "Opções De Gráficos", true));
+
+        setPreferredSize(new Dimension(996, 550));
+        setMinimumSize(new Dimension(996, 550));
+
+    }
+
+    @Override
+    public void paint(Graphics g) {
+        panelEmpty.setCrossSizeLock(Math.round(getWidth() * crossSizeLock));
+        super.paint(g);
+
     }
 
     /** This method is called from within the constructor to
@@ -49,10 +72,20 @@ public class MainView extends javax.swing.JFrame {
         panelBackGround = new javax.swing.JPanel();
         panelGraphs = new javax.swing.JPanel();
         graphLevel = new br.ufrn.controle.fuzzycontroller.view.Graph();
-        graphTension = new br.ufrn.controle.fuzzycontroller.view.Graph();
+        graphContol = new br.ufrn.controle.fuzzycontroller.view.Graph();
         tanquePanel = new br.ufrn.controle.fuzzycontroller.view.TanquePanel();
-        dataPanel = new br.ufrn.controle.fuzzycontroller.view.DataPanel();
         pnlPadding = new javax.swing.JPanel();
+        DataPanel = new javax.swing.JPanel();
+        lblOverShoot = new javax.swing.JLabel();
+        txtOverShoot = new javax.swing.JTextField();
+        lblSubida = new javax.swing.JLabel();
+        txtSubida = new javax.swing.JTextField();
+        lblPico = new javax.swing.JLabel();
+        txtPico = new javax.swing.JTextField();
+        lblAcomodation = new javax.swing.JLabel();
+        txtAcomodation = new javax.swing.JTextField();
+        lblFactorAcomo = new javax.swing.JLabel();
+        comboFactorAcomo = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -60,34 +93,41 @@ public class MainView extends javax.swing.JFrame {
         panelBackGround.setLayout(new java.awt.BorderLayout());
 
         panelGraphs.setBackground(new java.awt.Color(255, 255, 255));
-        panelGraphs.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
         panelGraphs.setLayout(new javax.swing.BoxLayout(panelGraphs, javax.swing.BoxLayout.PAGE_AXIS));
+
+        graphLevel.setEIXO_X("Tempo ( Seg.)");
+        graphLevel.setEIXO_Y("Nível");
+        graphLevel.setTITLE("Nível X Tempo");
 
         javax.swing.GroupLayout graphLevelLayout = new javax.swing.GroupLayout(graphLevel);
         graphLevel.setLayout(graphLevelLayout);
         graphLevelLayout.setHorizontalGroup(
             graphLevelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 725, Short.MAX_VALUE)
+            .addGap(0, 533, Short.MAX_VALUE)
         );
         graphLevelLayout.setVerticalGroup(
             graphLevelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 267, Short.MAX_VALUE)
+            .addGap(0, 241, Short.MAX_VALUE)
         );
 
         panelGraphs.add(graphLevel);
 
-        javax.swing.GroupLayout graphTensionLayout = new javax.swing.GroupLayout(graphTension);
-        graphTension.setLayout(graphTensionLayout);
-        graphTensionLayout.setHorizontalGroup(
-            graphTensionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 725, Short.MAX_VALUE)
+        graphContol.setEIXO_X("Tempo (Seg.)");
+        graphContol.setEIXO_Y("Tensão");
+        graphContol.setTITLE("Ação de Controle");
+
+        javax.swing.GroupLayout graphContolLayout = new javax.swing.GroupLayout(graphContol);
+        graphContol.setLayout(graphContolLayout);
+        graphContolLayout.setHorizontalGroup(
+            graphContolLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 533, Short.MAX_VALUE)
         );
-        graphTensionLayout.setVerticalGroup(
-            graphTensionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 267, Short.MAX_VALUE)
+        graphContolLayout.setVerticalGroup(
+            graphContolLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 241, Short.MAX_VALUE)
         );
 
-        panelGraphs.add(graphTension);
+        panelGraphs.add(graphContol);
 
         panelBackGround.add(panelGraphs, java.awt.BorderLayout.CENTER);
 
@@ -97,29 +137,14 @@ public class MainView extends javax.swing.JFrame {
         tanquePanel.setLayout(tanquePanelLayout);
         tanquePanelLayout.setHorizontalGroup(
             tanquePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 238, Short.MAX_VALUE)
+            .addGap(0, 245, Short.MAX_VALUE)
         );
         tanquePanelLayout.setVerticalGroup(
             tanquePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 537, Short.MAX_VALUE)
+            .addGap(0, 483, Short.MAX_VALUE)
         );
 
         panelBackGround.add(tanquePanel, java.awt.BorderLayout.WEST);
-
-        dataPanel.setOpaque(false);
-
-        javax.swing.GroupLayout dataPanelLayout = new javax.swing.GroupLayout(dataPanel);
-        dataPanel.setLayout(dataPanelLayout);
-        dataPanelLayout.setHorizontalGroup(
-            dataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 142, Short.MAX_VALUE)
-        );
-        dataPanelLayout.setVerticalGroup(
-            dataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 510, Short.MAX_VALUE)
-        );
-
-        panelBackGround.add(dataPanel, java.awt.BorderLayout.EAST);
 
         pnlPadding.setBackground(new java.awt.Color(255, 255, 255));
         pnlPadding.setOpaque(false);
@@ -129,7 +154,7 @@ public class MainView extends javax.swing.JFrame {
         pnlPadding.setLayout(pnlPaddingLayout);
         pnlPaddingLayout.setHorizontalGroup(
             pnlPaddingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1119, Short.MAX_VALUE)
+            .addGap(0, 928, Short.MAX_VALUE)
         );
         pnlPaddingLayout.setVerticalGroup(
             pnlPaddingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -138,15 +163,89 @@ public class MainView extends javax.swing.JFrame {
 
         panelBackGround.add(pnlPadding, java.awt.BorderLayout.SOUTH);
 
+        DataPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Dados de Controle"));
+        DataPanel.setOpaque(false);
+
+        lblOverShoot.setText("OverShoot (%) :");
+
+        txtOverShoot.setEditable(false);
+        txtOverShoot.setOpaque(false);
+
+        lblSubida.setText("Tempo de Subida :");
+
+        txtSubida.setEditable(false);
+        txtSubida.setOpaque(false);
+
+        lblPico.setText("Tempo de Pico :");
+
+        txtPico.setEditable(false);
+        txtPico.setOpaque(false);
+
+        lblAcomodation.setText("Tempo de Acomodação :");
+
+        txtAcomodation.setEditable(false);
+        txtAcomodation.setOpaque(false);
+
+        lblFactorAcomo.setText("Fator de Acomodação :");
+
+        comboFactorAcomo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2 %", "5 %", "7 %", "10 %" }));
+
+        javax.swing.GroupLayout DataPanelLayout = new javax.swing.GroupLayout(DataPanel);
+        DataPanel.setLayout(DataPanelLayout);
+        DataPanelLayout.setHorizontalGroup(
+            DataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(DataPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(DataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtOverShoot, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)
+                    .addComponent(lblOverShoot, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)
+                    .addComponent(txtSubida, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)
+                    .addComponent(txtPico, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)
+                    .addComponent(txtAcomodation, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)
+                    .addComponent(comboFactorAcomo, 0, 118, Short.MAX_VALUE)
+                    .addComponent(lblFactorAcomo, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)
+                    .addComponent(lblAcomodation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblPico, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)
+                    .addComponent(lblSubida, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        DataPanelLayout.setVerticalGroup(
+            DataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(DataPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblOverShoot)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtOverShoot, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblSubida)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtSubida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblPico)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtPico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblAcomodation)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtAcomodation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblFactorAcomo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(comboFactorAcomo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(176, Short.MAX_VALUE))
+        );
+
+        panelBackGround.add(DataPanel, java.awt.BorderLayout.EAST);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelBackGround, javax.swing.GroupLayout.DEFAULT_SIZE, 1119, Short.MAX_VALUE)
+            .addComponent(panelBackGround, javax.swing.GroupLayout.DEFAULT_SIZE, 928, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelBackGround, javax.swing.GroupLayout.DEFAULT_SIZE, 587, Short.MAX_VALUE)
+            .addComponent(panelBackGround, javax.swing.GroupLayout.DEFAULT_SIZE, 533, Short.MAX_VALUE)
         );
 
         pack();
@@ -159,20 +258,30 @@ public class MainView extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
 
             public void run() {
-//                SkinInitialize();
+                SkinInitialize();
                 new MainView().setVisible(true);
-                
+
             }
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private br.ufrn.controle.fuzzycontroller.view.DataPanel dataPanel;
+    private javax.swing.JPanel DataPanel;
+    private javax.swing.JComboBox comboFactorAcomo;
+    private br.ufrn.controle.fuzzycontroller.view.Graph graphContol;
     private br.ufrn.controle.fuzzycontroller.view.Graph graphLevel;
-    private br.ufrn.controle.fuzzycontroller.view.Graph graphTension;
+    private javax.swing.JLabel lblAcomodation;
+    private javax.swing.JLabel lblFactorAcomo;
+    private javax.swing.JLabel lblOverShoot;
+    private javax.swing.JLabel lblPico;
+    private javax.swing.JLabel lblSubida;
     private javax.swing.JPanel panelBackGround;
     private javax.swing.JPanel panelGraphs;
     private javax.swing.JPanel pnlPadding;
     private br.ufrn.controle.fuzzycontroller.view.TanquePanel tanquePanel;
+    private javax.swing.JTextField txtAcomodation;
+    private javax.swing.JTextField txtOverShoot;
+    private javax.swing.JTextField txtPico;
+    private javax.swing.JTextField txtSubida;
     // End of variables declaration//GEN-END:variables
 
     private static void SkinInitialize() {
@@ -180,7 +289,7 @@ public class MainView extends javax.swing.JFrame {
         JDialog.setDefaultLookAndFeelDecorated(true);
 
         try { /*SubstanceBusinessLookAndFeel()*/
-            UIManager.setLookAndFeel(new SubstanceBusinessBlackSteelLookAndFeel());
+            UIManager.setLookAndFeel(new WindowsLookAndFeel());
         } catch (Exception e) {
             System.out.println("Substance Raven Graphite failed to initialize");
         }

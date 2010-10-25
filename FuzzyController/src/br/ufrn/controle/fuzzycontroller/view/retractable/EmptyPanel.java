@@ -4,21 +4,25 @@
  */
 
 /*
- * DataPanel.java
+ * EmptyPanel.java
  *
- * Created on 22/10/2010, 16:00:51
+ * Created on 24/10/2010, 21:31:53
  */
 
-package br.ufrn.controle.fuzzycontroller.view;
+package br.ufrn.controle.fuzzycontroller.view.retractable;
+
+import br.ufrn.siga.component.retractable.RetractablePanelContent;
 
 /**
  *
- * @author Demetrios
+ * @author demetrios
  */
-public class DataPanel extends javax.swing.JPanel {
+public class EmptyPanel extends javax.swing.JPanel implements RetractablePanelContent {
 
-    /** Creates new form DataPanel */
-    public DataPanel() {
+    private boolean compact;
+    
+    /** Creates new form EmptyPanel */
+    public EmptyPanel() {
         initComponents();
     }
 
@@ -31,19 +35,31 @@ public class DataPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setBorder(javax.swing.BorderFactory.createTitledBorder(org.openide.util.NbBundle.getMessage(DataPanel.class, "DataPanel.border.title"))); // NOI18N
+        setBackground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 150, Short.MAX_VALUE)
+            .addGap(0, 400, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 281, Short.MAX_VALUE)
+            .addGap(0, 300, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    public void showCompact() {
+        compact = true;
+    }
+
+    public void showFull() {
+        compact = false;
+    }
+
+    public boolean isCompactView() {
+        return compact;
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
