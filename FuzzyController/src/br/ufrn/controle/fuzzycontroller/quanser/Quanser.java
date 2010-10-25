@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.ufrn.controle.fuzzycontroller.domain;
+package br.ufrn.controle.fuzzycontroller.quanser;
 
 import br.ufrn.controle.fuzzycontroller.quanser.QuanserClient;
 import br.ufrn.controle.fuzzycontroller.quanser.QuanserClientException;
