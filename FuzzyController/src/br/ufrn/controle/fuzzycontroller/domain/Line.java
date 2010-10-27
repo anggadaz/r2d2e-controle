@@ -29,12 +29,50 @@ public class Line {
     }
 
     public double distance() {
-        return Geometry.length(point1.toArray(), point2.toArray());
+        return Math.sqrt(Math.pow((point1.getX() - point2.getX()), 2) + Math.pow((point1.getY() - point2.getY()), 2));
     }
 
-//    public double PointValue(double x, double y){
-//        return Geometry.
-//    }
+    public double RangeValue(double x) {
+        double alpha = calculateCoeficientAngle();
+
+        if (alpha == Integer.MAX_VALUE) {
+            return point1.getY();
+        } else {
+            return alpha * (x - point1.getX()) + point1.getY();
+        }
+    }
+
+    public double[] LineEquationCoeficients() {
+
+        double alpha = calculateCoeficientAngle();
+
+        //y - y1 = m(x-x1) = mx - y + (-mx1+y1)
+
+        double a = alpha;
+        double b = 1;
+        double c = -alpha * point1.getX() + point1.getY();
+
+        return new double[]{a,b,c};
+    }
+
+    private boolean isLineParallelEixy() {
+
+        double alpha = calculateCoeficientAngle();
+
+        if (alpha == Integer.MAX_VALUE) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private double calculateCoeficientAngle() {
+        if (point2.getX() != point1.getY()) {
+            return (point2.getY() - point1.getY()) / (point2.getX() - point1.getX());
+        } else {
+            return Integer.MAX_VALUE;
+        }
+    }
 
     public Point getPoint1() {
         return point1;

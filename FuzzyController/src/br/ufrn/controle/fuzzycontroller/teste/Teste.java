@@ -10,6 +10,8 @@
  */
 package br.ufrn.controle.fuzzycontroller.teste;
 
+import Jama.Matrix;
+import br.ufrn.controle.fuzzycontroller.domain.Line;
 import br.ufrn.controle.fuzzycontroller.shared.ConstantsGraph;
 import br.ufrn.controle.fuzzycontroller.view.Graph;
 import java.util.logging.Level;
@@ -24,6 +26,7 @@ public class Teste extends javax.swing.JFrame {
     /** Creates new form teste */
     public Teste() {
         initComponents();
+
     }
 
 //    public void addValue(String tipo, double value) {
@@ -33,7 +36,6 @@ public class Teste extends javax.swing.JFrame {
 //    public void init() {
 //        graph.init();
 //    }
-
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is

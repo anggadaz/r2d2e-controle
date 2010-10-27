@@ -19,6 +19,12 @@ public class DataIn {
         variables = new HashMap<String, Double>();
     }
 
-    
+    public String[] getVariables(){
+        return (String[]) variables.keySet().toArray();
+    }
+
+    public double getValueOfVariable(String variable){
+        return variables.get(variable);
+    }
 
 }

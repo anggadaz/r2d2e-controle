@@ -29,7 +29,7 @@ public class Rule {
         funcOut = functionOut;
     }
 
-    public Shape getGeometry(String variable){
+    public Shape getShape(String variable){
         return premises.get(variable);
     }
 

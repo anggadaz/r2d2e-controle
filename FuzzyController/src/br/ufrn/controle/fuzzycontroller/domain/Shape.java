@@ -12,17 +12,29 @@ import java.util.ArrayList;
  */
 public class Shape {
 
-    protected ArrayList<Integer> points;
+    protected ArrayList<Line> lines;
 
     public Shape() {
-        this.points = new ArrayList<Integer>();
     }
 
-    public int countPoints() {
-        return points.size();
+    public double getRangeValue(double value) {
+        double rangeValue = 0;
+
+        for (Line line : lines) {
+            rangeValue = line.RangeValue(value);
+            if (rangeValue != 0) {
+                break;
+            }
+        }
+
+        return rangeValue;
     }
 
-    public ArrayList<Integer> getPoints() {
-        return points;
+    public ArrayList<Line> getLines() {
+        return lines;
+    }
+
+    public void setLines(ArrayList<Line> lines) {
+        this.lines = lines;
     }
 }
