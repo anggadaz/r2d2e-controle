@@ -6,7 +6,7 @@ package br.ufrn.controle.fuzzycontroller.domain;
 
 import Jama.Matrix;
 import java.util.ArrayList;
-
+import org.jfree.util.ShapeUtilities;
 
 /**
  *
@@ -38,12 +38,49 @@ public class Inference {
 
             pertinenceValue[i++] = mi;
         }
-        
+
         double minPertiValue = min(pertinenceValue);
 
         Shape funcOut = rule.getFunctionOut();
 
-        return reShapeFuncOut(funcOut,minPertiValue);
+        return reShapeFuncOut(funcOut, minPertiValue);
+    }
+
+    private Point computelinearSystem(Line line1, Line line2) {
+
+        double[] coef = line2.LineEquationCoeficients();
+
+        double[] coefic2 = line1.LineEquationCoeficients();
+
+        Matrix d = new Matrix(2, 2);
+        Matrix dx = new Matrix(2, 2);
+        Matrix dy = new Matrix(2, 2);
+
+        d.set(0, 0, coef[0]);
+        d.set(0, 1, coef[1]);
+        d.set(1, 0, coefic2[0]);
+        d.set(1, 1, coefic2[1]);
+
+        dx.set(0, 0, coef[2]);
+        dx.set(0, 1, coef[1]);
+        dx.set(1, 0, coefic2[2]);
+        dx.set(1, 1, coefic2[1]);
+
+        dy.set(0, 0, coef[0]);
+        dy.set(0, 1, coef[2]);
+        dy.set(1, 0, coefic2[0]);
+        dy.set(1, 1, coefic2[2]);
+
+        double determinanteD = d.det();
+        double determinanteDx = dx.det();
+        double determinanteDy = dy.det();
+
+        double x = determinanteDx / determinanteD;
+        double y = determinanteDy / determinanteD;
+
+        Point initPoint = new Point(x, y);
+
+        return initPoint;
     }
 
     private double min(double[] pertinenceValue) {
@@ -63,19 +100,20 @@ public class Inference {
 
         Line line = new Line(0, minPertiValue, 30, minPertiValue);
 
-        double[] coef = line.LineEquationCoeficients();
-
-        Matrix matrixLine = new Matrix(1, 3);
-
-        matrixLine.set(0, 0, coef[0]);
-        matrixLine.set(0, 1, coef[1]);
-        matrixLine.set(0, 2, coef[2]);
-
         ArrayList<Line> lines = funcOut.getLines();
 
+        Shape saida = new Shape();
+
         for (Line lineShape : lines) {
-            
+
+            Point initPoint = computelinearSystem(lineShape, line);
+
+            Line newLine = new Line(initPoint, lineShape.getPoint2());
+
+            saida.addLine(newLine);
+
         }
-       
+
+        return saida;
     }
 }

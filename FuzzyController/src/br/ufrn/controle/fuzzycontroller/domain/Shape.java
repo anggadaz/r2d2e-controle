@@ -15,6 +15,7 @@ public class Shape {
     protected ArrayList<Line> lines;
 
     public Shape() {
+        lines = new ArrayList<Line>();
     }
 
     public double getRangeValue(double value) {
@@ -36,5 +37,9 @@ public class Shape {
 
     public void setLines(ArrayList<Line> lines) {
         this.lines = lines;
+    }
+
+    public void addLine(Line line) {
+        lines.add(line);
     }
 }
