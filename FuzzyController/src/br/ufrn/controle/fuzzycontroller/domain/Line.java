@@ -33,6 +33,11 @@ public class Line {
     }
 
     public double RangeValue(double x) {
+
+        if (x > point2.getX() || x < point1.getX()) {
+            return 0;
+        }
+
         double alpha = calculateCoeficientAngle();
 
         if (alpha == Integer.MAX_VALUE) {
@@ -52,10 +57,16 @@ public class Line {
         double b = 1;
         double c = -alpha * point1.getX() + point1.getY();
 
-        return new double[]{a,b,c};
+        return new double[]{a, b, c};
     }
 
-    private boolean isLineParallelEixy() {
+    public double domainValue(double y) {
+        double alpha = calculateCoeficientAngle();
+
+        return (y - point1.getY() + alpha * point1.getX()) / alpha;
+    }
+
+    private boolean isLineParallelEixoy() {
 
         double alpha = calculateCoeficientAngle();
 
@@ -67,7 +78,7 @@ public class Line {
     }
 
     private double calculateCoeficientAngle() {
-        if (point2.getX() != point1.getY()) {
+        if (point2.getX() != point1.getX()) {
             return (point2.getY() - point1.getY()) / (point2.getX() - point1.getX());
         } else {
             return Integer.MAX_VALUE;

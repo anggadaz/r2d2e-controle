@@ -2,7 +2,6 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package br.ufrn.controle.fuzzycontroller.domain;
 
 import java.util.HashMap;
@@ -13,27 +12,27 @@ import java.util.HashMap;
  */
 public class Rule {
 
-    private HashMap<String,Shape> premises;
-    private Shape funcOut;
+    private HashMap<String, Shape> premises;
+    private HashMap<String, Shape> functionOuts;
 
     public Rule() {
         premises = new HashMap<String, Shape>();
-        funcOut = new Shape();
+        functionOuts = new HashMap<String, Shape>();
     }
 
-    public void addPremise(String Variable, Shape geometry){
+    public void addPremise(String Variable, Shape geometry) {
         premises.put(Variable, geometry);
     }
 
-    public void setFunctionOut(Shape functionOut){
-        funcOut = functionOut;
+    public void addFunctionOut(String variable, Shape shape) {
+        functionOuts.put(variable, shape);
+    }
+    
+    public Shape getInputShape(String var) {
+        return premises.get(var);
     }
 
-    public Shape getShape(String variable){
-        return premises.get(variable);
-    }
-
-    public Shape getFunctionOut(){
-        return funcOut;
+    public Shape getOutPutShape(String var){
+        return functionOuts.get(var);
     }
 }

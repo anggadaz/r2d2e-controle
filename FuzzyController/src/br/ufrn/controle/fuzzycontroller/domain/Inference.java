@@ -5,6 +5,7 @@
 package br.ufrn.controle.fuzzycontroller.domain;
 
 import Jama.Matrix;
+import br.ufrn.controle.fuzzycontroller.shared.ConstantsFuzzy;
 import java.util.ArrayList;
 import org.jfree.util.ShapeUtilities;
 
@@ -20,17 +21,17 @@ public class Inference {
     public Inference() {
     }
 
-    private Shape avaliateRule(Rule rule, DataIn dataIn) {
+    public Shape avaliateRule(Rule rule, DataIn dataIn) {
 
-        String[] variables = dataIn.getVariables();
+        ArrayList<String> variables = dataIn.getVariables();
 
-        double[] pertinenceValue = new double[variables.length];
+        double[] pertinenceValue = new double[variables.size()];
 
         int i = 0;
 
         for (String var : variables) {
 
-            Shape shape = rule.getShape(var);
+            Shape shape = rule.getInputShape(var);
 
             double value = dataIn.getValueOfVariable(var);
 
@@ -41,46 +42,9 @@ public class Inference {
 
         double minPertiValue = min(pertinenceValue);
 
-        Shape funcOut = rule.getFunctionOut();
+        Shape funcOut = rule.getOutPutShape(ConstantsFuzzy.VARIABLE_OUTPUT);
 
         return reShapeFuncOut(funcOut, minPertiValue);
-    }
-
-    private Point computelinearSystem(Line line1, Line line2) {
-
-        double[] coef = line2.LineEquationCoeficients();
-
-        double[] coefic2 = line1.LineEquationCoeficients();
-
-        Matrix d = new Matrix(2, 2);
-        Matrix dx = new Matrix(2, 2);
-        Matrix dy = new Matrix(2, 2);
-
-        d.set(0, 0, coef[0]);
-        d.set(0, 1, coef[1]);
-        d.set(1, 0, coefic2[0]);
-        d.set(1, 1, coefic2[1]);
-
-        dx.set(0, 0, coef[2]);
-        dx.set(0, 1, coef[1]);
-        dx.set(1, 0, coefic2[2]);
-        dx.set(1, 1, coefic2[1]);
-
-        dy.set(0, 0, coef[0]);
-        dy.set(0, 1, coef[2]);
-        dy.set(1, 0, coefic2[0]);
-        dy.set(1, 1, coefic2[2]);
-
-        double determinanteD = d.det();
-        double determinanteDx = dx.det();
-        double determinanteDy = dy.det();
-
-        double x = determinanteDx / determinanteD;
-        double y = determinanteDy / determinanteD;
-
-        Point initPoint = new Point(x, y);
-
-        return initPoint;
     }
 
     private double min(double[] pertinenceValue) {
@@ -98,21 +62,35 @@ public class Inference {
 
     private Shape reShapeFuncOut(Shape funcOut, double minPertiValue) {
 
-        Line line = new Line(0, minPertiValue, 30, minPertiValue);
+        if(minPertiValue == 0){
+            return funcOut;
+        }
 
         ArrayList<Line> lines = funcOut.getLines();
+
+        ArrayList<Double> xs = new ArrayList<Double>();
 
         Shape saida = new Shape();
 
         for (Line lineShape : lines) {
 
-            Point initPoint = computelinearSystem(lineShape, line);
+            if (lineShape.getPoint1().getY() == 0 && lineShape.getPoint2().getY() == 0) {
+                continue;
+            }
 
-            Line newLine = new Line(initPoint, lineShape.getPoint2());
+            double x = lineShape.domainValue(minPertiValue);
+
+            xs.add(x);
+
+            Point endPoint = new Point(x, minPertiValue);
+
+            Line newLine = new Line(endPoint, lineShape.getPoint1());
 
             saida.addLine(newLine);
 
         }
+
+        saida.addLine(new Line(xs.get(0), minPertiValue, xs.get(1), minPertiValue));
 
         return saida;
     }

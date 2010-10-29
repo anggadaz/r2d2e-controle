@@ -22,4 +22,6 @@ public class ConstantsFuzzy {
     public static final String VARIABLE_DERIVATIVE_TANK2 = "derivativeError2";
     public static final String VARIABLE_INTEGRATIVE_ERROR_TANK1 = "integrativeError1";
     public static final String VARIABLE_INTEGRATIVE_ERROR_TANK2 = "integrativeError2";
+
+    public static final String VARIABLE_OUTPUT = "outPut";
 }
