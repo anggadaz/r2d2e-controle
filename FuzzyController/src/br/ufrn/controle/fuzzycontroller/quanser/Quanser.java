@@ -4,9 +4,6 @@
  */
 package br.ufrn.controle.fuzzycontroller.quanser;
 
-import br.ufrn.controle.fuzzycontroller.quanser.QuanserClient;
-import br.ufrn.controle.fuzzycontroller.quanser.QuanserClientException;
-
 /**
  *
  * @author Demétrios
@@ -104,5 +101,13 @@ public class Quanser {
 
     public static void setIP_QUANSER(String IP_QUANSER) {
         Quanser.IP_QUANSER = IP_QUANSER;
+    }
+
+    public static int getPORT_QUANSER() {
+        return PORT_QUANSER;
+    }
+
+    public static void setPORT_QUANSER(int PORT_QUANSER) {
+        Quanser.PORT_QUANSER = PORT_QUANSER;
     }
 }

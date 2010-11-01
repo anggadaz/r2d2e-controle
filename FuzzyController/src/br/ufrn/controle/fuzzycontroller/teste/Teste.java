@@ -10,18 +10,15 @@
  */
 package br.ufrn.controle.fuzzycontroller.teste;
 
-import Jama.Matrix;
-import br.ufrn.controle.fuzzycontroller.domain.Line;
-import br.ufrn.controle.fuzzycontroller.shared.ConstantsGraph;
-import br.ufrn.controle.fuzzycontroller.view.Graph;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import br.ufrn.siga.component.retractable.RetractablePanelContent;
 
 /**
  *
  * @author Demetrios
  */
-public class Teste extends javax.swing.JFrame {
+public class Teste extends javax.swing.JFrame implements RetractablePanelContent {
+
+    private boolean compact;
 
     /** Creates new form teste */
     public Teste() {
@@ -45,17 +42,19 @@ public class Teste extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        cornerPanel1 = new br.ufrn.siga.component.corner.CornerPanel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 673, Short.MAX_VALUE)
+            .addComponent(cornerPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 442, Short.MAX_VALUE)
+            .addComponent(cornerPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE)
         );
 
         pack();
@@ -96,5 +95,18 @@ public class Teste extends javax.swing.JFrame {
 //        }.start();
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private br.ufrn.siga.component.corner.CornerPanel cornerPanel1;
     // End of variables declaration//GEN-END:variables
+
+    public void showCompact() {
+        compact = true;
+    }
+
+    public void showFull() {
+        compact = false;
+    }
+
+    public boolean isCompactView() {
+        return compact;
+    }
 }

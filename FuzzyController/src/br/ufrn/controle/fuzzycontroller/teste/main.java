@@ -5,7 +5,7 @@
 package br.ufrn.controle.fuzzycontroller.teste;
 
 import br.ufrn.controle.fuzzycontroller.domain.DataIn;
-import br.ufrn.controle.fuzzycontroller.domain.Inference;
+import br.ufrn.controle.fuzzycontroller.domain.Mamdani;
 import br.ufrn.controle.fuzzycontroller.domain.Line;
 import br.ufrn.controle.fuzzycontroller.domain.Rule;
 import br.ufrn.controle.fuzzycontroller.domain.Shape;
@@ -18,7 +18,7 @@ import br.ufrn.controle.fuzzycontroller.shared.ConstantsFuzzy;
 public class main {
 
     public static void main(String args[]) {
-        Inference inference = new Inference();
+        Mamdani inference = new Mamdani();
 
         Shape s = new Shape();
 
@@ -41,14 +41,14 @@ public class main {
 
         Rule r = new Rule();
 
-        r.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK1, i1);
-        r.addPremise(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK1, i2);
+//        r.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK1, i1);
+//        r.addPremise(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK1, i2);
         r.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, s);
 
         DataIn dataIn = new DataIn();
         dataIn.addValue(ConstantsFuzzy.VARIABLE_ERROR_TANK1, 0.3d);
         dataIn.addValue(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK1,2d);
 
-        inference.avaliateRule(r,dataIn);
+//        inference.avaliateRule(r,dataIn);
     }
 }

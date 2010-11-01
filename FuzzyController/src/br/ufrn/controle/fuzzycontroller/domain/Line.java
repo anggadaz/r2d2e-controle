@@ -66,17 +66,6 @@ public class Line {
         return (y - point1.getY() + alpha * point1.getX()) / alpha;
     }
 
-    private boolean isLineParallelEixoy() {
-
-        double alpha = calculateCoeficientAngle();
-
-        if (alpha == Integer.MAX_VALUE) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
     private double calculateCoeficientAngle() {
         if (point2.getX() != point1.getX()) {
             return (point2.getY() - point1.getY()) / (point2.getX() - point1.getX());

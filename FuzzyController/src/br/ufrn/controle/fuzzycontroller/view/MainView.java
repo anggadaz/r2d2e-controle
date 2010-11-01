@@ -14,6 +14,7 @@ import br.ufrn.controle.fuzzycontroller.view.retractable.EmptyPanel;
 import br.ufrn.controle.fuzzycontroller.view.retractable.FuzzyRetractable;
 import br.ufrn.controle.fuzzycontroller.view.retractable.TankOptionsPanel;
 import br.ufrn.controle.fuzzycontroller.view.retractable.ToolsPanel;
+import br.ufrn.siga.component.constant.SigaComponentsConstants;
 import br.ufrn.siga.component.retractable.RetractablePanel;
 import com.sun.java.swing.plaf.windows.WindowsLookAndFeel;
 import java.awt.Color;
@@ -41,10 +42,12 @@ public class MainView extends javax.swing.JFrame {
 
         retractable = new FuzzyRetractable(getLayeredPane());
 
+        RetractablePanel toolRetractable = new RetractablePanel(retractable, new ToolsPanel(this), "Configuração", true);
+
         panelEmpty = new RetractablePanel(retractable, new EmptyPanel(), "", false);
         panelEmpty.setCrossSizeLock(Math.round(getWidth() * crossSizeLock));
-
-        retractable.add(new RetractablePanel(retractable, new ToolsPanel(), "Configuração", true));
+        
+        retractable.add(toolRetractable);
         retractable.add(panelEmpty);
         retractable.add(new RetractablePanel(retractable, new TankOptionsPanel(), "Opções De Gráficos", true));
 
@@ -68,6 +71,7 @@ public class MainView extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         panelBackGround = new javax.swing.JPanel();
         panelGraphs = new javax.swing.JPanel();
@@ -75,6 +79,10 @@ public class MainView extends javax.swing.JFrame {
         graphContol = new br.ufrn.controle.fuzzycontroller.view.Graph();
         tanquePanel = new br.ufrn.controle.fuzzycontroller.view.TanquePanel();
         pnlPadding = new javax.swing.JPanel();
+        panelSetPoint = new javax.swing.JPanel();
+        lblSetPoint = new javax.swing.JLabel();
+        txtSetPoint = new javax.swing.JFormattedTextField();
+        buttonSetPoint = new javax.swing.JButton();
         DataPanel = new javax.swing.JPanel();
         lblOverShoot = new javax.swing.JLabel();
         txtOverShoot = new javax.swing.JTextField();
@@ -147,18 +155,42 @@ public class MainView extends javax.swing.JFrame {
         panelBackGround.add(tanquePanel, java.awt.BorderLayout.WEST);
 
         pnlPadding.setBackground(new java.awt.Color(255, 255, 255));
+        pnlPadding.setMinimumSize(new java.awt.Dimension(928, 50));
         pnlPadding.setOpaque(false);
         pnlPadding.setPreferredSize(new java.awt.Dimension(50, 50));
+
+        panelSetPoint.setOpaque(false);
+        panelSetPoint.setLayout(new java.awt.BorderLayout(10, 0));
+
+        lblSetPoint.setText("SetPoint :");
+        panelSetPoint.add(lblSetPoint, java.awt.BorderLayout.WEST);
+
+        txtSetPoint.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        txtSetPoint.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtSetPoint.setText("15.00");
+        panelSetPoint.add(txtSetPoint, java.awt.BorderLayout.CENTER);
+
+        buttonSetPoint.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufrn/controle/fuzzycontroller/view/resources/reload.png"))); // NOI18N
+        buttonSetPoint.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
+        buttonSetPoint.setContentAreaFilled(false);
+        buttonSetPoint.setFocusPainted(false);
+        panelSetPoint.add(buttonSetPoint, java.awt.BorderLayout.EAST);
 
         javax.swing.GroupLayout pnlPaddingLayout = new javax.swing.GroupLayout(pnlPadding);
         pnlPadding.setLayout(pnlPaddingLayout);
         pnlPaddingLayout.setHorizontalGroup(
             pnlPaddingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 928, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlPaddingLayout.createSequentialGroup()
+                .addGap(428, 428, 428)
+                .addComponent(panelSetPoint, javax.swing.GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE)
+                .addGap(246, 246, 246))
         );
         pnlPaddingLayout.setVerticalGroup(
             pnlPaddingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 50, Short.MAX_VALUE)
+            .addGroup(pnlPaddingLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(panelSetPoint, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         panelBackGround.add(pnlPadding, java.awt.BorderLayout.SOUTH);
@@ -266,6 +298,7 @@ public class MainView extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel DataPanel;
+    private javax.swing.JButton buttonSetPoint;
     private javax.swing.JComboBox comboFactorAcomo;
     private br.ufrn.controle.fuzzycontroller.view.Graph graphContol;
     private br.ufrn.controle.fuzzycontroller.view.Graph graphLevel;
@@ -273,14 +306,17 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JLabel lblFactorAcomo;
     private javax.swing.JLabel lblOverShoot;
     private javax.swing.JLabel lblPico;
+    private javax.swing.JLabel lblSetPoint;
     private javax.swing.JLabel lblSubida;
     private javax.swing.JPanel panelBackGround;
     private javax.swing.JPanel panelGraphs;
+    private javax.swing.JPanel panelSetPoint;
     private javax.swing.JPanel pnlPadding;
     private br.ufrn.controle.fuzzycontroller.view.TanquePanel tanquePanel;
     private javax.swing.JTextField txtAcomodation;
     private javax.swing.JTextField txtOverShoot;
     private javax.swing.JTextField txtPico;
+    private javax.swing.JFormattedTextField txtSetPoint;
     private javax.swing.JTextField txtSubida;
     // End of variables declaration//GEN-END:variables
 

@@ -34,19 +34,39 @@ public class EmptyPanel extends javax.swing.JPanel implements RetractablePanelCo
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
+
+        panelSetPoint = new javax.swing.JPanel();
+        lblSetPoint = new javax.swing.JLabel();
+        txtSetPoint = new javax.swing.JFormattedTextField();
+        buttonSetPoint = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
+        setLayout(new java.awt.GridBagLayout());
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        panelSetPoint.setOpaque(false);
+        panelSetPoint.setLayout(new java.awt.BorderLayout(10, 0));
+
+        lblSetPoint.setText("SetPoint :");
+        panelSetPoint.add(lblSetPoint, java.awt.BorderLayout.WEST);
+
+        txtSetPoint.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtSetPoint.setText("15.00");
+        panelSetPoint.add(txtSetPoint, java.awt.BorderLayout.CENTER);
+
+        buttonSetPoint.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufrn/controle/fuzzycontroller/view/resources/reload.png"))); // NOI18N
+        buttonSetPoint.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
+        buttonSetPoint.setContentAreaFilled(false);
+        buttonSetPoint.setFocusPainted(false);
+        panelSetPoint.add(buttonSetPoint, java.awt.BorderLayout.EAST);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.RELATIVE;
+        gridBagConstraints.gridheight = java.awt.GridBagConstraints.RELATIVE;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipadx = 280;
+        gridBagConstraints.insets = new java.awt.Insets(0, 54, 0, 54);
+        add(panelSetPoint, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 
     public void showCompact() {
@@ -63,6 +83,10 @@ public class EmptyPanel extends javax.swing.JPanel implements RetractablePanelCo
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton buttonSetPoint;
+    private javax.swing.JLabel lblSetPoint;
+    private javax.swing.JPanel panelSetPoint;
+    private javax.swing.JFormattedTextField txtSetPoint;
     // End of variables declaration//GEN-END:variables
 
 }

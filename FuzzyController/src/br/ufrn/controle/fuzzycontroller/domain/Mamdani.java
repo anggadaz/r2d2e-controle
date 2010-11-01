@@ -1,0 +1,54 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package br.ufrn.controle.fuzzycontroller.domain;
+
+import br.ufrn.controle.fuzzycontroller.shared.ConstantsFuzzy;
+import java.util.ArrayList;
+import org.openide.util.Exceptions;
+
+/**
+ *
+ * @author Demetrios
+ */
+public class Mamdani extends Inference{
+
+    private final int numbThreads = 2;
+
+    public Mamdani() {
+        andFunction = ConstantsFuzzy.MIN_FUNCTION;
+    }
+
+    public Shape work(DataIn dataIn) {
+
+        ArrayList<Rule> rules = ruleBase.getRules();
+
+        Shape shapeOut = new Shape();
+
+        RulesAvaliationThread rats[] = new RulesAvaliationThread[numbThreads];
+
+        int lengthPerThread = rules.size() / numbThreads;
+        int rest = rules.size() % numbThreads;
+
+        for (int i = 0; i < numbThreads - 1; i++) {
+            rats[i] = new RulesAvaliationThread(i, i * lengthPerThread, lengthPerThread, rules, dataIn, shapeOut,andFunction);
+        }
+
+        rats[numbThreads - 1] = new RulesAvaliationThread(numbThreads - 1, numbThreads - 1 * lengthPerThread, lengthPerThread + rest, rules, dataIn, shapeOut,andFunction);
+
+        for (int i = 0; i < numbThreads; i++) {
+            rats[i].start();
+        }
+
+        for (int i = 0; i < numbThreads; i++) {
+            try {
+                rats[i].join();
+            } catch (InterruptedException ex) {
+                Exceptions.printStackTrace(ex);
+            }
+        }
+
+        return shapeOut;
+    }
+}
