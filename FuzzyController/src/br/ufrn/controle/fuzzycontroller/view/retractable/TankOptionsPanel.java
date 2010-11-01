@@ -8,9 +8,9 @@
  *
  * Created on 22/10/2010, 16:17:00
  */
-
 package br.ufrn.controle.fuzzycontroller.view.retractable;
 
+import br.ufrn.controle.fuzzycontroller.domain.SelectionsGraph;
 import br.ufrn.siga.component.retractable.RetractablePanelContent;
 import java.awt.CardLayout;
 
@@ -23,11 +23,14 @@ public class TankOptionsPanel extends javax.swing.JPanel implements RetractableP
     private boolean compact;
     private final static String CARD_CHECK = "cardCheck";
     private final static String CARD_COMPACT = "cardCompact";
+    private SelectionsGraph selectionsGraph;
 
-
-    /** Creates new form OpcoesTanque */
-    public TankOptionsPanel() {
+    /** Creates new form OpcoesTanque
+     * @param selectionsGraph
+     */
+    public TankOptionsPanel(SelectionsGraph selectionsGraph) {
         initComponents();
+        this.selectionsGraph = selectionsGraph;
     }
 
     /** This method is called from within the constructor to
@@ -48,6 +51,7 @@ public class TankOptionsPanel extends javax.swing.JPanel implements RetractableP
         chkSetPoint = new javax.swing.JCheckBox();
         panelCompact = new br.ufrn.siga.component.gradient.GradientPanel();
         lblOptions = new javax.swing.JLabel();
+        lblNumber = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new java.awt.CardLayout());
@@ -62,33 +66,58 @@ public class TankOptionsPanel extends javax.swing.JPanel implements RetractableP
         chkTank1.setSelected(true);
         chkTank1.setText("Nivel do Tanque 1");
         chkTank1.setOpaque(false);
+        chkTank1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkTank1ActionPerformed(evt);
+            }
+        });
         translucentPanel1.add(chkTank1);
 
         chkTank2.setSelected(true);
         chkTank2.setText("Nivel do Tanque 2");
         chkTank2.setOpaque(false);
+        chkTank2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkTank2ActionPerformed(evt);
+            }
+        });
         translucentPanel1.add(chkTank2);
 
         chkError1.setSelected(true);
         chkError1.setText("Erro do Tanque1");
         chkError1.setOpaque(false);
+        chkError1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkError1ActionPerformed(evt);
+            }
+        });
         translucentPanel1.add(chkError1);
 
         chkError2.setSelected(true);
         chkError2.setText("Erro do Tanque2");
         chkError2.setOpaque(false);
+        chkError2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkError2ActionPerformed(evt);
+            }
+        });
         translucentPanel1.add(chkError2);
 
         chkSetPoint.setSelected(true);
         chkSetPoint.setText("SetPoint");
         chkSetPoint.setOpaque(false);
+        chkSetPoint.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkSetPointActionPerformed(evt);
+            }
+        });
         translucentPanel1.add(chkSetPoint);
 
         javax.swing.GroupLayout panelCheckLayout = new javax.swing.GroupLayout(panelCheck);
         panelCheck.setLayout(panelCheckLayout);
         panelCheckLayout.setHorizontalGroup(
             panelCheckLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(translucentPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
+            .addComponent(translucentPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
         );
         panelCheckLayout.setVerticalGroup(
             panelCheckLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -101,33 +130,90 @@ public class TankOptionsPanel extends javax.swing.JPanel implements RetractableP
         panelCompact.setColor2(new java.awt.Color(119, 166, 110));
 
         lblOptions.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblOptions.setText("5 Opções Selecionados");
+        lblOptions.setText(org.openide.util.NbBundle.getMessage(TankOptionsPanel.class, "TankOptionsPanel.lblOptions.text")); // NOI18N
+
+        lblNumber.setText(org.openide.util.NbBundle.getMessage(TankOptionsPanel.class, "TankOptionsPanel.lblNumber.text")); // NOI18N
 
         javax.swing.GroupLayout panelCompactLayout = new javax.swing.GroupLayout(panelCompact);
         panelCompact.setLayout(panelCompactLayout);
         panelCompactLayout.setHorizontalGroup(
             panelCompactLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblOptions, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(panelCompactLayout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(lblNumber, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblOptions)
+                .addGap(19, 19, 19))
         );
         panelCompactLayout.setVerticalGroup(
             panelCompactLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelCompactLayout.createSequentialGroup()
-                .addComponent(lblOptions)
+                .addGroup(panelCompactLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblOptions)
+                    .addComponent(lblNumber))
                 .addContainerGap(197, Short.MAX_VALUE))
         );
 
         add(panelCompact, "cardCompact");
     }// </editor-fold>//GEN-END:initComponents
 
-    private void changeCard(String card){
+    private void chkTank1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkTank1ActionPerformed
+        // TODO add your handling code here:
+        selectionsGraph.setLevel1Selected(chkTank1.isSelected());
+    }//GEN-LAST:event_chkTank1ActionPerformed
+
+    private void chkTank2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkTank2ActionPerformed
+        // TODO add your handling code here:
+        selectionsGraph.setLevel2Selected(chkTank2.isSelected());
+    }//GEN-LAST:event_chkTank2ActionPerformed
+
+    private void chkError1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkError1ActionPerformed
+        // TODO add your handling code here:
+        selectionsGraph.setError1Selected(chkError1.isSelected());
+    }//GEN-LAST:event_chkError1ActionPerformed
+
+    private void chkError2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkError2ActionPerformed
+        // TODO add your handling code here:
+        selectionsGraph.setError2Selected(chkError2.isSelected());
+    }//GEN-LAST:event_chkError2ActionPerformed
+
+    private void chkSetPointActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkSetPointActionPerformed
+        // TODO add your handling code here:
+        selectionsGraph.setSetPointSelected(chkSetPoint.isSelected());
+    }//GEN-LAST:event_chkSetPointActionPerformed
+
+    private void changeCard(String card) {
         CardLayout layout = (CardLayout) getLayout();
         layout.show(this, card);
     }
 
     public void showCompact() {
         compact = true;
+
+        updateNumbSelection();
+
         changeCard(CARD_COMPACT);
-        
+
+    }
+
+    private void updateNumbSelection() {
+        int count = 0;
+        if (chkError1.isSelected()) {
+            count++;
+        }
+        if (chkError2.isSelected()) {
+            count++;
+        }
+        if (chkSetPoint.isSelected()) {
+            count++;
+        }
+        if (chkTank1.isSelected()) {
+            count++;
+        }
+        if (chkTank2.isSelected()) {
+            count++;
+        }
+        lblNumber.setText(Integer.toString(count));
     }
 
     public void showFull() {
@@ -138,18 +224,16 @@ public class TankOptionsPanel extends javax.swing.JPanel implements RetractableP
     public boolean isCompactView() {
         return compact;
     }
-
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox chkError1;
     private javax.swing.JCheckBox chkError2;
     private javax.swing.JCheckBox chkSetPoint;
     private javax.swing.JCheckBox chkTank1;
     private javax.swing.JCheckBox chkTank2;
+    private javax.swing.JLabel lblNumber;
     private javax.swing.JLabel lblOptions;
     private br.ufrn.siga.component.gradient.GradientPanel panelCheck;
     private br.ufrn.siga.component.gradient.GradientPanel panelCompact;
     private br.ufrn.siga.component.translucent.TranslucentPanel translucentPanel1;
     // End of variables declaration//GEN-END:variables
-
 }

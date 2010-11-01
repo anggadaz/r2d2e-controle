@@ -8,8 +8,11 @@
  *
  * Created on 31/10/2010, 23:15:45
  */
-
 package br.ufrn.controle.fuzzycontroller.view;
+
+import br.ufrn.controle.fuzzycontroller.domain.FuzzyController;
+import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
 
 /**
  *
@@ -17,10 +20,17 @@ package br.ufrn.controle.fuzzycontroller.view;
  */
 public class InitialDialog extends javax.swing.JDialog {
 
-    /** Creates new form InitialDialog */
+    /** Creates new form InitialDialog
+     * @param parent
+     * @param modal
+     */
     public InitialDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        MainView mainView = (MainView) parent;
+        ArrayList<FuzzyController> controllers = mainView.getControllers();
+
+        fillCombo(controllers);
     }
 
     /** This method is called from within the constructor to
@@ -33,28 +43,28 @@ public class InitialDialog extends javax.swing.JDialog {
     private void initComponents() {
 
         panelBackGround = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
-        jButton1 = new javax.swing.JButton();
+        lblFuzzy = new javax.swing.JLabel();
+        comboControllers = new javax.swing.JComboBox();
+        buttonStart = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         panelBackGround.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel1.setText(org.openide.util.NbBundle.getMessage(InitialDialog.class, "InitialDialog.jLabel1.text")); // NOI18N
+        lblFuzzy.setText(org.openide.util.NbBundle.getMessage(InitialDialog.class, "InitialDialog.lblFuzzy.text")); // NOI18N
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox1.setOpaque(false);
+        comboControllers.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboControllers.setOpaque(false);
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufrn/controle/fuzzycontroller/view/resources/play_1.png"))); // NOI18N
-        jButton1.setText(org.openide.util.NbBundle.getMessage(InitialDialog.class, "InitialDialog.jButton1.text")); // NOI18N
-        jButton1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
-        jButton1.setBorderPainted(false);
-        jButton1.setContentAreaFilled(false);
-        jButton1.setFocusPainted(false);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        buttonStart.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufrn/controle/fuzzycontroller/view/resources/play_1.png"))); // NOI18N
+        buttonStart.setText(org.openide.util.NbBundle.getMessage(InitialDialog.class, "InitialDialog.buttonStart.text")); // NOI18N
+        buttonStart.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
+        buttonStart.setBorderPainted(false);
+        buttonStart.setContentAreaFilled(false);
+        buttonStart.setFocusPainted(false);
+        buttonStart.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                buttonStartActionPerformed(evt);
             }
         });
 
@@ -66,10 +76,10 @@ public class InitialDialog extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(panelBackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelBackGroundLayout.createSequentialGroup()
-                        .addComponent(jLabel1)
+                        .addComponent(lblFuzzy)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox1, 0, 184, Short.MAX_VALUE))
-                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addComponent(comboControllers, 0, 184, Short.MAX_VALUE))
+                    .addComponent(buttonStart, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
         panelBackGroundLayout.setVerticalGroup(
@@ -77,10 +87,10 @@ public class InitialDialog extends javax.swing.JDialog {
             .addGroup(panelBackGroundLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(panelBackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblFuzzy)
+                    .addComponent(comboControllers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1))
+                .addComponent(buttonStart))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -97,19 +107,25 @@ public class InitialDialog extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void buttonStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonStartActionPerformed
         // TODO add your handling code here:
         dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_buttonStartActionPerformed
+
+    public FuzzyController getFuzzyControllerSelected() {
+        return (FuzzyController) comboControllers.getSelectedItem();
+    }
 
     /**
-    * @param args the command line arguments
-    */
+     * @param args the command line arguments
+     */
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
+
             public void run() {
                 InitialDialog dialog = new InitialDialog(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+
                     public void windowClosing(java.awt.event.WindowEvent e) {
                         System.exit(0);
                     }
@@ -118,12 +134,15 @@ public class InitialDialog extends javax.swing.JDialog {
             }
         });
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox jComboBox1;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton buttonStart;
+    private javax.swing.JComboBox comboControllers;
+    private javax.swing.JLabel lblFuzzy;
     private javax.swing.JPanel panelBackGround;
     // End of variables declaration//GEN-END:variables
 
+    private void fillCombo(ArrayList<FuzzyController> controllers) {
+        DefaultComboBoxModel model = new DefaultComboBoxModel(controllers.toArray());
+        comboControllers.setModel(model);
+    }
 }

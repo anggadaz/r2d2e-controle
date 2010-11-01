@@ -27,7 +27,9 @@ public class ToolsPanel extends javax.swing.JPanel implements RetractablePanelCo
     private boolean compact;
     private MainView parent;
 
-    /** Creates new form ToolsPanel */
+    /** Creates new form ToolsPanel
+     * @param parent
+     */
     public ToolsPanel(MainView parent) {
         initComponents();
         this.parent = parent;

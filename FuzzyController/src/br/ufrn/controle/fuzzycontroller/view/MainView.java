@@ -10,21 +10,20 @@
  */
 package br.ufrn.controle.fuzzycontroller.view;
 
+import br.ufrn.controle.fuzzycontroller.domain.FuzzyController;
+import br.ufrn.controle.fuzzycontroller.domain.SelectionsGraph;
 import br.ufrn.controle.fuzzycontroller.view.retractable.EmptyPanel;
 import br.ufrn.controle.fuzzycontroller.view.retractable.FuzzyRetractable;
 import br.ufrn.controle.fuzzycontroller.view.retractable.TankOptionsPanel;
 import br.ufrn.controle.fuzzycontroller.view.retractable.ToolsPanel;
-import br.ufrn.siga.component.constant.SigaComponentsConstants;
 import br.ufrn.siga.component.retractable.RetractablePanel;
 import com.sun.java.swing.plaf.windows.WindowsLookAndFeel;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.util.ArrayList;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.UIManager;
-import org.jvnet.substance.skin.SubstanceBusinessBlackSteelLookAndFeel;
 
 /**
  *
@@ -35,21 +34,27 @@ public class MainView extends javax.swing.JFrame {
     private FuzzyRetractable retractable;
     private RetractablePanel panelEmpty;
     private float crossSizeLock = 0.69f;
+    private ArrayList<FuzzyController> controllers;
+    private FuzzyController controllerSelected;
 
     /** Creates new form MainView */
     public MainView() {
         initComponents();
 
+        controllers = new ArrayList<FuzzyController>();
+
         retractable = new FuzzyRetractable(getLayeredPane());
+
+        SelectionsGraph selectionsGraph = new SelectionsGraph();
 
         RetractablePanel toolRetractable = new RetractablePanel(retractable, new ToolsPanel(this), "Configuração", true);
 
         panelEmpty = new RetractablePanel(retractable, new EmptyPanel(), "", false);
         panelEmpty.setCrossSizeLock(Math.round(getWidth() * crossSizeLock));
-        
+
         retractable.add(toolRetractable);
         retractable.add(panelEmpty);
-        retractable.add(new RetractablePanel(retractable, new TankOptionsPanel(), "Opções De Gráficos", true));
+        retractable.add(new RetractablePanel(retractable, new TankOptionsPanel(selectionsGraph), "Opções De Gráficos", true));
 
         setPreferredSize(new Dimension(996, 550));
         setMinimumSize(new Dimension(996, 550));
@@ -282,6 +287,22 @@ public class MainView extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    public ArrayList<FuzzyController> getControllers() {
+        return controllers;
+    }
+
+    public void setControllers(ArrayList<FuzzyController> controllers) {
+        this.controllers = controllers;
+    }
+
+    public FuzzyController getControllerSelected() {
+        return controllerSelected;
+    }
+
+    public void setControllerSelected(FuzzyController controllerSelected) {
+        this.controllerSelected = controllerSelected;
+    }
 
     /**
      * @param args the command line arguments
