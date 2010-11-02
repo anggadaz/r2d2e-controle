@@ -19,11 +19,11 @@ public class RulesAvaliationThread extends Thread {
     private int elements;
     private ArrayList<Rule> rules;
     private DataIn dataIn;
-    private Shape globalShape;
+    private FuncPertinence globalShape;
     private int andFunction;
     private static final Object lock = new Object();
 
-    public RulesAvaliationThread(int id, int startIndex, int elements, ArrayList<Rule> rules, DataIn dataIn, Shape globalShape, int andFunction) {
+    public RulesAvaliationThread(int id, int startIndex, int elements, ArrayList<Rule> rules, DataIn dataIn, FuncPertinence globalShape, int andFunction) {
         this.id = id;
         this.startIndex = startIndex;
         this.elements = elements;
@@ -35,11 +35,11 @@ public class RulesAvaliationThread extends Thread {
 
     @Override
     public void run() {
-        Shape tempShape = null;
+        FuncPertinence tempShape = null;
 
         for (Rule rule : rules) {
 
-            Shape shape = avaliateRule(rule);
+            FuncPertinence shape = avaliateRule(rule);
 
             if (tempShape == null) {
                 tempShape = shape;
@@ -55,7 +55,7 @@ public class RulesAvaliationThread extends Thread {
 
     }
 
-    private Shape avaliateRule(Rule rule) {
+    private FuncPertinence avaliateRule(Rule rule) {
 
         ArrayList<String> variables = dataIn.getVariables();
 
@@ -65,7 +65,7 @@ public class RulesAvaliationThread extends Thread {
 
         for (String var : variables) {
 
-            Shape shape = rule.getInputShape(var);
+            FuncPertinence shape = rule.getInputShape(var);
 
             if (shape == null) {
                 continue;
@@ -83,7 +83,7 @@ public class RulesAvaliationThread extends Thread {
 
         int index[] = Util.min(pertinenceValue);
 
-        Shape funcOut = rule.getOutPutShape(ConstantsFuzzy.VARIABLE_OUTPUT);
+        FuncPertinence funcOut = rule.getOutPutShape(ConstantsFuzzy.VARIABLE_OUTPUT);
 
         return reShapeFuncOut(funcOut, pertinenceValue[index[0]]);
     }
@@ -92,7 +92,7 @@ public class RulesAvaliationThread extends Thread {
 
 
 
-    private Shape reShapeFuncOut(Shape funcOut, double minPertiValue) {
+    private FuncPertinence reShapeFuncOut(FuncPertinence funcOut, double minPertiValue) {
 
         if (minPertiValue == 0) {
             return funcOut;
@@ -101,6 +101,6 @@ public class RulesAvaliationThread extends Thread {
         return funcOut.cut(minPertiValue);
     }
 
-    private void aggregate(Shape shape, Shape shapeOut) {
+    private void aggregate(FuncPertinence shape, FuncPertinence shapeOut) {
     }
 }

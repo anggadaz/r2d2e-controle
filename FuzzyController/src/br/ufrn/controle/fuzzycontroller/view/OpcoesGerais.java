@@ -7,8 +7,6 @@ package br.ufrn.controle.fuzzycontroller.view;
 
 import br.ufrn.controle.fuzzycontroller.quanser.Quanser;
 import java.awt.CardLayout;
-import java.net.URL;
-import javax.swing.ImageIcon;
 
 /**
  *
@@ -19,7 +17,7 @@ public class OpcoesGerais extends javax.swing.JDialog {
     private final static String CARD_CONFIGURACAO = "card_configuracao";
     private final static String CARD_CALIBRACAO = "card_calibracao";
     private final static String CARD_SERVIDOR = "card_servidor";
-    private static boolean calibrationInitial = true;
+    public static boolean calibrationInitial = true;
 
     private MainView novoFrame;
     private boolean modificado = false;
@@ -78,7 +76,7 @@ public class OpcoesGerais extends javax.swing.JDialog {
 
         panelBack.setBackground(new java.awt.Color(255, 255, 255));
 
-        buttonSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/r2d2e/solution/moduloteste/view/resources/save.png"))); // NOI18N
+        buttonSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufrn/controle/fuzzycontroller/view/resources/save.png"))); // NOI18N
         buttonSalvar.setText("Salvar");
         buttonSalvar.setToolTipText("Salva Alteraçoes");
         buttonSalvar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
@@ -89,7 +87,7 @@ public class OpcoesGerais extends javax.swing.JDialog {
             }
         });
 
-        buttonFechar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/r2d2e/solution/moduloteste/view/resources/cancelar.png"))); // NOI18N
+        buttonFechar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufrn/controle/fuzzycontroller/view/resources/cancelar.png"))); // NOI18N
         buttonFechar.setText(org.openide.util.NbBundle.getMessage(OpcoesGerais.class, "OpcoesGerais.buttonFechar.text")); // NOI18N
         buttonFechar.setToolTipText("Fecha a janela");
         buttonFechar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
@@ -249,7 +247,7 @@ public class OpcoesGerais extends javax.swing.JDialog {
                 .addComponent(buttonCalibracao, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(buttonServidor, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(137, Short.MAX_VALUE))
+                .addContainerGap(126, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout panelButtonLayout = new javax.swing.GroupLayout(panelButton);
@@ -288,17 +286,13 @@ public class OpcoesGerais extends javax.swing.JDialog {
             .addGroup(panelBackLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelBackLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBackLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(panelBackLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(separator, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
-                            .addGroup(panelBackLayout.createSequentialGroup()
-                                .addComponent(panelCard, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(panelBackLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(buttonFechar, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(buttonSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                    .addComponent(separator, javax.swing.GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE)
+                    .addGroup(panelBackLayout.createSequentialGroup()
+                        .addComponent(panelCard, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(panelBackLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(buttonFechar, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(buttonSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(panelButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -369,24 +363,6 @@ public class OpcoesGerais extends javax.swing.JDialog {
         cardLayout.show(panelCard, card);
     }
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-
-            public void run() {
-                OpcoesGerais dialog = new OpcoesGerais(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonCalibracao;
     private javax.swing.JButton buttonFechar;

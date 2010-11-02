@@ -13,28 +13,28 @@ import java.util.HashMap;
 public class Rule {
 
     private HashMap<String, PremiseInfo> premises;
-    private HashMap<String, Shape> functionOuts;
+    private HashMap<String, FuncPertinence> functionOuts;
 
     public Rule() {
         premises = new HashMap<String, PremiseInfo>();
-        functionOuts = new HashMap<String, Shape>();
+        functionOuts = new HashMap<String, FuncPertinence>();
     }
 
-    public void addPremise(String Variable, boolean isOperationNot, Shape geometry) {
+    public void addPremise(String Variable, boolean isOperationNot, FuncPertinence geometry) {
         premises.put(Variable, new PremiseInfo(geometry, isOperationNot));
     }
 
-    public void addFunctionOut(String variable, Shape shape) {
+    public void addFunctionOut(String variable, FuncPertinence shape) {
         functionOuts.put(variable, shape);
     }
 
-    public Shape getInputShape(String var) {
+    public FuncPertinence getInputShape(String var) {
         PremiseInfo info = premises.get(var);
         return info != null ? info.getShape() : null;
     }
 
-    public Shape getOutPutShape(String var) {
-        Shape shape = functionOuts.get(var);
+    public FuncPertinence getOutPutShape(String var) {
+        FuncPertinence shape = functionOuts.get(var);
         return shape != null ? shape : null;
     }
 

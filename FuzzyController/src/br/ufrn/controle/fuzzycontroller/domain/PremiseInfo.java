@@ -10,10 +10,10 @@ package br.ufrn.controle.fuzzycontroller.domain;
  */
 public class PremiseInfo {
 
-    private Shape shape;
+    private FuncPertinence shape;
     private boolean OperationNot;
 
-    public PremiseInfo(Shape shape, boolean OperationNot) {
+    public PremiseInfo(FuncPertinence shape, boolean OperationNot) {
         this.shape = shape;
         this.OperationNot = OperationNot;
     }
@@ -26,11 +26,11 @@ public class PremiseInfo {
         this.OperationNot = OperationNot;
     }
 
-    public Shape getShape() {
+    public FuncPertinence getShape() {
         return shape;
     }
 
-    public void setShape(Shape shape) {
+    public void setShape(FuncPertinence shape) {
         this.shape = shape;
     }
 }

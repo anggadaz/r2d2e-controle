@@ -13,7 +13,7 @@ public abstract class Inference {
     protected RuleBase ruleBase;
     protected int andFunction;
 
-    public abstract Shape work(DataIn dataIn);
+    public abstract FuncPertinence work(DataIn dataIn);
 
     public int getAndFunction() {
         return andFunction;

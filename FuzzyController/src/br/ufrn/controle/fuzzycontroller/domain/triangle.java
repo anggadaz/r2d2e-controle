@@ -8,7 +8,7 @@ package br.ufrn.controle.fuzzycontroller.domain;
  *
  * @author Demetrios
  */
-public class triangle extends Shape{
+public class triangle extends FuncPertinence{
 
     
 }

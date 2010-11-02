@@ -234,6 +234,7 @@ public class ToolsPanel extends javax.swing.JPanel implements RetractablePanelCo
         InitialDialog dialog = new InitialDialog(parent, true);
         dialog.setLocationRelativeTo(parent);
         dialog.setVisible(true);
+        parent.setControllerSelected(dialog.getFuzzyControllerSelected());
     }//GEN-LAST:event_buttonStartMouseReleased
 
     private void buttonGeralMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonGeralMouseReleased

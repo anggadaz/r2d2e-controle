@@ -18,7 +18,7 @@ public class Defuzzification {
     public Defuzzification() {
     }
 
-    public double defuzzificate(Shape shape) {
+    public double defuzzificate(FuncPertinence shape) {
 
         switch (defuzzificationType) {
             case ConstantsFuzzy.DEFUZZI_CENTROID:
@@ -37,7 +37,7 @@ public class Defuzzification {
 
     }
 
-    private double centroid(Shape shape) {
+    private double centroid(FuncPertinence shape) {
         double[] xs = shape.getArrayOfX();
         double[] ys = shape.getArrayOfY();
 
@@ -46,7 +46,7 @@ public class Defuzzification {
         return centroPoint[0];
     }
 
-    private double som(Shape shape) {
+    private double som(FuncPertinence shape) {
         double[] xs = shape.getArrayOfX();
         double[] ys = shape.getArrayOfY();
 
@@ -55,7 +55,7 @@ public class Defuzzification {
         return xs[indeys[0]];
     }
 
-    private double lom(Shape shape) {
+    private double lom(FuncPertinence shape) {
 
         double[] xs = shape.getArrayOfX();
         double[] ys = shape.getArrayOfY();
@@ -65,7 +65,7 @@ public class Defuzzification {
         return xs[indeys[indeys.length - 1]];
     }
 
-    private double mom(Shape shape) {
+    private double mom(FuncPertinence shape) {
         double[] xs = shape.getArrayOfX();
         double[] ys = shape.getArrayOfY();
 
@@ -91,7 +91,7 @@ public class Defuzzification {
 
         return xSum/2;
     }
-    private double sugeno(Shape shape){
+    private double sugeno(FuncPertinence shape){
         return shape.getArrayOfX()[0];
     }
 }

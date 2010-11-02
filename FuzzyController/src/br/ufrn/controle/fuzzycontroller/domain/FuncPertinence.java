@@ -5,29 +5,30 @@
 package br.ufrn.controle.fuzzycontroller.domain;
 
 import br.ufrn.controle.fuzzycontroller.utils.Util;
+import java.awt.geom.Area;
 import java.util.ArrayList;
 
 /**
  *
  * @author Demetrios
  */
-public class Shape {
+public class FuncPertinence {
 
     protected ArrayList<Line> lines;
     private String LinguisticTerm;
     private static final int GET_X = 10;
     private static final int GET_Y = 11;
 
-    public Shape() {
+    public FuncPertinence() {
         lines = new ArrayList<Line>();
         LinguisticTerm = "";
     }
 
-    public Shape(String LinguisticTerm) {
+    public FuncPertinence(String LinguisticTerm) {
         this.LinguisticTerm = LinguisticTerm;
     }
 
-    public Shape(ArrayList<Line> lines, String LinguisticTerm) {
+    public FuncPertinence(ArrayList<Line> lines, String LinguisticTerm) {
         this.lines = lines;
         this.LinguisticTerm = LinguisticTerm;
     }
@@ -45,11 +46,11 @@ public class Shape {
         return rangeValue;
     }
 
-    public Shape cut(double rangeValue) {
+    public FuncPertinence cut(double rangeValue) {
 
         ArrayList<Double> xs = new ArrayList<Double>();
 
-        Shape saida = new Shape();
+        FuncPertinence saida = new FuncPertinence();
 
         for (Line lineShape : lines) {
 
@@ -89,11 +90,11 @@ public class Shape {
         this.LinguisticTerm = LinguisticTerm;
     }
 
-    public double[] getArrayOfX(){
+    public double[] getArrayOfX() {
         return getArrayOfCoordenates(GET_X);
     }
-    
-    public double[] getArrayOfY(){
+
+    public double[] getArrayOfY() {
         return getArrayOfCoordenates(GET_Y);
     }
 
@@ -122,15 +123,13 @@ public class Shape {
                     out.add(line.getPoint2().getY());
                 }
             }
-            
+
         }
 
         return Util.convertToArrayOfDouble(out);
     }
 
-    public Shape union(Shape shape) {
+    public FuncPertinence union(FuncPertinence shape) {
         return null;
     }
-
-
 }

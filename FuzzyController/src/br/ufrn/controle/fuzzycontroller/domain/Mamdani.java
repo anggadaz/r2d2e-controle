@@ -20,11 +20,11 @@ public class Mamdani extends Inference{
         andFunction = ConstantsFuzzy.MIN_FUNCTION;
     }
 
-    public Shape work(DataIn dataIn) {
+    public FuncPertinence work(DataIn dataIn) {
 
         ArrayList<Rule> rules = ruleBase.getRules();
 
-        Shape shapeOut = new Shape();
+        FuncPertinence shapeOut = new FuncPertinence();
 
         RulesAvaliationThread rats[] = new RulesAvaliationThread[numbThreads];
 

@@ -4,8 +4,10 @@
  */
 package br.ufrn.controle.fuzzycontroller.domain;
 
+import br.ufrn.controle.fuzzycontroller.handler.GraphHandler;
 import br.ufrn.controle.fuzzycontroller.quanser.Quanser;
 import br.ufrn.controle.fuzzycontroller.shared.ConstantsFuzzy;
+import br.ufrn.controle.fuzzycontroller.shared.ConstantsGraph;
 import java.util.ArrayList;
 import org.openide.util.Exceptions;
 
@@ -19,6 +21,9 @@ public class FuzzyController extends Thread {
     private Inference inference;
     private Defuzzification defuzzification;
     private ArrayList<String> DataInType;
+    private SelectionsGraph selectionsGraph;
+    private GraphHandler graphLevelHandler;
+    private GraphHandler graphControlHandler;
     private Quanser quanser;
     private volatile boolean ative = true;
     private int setPoint;
@@ -49,7 +54,7 @@ public class FuzzyController extends Thread {
 
             DataIn dataIn = createDataIn(level1, level2);
 
-            Shape shape = inference.work(dataIn);
+            FuncPertinence shape = inference.work(dataIn);
             double voltz = defuzzification.defuzzificate(shape);
 
             double realVoltz = travaTensao(voltz);
@@ -59,6 +64,8 @@ public class FuzzyController extends Thread {
             realVoltz = travaNivel1(level1, realVoltz);
 
             quanser.writeBomb(realVoltz);
+
+            updateGraph(level1, level2, realVoltz);
 
             try {
                 sleep(100);
@@ -120,11 +127,14 @@ public class FuzzyController extends Thread {
             String string = DataInType.get(i);
             if (string.equals(ConstantsFuzzy.VARIABLE_ERROR_TANK1)) {
                 valuesIn.add(setPoint - level1);
-            } else if (string.equals(ConstantsFuzzy.VARIABLE_ERROR_TANK2)) {
+            }
+            if (string.equals(ConstantsFuzzy.VARIABLE_ERROR_TANK2)) {
                 valuesIn.add(setPoint - level2);
-            } else if (string.equals(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK1)) {
+            }
+            if (string.equals(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK1)) {
                 valuesIn.add((setPoint - level1) - previousError1);
-            } else if (string.equals(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2)) {
+            }
+            if (string.equals(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2)) {
                 valuesIn.add((setPoint - level2) - previousError2);
             }
         }
@@ -138,6 +148,38 @@ public class FuzzyController extends Thread {
         previousError2 = setPoint - level2;
 
         return dataIn;
+    }
+
+    private void updateGraph(final double level1, final double level2, final double tension) {
+
+        new Thread(new Runnable() {
+
+            public void run() {
+                if (selectionsGraph.isError1Selected()) {
+                    graphLevelHandler.addValue(ConstantsGraph.ERRO1, setPoint - level1);
+                }
+
+                if (selectionsGraph.isError2Selected()) {
+                    graphLevelHandler.addValue(ConstantsGraph.ERRO2, setPoint - level2);
+                }
+
+                if (selectionsGraph.isLevel1Selected()) {
+                    graphLevelHandler.addValue(ConstantsGraph.NIVEL1, level1);
+                }
+
+                if (selectionsGraph.isLevel2Selected()) {
+                    graphLevelHandler.addValue(ConstantsGraph.NIVEL2, level2);
+                }
+
+                if (selectionsGraph.isSetPointSelected()) {
+                    graphLevelHandler.addValue(ConstantsGraph.SET_POINT, setPoint);
+                }
+
+                graphControlHandler.addValue(ConstantsGraph.SINAL_CONTROLE, tension);
+
+            }
+        }).start();
+
     }
 
     public boolean isAtive() {
@@ -178,6 +220,22 @@ public class FuzzyController extends Thread {
 
     public void setSetPoint(int setPoint) {
         this.setPoint = setPoint;
+    }
+
+    public SelectionsGraph getSelectionsGraph() {
+        return selectionsGraph;
+    }
+
+    public void setSelectionsGraph(SelectionsGraph selectionsGraph) {
+        this.selectionsGraph = selectionsGraph;
+    }
+
+    public void setGraphControlHandler(GraphHandler graphControlHandler) {
+        this.graphControlHandler = graphControlHandler;
+    }
+
+    public void setGraphLevelHandler(GraphHandler graphLevelHandler) {
+        this.graphLevelHandler = graphLevelHandler;
     }
 
     @Override

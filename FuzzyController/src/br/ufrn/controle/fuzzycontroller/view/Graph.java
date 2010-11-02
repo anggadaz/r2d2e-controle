@@ -10,6 +10,7 @@
  */
 package br.ufrn.controle.fuzzycontroller.view;
 
+import br.ufrn.controle.fuzzycontroller.handler.GraphHandler;
 import java.awt.Color;
 import java.util.HashMap;
 import org.jfree.chart.ChartFactory;
@@ -39,46 +40,23 @@ public class Graph extends ChartPanel {
     private boolean SHOW_TOOLTIPS = true;
     private boolean CREATE_URL = true;
     private Color BACKGROUND_COLOR = Color.WHITE;
-    private XYSeriesCollection seriesCollection = new XYSeriesCollection();
-    private HashMap<String, XYSeries> mapSeries;
     private JFreeChart chart;
-    private long initTime;
+    private GraphHandler graphHandler;
 
     /** Creates new form Graph */
     public Graph() {
         super(null);
         initComponents();
 
+        graphHandler = new GraphHandler();
+
+        XYSeriesCollection seriesCollection = graphHandler.getSeriesCollection();
+
         chart = ChartFactory.createXYLineChart(TITLE, EIXO_X, EIXO_Y, seriesCollection, ORIENTATION, CREATE_LEGENDS, SHOW_TOOLTIPS, CREATE_URL);
 
         setChart(chart);
 
-        mapSeries = new HashMap<String, XYSeries>();
-
         config();
-    }
-
-    public void init() {
-        initTime = System.currentTimeMillis();
-    }
-
-    public void addValue(String tipo, double value) {
-        XYSeries serie = mapSeries.get(tipo);
-        if (serie == null) {
-            serie = new XYSeries(tipo);
-            seriesCollection.addSeries(serie);
-
-            mapSeries.put(tipo, serie);
-        }
-
-        double diffTime = System.currentTimeMillis() - initTime;
-
-        serie.add(diffTime / 1000, value);
-    }
-
-    public void removeSerie(String tipo) {
-        XYSeries serie = mapSeries.remove(tipo);
-        seriesCollection.removeSeries(serie);
     }
 
     private void config() {
@@ -141,6 +119,10 @@ public class Graph extends ChartPanel {
 
     public String getTITLE() {
         return TITLE;
+    }
+
+    public GraphHandler getGraphHandler() {
+        return graphHandler;
     }
 
     /** This method is called from within the constructor to

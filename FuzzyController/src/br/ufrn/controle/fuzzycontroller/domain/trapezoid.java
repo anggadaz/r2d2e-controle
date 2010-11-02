@@ -8,7 +8,7 @@ package br.ufrn.controle.fuzzycontroller.domain;
  *
  * @author Demetrios
  */
-public class trapezoid extends Shape{
+public class trapezoid extends FuncPertinence{
 
     
 }

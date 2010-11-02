@@ -54,7 +54,7 @@ public class MainView extends javax.swing.JFrame {
 
         retractable.add(toolRetractable);
         retractable.add(panelEmpty);
-        retractable.add(new RetractablePanel(retractable, new TankOptionsPanel(selectionsGraph), "Opções De Gráficos", true));
+        retractable.add(new RetractablePanel(retractable, new TankOptionsPanel(selectionsGraph,graphLevel.getGraphHandler()), "Opções De Gráficos", true));
 
         setPreferredSize(new Dimension(996, 550));
         setMinimumSize(new Dimension(996, 550));

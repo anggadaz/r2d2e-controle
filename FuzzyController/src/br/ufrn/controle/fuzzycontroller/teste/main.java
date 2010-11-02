@@ -8,7 +8,7 @@ import br.ufrn.controle.fuzzycontroller.domain.DataIn;
 import br.ufrn.controle.fuzzycontroller.domain.Mamdani;
 import br.ufrn.controle.fuzzycontroller.domain.Line;
 import br.ufrn.controle.fuzzycontroller.domain.Rule;
-import br.ufrn.controle.fuzzycontroller.domain.Shape;
+import br.ufrn.controle.fuzzycontroller.domain.FuncPertinence;
 import br.ufrn.controle.fuzzycontroller.shared.ConstantsFuzzy;
 
 /**
@@ -20,19 +20,19 @@ public class main {
     public static void main(String args[]) {
         Mamdani inference = new Mamdani();
 
-        Shape s = new Shape();
+        FuncPertinence s = new FuncPertinence();
 
         s.addLine(new Line(0, 0, 3, 1));
         s.addLine(new Line(6, 0, 3, 1));
         s.addLine(new Line(0, 0, 6, 0));
 
-        Shape i1 = new Shape();
+        FuncPertinence i1 = new FuncPertinence();
 
         i1.addLine(new Line(1, 0, 3, 1));
         i1.addLine(new Line(5, 0, 3, 1));
         i1.addLine(new Line(1, 0, 5, 0));
 
-        Shape i2 = new Shape();
+        FuncPertinence i2 = new FuncPertinence();
 
         i2.addLine(new Line(0, 0, 1, 1));
         i2.addLine(new Line(1, 1, 3, 1));

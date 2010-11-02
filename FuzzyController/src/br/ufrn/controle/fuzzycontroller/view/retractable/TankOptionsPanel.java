@@ -11,6 +11,8 @@
 package br.ufrn.controle.fuzzycontroller.view.retractable;
 
 import br.ufrn.controle.fuzzycontroller.domain.SelectionsGraph;
+import br.ufrn.controle.fuzzycontroller.handler.GraphHandler;
+import br.ufrn.controle.fuzzycontroller.shared.ConstantsGraph;
 import br.ufrn.siga.component.retractable.RetractablePanelContent;
 import java.awt.CardLayout;
 
@@ -24,6 +26,7 @@ public class TankOptionsPanel extends javax.swing.JPanel implements RetractableP
     private final static String CARD_CHECK = "cardCheck";
     private final static String CARD_COMPACT = "cardCompact";
     private SelectionsGraph selectionsGraph;
+    private GraphHandler graphHandler;
 
     /** Creates new form OpcoesTanque
      * @param selectionsGraph
@@ -31,6 +34,11 @@ public class TankOptionsPanel extends javax.swing.JPanel implements RetractableP
     public TankOptionsPanel(SelectionsGraph selectionsGraph) {
         initComponents();
         this.selectionsGraph = selectionsGraph;
+    }
+
+    public TankOptionsPanel(SelectionsGraph selectionsGraph, GraphHandler graphHandler) {
+        this.selectionsGraph = selectionsGraph;
+        this.graphHandler = graphHandler;
     }
 
     /** This method is called from within the constructor to
@@ -160,26 +168,41 @@ public class TankOptionsPanel extends javax.swing.JPanel implements RetractableP
     private void chkTank1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkTank1ActionPerformed
         // TODO add your handling code here:
         selectionsGraph.setLevel1Selected(chkTank1.isSelected());
+        if (!chkTank1.isSelected()) {
+            graphHandler.removeSerie(ConstantsGraph.NIVEL1);
+        }
     }//GEN-LAST:event_chkTank1ActionPerformed
 
     private void chkTank2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkTank2ActionPerformed
         // TODO add your handling code here:
         selectionsGraph.setLevel2Selected(chkTank2.isSelected());
+        if (!chkTank2.isSelected()) {
+            graphHandler.removeSerie(ConstantsGraph.NIVEL2);
+        }
     }//GEN-LAST:event_chkTank2ActionPerformed
 
     private void chkError1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkError1ActionPerformed
         // TODO add your handling code here:
         selectionsGraph.setError1Selected(chkError1.isSelected());
+        if (!chkError1.isSelected()) {
+            graphHandler.removeSerie(ConstantsGraph.ERRO1);
+        }
     }//GEN-LAST:event_chkError1ActionPerformed
 
     private void chkError2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkError2ActionPerformed
         // TODO add your handling code here:
         selectionsGraph.setError2Selected(chkError2.isSelected());
+        if (!chkError2.isSelected()) {
+            graphHandler.removeSerie(ConstantsGraph.ERRO2);
+        }
     }//GEN-LAST:event_chkError2ActionPerformed
 
     private void chkSetPointActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkSetPointActionPerformed
         // TODO add your handling code here:
         selectionsGraph.setSetPointSelected(chkSetPoint.isSelected());
+        if (!chkSetPoint.isSelected()) {
+            graphHandler.removeSerie(ConstantsGraph.SET_POINT);
+        }
     }//GEN-LAST:event_chkSetPointActionPerformed
 
     private void changeCard(String card) {
