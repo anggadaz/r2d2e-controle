@@ -37,6 +37,7 @@ public class TankOptionsPanel extends javax.swing.JPanel implements RetractableP
     }
 
     public TankOptionsPanel(SelectionsGraph selectionsGraph, GraphHandler graphHandler) {
+        initComponents();
         this.selectionsGraph = selectionsGraph;
         this.graphHandler = graphHandler;
     }
