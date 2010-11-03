@@ -5,14 +5,16 @@
 package br.ufrn.controle.fuzzycontroller.domain;
 
 import br.ufrn.controle.fuzzycontroller.utils.Util;
+import java.awt.Polygon;
 import java.awt.geom.Area;
+import java.awt.geom.PathIterator;
 import java.util.ArrayList;
 
 /**
  *
  * @author Demetrios
  */
-public class FuncPertinence {
+public class FuncPertinence extends Polygon {
 
     protected ArrayList<Line> lines;
     private String LinguisticTerm;
@@ -130,6 +132,20 @@ public class FuncPertinence {
     }
 
     public FuncPertinence union(FuncPertinence shape) {
-        return null;
+        FuncPertinence retorno = new FuncPertinence();
+        double[] coords = new double[6];
+        Area uniao = new Area(this);
+        Area x = new Area(shape);
+
+        uniao.add(x);
+
+        PathIterator it = uniao.getPathIterator(null);
+        
+        while (it.isDone()) {
+            it.currentSegment(coords);
+            retorno.addPoint((int) coords[0], (int) coords[1]);
+            it.next();
+        }
+        return retorno;
     }
 }
