@@ -188,6 +188,8 @@ public class FuzzyController extends Thread {
 
     public void setAtive(boolean ative) {
         this.ative = ative;
+        quanser.writeBomb(0);
+        quanser.closeConnection();
     }
 
     public Defuzzification getDefuzzification() {

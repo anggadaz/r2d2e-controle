@@ -235,6 +235,7 @@ public class ToolsPanel extends javax.swing.JPanel implements RetractablePanelCo
         dialog.setLocationRelativeTo(parent);
         dialog.setVisible(true);
         parent.setControllerSelected(dialog.getFuzzyControllerSelected());
+        parent.startController();
     }//GEN-LAST:event_buttonStartMouseReleased
 
     private void buttonGeralMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonGeralMouseReleased
@@ -246,6 +247,7 @@ public class ToolsPanel extends javax.swing.JPanel implements RetractablePanelCo
 
     private void buttonStopMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonStopMouseReleased
         // TODO add your handling code here:
+        parent.stopController();
     }//GEN-LAST:event_buttonStopMouseReleased
     private void changeCard(String card) {
         CardLayout layout = (CardLayout) getLayout();

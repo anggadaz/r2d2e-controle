@@ -54,7 +54,7 @@ public class MainView extends javax.swing.JFrame {
 
         retractable.add(toolRetractable);
         retractable.add(panelEmpty);
-        retractable.add(new RetractablePanel(retractable, new TankOptionsPanel(selectionsGraph,graphLevel.getGraphHandler()), "Opções De Gráficos", true));
+        retractable.add(new RetractablePanel(retractable, new TankOptionsPanel(selectionsGraph, graphLevel.getGraphHandler()), "Opções De Gráficos", true));
 
         setPreferredSize(new Dimension(996, 550));
         setMinimumSize(new Dimension(996, 550));
@@ -303,6 +303,19 @@ public class MainView extends javax.swing.JFrame {
     public void setControllerSelected(FuzzyController controllerSelected) {
         this.controllerSelected = controllerSelected;
     }
+
+    public void startController() {
+        if (controllerSelected == null) {
+            return;
+        }
+
+        controllerSelected.start();
+    }
+
+    public void stopController() {
+        controllerSelected.setAtive(false);
+    }
+
 
     /**
      * @param args the command line arguments
