@@ -19,10 +19,13 @@ public abstract class FuncaoPertinencia extends Polygon {
 
     private int TOP;
     private int BOTTOM;
+
     private GeneralPath path = new GeneralPath();
     private Rectangle dragTarget = null;
+
     private ArrayList<Rectangle> retangs = new ArrayList<Rectangle>();
     private Color color = Color.BLACK;
+
     private int oldX = 0;
 
     public FuncaoPertinencia() {

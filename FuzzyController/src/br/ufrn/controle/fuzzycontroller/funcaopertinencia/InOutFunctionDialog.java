@@ -1,9 +1,4 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/*
  * InputDialog.java
  *
  * Created on 02/11/2010, 17:23:39
@@ -11,17 +6,17 @@
 
 package br.ufrn.controle.fuzzycontroller.funcaopertinencia;
 
+import java.awt.Frame;
 import java.awt.Point;
-import java.util.ArrayList;
 
 /**
  *
- * @author allan
+ * @author Rivaldo
  */
-public class InputFunctionDialog extends javax.swing.JDialog {
+public class InOutFunctionDialog extends javax.swing.JDialog {
 
     /** Creates new form InputDialog */
-    public InputFunctionDialog(java.awt.Frame parent, boolean modal) {
+    public InOutFunctionDialog(Frame parent, boolean modal, boolean isOutput) {
         super(parent, modal);
         initComponents();
     }
@@ -47,10 +42,11 @@ public class InputFunctionDialog extends javax.swing.JDialog {
         jLabel4 = new javax.swing.JLabel();
         jComboBox3 = new javax.swing.JComboBox();
         jLabel5 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        tfParametros = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Editar Funções");
 
         javax.swing.GroupLayout funcaoPertinenciaPanel1Layout = new javax.swing.GroupLayout(funcaoPertinenciaPanel1);
         funcaoPertinenciaPanel1.setLayout(funcaoPertinenciaPanel1Layout);
@@ -60,22 +56,18 @@ public class InputFunctionDialog extends javax.swing.JDialog {
         );
         funcaoPertinenciaPanel1Layout.setVerticalGroup(
             funcaoPertinenciaPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 313, Short.MAX_VALUE)
+            .addGap(0, 207, Short.MAX_VALUE)
         );
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Input"));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Input/Output"));
 
         jLabel1.setText("Nome:");
-
-        jTextField1.setText("jTextField1");
 
         jLabel2.setText("Tipo:");
 
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel3.setText("Range");
-
-        jTextField2.setText("jTextField2");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -89,9 +81,10 @@ public class InputFunctionDialog extends javax.swing.JDialog {
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
-                    .addComponent(jComboBox2, 0, 123, Short.MAX_VALUE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)))
+                    .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
+                    .addComponent(jComboBox2, 0, 113, Short.MAX_VALUE)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -117,7 +110,7 @@ public class InputFunctionDialog extends javax.swing.JDialog {
 
         jLabel5.setText("Parâmetros:");
 
-        jButton1.setText("add");
+        jButton1.setText("Adicionar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -131,14 +124,14 @@ public class InputFunctionDialog extends javax.swing.JDialog {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jComboBox3, 0, 120, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE))
+                        .addComponent(tfParametros, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE))
                     .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
@@ -151,10 +144,9 @@ public class InputFunctionDialog extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfParametros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addComponent(jButton1))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -165,22 +157,21 @@ public class InputFunctionDialog extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(funcaoPertinenciaPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(funcaoPertinenciaPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(funcaoPertinenciaPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(75, 75, 75)))
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
 
@@ -188,34 +179,42 @@ public class InputFunctionDialog extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
-        String text = jTextField3.getText();
-        String[] pontos = text.split(" ");
 
-        for (int i = 0; i < pontos.length; i++) {
-            String s = pontos[i];
+        int[] param = new int[4];
+
+        if (!getParametros(param)) {
+            return;
+        }
+
+
+
+//        if (jComboBox3.getSelectedIndex() == 0) {
+//            func = new FuncaoTriangular(new Point(p1, MAX), new Point(p2, MIN), new Point(p3, MAX));
+//        } else if (jComboBox3.getSelectedIndex() == 1){
+//            func = new FuncaoTrapezoidal(new Point(p1, MAX), new Point(p2, MIN), new Point(p3, MIN), new Point(p4, MAX));
+//        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private boolean getParametros(int[] dados)
+    {
+        String param = tfParametros.getText();
+        String[] partes = param.split("");
+
+        if(partes.length < 3 || partes.length > 4)
+        {
+            return false;
+        }
+
+        for (int i = 0; i < partes.length; i++) {
             try {
-//                numeros[i] = Integer.parseInt(s);
+              dados[i] = Integer.parseInt(partes[i]);
             } catch (Exception e) {
             }
-
         }
 
-        int p1 = 0;
-        int p2 = 0;
-        int p3 = 0;
-        int p4 = 0;
-        int MAX = 0;
-        int MIN = 0;
-        
-        FuncaoPertinencia func;
+        return true;
 
-        if (jComboBox3.getSelectedIndex() == 0) {
-            func = new FuncaoTriangular(new Point(p1, MAX), new Point(p2, MIN), new Point(p3, MAX));
-        } else if (jComboBox3.getSelectedIndex() == 1){
-            func = new FuncaoTrapezoidal(new Point(p1, MAX), new Point(p2, MIN), new Point(p3, MIN), new Point(p4, MAX));
-        }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }
 
     /**
     * @param args the command line arguments
@@ -223,7 +222,7 @@ public class InputFunctionDialog extends javax.swing.JDialog {
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                InputFunctionDialog dialog = new InputFunctionDialog(new javax.swing.JFrame(), true);
+                InOutFunctionDialog dialog = new InOutFunctionDialog(new javax.swing.JFrame(), true, true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     public void windowClosing(java.awt.event.WindowEvent e) {
                         System.exit(0);
@@ -248,7 +247,7 @@ public class InputFunctionDialog extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField tfParametros;
     // End of variables declaration//GEN-END:variables
 
 }
