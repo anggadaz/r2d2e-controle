@@ -66,21 +66,26 @@ public class Sugeno extends Inference {
     }
 
     @Override
-    public Shape work(DataIn dataIn) {
-        ArrayList<String> variables = dataIn.getVariables();
-        ArrayList<ArrayList<Double>> listaEntradas = new ArrayList<ArrayList<Double>>();
-        for (String variable : variables) {
-            double value = dataIn.getValueOfVariable(variable);
-            ArrayList<Shape> funcPertinencias = dataBase.getIn(variable);
-            ArrayList<Double> pertinenciaValues = new ArrayList<Double>();
-            for (Shape pertinencia : funcPertinencias) {
-                pertinenciaValues.add(pertinencia.getRangeValue(value));
-            }
-            listaEntradas.add(pertinenciaValues);
-        }
-
-        Double alpha[][] = alfa(listaEntradas);
-
-
+    public FuncPertinence work(DataIn dataIn) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
+
+//    @Override
+//    public Shape work(DataIn dataIn) {
+//        ArrayList<String> variables = dataIn.getVariables();
+//        ArrayList<ArrayList<Double>> listaEntradas = new ArrayList<ArrayList<Double>>();
+//        for (String variable : variables) {
+//            double value = dataIn.getValueOfVariable(variable);
+//            ArrayList<Shape> funcPertinencias = dataBase.getIn(variable);
+//            ArrayList<Double> pertinenciaValues = new ArrayList<Double>();
+//            for (Shape pertinencia : funcPertinencias) {
+//                pertinenciaValues.add(pertinencia.getRangeValue(value));
+//            }
+//            listaEntradas.add(pertinenciaValues);
+//        }
+//
+//        Double alpha[][] = alfa(listaEntradas);
+//
+//
+//    }
 }

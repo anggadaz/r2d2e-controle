@@ -22,22 +22,22 @@ public class main {
 
         FuncPertinence s = new FuncPertinence();
 
-        s.addLine(new Line(0, 0, 3, 1));
-        s.addLine(new Line(6, 0, 3, 1));
-        s.addLine(new Line(0, 0, 6, 0));
-
-        FuncPertinence i1 = new FuncPertinence();
-
-        i1.addLine(new Line(1, 0, 3, 1));
-        i1.addLine(new Line(5, 0, 3, 1));
-        i1.addLine(new Line(1, 0, 5, 0));
-
-        FuncPertinence i2 = new FuncPertinence();
-
-        i2.addLine(new Line(0, 0, 1, 1));
-        i2.addLine(new Line(1, 1, 3, 1));
-        i2.addLine(new Line(3, 1, 5, 0));
-        i2.addLine(new Line(0, 0, 5, 0));
+//        s.addLine(new Line(0, 0, 3, 1));
+//        s.addLine(new Line(6, 0, 3, 1));
+//        s.addLine(new Line(0, 0, 6, 0));
+//
+//        FuncPertinence i1 = new FuncPertinence();
+//
+//        i1.addLine(new Line(1, 0, 3, 1));
+//        i1.addLine(new Line(5, 0, 3, 1));
+//        i1.addLine(new Line(1, 0, 5, 0));
+//
+//        FuncPertinence i2 = new FuncPertinence();
+//
+//        i2.addLine(new Line(0, 0, 1, 1));
+//        i2.addLine(new Line(1, 1, 3, 1));
+//        i2.addLine(new Line(3, 1, 5, 0));
+//        i2.addLine(new Line(0, 0, 5, 0));
 
         Rule r = new Rule();
 

@@ -28,9 +28,9 @@ public class Line {
         point2 = new Point(0, 0);
     }
 
-    public double distance() {
-        return Math.sqrt(Math.pow((point1.getX() - point2.getX()), 2) + Math.pow((point1.getY() - point2.getY()), 2));
-    }
+//    public double distance() {
+//        return Math.sqrt(Math.pow((point1.getX() - point2.getX()), 2) + Math.pow((point1.getY() - point2.getY()), 2));
+//    }
 
     public double RangeValue(double x) {
 
@@ -47,18 +47,18 @@ public class Line {
         }
     }
 
-    public double[] LineEquationCoeficients() {
-
-        double alpha = calculateCoeficientAngle();
-
-        //y - y1 = m(x-x1) = mx - y + (-mx1+y1)
-
-        double a = alpha;
-        double b = 1;
-        double c = -alpha * point1.getX() + point1.getY();
-
-        return new double[]{a, b, c};
-    }
+//    public double[] LineEquationCoeficients() {
+//
+//        double alpha = calculateCoeficientAngle();
+//
+//        //y - y1 = m(x-x1) = mx - y + (-mx1+y1)
+//
+//        double a = alpha;
+//        double b = 1;
+//        double c = -alpha * point1.getX() + point1.getY();
+//
+//        return new double[]{a, b, c};
+//    }
 
     public double domainValue(double y) {
         double alpha = calculateCoeficientAngle();

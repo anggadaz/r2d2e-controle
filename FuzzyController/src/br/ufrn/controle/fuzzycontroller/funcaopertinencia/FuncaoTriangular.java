@@ -1,12 +1,13 @@
 package br.ufrn.controle.fuzzycontroller.funcaopertinencia;
 
+import br.ufrn.controle.fuzzycontroller.domain.FuncPertinence;
 import java.awt.Point;
 
 /**
  *
  * @author Allan
  */
-public class FuncaoTriangular extends FuncaoPertinencia {
+public class FuncaoTriangular extends FuncPertinence {
 
     public FuncaoTriangular(Point p1, Point p2, Point p3) {
         super(p1, p2, p3);
@@ -17,7 +18,7 @@ public class FuncaoTriangular extends FuncaoPertinencia {
     }
 
     @Override
-    public double avaliate(int x) {
+    public double getRangeValue(double x) {
         int px1, px2, py1, py2;
         //Fora da funcao
         if (x < getMinX() || x > getMaxX()) {

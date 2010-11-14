@@ -15,7 +15,7 @@ import java.util.ArrayList;
  *
  * @author Allan
  */
-public abstract class FuncaoPertinencia extends Polygon {
+public class FuncaoPertinencia extends Polygon {
 
     private int TOP;
     private int BOTTOM;
@@ -25,7 +25,6 @@ public abstract class FuncaoPertinencia extends Polygon {
 
     private ArrayList<Rectangle> retangs = new ArrayList<Rectangle>();
     private Color color = Color.BLACK;
-
     private int oldX = 0;
 
     public FuncaoPertinencia() {
@@ -43,7 +42,9 @@ public abstract class FuncaoPertinencia extends Polygon {
      * @param x Valor de X
      * @return Retorna o valor de Y da funcao no ponto X.
      */
-    public abstract double avaliate(int x);
+    public double avaliate(double x) {
+        return 0;
+    }
 
     @Override
     public void addPoint(int x, int y) {
@@ -123,8 +124,7 @@ public abstract class FuncaoPertinencia extends Polygon {
                 }
             }
         }
-
-        System.out.println(avaliate(e.getX()));
+//        System.out.println(avaliate(e.getX()));
     }
 
     public void mouseClicked() {
