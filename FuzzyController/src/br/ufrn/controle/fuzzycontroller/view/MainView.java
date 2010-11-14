@@ -10,6 +10,7 @@
  */
 package br.ufrn.controle.fuzzycontroller.view;
 
+import br.ufrn.controle.fuzzycontroller.domain.FuncPertinence;
 import br.ufrn.controle.fuzzycontroller.domain.FuzzyController;
 import br.ufrn.controle.fuzzycontroller.domain.SelectionsGraph;
 import br.ufrn.controle.fuzzycontroller.view.retractable.EmptyPanel;
@@ -40,25 +41,22 @@ public class MainView extends javax.swing.JFrame {
     /** Creates new form MainView */
     public MainView() {
         initComponents();
+        init();
+    }
 
+    private void init() {
         controllers = new ArrayList<FuzzyController>();
-
         retractable = new FuzzyRetractable(getLayeredPane());
-
         SelectionsGraph selectionsGraph = new SelectionsGraph();
-
-        RetractablePanel toolRetractable = new RetractablePanel(retractable, new ToolsPanel(this), "Configuração");
-
-        panelEmpty = new RetractablePanel(retractable, new EmptyPanel(), "");
+        RetractablePanel toolRetractable = new RetractablePanel(retractable, new ToolsPanel(this), "Configuração",true);
+        panelEmpty = new RetractablePanel(retractable, new EmptyPanel(), "",false);
         panelEmpty.setCrossSizeLock(Math.round(getWidth() * crossSizeLock));
-
         retractable.add(toolRetractable);
         retractable.add(panelEmpty);
-        retractable.add(new RetractablePanel(retractable, new TankOptionsPanel(selectionsGraph, graphLevel.getGraphHandler()), "Opções De Gráficos"));
-
+        retractable.add(new RetractablePanel(retractable, new TankOptionsPanel(selectionsGraph, graphLevel.getGraphHandler()), "Opções De Gráficos",true));
         setPreferredSize(new Dimension(996, 550));
         setMinimumSize(new Dimension(996, 550));
-
+        initialConfiguration();
     }
 
     @Override
@@ -66,6 +64,10 @@ public class MainView extends javax.swing.JFrame {
         panelEmpty.setCrossSizeLock(Math.round(getWidth() * crossSizeLock));
         super.paint(g);
 
+    }
+
+    private void initialConfiguration() {
+        
     }
 
     /** This method is called from within the constructor to

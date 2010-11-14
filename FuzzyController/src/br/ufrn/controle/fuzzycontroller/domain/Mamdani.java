@@ -4,7 +4,6 @@
  */
 package br.ufrn.controle.fuzzycontroller.domain;
 
-import br.ufrn.controle.fuzzycontroller.shared.ConstantsFuzzy;
 import java.util.ArrayList;
 import org.openide.util.Exceptions;
 
@@ -16,11 +15,11 @@ public class Mamdani extends Inference{
 
     private final int numbThreads = 2;
 
-    public Mamdani() {
-        andFunction = ConstantsFuzzy.MIN_FUNCTION;
+    public Mamdani(RuleBase ruleBase) {
+        super(ruleBase);
     }
 
-    public FuncPertinence work(DataIn dataIn) {
+    public FunctionOutPut work(DataIn dataIn) {
 
         ArrayList<Rule> rules = ruleBase.getRules();
 
@@ -49,6 +48,6 @@ public class Mamdani extends Inference{
             }
         }
 
-        return shapeOut;
+        return new FunctionOutPut(shapeOut);
     }
 }

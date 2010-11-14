@@ -13,11 +13,11 @@ import java.util.HashMap;
 public class Rule {
 
     private HashMap<String, PremiseInfo> premises;
-    private HashMap<String, FuncPertinence> functionOuts;
+    private HashMap<String, FunctionOutPut> functionOuts;
 
     public Rule() {
         premises = new HashMap<String, PremiseInfo>();
-        functionOuts = new HashMap<String, FuncPertinence>();
+        functionOuts = new HashMap<String, FunctionOutPut>();
     }
 
     public void addPremise(String Variable, boolean isOperationNot, FuncPertinence geometry) {
@@ -25,7 +25,13 @@ public class Rule {
     }
 
     public void addFunctionOut(String variable, FuncPertinence shape) {
-        functionOuts.put(variable, shape);
+        FunctionOutPut func = new FunctionOutPut(shape);
+        functionOuts.put(variable, func);
+    }
+
+    public void addFunctionOut(String variable, Expression expression) {
+        FunctionOutPut func = new FunctionOutPut(expression);
+        functionOuts.put(variable, func);
     }
 
     public FuncPertinence getInputShape(String var) {
@@ -34,8 +40,13 @@ public class Rule {
     }
 
     public FuncPertinence getOutPutShape(String var) {
-        FuncPertinence shape = functionOuts.get(var);
-        return shape != null ? shape : null;
+        FunctionOutPut func = functionOuts.get(var);
+        return func != null ? func.getPertinence() : null;
+    }
+
+    public Expression getOutPutExpression(String var) {
+        FunctionOutPut func = functionOuts.get(var);
+        return func != null ? func.getExpression() : null;
     }
 
     public boolean isOperationNot(String var) {

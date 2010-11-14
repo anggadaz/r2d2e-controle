@@ -18,8 +18,10 @@ public class Defuzzification {
     public Defuzzification() {
     }
 
-    public double defuzzificate(FuncPertinence shape) {
+    public double defuzzificate(FunctionOutPut functionOutPut) {
 
+        FuncPertinence shape = functionOutPut.getPertinence();
+        Expression expression = functionOutPut.getExpression();
         switch (defuzzificationType) {
             case ConstantsFuzzy.DEFUZZI_CENTROID:
                 return centroid(shape);
@@ -30,7 +32,7 @@ public class Defuzzification {
             case ConstantsFuzzy.DEFUZZI_MOM:
                 return mom(shape);
             case ConstantsFuzzy.DEFUZZI_SUGENO:
-                return sugeno(shape);
+                return sugeno(expression);
             default:
                 return 0;
         }
@@ -91,7 +93,7 @@ public class Defuzzification {
 
         return xSum/2;
     }
-    private double sugeno(FuncPertinence shape){
-        return shape.getArrayOfX()[0];
+    private double sugeno(Expression expression){
+        return expression.evaluate(new DataIn());
     }
 }

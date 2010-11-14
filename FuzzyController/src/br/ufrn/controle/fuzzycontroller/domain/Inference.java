@@ -4,6 +4,8 @@
  */
 package br.ufrn.controle.fuzzycontroller.domain;
 
+import br.ufrn.controle.fuzzycontroller.shared.ConstantsFuzzy;
+
 /**
  *
  * @author demetrios
@@ -11,9 +13,26 @@ package br.ufrn.controle.fuzzycontroller.domain;
 public abstract class Inference {
 
     protected RuleBase ruleBase;
+    protected DataBase dataBase;
     protected int andFunction;
 
-    public abstract FuncPertinence work(DataIn dataIn);
+    public Inference(RuleBase ruleBase) {
+        this.ruleBase = ruleBase;
+        andFunction = ConstantsFuzzy.MIN_FUNCTION;
+    }
+
+    public Inference(DataBase dataBase) {
+        this.dataBase = dataBase;
+        andFunction = ConstantsFuzzy.MIN_FUNCTION;
+    }
+
+    public Inference(RuleBase ruleBase, DataBase dataBase) {
+        this.ruleBase = ruleBase;
+        this.dataBase = dataBase;
+        andFunction = ConstantsFuzzy.MIN_FUNCTION;
+    }
+
+    public abstract FunctionOutPut work(DataIn dataIn);
 
     public int getAndFunction() {
         return andFunction;

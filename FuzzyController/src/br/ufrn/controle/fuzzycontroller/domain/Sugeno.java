@@ -4,10 +4,10 @@
  */
 package br.ufrn.controle.fuzzycontroller.domain;
 
+import br.ufrn.controle.fuzzycontroller.shared.ConstantsFuzzy;
+import br.ufrn.controle.fuzzycontroller.utils.Util;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
-import java.util.Iterator;
 
 /**
  *
@@ -15,10 +15,8 @@ import java.util.Iterator;
  */
 public class Sugeno extends Inference {
 
-    private DataBase dataBase;
-
-    public Sugeno(DataBase dataBase) {
-        this.dataBase = dataBase;
+    public Sugeno(RuleBase ruleBase, DataBase dataBase) {
+        super(ruleBase, dataBase);
     }
 
     public Double[][] alfa(ArrayList<ArrayList<Double>> lista) {
@@ -66,12 +64,18 @@ public class Sugeno extends Inference {
     }
 
     @Override
-    public FuncPertinence work(DataIn dataIn) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
+    public FunctionOutPut work(DataIn dataIn) {
+        ArrayList<Double> alphas = minAlphas(dataIn);
+        ArrayList<Double> results = evaluateExpressions(dataIn);
 
-//    @Override
-//    public Shape work(DataIn dataIn) {
+
+//TODO ESTA FALTANDO FAZER A MEDIA PONDERADA RESULTADO =(ALPHAS[I]*RESULTS[I]/SOMA DE ALPHAS)
+//        E DEPOIS FAÇA ISSO :
+//        Expression expression = new Expression();
+//        expression.setOffset(RESULTADO);
+//        return new FunctionOutPut(expression);
+
+        return null;
 //        ArrayList<String> variables = dataIn.getVariables();
 //        ArrayList<ArrayList<Double>> listaEntradas = new ArrayList<ArrayList<Double>>();
 //        for (String variable : variables) {
@@ -88,4 +92,43 @@ public class Sugeno extends Inference {
 //
 //
 //    }
+    }
+
+    private ArrayList<Double> evaluateExpressions(DataIn dataIn) {
+        ArrayList<Double> results = new ArrayList<Double>();
+
+        ArrayList<Rule> rules = ruleBase.getRules();
+
+        for (Rule rule : rules) {
+            Expression expression = rule.getOutPutExpression(ConstantsFuzzy.VARIABLE_OUTPUT);
+            results.add(expression.evaluate(dataIn));
+        }
+
+        return results;
+    }
+
+    private ArrayList<Double> minAlphas(DataIn dataIn) {
+        ArrayList<Double> results = new ArrayList<Double>();
+
+        ArrayList<Rule> rules = ruleBase.getRules();
+
+        ArrayList<String> variables = dataIn.getVariables();
+        
+        for (Rule rule : rules) {
+
+            double min[] = new double[variables.size()];
+            int i = 0;
+
+            for (String variable : variables) {
+                FuncPertinence pertinence = rule.getInputShape(variable);
+                min[i++] = pertinence.getRangeValue(dataIn.getValueOfVariable(variable));
+            }
+
+            int[] indexs = Util.min(min);
+            
+            results.add(min[indexs[0]]);
+        }
+
+        return results;
+    }
 }

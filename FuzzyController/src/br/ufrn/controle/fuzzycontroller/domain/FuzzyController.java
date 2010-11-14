@@ -54,8 +54,8 @@ public class FuzzyController extends Thread {
 
             DataIn dataIn = createDataIn(level1, level2);
 
-            FuncPertinence shape = inference.work(dataIn);
-            double voltz = defuzzification.defuzzificate(shape);
+            FunctionOutPut functionOutPut = inference.work(dataIn);
+            double voltz = defuzzification.defuzzificate(functionOutPut);
 
             double realVoltz = travaTensao(voltz);
 
