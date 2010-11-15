@@ -32,6 +32,7 @@ public class FuzzyController extends Thread {
     private boolean limiteMaxTank2 = false;
     private double previousError1 = 0;
     private double previousError2 = 0;
+    private double integralTension = 0;
 
     public FuzzyController(String name, Inference inference, Defuzzification defuzzification, ArrayList<String> DataInType, Quanser quanser) {
         this.name = name;
@@ -59,13 +60,15 @@ public class FuzzyController extends Thread {
 
             double realVoltz = travaTensao(voltz);
 
-            realVoltz = travaNivel2(level2, realVoltz);
+            integralTension += realVoltz;
 
-            realVoltz = travaNivel1(level1, realVoltz);
+            realVoltz = travaNivel2(level2, integralTension);
 
-            quanser.writeBomb(realVoltz);
+            realVoltz = travaNivel1(level1, integralTension);
 
-            updateGraph(level1, level2, realVoltz);
+            quanser.writeBomb(integralTension);
+
+            updateGraph(level1, level2, integralTension);
 
             try {
                 sleep(100);

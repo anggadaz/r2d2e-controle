@@ -8,12 +8,16 @@ import br.ufrn.controle.fuzzycontroller.shared.ConstantsFuzzy;
 import br.ufrn.controle.fuzzycontroller.utils.Util;
 import java.util.ArrayList;
 import java.util.Collections;
+import org.openide.util.Exceptions;
 
 /**
  *
  * @author iuri
  */
 public class Sugeno extends Inference {
+
+    private ArrayList<Double> alphas;
+    private ArrayList<Double> expressionValues;
 
     public Sugeno(RuleBase ruleBase, DataBase dataBase) {
         super(ruleBase, dataBase);
@@ -64,34 +68,35 @@ public class Sugeno extends Inference {
     }
 
     @Override
-    public FunctionOutPut work(DataIn dataIn) {
-        ArrayList<Double> alphas = minAlphas(dataIn);
-        ArrayList<Double> results = evaluateExpressions(dataIn);
+    public FunctionOutPut work(final DataIn dataIn) {
 
+        Thread thread1 = new Thread(new Runnable() {
 
-//TODO ESTA FALTANDO FAZER A MEDIA PONDERADA RESULTADO =(ALPHAS[I]*RESULTS[I]/SOMA DE ALPHAS)
-//        E DEPOIS FAÇA ISSO :
-//        Expression expression = new Expression();
-//        expression.setOffset(RESULTADO);
-//        return new FunctionOutPut(expression);
+            public void run() {
+                alphas = minAlphas(dataIn);
+            }
+        });
 
-        return null;
-//        ArrayList<String> variables = dataIn.getVariables();
-//        ArrayList<ArrayList<Double>> listaEntradas = new ArrayList<ArrayList<Double>>();
-//        for (String variable : variables) {
-//            double value = dataIn.getValueOfVariable(variable);
-//            ArrayList<Shape> funcPertinencias = dataBase.getIn(variable);
-//            ArrayList<Double> pertinenciaValues = new ArrayList<Double>();
-//            for (Shape pertinencia : funcPertinencias) {
-//                pertinenciaValues.add(pertinencia.getRangeValue(value));
-//            }
-//            listaEntradas.add(pertinenciaValues);
-//        }
-//
-//        Double alpha[][] = alfa(listaEntradas);
-//
-//
-//    }
+        Thread thread2 = new Thread(new Runnable() {
+
+            public void run() {
+                expressionValues = evaluateExpressions(dataIn);
+            }
+        });
+
+        thread1.start();
+        thread2.start();
+
+        try {
+            thread1.join();
+            thread2.join();
+        } catch (InterruptedException ex) {
+            Exceptions.printStackTrace(ex);
+        }
+
+        double value = calculateFinalValue();
+
+        return new FunctionOutPut(new Expression(value));
     }
 
     private ArrayList<Double> evaluateExpressions(DataIn dataIn) {
@@ -113,7 +118,7 @@ public class Sugeno extends Inference {
         ArrayList<Rule> rules = ruleBase.getRules();
 
         ArrayList<String> variables = dataIn.getVariables();
-        
+
         for (Rule rule : rules) {
 
             double min[] = new double[variables.size()];
@@ -125,10 +130,25 @@ public class Sugeno extends Inference {
             }
 
             int[] indexs = Util.min(min);
-            
+
             results.add(min[indexs[0]]);
         }
 
         return results;
+    }
+
+    private double calculateFinalValue() {
+
+        double num = 0;
+        double den = 0;
+
+        for (int i = 0; i < alphas.size(); i++) {
+            double y = expressionValues.get(i);
+            double alpha = alphas.get(i);
+            num += (alpha * y);
+            den += alpha;
+        }
+
+        return num / den;
     }
 }
