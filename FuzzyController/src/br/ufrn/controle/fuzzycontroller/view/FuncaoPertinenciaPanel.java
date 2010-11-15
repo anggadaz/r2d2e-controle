@@ -1,5 +1,6 @@
-package br.ufrn.controle.fuzzycontroller.funcaopertinencia;
+package br.ufrn.controle.fuzzycontroller.view;
 
+import br.ufrn.controle.fuzzycontroller.domain.FuncPertinence;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.BasicStroke;
@@ -7,6 +8,7 @@ import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.geom.GeneralPath;
+import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import javax.swing.JPanel;
 
@@ -15,20 +17,20 @@ public class FuncaoPertinenciaPanel extends JPanel {
     private static int [] INPUT_SCALE = {0,5,10,15,20,25,30};
     private static int [] OUTPUT_SCALE = {-3,-2,-1,0,1,2,3};
 
-    private ArrayList<FuncaoPertinencia> funcs;
-    private FuncaoPertinencia dragTarget = null;
+    private ArrayList<FuncPertinence> funcs;
+    private FuncPertinence dragTarget = null;
 
-    private int LIMITE_MIN = 10;
-    private int LIMITE_MAX = 20;
-    private int LIMITE_NUM = 2;
+    private static int LIMITE_MIN = 10;
+    private static int LIMITE_MAX = 20;
+    private static int LIMITE_NUM = 2;
 
-    private int NUM_DIVISOES = 6;
+    private static int NUM_DIVISOES = 6;
 
     private boolean isOutput = false;
 
     public FuncaoPertinenciaPanel() {
 
-        funcs = new ArrayList<FuncaoPertinencia>();
+        funcs = new ArrayList<FuncPertinence>();
 
 //        funcs.add(new FuncaoTriangular(10,10,100,10,200));
 //
@@ -39,7 +41,7 @@ public class FuncaoPertinenciaPanel extends JPanel {
             @Override
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 boolean clicado = false;
-                for (FuncaoPertinencia funcaoPertinencia : funcs) {
+                for (FuncPertinence funcaoPertinencia : funcs) {
                     if (funcaoPertinencia.contains(evt.getX(), evt.getY()) && !clicado) {
                         dragTarget = funcaoPertinencia;
                         dragTarget.mouseClicked();
@@ -80,94 +82,22 @@ public class FuncaoPertinenciaPanel extends JPanel {
                     repaint();
                 }
             }
-//            public void mouseMoved(java.awt.event.MouseEvent evt) {
-//                System.out.println("moved");
-//            }
         });
     }
 
     @Override
     public void paintComponent(Graphics g) {
+
         super.paintComponent(g); // call superclass's paintComponent
 
         Graphics2D g2d = (Graphics2D) g; // cast g to Graphics2D
 
-//        ArrayList<Area> x = new ArrayList<Area>();
-        for (FuncaoPertinencia funcaoPertinencia : funcs) {
-            funcaoPertinencia.draw(g2d);
-//            x.add(new Area(funcaoPertinencia));
-        }
-
         drawAxis(g2d);
         drawScale(g2d);
 
-//        Area y = new Area();
-//
-//        for (Area area : x) {
-//            y.add(area);
-//        }
-
-
-
-//        g2d.draw(y);
-
-//        g2d.setPaint(Color.GRAY);
-//        g2d.setStroke(new BasicStroke(2.0f));
-//
-//        GeneralPath reta = new GeneralPath();
-//
-//        reta.moveTo(LIMITE_MAX, LIMITE_MIN);
-//        reta.lineTo(LIMITE_MAX, getHeight() - LIMITE_MIN);
-//
-//        reta.moveTo(LIMITE_MIN, getHeight() - LIMITE_MAX);
-//        reta.lineTo(getWidth() - LIMITE_MIN, getHeight() - LIMITE_MAX);
-//
-//        g2d.draw(reta);
-//
-//        g2d.setPaint(Color.MAGENTA);
-//        g2d.setStroke(new BasicStroke(2.0f));
-//
-//        int posicao = LIMITE_MAX;
-//
-//        int incrementoPixel = (getWidth() - 2 * LIMITE_MAX) / 6;
-//
-//        //Eixo X
-//        for (int i = -3; i <= 3; i++) {
-//            g2d.drawString(Integer.toString(i), posicao-3, getHeight()-LIMITE_NUM);
-//            reta.reset();
-//            reta.moveTo(posicao, getHeight() - LIMITE_MAX + 4);
-//            reta.lineTo(posicao, getHeight() - LIMITE_MAX - 4);
-//
-//            g2d.draw(reta);
-//
-//            posicao += incrementoPixel;
-//        }
-//
-//        //Eixo Y
-//        g2d.drawString("1", LIMITE_NUM, LIMITE_MAX);
-//        reta.reset();
-//        reta.moveTo(LIMITE_MAX - 4, LIMITE_MAX);
-//        reta.lineTo(LIMITE_MAX + 4, LIMITE_MAX);
-//
-//        g2d.draw(reta);
-//
-//        //Seta em Y
-//        g2d.setPaint(Color.GRAY);
-//        reta.reset();
-//        reta.moveTo(LIMITE_MAX - 5, LIMITE_MIN);
-//        reta.lineTo(LIMITE_MAX + 5, LIMITE_MIN);
-//        reta.lineTo(LIMITE_MAX, LIMITE_MIN - 10);
-//
-//        g2d.fill(reta);
-//
-//        //Seta em x
-//        reta.reset();
-//        reta.moveTo(getWidth() - LIMITE_MIN, getHeight() - LIMITE_MAX + 5);
-//        reta.lineTo(getWidth() - LIMITE_MIN, getHeight() - LIMITE_MAX - 5);
-//        reta.lineTo(getWidth() - LIMITE_MIN + 10, getHeight() - LIMITE_MAX);
-//
-//        g2d.fill(reta);
-
+        for (FuncPertinence funcaoPertinencia : funcs) {
+            funcaoPertinencia.draw(g2d);
+        }
     }
 
     private void drawScale(Graphics2D g2d)
@@ -216,11 +146,11 @@ public class FuncaoPertinenciaPanel extends JPanel {
         g2d.setPaint(Color.GRAY);
         g2d.setStroke(new BasicStroke(2.0f));
 
-        // Eixo X
+        // Eixo Y
         path.moveTo(LIMITE_MAX, LIMITE_MIN);
         path.lineTo(LIMITE_MAX, getHeight() - LIMITE_MIN);
 
-        // Eixo Y
+        // Eixo X
         path.moveTo(LIMITE_MIN, getHeight() - LIMITE_MAX);
         path.lineTo(getWidth() - LIMITE_MIN, getHeight() - LIMITE_MAX);
 
@@ -239,11 +169,43 @@ public class FuncaoPertinenciaPanel extends JPanel {
         g2d.fill(path);
     }
 
-    public void addFunc(FuncaoPertinencia func) {
+    public void addFunc(FuncPertinence func) {
+
+        if(func == null) {
+            return;
+        }
+
         funcs.add(func);
     }
 
-    public ArrayList<FuncaoPertinencia> getFuncsPertinencia() {
+    public ArrayList<FuncPertinence> getFuncsPertinencia() {
         return funcs;
+    }
+
+    public Point toPixelScale(Point point) {
+
+        int limitReal;
+        int limitPixel = getWidth() - 2*LIMITE_MAX;
+
+        if(isOutput) {
+            limitReal = OUTPUT_SCALE[NUM_DIVISOES] - OUTPUT_SCALE[0];
+        } else {
+            limitReal = INPUT_SCALE[NUM_DIVISOES] - INPUT_SCALE[0];
+        }
+
+        int altura;
+
+        int x = point.x;
+        int y = (x * limitPixel)/limitReal;
+
+        y += (LIMITE_MAX);
+
+        if(point.y == 0) {
+            altura = getHeight() - LIMITE_MAX;
+        } else {
+            altura = LIMITE_MAX;
+        }
+
+        return new Point(y,altura);
     }
 }

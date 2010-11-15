@@ -5,6 +5,7 @@
 package br.ufrn.controle.fuzzycontroller.domain;
 
 import br.ufrn.controle.fuzzycontroller.utils.Util;
+import br.ufrn.controle.fuzzycontroller.view.FuncaoPertinenciaPanel;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -23,11 +24,10 @@ import java.awt.Point;
  */
 public class FuncPertinence extends Polygon {
 
-    protected ArrayList<Line> lines;
-    private String LinguisticTerm;
+    private static int REC_SIZE = 3;
 
-    private static final int GET_X = 10;
-    private static final int GET_Y = 11;
+    private FuncaoPertinenciaPanel panel;
+    private String linguisticTerm = "";
 
     private ArrayList<Double> px = new ArrayList<Double>();
     private ArrayList<Double> py = new ArrayList<Double>();
@@ -39,27 +39,23 @@ public class FuncPertinence extends Polygon {
 
     private int oldX = 0;
 
-    public FuncPertinence(Point... p) {
-        this();
-        for (Point point : p) {
+    public FuncPertinence() {
+        panel = null;
+    }
+
+    public FuncPertinence(FuncaoPertinenciaPanel p) {
+        panel = p;
+    }
+
+    public FuncPertinence(String name, ArrayList<Point> list, FuncaoPertinenciaPanel p) {
+
+        panel = p;
+        linguisticTerm = name;
+
+        for (Point point : list) {
             addPoint(point.getX(), point.getY());
         }
     }
-    
-    public FuncPertinence() {
-        lines = new ArrayList<Line>();
-        LinguisticTerm = "";
-    }
-
-    public FuncPertinence(String LinguisticTerm) {
-        this();
-        this.LinguisticTerm = LinguisticTerm;
-    }
-
-//    public FuncPertinence(ArrayList<Line> lines, String LinguisticTerm) {
-//        this.lines = lines;
-//        this.LinguisticTerm = LinguisticTerm;
-//    }
 
     /**
      * Metodo para avaliar o valor da funcao no ponto x. As classes filhas precisam
@@ -71,24 +67,11 @@ public class FuncPertinence extends Polygon {
         return 0;
     }
 
-//    public double getRangeValue(double value) {
-//        double rangeValue = 0;
-//
-//        for (Line line : lines) {
-//            rangeValue = line.RangeValue(value);
-//            if (rangeValue != 0) {
-//                break;
-//            }
-//        }
-//
-//        return rangeValue;
-//    }
-
     public FuncPertinence cut(double rangeValue) {
 
         ArrayList<Double> xs = new ArrayList<Double>();
 
-        FuncPertinence saida = new FuncPertinence();
+        FuncPertinence saida = new FuncPertinence(panel);
 
         for (int i = 0; i < npoints-1; i++) {
             if (py.get(i)==0 && py.get(i+1) == 0) {
@@ -108,23 +91,6 @@ public class FuncPertinence extends Polygon {
             saida.addPoint(px.get(i), py.get(i));
             
         }
-//        for (Line lineShape : lines) {
-//
-//            if (lineShape.getPoint1().getY() == 0 && lineShape.getPoint2().getY() == 0) {
-//                continue;
-//            }
-//
-//            double x = lineShape.domainValue(rangeValue);
-//
-//            xs.add(x);
-//
-////            Point endPoint = new Point(x, rangeValue);
-////
-////            Line newLine = new Line(endPoint, lineShape.getPoint1());
-//
-//            saida.addPoint(x, rangeValue);
-//            saida.addPoint(lineShape.getPoint1().getX(), lineShape.getPoint1().getY());
-//        }
 
         saida.addPoint(xs.get(0), rangeValue);
         saida.addPoint(xs.get(1), rangeValue);
@@ -133,33 +99,24 @@ public class FuncPertinence extends Polygon {
     }
 
     public void addPoint(double x, double y) {
-        //Converter para coordenada de pixels
-        int xConvertido = (int) x;
-        int yConvertido = (int) y;
 
-        super.addPoint((int) x, (int) y);
         this.px.add(x);
         this.py.add(y);
 
-        retangs.add(new Rectangle(xConvertido - 3, yConvertido - 3, 6, 6));
+        //Converter para coordenada de pixels
+        Point conv = panel.toPixelScale(new Point((int)x, (int)y));
+
+        super.addPoint(conv.x, conv.y);
+
+        retangs.add(new Rectangle(conv.x - REC_SIZE, conv.y - REC_SIZE, 2*REC_SIZE, 2*REC_SIZE));
     }
 
-//    public void setLines(ArrayList<Line> lines) {
-//        this.lines = lines;
-//    }
-
-
-
-//    public void addLine(Line line) {
-//        lines.add(line);
-//    }
-
     public String getLinguisticTerm() {
-        return LinguisticTerm;
+        return linguisticTerm;
     }
 
     public void setLinguisticTerm(String LinguisticTerm) {
-        this.LinguisticTerm = LinguisticTerm;
+        this.linguisticTerm = LinguisticTerm;
     }
 
     public double[] getArrayOfX() {
@@ -170,39 +127,9 @@ public class FuncPertinence extends Polygon {
         return Util.convertToArrayOfDouble(py);
     }
 
-//    private double[] getArrayOfCoordenates(int axis) {
-//
-//        ArrayList<Double> out = new ArrayList<Double>();
-//
-//        for (int i = 0; i < lines.size(); i++) {
-//
-//            Line line = lines.get(i);
-//
-//            if (axis == GET_X) {
-//                if (!out.contains(line.getPoint1().getX())) {
-//                    out.add(line.getPoint1().getX());
-//                }
-//
-//                if (!out.contains(line.getPoint2().getX())) {
-//                    out.add(line.getPoint2().getX());
-//                }
-//            } else {
-//                if (!out.contains(line.getPoint1().getY())) {
-//                    out.add(line.getPoint1().getY());
-//                }
-//
-//                if (!out.contains(line.getPoint2().getY())) {
-//                    out.add(line.getPoint2().getY());
-//                }
-//            }
-//
-//        }
-//
-//        return Util.convertToArrayOfDouble(out);
-//    }
-
     public FuncPertinence union(FuncPertinence shape) {
-        FuncPertinence retorno = new FuncPertinence();
+
+        FuncPertinence retorno = new FuncPertinence(panel);
         double[] coords = new double[6];
         Area uniao = new Area(this);
         Area area = new Area(shape);
@@ -220,9 +147,11 @@ public class FuncPertinence extends Polygon {
     }
 
     public void draw(Graphics2D g) {
+
         GeneralPath path = new GeneralPath();
 
         path.moveTo(this.xpoints[0], this.ypoints[0]);
+
         for (int i = 1; i < npoints; i++) {
             path.lineTo(this.xpoints[i], this.ypoints[i]);
         }
@@ -234,12 +163,15 @@ public class FuncPertinence extends Polygon {
             g.fill(rectangle);
         }
     }
+
     public void fill(Graphics g) {
         g.fillPolygon(this);
     }
 
     public void mouseDragged(MouseEvent e) {
+
         if (dragTarget != null) {
+
             int index = retangs.indexOf(dragTarget);
             int direita = index + 1;
             int esquerda = index - 1;

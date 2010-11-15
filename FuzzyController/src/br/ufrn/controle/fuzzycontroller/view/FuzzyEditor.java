@@ -9,7 +9,7 @@
  * Created on 02/11/2010, 17:03:46
  */
 
-package br.ufrn.controle.fuzzycontroller.funcaopertinencia;
+package br.ufrn.controle.fuzzycontroller.view;
 
 /**
  *

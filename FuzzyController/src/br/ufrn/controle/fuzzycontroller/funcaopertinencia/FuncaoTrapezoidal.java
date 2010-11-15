@@ -1,7 +1,9 @@
 package br.ufrn.controle.fuzzycontroller.funcaopertinencia;
 
 import br.ufrn.controle.fuzzycontroller.domain.FuncPertinence;
+import br.ufrn.controle.fuzzycontroller.view.FuncaoPertinenciaPanel;
 import java.awt.Point;
+import java.util.ArrayList;
 
 /**
  *
@@ -9,12 +11,8 @@ import java.awt.Point;
  */
 public class FuncaoTrapezoidal extends FuncPertinence {
 
-    public FuncaoTrapezoidal(Point p1, Point p2, Point p3, Point p4) {
-        super(p1, p2, p3, p4);
-    }
-
-    public FuncaoTrapezoidal(int x1, int x2, int x3, int x4, int top, int bottom) {
-        this(new Point(x1, bottom), new Point(x2, top),new Point(x3, top), new Point(x4, bottom));
+    public FuncaoTrapezoidal(String n, ArrayList<Point> pVertex, FuncaoPertinenciaPanel panel) {
+        super(n,pVertex, panel);
     }
 
     @Override

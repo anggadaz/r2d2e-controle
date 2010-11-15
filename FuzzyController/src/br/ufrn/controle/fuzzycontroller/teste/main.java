@@ -18,7 +18,7 @@ import br.ufrn.controle.fuzzycontroller.shared.ConstantsFuzzy;
 public class main {
 
     public static void main(String args[]) {
-        Mamdani inference = new Mamdani();
+        //Mamdani inference = new Mamdani();
 
         FuncPertinence s = new FuncPertinence();
 
