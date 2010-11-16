@@ -8,12 +8,12 @@
  *
  * Created on 15/11/2010, 17:13:22
  */
-
 package br.ufrn.controle.fuzzycontroller.view;
 
 import br.ufrn.controle.fuzzycontroller.domain.DataBase;
 import br.ufrn.controle.fuzzycontroller.domain.FuncPertinence;
 import br.ufrn.controle.fuzzycontroller.domain.FuzzyController;
+import br.ufrn.controle.fuzzycontroller.domain.Rule;
 import br.ufrn.controle.fuzzycontroller.shared.ConstantsFuzzy;
 import javax.swing.DefaultListModel;
 
@@ -78,6 +78,11 @@ public class RuleEditorDialog extends javax.swing.JDialog {
         jCheckBox2.setText(org.openide.util.NbBundle.getMessage(RuleEditorDialog.class, "RuleEditorDialog.jCheckBox2.text")); // NOI18N
 
         jButton1.setText(org.openide.util.NbBundle.getMessage(RuleEditorDialog.class, "RuleEditorDialog.jButton1.text")); // NOI18N
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText(org.openide.util.NbBundle.getMessage(RuleEditorDialog.class, "RuleEditorDialog.jButton2.text")); // NOI18N
 
@@ -91,12 +96,16 @@ public class RuleEditorDialog extends javax.swing.JDialog {
 
         jButton3.setText(org.openide.util.NbBundle.getMessage(RuleEditorDialog.class, "RuleEditorDialog.jButton3.text")); // NOI18N
 
+        jList1.setModel(new DefaultListModel());
         jScrollPane1.setViewportView(jList1);
 
+        jList2.setModel(new DefaultListModel());
         jScrollPane2.setViewportView(jList2);
 
+        jList3.setModel(new DefaultListModel());
         jScrollPane3.setViewportView(jList3);
 
+        jList4.setModel(new DefaultListModel());
         jScrollPane4.setViewportView(jList4);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -194,27 +203,44 @@ public class RuleEditorDialog extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        Rule regra = new Rule();
+        regra.addPremise(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2, jCheckBox1.isSelected(), (FuncPertinence) jList2.getSelectedValue());
+        regra.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK2, jCheckBox2.isSelected(), (FuncPertinence) jList3.getSelectedValue());
+
+        regra.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, (FuncPertinence) jList4.getSelectedValue());
+
+        ((DefaultListModel) jList1.getModel()).addElement(regra);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     private void init() {
-        for (FuncPertinence func : DataBase.getIn(ConstantsFuzzy.VARIABLE_INTEGRATIVE_ERROR_TANK1)) {
-            ((DefaultListModel) jList2.getModel()).addElement(func);
+        if (DataBase.getIn(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2) != null) {
+            for (FuncPertinence func : DataBase.getIn(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2)) {
+                ((DefaultListModel) jList2.getModel()).addElement(func);
+            }
         }
-
-        for (FuncPertinence func : DataBase.getIn(ConstantsFuzzy.VARIABLE_INTEGRATIVE_ERROR_TANK2)) {
-            ((DefaultListModel) jList3.getModel()).addElement(func);
+        if (DataBase.getIn(ConstantsFuzzy.VARIABLE_ERROR_TANK2) != null) {
+            for (FuncPertinence func : DataBase.getIn(ConstantsFuzzy.VARIABLE_ERROR_TANK2)) {
+                ((DefaultListModel) jList3.getModel()).addElement(func);
+            }
         }
-
-        for (FuncPertinence func : DataBase.getIn(ConstantsFuzzy.VARIABLE_OUTPUT)) {
-            ((DefaultListModel) jList3.getModel()).addElement(func);
+        if (DataBase.getOut(ConstantsFuzzy.VARIABLE_OUTPUT) != null) {
+            for (FuncPertinence func : DataBase.getOut(ConstantsFuzzy.VARIABLE_OUTPUT)) {
+                ((DefaultListModel) jList4.getModel()).addElement(func);
+            }
         }
     }
+
     /**
-    * @param args the command line arguments
-    */
+     * @param args the command line arguments
+     */
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
+
             public void run() {
                 RuleEditorDialog dialog = new RuleEditorDialog(new MainView(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+
                     public void windowClosing(java.awt.event.WindowEvent e) {
                         System.exit(0);
                     }
@@ -223,7 +249,6 @@ public class RuleEditorDialog extends javax.swing.JDialog {
             }
         });
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -247,5 +272,4 @@ public class RuleEditorDialog extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JSeparator jSeparator1;
     // End of variables declaration//GEN-END:variables
-
 }
