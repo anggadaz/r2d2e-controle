@@ -204,7 +204,7 @@ public class InOutFunctionDialog extends javax.swing.JDialog {
         if(!delete) {
             addFunction();
         } else {
-
+            delFunction();
         }
 
     }//GEN-LAST:event_btAddActionPerformed
@@ -212,6 +212,7 @@ public class InOutFunctionDialog extends javax.swing.JDialog {
     private void delFunction() {
 
     }
+    
     private void addFunction() {
 
         String nome = tbFunctionName.getText();
