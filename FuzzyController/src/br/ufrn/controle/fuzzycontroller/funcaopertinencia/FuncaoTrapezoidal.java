@@ -10,7 +10,11 @@ import java.util.ArrayList;
 public class FuncaoTrapezoidal extends FuncPertinence {
 
     public FuncaoTrapezoidal(String n, ArrayList<Double> pVertex) {
-        super(n,pVertex);
+        super(n, pVertex);
+    }
+
+    public FuncaoTrapezoidal(String name, double[] list) {
+        super(name, list);
     }
 
     @Override
@@ -43,6 +47,6 @@ public class FuncaoTrapezoidal extends FuncPertinence {
             py2 = 0;
         }
 
-        return ((double) (py2 - py1) / (double)(px2 - px1)) * (x - px1) + py1;
+        return ((double) (py2 - py1) / (double) (px2 - px1)) * (x - px1) + py1;
     }
 }

@@ -30,10 +30,33 @@ public class DataBase {
     }
 
     public static void addIn(String variableIn, FuncPertinence func) {
-        getIn(variableIn).add(func);
+        ArrayList<FuncPertinence> list = pertinenceIn.get(variableIn);
+
+        if (list == null) {
+            list = new ArrayList<FuncPertinence>();
+            pertinenceIn.put(variableIn, list);
+        }
+
+        list.add(func);
+
     }
 
     public static void addOut(String variableOut, FuncPertinence func) {
-        getOut(variableOut).add(func);
+        ArrayList<FuncPertinence> list = pertinenceOut.get(variableOut);
+
+        if (list == null) {
+            list = new ArrayList<FuncPertinence>();
+            pertinenceOut.put(variableOut, list);
+        }
+
+        list.add(func);
+    }
+
+    public static void addIn(String variableOut, ArrayList<FuncPertinence> pertinences) {
+        pertinenceIn.put(variableOut, pertinences);
+    }
+
+    public static void addOut(String variableOut, ArrayList<FuncPertinence> pertinences) {
+        pertinenceOut.put(variableOut, pertinences);
     }
 }

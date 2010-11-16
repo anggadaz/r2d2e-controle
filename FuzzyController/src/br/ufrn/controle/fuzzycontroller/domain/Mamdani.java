@@ -22,7 +22,11 @@ public class Mamdani extends Inference{
     public FunctionOutPut work(DataIn dataIn) {
 
         ArrayList<Rule> rules = ruleBase.getRules();
-
+        
+        if(rules == null || rules.isEmpty()){
+            return null;
+        }
+        
         FuncPertinence shapeOut = new FuncPertinence();
 
         RulesAvaliationThread rats[] = new RulesAvaliationThread[numbThreads];

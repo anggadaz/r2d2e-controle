@@ -18,6 +18,10 @@ public class RuleBase {
         rules = new ArrayList<Rule>();
     }
 
+    public RuleBase(ArrayList<Rule> rules) {
+        this.rules = rules;
+    }
+
     public ArrayList<Rule> getRules() {
         return rules;
     }

@@ -11,6 +11,7 @@
 
 package br.ufrn.controle.fuzzycontroller.view.retractable;
 
+import br.ufrn.controle.fuzzycontroller.shared.ConstantsFuzzy;
 import br.ufrn.siga.component.retractable.RetractablePanelContent;
 
 /**
@@ -58,6 +59,11 @@ public class EmptyPanel extends javax.swing.JPanel implements RetractablePanelCo
         buttonSetPoint.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
         buttonSetPoint.setContentAreaFilled(false);
         buttonSetPoint.setFocusPainted(false);
+        buttonSetPoint.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonSetPointActionPerformed(evt);
+            }
+        });
         panelSetPoint.add(buttonSetPoint, java.awt.BorderLayout.EAST);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -68,6 +74,11 @@ public class EmptyPanel extends javax.swing.JPanel implements RetractablePanelCo
         gridBagConstraints.insets = new java.awt.Insets(0, 54, 0, 54);
         add(panelSetPoint, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void buttonSetPointActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSetPointActionPerformed
+        // TODO add your handling code here:
+        ConstantsFuzzy.setPoint = Double.parseDouble(txtSetPoint.getText());
+    }//GEN-LAST:event_buttonSetPointActionPerformed
 
     public void showCompact() {
         compact = true;

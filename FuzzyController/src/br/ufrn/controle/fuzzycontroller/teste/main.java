@@ -20,8 +20,6 @@ public class main {
     public static void main(String args[]) {
         //Mamdani inference = new Mamdani();
 
-        FuncPertinence s = new FuncPertinence();
-
 //        s.addLine(new Line(0, 0, 3, 1));
 //        s.addLine(new Line(6, 0, 3, 1));
 //        s.addLine(new Line(0, 0, 6, 0));
@@ -38,16 +36,16 @@ public class main {
 //        i2.addLine(new Line(1, 1, 3, 1));
 //        i2.addLine(new Line(3, 1, 5, 0));
 //        i2.addLine(new Line(0, 0, 5, 0));
-
-        Rule r = new Rule();
-
-//        r.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK1, i1);
-//        r.addPremise(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK1, i2);
-        r.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, s);
-
-        DataIn dataIn = new DataIn();
-        dataIn.addValue(ConstantsFuzzy.VARIABLE_ERROR_TANK1, 0.3d);
-        dataIn.addValue(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK1,2d);
+//
+//        Rule r = new Rule();
+//
+////        r.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK1, i1);
+////        r.addPremise(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK1, i2);
+//        r.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, s);
+//
+//        DataIn dataIn = new DataIn();
+//        dataIn.addValue(ConstantsFuzzy.VARIABLE_ERROR_TANK1, 0.3d);
+//        dataIn.addValue(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK1,2d);
 
 //        inference.avaliateRule(r,dataIn);
     }

@@ -12,7 +12,11 @@ import java.util.ArrayList;
 public class FuncaoTriangular extends FuncPertinence {
 
     public FuncaoTriangular(String n, ArrayList<Double> pVertex) {
-        super(n,pVertex);
+        super(n, pVertex);
+    }
+
+    public FuncaoTriangular(String name, double[] list) {
+        super(name, list);
     }
 
     @Override
@@ -39,6 +43,6 @@ public class FuncaoTriangular extends FuncPertinence {
             py2 = 0;
         }
 
-        return ((double) (py2 - py1) / (double)(px2 - px1)) * (x - px1) + py1;
+        return ((double) (py2 - py1) / (double) (px2 - px1)) * (x - px1) + py1;
     }
 }

@@ -11,14 +11,20 @@ package br.ufrn.controle.fuzzycontroller.quanser;
 public class Quanser {
 
     private QuanserClient quanserClient;
-    private static String IP_QUANSER = "10.13.99.69";
-    private static int PORT_QUANSER = 20081;//20081;
+    private static String IP_QUANSER;
+    private static int PORT_QUANSER;
     private static int CHANNEL_BOMB = 0;
-    private static double CALIBRATION1 = 0.0;//2.0;
-    private static double CALIBRATION2 = 0.0;
+    private static double CALIBRATION1;
+    private static double CALIBRATION2;
     private static double VOLT_TO_LEVEL = 6.25;
 
     public Quanser() {
+        if (IP_QUANSER == null){
+            IP_QUANSER = "10.13.99.69";
+        }
+        if(PORT_QUANSER == 0){
+            PORT_QUANSER = 20081;
+        }
     }
 
     public void connect() {

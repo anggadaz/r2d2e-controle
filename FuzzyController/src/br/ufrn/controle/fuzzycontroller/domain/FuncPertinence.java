@@ -18,6 +18,8 @@ import java.awt.geom.GeneralPath;
 import java.awt.geom.PathIterator;
 import java.util.ArrayList;
 import java.awt.Point;
+import java.util.Collection;
+import java.util.Collections;
 
 /**
  *
@@ -26,17 +28,12 @@ import java.awt.Point;
 public class FuncPertinence extends Polygon {
 
     private static int REC_SIZE = 3;
-
     private String linguisticTerm = "";
-
     private ArrayList<Double> px = new ArrayList<Double>();
     private ArrayList<Double> py = new ArrayList<Double>();
-
     private Rectangle dragTarget = null;
     private ArrayList<Rectangle> retangs = new ArrayList<Rectangle>();
-
     private Color color = Color.BLACK;
-
     private int oldX = 0;
 
     public FuncPertinence() {
@@ -47,6 +44,17 @@ public class FuncPertinence extends Polygon {
         addPoint(list);
     }
 
+    public FuncPertinence(String name, double[] list) {
+        linguisticTerm = name;
+
+        ArrayList<Double> list2 = new ArrayList<Double>();
+
+        for (int i = 0; i < list.length; i++) {
+            list2.add(list[i]);
+        }
+
+        addPoint(list2);
+    }
     /**
      * Metodo para avaliar o valor da funcao no ponto x. As classes filhas precisam
      * sobreescrever esse metodo.
@@ -75,15 +83,15 @@ public class FuncPertinence extends Polygon {
 
         FuncPertinence saida = new FuncPertinence();
 
-        for (int i = 0; i < npoints-1; i++) {
-            if (py.get(i)==0 && py.get(i+1) == 0) {
+        for (int i = 0; i < npoints - 1; i++) {
+            if (py.get(i) == 0 && py.get(i + 1) == 0) {
                 continue;
             }
 
             double px1 = px.get(i);
             double py1 = py.get(i);
-            double px2 = px.get(i+1);
-            double py2 = py.get(i+1);
+            double px2 = px.get(i + 1);
+            double py2 = py.get(i + 1);
 
             double x = ((px2 - px1) / ((py2 - py1)) * (rangeValue - py1) + px1);
 
@@ -91,7 +99,7 @@ public class FuncPertinence extends Polygon {
 
             saida.addPoint(x, rangeValue);
             saida.addPoint(px.get(i), py.get(i));
-            
+
         }
 
         saida.addPoint(xs.get(0), rangeValue);
@@ -110,7 +118,7 @@ public class FuncPertinence extends Polygon {
 
         super.addPoint(conv.x, conv.y);
 
-        retangs.add(new Rectangle(conv.x - REC_SIZE, conv.y - REC_SIZE, 2*REC_SIZE, 2*REC_SIZE));
+        retangs.add(new Rectangle(conv.x - REC_SIZE, conv.y - REC_SIZE, 2 * REC_SIZE, 2 * REC_SIZE));
     }
 
     public String getLinguisticTerm() {
@@ -139,7 +147,7 @@ public class FuncPertinence extends Polygon {
         uniao.add(area);
 
         PathIterator it = uniao.getPathIterator(null);
-        
+
         while (!it.isDone()) {
             it.currentSegment(coords);
             retorno.addPoint((int) coords[0], (int) coords[1]);
@@ -360,5 +368,4 @@ public class FuncPertinence extends Polygon {
 
         return ((hits & 1) != 0);
     }
-
 }

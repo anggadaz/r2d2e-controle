@@ -3,7 +3,6 @@
  *
  * Created on 02/11/2010, 17:23:39
  */
-
 package br.ufrn.controle.fuzzycontroller.view;
 
 import br.ufrn.controle.fuzzycontroller.domain.FuncPertinence;
@@ -224,7 +223,7 @@ public class InOutFunctionDialog extends javax.swing.JDialog {
 
         FuncPertinence func = null;
 
-        if("Triangular".equals(cbFunctionType.getSelectedItem())) {
+        if ("Triangular".equals(cbFunctionType.getSelectedItem())) {
             func = new FuncaoTriangular(nome, param);
         } else {
             func = new FuncaoTrapezoidal(nome, param);
@@ -240,7 +239,7 @@ public class InOutFunctionDialog extends javax.swing.JDialog {
         String param = tbParam.getText();
         String[] partes = param.split(" ");
 
-        if(partes.length < 3 || partes.length > 4) {
+        if (partes.length < 3 || partes.length > 4) {
             return null;
         }
 
@@ -298,13 +297,15 @@ public class InOutFunctionDialog extends javax.swing.JDialog {
     }
 
     /**
-    * @param args the command line arguments
-    */
+     * @param args the command line arguments
+     */
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
+
             public void run() {
                 InOutFunctionDialog dialog = new InOutFunctionDialog(new javax.swing.JFrame(), true, true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+
                     public void windowClosing(java.awt.event.WindowEvent e) {
                         System.exit(0);
                     }
@@ -313,7 +314,6 @@ public class InOutFunctionDialog extends javax.swing.JDialog {
             }
         });
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAdd;
     private javax.swing.JComboBox cbFunctionType;
@@ -332,5 +332,4 @@ public class InOutFunctionDialog extends javax.swing.JDialog {
     private javax.swing.JTextField txIOName;
     private javax.swing.JTextField txRange;
     // End of variables declaration//GEN-END:variables
-
 }

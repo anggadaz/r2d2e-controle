@@ -26,7 +26,7 @@ public class FuzzyController extends Thread {
     private GraphHandler graphControlHandler;
     private Quanser quanser;
     private volatile boolean ative = true;
-    private int setPoint;
+//    private int setPoint;
     private static final int NIVEL_MAX = 25;
     private static final int NIVEL_MIN = 3;
     private boolean limiteMaxTank2 = false;
@@ -34,12 +34,12 @@ public class FuzzyController extends Thread {
     private double previousError2 = 0;
     private double integralTension = 0;
 
-    public FuzzyController(String name, Inference inference, Defuzzification defuzzification, ArrayList<String> DataInType, Quanser quanser) {
+    public FuzzyController(String name, Inference inference, Defuzzification defuzzification, ArrayList<String> DataInType) {
         this.name = name;
         this.inference = inference;
         this.defuzzification = defuzzification;
         this.DataInType = DataInType;
-        this.quanser = quanser;
+        quanser = new Quanser();
     }
 
     public FuzzyController(String name) {
@@ -48,6 +48,9 @@ public class FuzzyController extends Thread {
 
     @Override
     public void run() {
+
+        quanser.connect();
+
         while (ative) {
 
             double level1 = quanser.readSensor1();
@@ -56,6 +59,11 @@ public class FuzzyController extends Thread {
             DataIn dataIn = createDataIn(level1, level2);
 
             FunctionOutPut functionOutPut = inference.work(dataIn);
+
+            if (functionOutPut == null) {
+                break;
+            }
+
             double voltz = defuzzification.defuzzificate(functionOutPut);
 
             double realVoltz = travaTensao(voltz);
@@ -124,31 +132,24 @@ public class FuzzyController extends Thread {
     private DataIn createDataIn(double level1, double level2) {
         DataIn dataIn = new DataIn();
 
-        ArrayList<Double> valuesIn = new ArrayList<Double>();
-
         for (int i = 0; i < DataInType.size(); i++) {
             String string = DataInType.get(i);
             if (string.equals(ConstantsFuzzy.VARIABLE_ERROR_TANK1)) {
-                valuesIn.add(setPoint - level1);
+                dataIn.addValue(string, ConstantsFuzzy.setPoint - level1);
             }
             if (string.equals(ConstantsFuzzy.VARIABLE_ERROR_TANK2)) {
-                valuesIn.add(setPoint - level2);
+                dataIn.addValue(string, ConstantsFuzzy.setPoint - level2);
             }
             if (string.equals(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK1)) {
-                valuesIn.add((setPoint - level1) - previousError1);
+                dataIn.addValue(string, (ConstantsFuzzy.setPoint - level1) - previousError1);
             }
             if (string.equals(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2)) {
-                valuesIn.add((setPoint - level2) - previousError2);
+                dataIn.addValue(string, (ConstantsFuzzy.setPoint - level2) - previousError2);
             }
         }
 
-        for (int i = 0; i < valuesIn.size(); i++) {
-            Double double1 = valuesIn.get(i);
-            dataIn.addValue(DataInType.get(i), double1);
-        }
-
-        previousError1 = setPoint - level1;
-        previousError2 = setPoint - level2;
+        previousError1 = ConstantsFuzzy.setPoint - level1;
+        previousError2 = ConstantsFuzzy.setPoint - level2;
 
         return dataIn;
     }
@@ -159,11 +160,11 @@ public class FuzzyController extends Thread {
 
             public void run() {
                 if (selectionsGraph.isError1Selected()) {
-                    graphLevelHandler.addValue(ConstantsGraph.ERRO1, setPoint - level1);
+                    graphLevelHandler.addValue(ConstantsGraph.ERRO1, ConstantsFuzzy.setPoint - level1);
                 }
 
                 if (selectionsGraph.isError2Selected()) {
-                    graphLevelHandler.addValue(ConstantsGraph.ERRO2, setPoint - level2);
+                    graphLevelHandler.addValue(ConstantsGraph.ERRO2, ConstantsFuzzy.setPoint - level2);
                 }
 
                 if (selectionsGraph.isLevel1Selected()) {
@@ -175,7 +176,7 @@ public class FuzzyController extends Thread {
                 }
 
                 if (selectionsGraph.isSetPointSelected()) {
-                    graphLevelHandler.addValue(ConstantsGraph.SET_POINT, setPoint);
+                    graphLevelHandler.addValue(ConstantsGraph.SET_POINT, ConstantsFuzzy.setPoint);
                 }
 
                 graphControlHandler.addValue(ConstantsGraph.SINAL_CONTROLE, tension);
@@ -219,13 +220,13 @@ public class FuzzyController extends Thread {
         this.quanser = quanser;
     }
 
-    public int getSetPoint() {
-        return setPoint;
-    }
-
-    public void setSetPoint(int setPoint) {
-        this.setPoint = setPoint;
-    }
+//    public int getSetPoint() {
+//        return setPoint;
+//    }
+//
+//    public void setSetPoint(int setPoint) {
+//        this.setPoint = setPoint;
+//    }
 
     public SelectionsGraph getSelectionsGraph() {
         return selectionsGraph;

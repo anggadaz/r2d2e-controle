@@ -139,9 +139,9 @@ public class TankOptionsPanel extends javax.swing.JPanel implements RetractableP
         panelCompact.setColor2(new java.awt.Color(119, 166, 110));
 
         lblOptions.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblOptions.setText(org.openide.util.NbBundle.getMessage(TankOptionsPanel.class, "TankOptionsPanel.lblOptions.text")); // NOI18N
+        lblOptions.setText("Opções Selecionados");
 
-        lblNumber.setText(org.openide.util.NbBundle.getMessage(TankOptionsPanel.class, "TankOptionsPanel.lblNumber.text")); // NOI18N
+        lblNumber.setText("5");
 
         javax.swing.GroupLayout panelCompactLayout = new javax.swing.GroupLayout(panelCompact);
         panelCompact.setLayout(panelCompactLayout);
