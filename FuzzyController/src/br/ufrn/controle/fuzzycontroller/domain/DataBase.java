@@ -13,19 +13,27 @@ import java.util.HashMap;
  */
 public class DataBase {
 
-    HashMap<String, ArrayList<FuncPertinence>> pertinenceIn;
-    HashMap<String, ArrayList<FuncPertinence>> pertinenceOut;
+    private static HashMap<String, ArrayList<FuncPertinence>> pertinenceIn;
+    private static HashMap<String, ArrayList<FuncPertinence>> pertinenceOut;
 
-    public DataBase() {
+    static {
         pertinenceIn = new HashMap<String, ArrayList<FuncPertinence>>();
         pertinenceOut = new HashMap<String, ArrayList<FuncPertinence>>();
     }
 
-    public ArrayList<FuncPertinence> getIn(String variableIn) {
+    public static ArrayList<FuncPertinence> getIn(String variableIn) {
         return pertinenceIn.get(variableIn);
     }
 
-    public ArrayList<FuncPertinence> getOut(String variableOut) {
-        return pertinenceIn.get(variableOut);
+    public static ArrayList<FuncPertinence> getOut(String variableOut) {
+        return pertinenceOut.get(variableOut);
+    }
+
+    public static void addIn(String variableIn, FuncPertinence func) {
+        getIn(variableIn).add(func);
+    }
+
+    public static void addOut(String variableOut, FuncPertinence func) {
+        getOut(variableOut).add(func);
     }
 }
