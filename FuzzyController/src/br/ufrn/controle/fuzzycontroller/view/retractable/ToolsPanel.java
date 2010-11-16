@@ -10,6 +10,7 @@
  */
 package br.ufrn.controle.fuzzycontroller.view.retractable;
 
+import br.ufrn.controle.fuzzycontroller.view.InOutFunctionDialog;
 import br.ufrn.controle.fuzzycontroller.view.InitialDialog;
 import br.ufrn.controle.fuzzycontroller.view.MainView;
 import br.ufrn.controle.fuzzycontroller.view.OpcoesGerais;
@@ -26,6 +27,8 @@ public class ToolsPanel extends javax.swing.JPanel implements RetractablePanelCo
     private static final String CARD_OPTIONS = "cardOptions";
     private boolean compact;
     private MainView parent;
+
+    public static InOutFunctionDialog IODialog = new InOutFunctionDialog(null, false, false);
 
     /** Creates new form ToolsPanel
      * @param parent
@@ -51,7 +54,7 @@ public class ToolsPanel extends javax.swing.JPanel implements RetractablePanelCo
         transluStop = new br.ufrn.siga.component.translucent.TranslucentPanel();
         buttonStop = new br.ufrn.siga.component.translucent.TranslucentButton();
         transluOptFuzzy = new br.ufrn.siga.component.translucent.TranslucentPanel();
-        buttonOptFuzzy = new br.ufrn.siga.component.translucent.TranslucentButton();
+        buttonOpFunc = new br.ufrn.siga.component.translucent.TranslucentButton();
         transluOptGeral = new br.ufrn.siga.component.translucent.TranslucentPanel();
         buttonGeral = new br.ufrn.siga.component.translucent.TranslucentButton();
         panelCompact = new br.ufrn.siga.component.gradient.GradientPanel();
@@ -137,16 +140,21 @@ public class ToolsPanel extends javax.swing.JPanel implements RetractablePanelCo
         gridBagConstraints.ipady = 36;
         panelOptions.add(transluStop, gridBagConstraints);
 
-        buttonOptFuzzy.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufrn/controle/fuzzycontroller/view/resources/tools.png"))); // NOI18N
+        buttonOpFunc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufrn/controle/fuzzycontroller/view/resources/tools.png"))); // NOI18N
+        buttonOpFunc.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                buttonOpFuncMouseReleased(evt);
+            }
+        });
 
-        javax.swing.GroupLayout buttonOptFuzzyLayout = new javax.swing.GroupLayout(buttonOptFuzzy);
-        buttonOptFuzzy.setLayout(buttonOptFuzzyLayout);
-        buttonOptFuzzyLayout.setHorizontalGroup(
-            buttonOptFuzzyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout buttonOpFuncLayout = new javax.swing.GroupLayout(buttonOpFunc);
+        buttonOpFunc.setLayout(buttonOpFuncLayout);
+        buttonOpFuncLayout.setHorizontalGroup(
+            buttonOpFuncLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 39, Short.MAX_VALUE)
         );
-        buttonOptFuzzyLayout.setVerticalGroup(
-            buttonOptFuzzyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        buttonOpFuncLayout.setVerticalGroup(
+            buttonOpFuncLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 36, Short.MAX_VALUE)
         );
 
@@ -154,11 +162,11 @@ public class ToolsPanel extends javax.swing.JPanel implements RetractablePanelCo
         transluOptFuzzy.setLayout(transluOptFuzzyLayout);
         transluOptFuzzyLayout.setHorizontalGroup(
             transluOptFuzzyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(buttonOptFuzzy, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
+            .addComponent(buttonOpFunc, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
         );
         transluOptFuzzyLayout.setVerticalGroup(
             transluOptFuzzyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(buttonOptFuzzy, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
+            .addComponent(buttonOpFunc, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
         );
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -249,13 +257,18 @@ public class ToolsPanel extends javax.swing.JPanel implements RetractablePanelCo
         // TODO add your handling code here:
         parent.stopController();
     }//GEN-LAST:event_buttonStopMouseReleased
+
+    private void buttonOpFuncMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonOpFuncMouseReleased
+        IODialog.setLocationRelativeTo(parent);
+        IODialog.setVisible(true);
+    }//GEN-LAST:event_buttonOpFuncMouseReleased
     private void changeCard(String card) {
         CardLayout layout = (CardLayout) getLayout();
         layout.show(this, card);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private br.ufrn.siga.component.translucent.TranslucentButton buttonGeral;
-    private br.ufrn.siga.component.translucent.TranslucentButton buttonOptFuzzy;
+    private br.ufrn.siga.component.translucent.TranslucentButton buttonOpFunc;
     private br.ufrn.siga.component.translucent.TranslucentButton buttonStart;
     private br.ufrn.siga.component.translucent.TranslucentButton buttonStop;
     private javax.swing.JLabel lblCompact;

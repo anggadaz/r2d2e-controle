@@ -12,12 +12,17 @@ import br.ufrn.controle.fuzzycontroller.funcaopertinencia.FuncaoTriangular;
 import java.awt.Frame;
 import java.awt.Point;
 import java.util.ArrayList;
+import javax.swing.JButton;
+import javax.swing.JTextField;
 
 /**
  *
  * @author Rivaldo
  */
 public class InOutFunctionDialog extends javax.swing.JDialog {
+
+    private FuncPertinence old;
+    private boolean delete = false;
 
     /** Creates new form InputDialog */
     public InOutFunctionDialog(Frame parent, boolean modal, boolean isOutput) {
@@ -196,37 +201,40 @@ public class InOutFunctionDialog extends javax.swing.JDialog {
 
     private void btAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAddActionPerformed
 
-        addFunction();
+        if(!delete) {
+            addFunction();
+        } else {
 
-//        if (jComboBox3.getSelectedIndex() == 0) {
-//            func = new FuncaoTriangular(new Point(p1, MAX), new Point(p2, MIN), new Point(p3, MAX));
-//        } else if (jComboBox3.getSelectedIndex() == 1){
-//            func = new FuncaoTrapezoidal(new Point(p1, MAX), new Point(p2, MIN), new Point(p3, MIN), new Point(p4, MAX));
-//        }
+        }
+
     }//GEN-LAST:event_btAddActionPerformed
 
+    private void delFunction() {
+
+    }
     private void addFunction() {
 
-        ArrayList<Point> param = getParametros();
+        String nome = tbFunctionName.getText();
+        ArrayList<Double> param = getParametros();
 
-        if (param == null) {
+        if (param == null || "".equals(nome)) {
             return;
         }
 
-        String nome = tbFunctionName.getText();
         FuncPertinence func = null;
 
         if("Triangular".equals(cbFunctionType.getSelectedItem())) {
-            func = new FuncaoTriangular(nome, param, funcaoPertinenciaPanel1);
+            func = new FuncaoTriangular(nome, param);
         } else {
-            func = new FuncaoTrapezoidal(nome, param, funcaoPertinenciaPanel1);
+            func = new FuncaoTrapezoidal(nome, param);
         }
 
         funcaoPertinenciaPanel1.addFunc(func);
         funcaoPertinenciaPanel1.repaint();
+        clearFuncData();
     }
 
-    private ArrayList<Point> getParametros()
+    private ArrayList<Double> getParametros()
     {
         String param = tbParam.getText();
         String[] partes = param.split(" ");
@@ -235,20 +243,13 @@ public class InOutFunctionDialog extends javax.swing.JDialog {
             return null;
         }
 
-        ArrayList<Point> res = new ArrayList<Point>();
+        ArrayList<Double> res = new ArrayList<Double>();
 
         try {
 
-            int x = Integer.parseInt(partes[0]);
-            res.add(new Point(x, 0));
-
-            for (int i = 1; i < partes.length-1; i++) {
-                x = Integer.parseInt(partes[i]);
-                res.add(new Point(x, 1));
+            for (String string : partes) {
+                res.add(Double.parseDouble(string));
             }
-
-            x = Integer.parseInt(partes[partes.length-1]);
-            res.add(new Point(x,0));
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -256,6 +257,43 @@ public class InOutFunctionDialog extends javax.swing.JDialog {
 
         return res;
 
+    }
+
+    public boolean isDelete() {
+        return delete;
+    }
+
+    public void setDelete(boolean delete, FuncPertinence func) {
+        if(!delete) {
+            btAdd.setText("Adicionar");
+        } else {
+            btAdd.setText("Remover");
+        }
+
+        old = func;
+        this.delete = delete;
+    }
+
+    public void clearFuncData() {
+        tbParam.setText("");
+        tbFunctionName.setText("");
+        setDelete(false, null);
+    }
+
+    public JButton getBtAdd() {
+        return btAdd;
+    }
+
+    public FuncaoPertinenciaPanel getFuncaoPertinenciaPanel1() {
+        return funcaoPertinenciaPanel1;
+    }
+
+    public JTextField getTbFunctionName() {
+        return tbFunctionName;
+    }
+
+    public JTextField getTbParam() {
+        return tbParam;
     }
 
     /**

@@ -11,8 +11,8 @@ import java.util.ArrayList;
  */
 public class FuncaoTriangular extends FuncPertinence {
 
-    public FuncaoTriangular(String n, ArrayList<Point> pVertex, FuncaoPertinenciaPanel panel) {
-        super(n,pVertex, panel);
+    public FuncaoTriangular(String n, ArrayList<Double> pVertex) {
+        super(n,pVertex);
     }
 
     @Override

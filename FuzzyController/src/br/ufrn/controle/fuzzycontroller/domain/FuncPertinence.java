@@ -6,6 +6,7 @@ package br.ufrn.controle.fuzzycontroller.domain;
 
 import br.ufrn.controle.fuzzycontroller.utils.Util;
 import br.ufrn.controle.fuzzycontroller.view.FuncaoPertinenciaPanel;
+import br.ufrn.controle.fuzzycontroller.view.retractable.ToolsPanel;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -26,7 +27,6 @@ public class FuncPertinence extends Polygon {
 
     private static int REC_SIZE = 3;
 
-    private FuncaoPertinenciaPanel panel;
     private String linguisticTerm = "";
 
     private ArrayList<Double> px = new ArrayList<Double>();
@@ -40,21 +40,11 @@ public class FuncPertinence extends Polygon {
     private int oldX = 0;
 
     public FuncPertinence() {
-        panel = null;
     }
 
-    public FuncPertinence(FuncaoPertinenciaPanel p) {
-        panel = p;
-    }
-
-    public FuncPertinence(String name, ArrayList<Point> list, FuncaoPertinenciaPanel p) {
-
-        panel = p;
+    public FuncPertinence(String name, ArrayList<Double> list) {
         linguisticTerm = name;
-
-        for (Point point : list) {
-            addPoint(point.getX(), point.getY());
-        }
+        addPoint(list);
     }
 
     /**
@@ -64,14 +54,26 @@ public class FuncPertinence extends Polygon {
      * @return
      */
     public double getRangeValue(double x) {
-        return 0;
+        return -1;
+    }
+
+    private void addPoint(ArrayList<Double> list) {
+
+        addPoint(list.get(0), 0);
+
+        for (int i = 1; i < list.size()-1; i++) {
+            addPoint(list.get(i), 1);
+        }
+
+        addPoint(list.get(list.size()-1), 0);
+
     }
 
     public FuncPertinence cut(double rangeValue) {
 
         ArrayList<Double> xs = new ArrayList<Double>();
 
-        FuncPertinence saida = new FuncPertinence(panel);
+        FuncPertinence saida = new FuncPertinence();
 
         for (int i = 0; i < npoints-1; i++) {
             if (py.get(i)==0 && py.get(i+1) == 0) {
@@ -104,7 +106,7 @@ public class FuncPertinence extends Polygon {
         this.py.add(y);
 
         //Converter para coordenada de pixels
-        Point conv = panel.toPixelScale(new Point((int)x, (int)y));
+        Point conv = ToolsPanel.IODialog.getFuncaoPertinenciaPanel1().toPixelScale(x,y);
 
         super.addPoint(conv.x, conv.y);
 
@@ -129,7 +131,7 @@ public class FuncPertinence extends Polygon {
 
     public FuncPertinence union(FuncPertinence shape) {
 
-        FuncPertinence retorno = new FuncPertinence(panel);
+        FuncPertinence retorno = new FuncPertinence();
         double[] coords = new double[6];
         Area uniao = new Area(this);
         Area area = new Area(shape);
@@ -208,6 +210,24 @@ public class FuncPertinence extends Polygon {
     public void mouseReleased(MouseEvent e) {
         System.out.println("Released");
         dragTarget = null;
+
+        setData();
+    }
+
+    private void setData() {
+
+        Point p;
+        StringBuilder param = new StringBuilder();
+
+         for (int i = 0; i < npoints; i++) {
+             p = new Point(xpoints[i], ypoints[i]);
+             param.append(ToolsPanel.IODialog.getFuncaoPertinenciaPanel1().toRealScale(p));
+             param.append(" ");
+        }
+
+        ToolsPanel.IODialog.setDelete(true, this);
+        ToolsPanel.IODialog.getTbParam().setText(param.toString());
+        ToolsPanel.IODialog.getTbFunctionName().setText(linguisticTerm);
     }
 
     public void mousePressed(MouseEvent e) {

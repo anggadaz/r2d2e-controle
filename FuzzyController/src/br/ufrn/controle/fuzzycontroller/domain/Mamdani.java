@@ -23,7 +23,7 @@ public class Mamdani extends Inference{
 
         ArrayList<Rule> rules = ruleBase.getRules();
 
-        FuncPertinence shapeOut = new FuncPertinence(null);
+        FuncPertinence shapeOut = new FuncPertinence();
 
         RulesAvaliationThread rats[] = new RulesAvaliationThread[numbThreads];
 

@@ -38,6 +38,8 @@ public class MainView extends javax.swing.JFrame {
     private ArrayList<FuzzyController> controllers;
     private FuzzyController controllerSelected;
 
+
+
     /** Creates new form MainView */
     public MainView() {
         initComponents();

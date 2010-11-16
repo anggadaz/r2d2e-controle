@@ -182,7 +182,7 @@ public class FuncaoPertinenciaPanel extends JPanel {
         return funcs;
     }
 
-    public Point toPixelScale(Point point) {
+    public Point toPixelScale(Double pX, Double pY) {
 
         int limitReal;
         int limitPixel = getWidth() - 2*LIMITE_MAX;
@@ -195,17 +195,40 @@ public class FuncaoPertinenciaPanel extends JPanel {
 
         int altura;
 
-        int x = point.x;
+        int x = (int) pX.doubleValue();
         int y = (x * limitPixel)/limitReal;
 
         y += (LIMITE_MAX);
 
-        if(point.y == 0) {
+        if(pY == 0) {
             altura = getHeight() - LIMITE_MAX;
         } else {
             altura = LIMITE_MAX;
         }
 
         return new Point(y,altura);
+    }
+
+    public Double toRealScale(Point point) {
+
+        int limitReal;
+        int limitPixel = getWidth() - 2*LIMITE_MAX;
+
+        if(isOutput) {
+            limitReal = OUTPUT_SCALE[NUM_DIVISOES] - OUTPUT_SCALE[0];
+        } else {
+            limitReal = INPUT_SCALE[NUM_DIVISOES] - INPUT_SCALE[0];
+        }
+
+        double x = point.x;
+        Double y = (x * limitReal)/limitPixel;
+
+        if(isOutput) {
+            y += OUTPUT_SCALE[0];
+        } else {
+            y += INPUT_SCALE[0];
+        }
+
+        return y;
     }
 }
