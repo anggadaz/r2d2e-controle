@@ -52,8 +52,8 @@ public class DataBase {
         list.add(func);
     }
 
-    public static void addIn(String variableOut, ArrayList<FuncPertinence> pertinences) {
-        pertinenceIn.put(variableOut, pertinences);
+    public static void addIn(String variableIn, ArrayList<FuncPertinence> pertinences) {
+        pertinenceIn.put(variableIn, pertinences);
     }
 
     public static void addOut(String variableOut, ArrayList<FuncPertinence> pertinences) {
