@@ -12,6 +12,7 @@ public class FunctionOutPut {
 
     private FuncPertinence pertinence;
     private Expression expression;
+    private boolean OperationNot;
 
     public FunctionOutPut() {
     }
@@ -38,5 +39,13 @@ public class FunctionOutPut {
 
     public void setPertinence(FuncPertinence pertinence) {
         this.pertinence = pertinence;
+    }
+
+    public boolean isOperationNot() {
+        return OperationNot;
+    }
+
+    public void setOperationNot(boolean OperationNot) {
+        this.OperationNot = OperationNot;
     }
 }

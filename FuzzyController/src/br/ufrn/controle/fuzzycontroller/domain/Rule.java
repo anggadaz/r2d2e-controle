@@ -25,6 +25,12 @@ public class Rule {
         premises.put(Variable, new PremiseInfo(geometry, isOperationNot));
     }
 
+    public void addFunctionOut(String variable, boolean isOperationNot, FuncPertinence shape) {
+        FunctionOutPut func = new FunctionOutPut(shape);
+        func.setOperationNot(isOperationNot);
+        functionOuts.put(variable, func);
+    }
+
     public void addFunctionOut(String variable, FuncPertinence shape) {
         FunctionOutPut func = new FunctionOutPut(shape);
         functionOuts.put(variable, func);
@@ -57,8 +63,27 @@ public class Rule {
 
     @Override
     public String toString() {
-        return "If (Input1 is " + (premises.get(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2).isOperationNot() ? "not ":"") + premises.get(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2).getShape() +
-                ") and (Input2 is " +(premises.get(ConstantsFuzzy.VARIABLE_ERROR_TANK2).isOperationNot() ? "not ":"") + premises.get(ConstantsFuzzy.VARIABLE_ERROR_TANK2).getShape() +
-                ") Then (Output is " + functionOuts.get(ConstantsFuzzy.VARIABLE_OUTPUT).getPertinence() + ")";
+        StringBuilder retorno = new StringBuilder();
+        retorno.append("If ");
+        for (String entrada : premises.keySet()) {
+            retorno.append("(");
+            retorno.append(entrada);
+            retorno.append(" is ");
+            retorno.append(premises.get(entrada).isOperationNot() ? "not " : "");
+            retorno.append(premises.get(entrada).getShape());
+            retorno.append(") and ");
+        }
+
+        if (retorno.toString().trim().endsWith("and")) {
+            int index = retorno.lastIndexOf("and");
+            retorno.replace(index, retorno.length() - 1, "");
+        }
+
+        retorno.append(" Then (Output is ");
+        retorno.append(functionOuts.get(ConstantsFuzzy.VARIABLE_OUTPUT).isOperationNot() ? "not " : "");
+        retorno.append(functionOuts.get(ConstantsFuzzy.VARIABLE_OUTPUT).getPertinence());
+        retorno.append(")");
+
+        return retorno.toString();
     }
 }

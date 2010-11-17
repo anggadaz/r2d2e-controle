@@ -283,4 +283,8 @@ public class FuzzyController extends Thread {
 
         return value;
     }
+
+    public ArrayList<String> getDataInType() {
+        return DataInType;
+    }
 }
