@@ -25,4 +25,8 @@ public class RuleBase {
     public ArrayList<Rule> getRules() {
         return rules;
     }
+
+    public void addRule(Rule regra) {
+        rules.add(regra);
+    }
 }

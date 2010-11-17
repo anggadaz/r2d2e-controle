@@ -5,7 +5,6 @@
 package br.ufrn.controle.fuzzycontroller.domain;
 
 import br.ufrn.controle.fuzzycontroller.utils.Util;
-import br.ufrn.controle.fuzzycontroller.view.FuncaoPertinenciaPanel;
 import br.ufrn.controle.fuzzycontroller.view.retractable.ToolsPanel;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -18,8 +17,6 @@ import java.awt.geom.GeneralPath;
 import java.awt.geom.PathIterator;
 import java.util.ArrayList;
 import java.awt.Point;
-import java.util.Collection;
-import java.util.Collections;
 
 /**
  *
@@ -367,5 +364,10 @@ public class FuncPertinence extends Polygon {
         }
 
         return ((hits & 1) != 0);
+    }
+
+    @Override
+    public String toString() {
+        return linguisticTerm;
     }
 }

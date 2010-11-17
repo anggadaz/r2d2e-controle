@@ -11,7 +11,7 @@ import org.openide.util.Exceptions;
  *
  * @author Demetrios
  */
-public class Mamdani extends Inference{
+public class Mamdani extends Inference {
 
     private final int numbThreads = 2;
 
@@ -19,14 +19,22 @@ public class Mamdani extends Inference{
         super(ruleBase);
     }
 
+    public Mamdani(RuleBase ruleBase, DataBase dataBase) {
+        super(ruleBase, dataBase);
+    }
+
+    public Mamdani(DataBase dataBase) {
+        super(dataBase);
+    }
+
     public FunctionOutPut work(DataIn dataIn) {
 
         ArrayList<Rule> rules = ruleBase.getRules();
-        
-        if(rules == null || rules.isEmpty()){
+
+        if (rules == null || rules.isEmpty()) {
             return null;
         }
-        
+
         FuncPertinence shapeOut = new FuncPertinence();
 
         RulesAvaliationThread rats[] = new RulesAvaliationThread[numbThreads];
@@ -35,10 +43,10 @@ public class Mamdani extends Inference{
         int rest = rules.size() % numbThreads;
 
         for (int i = 0; i < numbThreads - 1; i++) {
-            rats[i] = new RulesAvaliationThread(i, i * lengthPerThread, lengthPerThread, rules, dataIn, shapeOut,andFunction);
+            rats[i] = new RulesAvaliationThread(i, i * lengthPerThread, lengthPerThread, rules, dataIn, shapeOut, andFunction);
         }
 
-        rats[numbThreads - 1] = new RulesAvaliationThread(numbThreads - 1, numbThreads - 1 * lengthPerThread, lengthPerThread + rest, rules, dataIn, shapeOut,andFunction);
+        rats[numbThreads - 1] = new RulesAvaliationThread(numbThreads - 1, numbThreads - 1 * lengthPerThread, lengthPerThread + rest, rules, dataIn, shapeOut, andFunction);
 
         for (int i = 0; i < numbThreads; i++) {
             rats[i].start();

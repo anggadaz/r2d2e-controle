@@ -13,23 +13,18 @@ import java.util.HashMap;
  */
 public class DataBase {
 
-    private static HashMap<String, ArrayList<FuncPertinence>> pertinenceIn;
-    private static HashMap<String, ArrayList<FuncPertinence>> pertinenceOut;
+    private HashMap<String, ArrayList<FuncPertinence>> pertinenceIn = new HashMap<String, ArrayList<FuncPertinence>>();
+    private HashMap<String, ArrayList<FuncPertinence>> pertinenceOut = new HashMap<String, ArrayList<FuncPertinence>>();
 
-    static {
-        pertinenceIn = new HashMap<String, ArrayList<FuncPertinence>>();
-        pertinenceOut = new HashMap<String, ArrayList<FuncPertinence>>();
-    }
-
-    public static ArrayList<FuncPertinence> getIn(String variableIn) {
+    public ArrayList<FuncPertinence> getIn(String variableIn) {
         return pertinenceIn.get(variableIn);
     }
 
-    public static ArrayList<FuncPertinence> getOut(String variableOut) {
+    public ArrayList<FuncPertinence> getOut(String variableOut) {
         return pertinenceOut.get(variableOut);
     }
 
-    public static void addIn(String variableIn, FuncPertinence func) {
+    public void addIn(String variableIn, FuncPertinence func) {
         ArrayList<FuncPertinence> list = pertinenceIn.get(variableIn);
 
         if (list == null) {
@@ -41,7 +36,7 @@ public class DataBase {
 
     }
 
-    public static void addOut(String variableOut, FuncPertinence func) {
+    public void addOut(String variableOut, FuncPertinence func) {
         ArrayList<FuncPertinence> list = pertinenceOut.get(variableOut);
 
         if (list == null) {
@@ -52,11 +47,11 @@ public class DataBase {
         list.add(func);
     }
 
-    public static void addIn(String variableIn, ArrayList<FuncPertinence> pertinences) {
+    public void addIn(String variableIn, ArrayList<FuncPertinence> pertinences) {
         pertinenceIn.put(variableIn, pertinences);
     }
 
-    public static void addOut(String variableOut, ArrayList<FuncPertinence> pertinences) {
+    public void addOut(String variableOut, ArrayList<FuncPertinence> pertinences) {
         pertinenceOut.put(variableOut, pertinences);
     }
 }

@@ -4,6 +4,7 @@
  */
 package br.ufrn.controle.fuzzycontroller.domain;
 
+import br.ufrn.controle.fuzzycontroller.shared.ConstantsFuzzy;
 import java.util.HashMap;
 
 /**
@@ -52,5 +53,12 @@ public class Rule {
     public boolean isOperationNot(String var) {
         PremiseInfo info = premises.get(var);
         return info != null ? info.isOperationNot() : false;
+    }
+
+    @Override
+    public String toString() {
+        return "If (Input1 is " + (premises.get(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2).isOperationNot() ? "not ":"") + premises.get(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2).getShape() +
+                ") and (Input2 is " +(premises.get(ConstantsFuzzy.VARIABLE_ERROR_TANK2).isOperationNot() ? "not ":"") + premises.get(ConstantsFuzzy.VARIABLE_ERROR_TANK2).getShape() +
+                ") Then (Output is " + functionOuts.get(ConstantsFuzzy.VARIABLE_OUTPUT).getPertinence() + ")";
     }
 }

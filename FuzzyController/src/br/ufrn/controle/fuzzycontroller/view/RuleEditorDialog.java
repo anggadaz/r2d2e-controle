@@ -14,6 +14,7 @@ import br.ufrn.controle.fuzzycontroller.domain.DataBase;
 import br.ufrn.controle.fuzzycontroller.domain.FuncPertinence;
 import br.ufrn.controle.fuzzycontroller.domain.FuzzyController;
 import br.ufrn.controle.fuzzycontroller.domain.Rule;
+import br.ufrn.controle.fuzzycontroller.domain.RuleBase;
 import br.ufrn.controle.fuzzycontroller.shared.ConstantsFuzzy;
 import javax.swing.DefaultListModel;
 
@@ -22,12 +23,15 @@ import javax.swing.DefaultListModel;
  * @author allan
  */
 public class RuleEditorDialog extends javax.swing.JDialog {
-    FuzzyController controller;
+
+    RuleBase regras;
+    DataBase baseDados;
 
     /** Creates new form RuleEditorDialog */
     public RuleEditorDialog(MainView parent, boolean modal) {
         super(parent, modal);
-        controller = parent.getControllerSelected();
+        baseDados = parent.getControllerSelected().getInference().getDataBase();
+        regras = parent.getControllerSelected().getInference().getRuleBase();
         initComponents();
         init();
     }
@@ -46,12 +50,12 @@ public class RuleEditorDialog extends javax.swing.JDialog {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jCheckBox1 = new javax.swing.JCheckBox();
-        jCheckBox2 = new javax.swing.JCheckBox();
+        jCheckBox3 = new javax.swing.JCheckBox();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jCheckBox3 = new javax.swing.JCheckBox();
+        jCheckBox2 = new javax.swing.JCheckBox();
         jSeparator1 = new javax.swing.JSeparator();
         jButton3 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -75,7 +79,7 @@ public class RuleEditorDialog extends javax.swing.JDialog {
 
         jCheckBox1.setText(org.openide.util.NbBundle.getMessage(RuleEditorDialog.class, "RuleEditorDialog.jCheckBox1.text")); // NOI18N
 
-        jCheckBox2.setText(org.openide.util.NbBundle.getMessage(RuleEditorDialog.class, "RuleEditorDialog.jCheckBox2.text")); // NOI18N
+        jCheckBox3.setText(org.openide.util.NbBundle.getMessage(RuleEditorDialog.class, "RuleEditorDialog.jCheckBox3.text")); // NOI18N
 
         jButton1.setText(org.openide.util.NbBundle.getMessage(RuleEditorDialog.class, "RuleEditorDialog.jButton1.text")); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -90,7 +94,7 @@ public class RuleEditorDialog extends javax.swing.JDialog {
 
         jLabel6.setText(org.openide.util.NbBundle.getMessage(RuleEditorDialog.class, "RuleEditorDialog.jLabel6.text")); // NOI18N
 
-        jCheckBox3.setText(org.openide.util.NbBundle.getMessage(RuleEditorDialog.class, "RuleEditorDialog.jCheckBox3.text")); // NOI18N
+        jCheckBox2.setText(org.openide.util.NbBundle.getMessage(RuleEditorDialog.class, "RuleEditorDialog.jCheckBox2.text")); // NOI18N
 
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
@@ -131,7 +135,7 @@ public class RuleEditorDialog extends javax.swing.JDialog {
                                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(59, 59, 59)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jCheckBox3)
+                                            .addComponent(jCheckBox2)
                                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                                 .addComponent(jLabel6)
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -146,7 +150,7 @@ public class RuleEditorDialog extends javax.swing.JDialog {
                         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jCheckBox2)
+                            .addComponent(jCheckBox3)
                             .addComponent(jLabel2)
                             .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -164,7 +168,7 @@ public class RuleEditorDialog extends javax.swing.JDialog {
                         .addComponent(jCheckBox1)
                         .addGap(41, 41, 41))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jCheckBox3)
+                        .addComponent(jCheckBox2)
                         .addGap(41, 41, 41))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -175,7 +179,7 @@ public class RuleEditorDialog extends javax.swing.JDialog {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jCheckBox2)
+                                .addComponent(jCheckBox3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jButton3))
                             .addGroup(layout.createSequentialGroup()
@@ -210,22 +214,24 @@ public class RuleEditorDialog extends javax.swing.JDialog {
 
         regra.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, (FuncPertinence) jList4.getSelectedValue());
 
+        regras.addRule(regra);
+
         ((DefaultListModel) jList1.getModel()).addElement(regra);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void init() {
-        if (DataBase.getIn(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2) != null) {
-            for (FuncPertinence func : DataBase.getIn(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2)) {
+        if (baseDados.getIn(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2) != null) {
+            for (FuncPertinence func : baseDados.getIn(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2)) {
                 ((DefaultListModel) jList2.getModel()).addElement(func);
             }
         }
-        if (DataBase.getIn(ConstantsFuzzy.VARIABLE_ERROR_TANK2) != null) {
-            for (FuncPertinence func : DataBase.getIn(ConstantsFuzzy.VARIABLE_ERROR_TANK2)) {
+        if (baseDados.getIn(ConstantsFuzzy.VARIABLE_ERROR_TANK2) != null) {
+            for (FuncPertinence func : baseDados.getIn(ConstantsFuzzy.VARIABLE_ERROR_TANK2)) {
                 ((DefaultListModel) jList3.getModel()).addElement(func);
             }
         }
-        if (DataBase.getOut(ConstantsFuzzy.VARIABLE_OUTPUT) != null) {
-            for (FuncPertinence func : DataBase.getOut(ConstantsFuzzy.VARIABLE_OUTPUT)) {
+        if (baseDados.getOut(ConstantsFuzzy.VARIABLE_OUTPUT) != null) {
+            for (FuncPertinence func : baseDados.getOut(ConstantsFuzzy.VARIABLE_OUTPUT)) {
                 ((DefaultListModel) jList4.getModel()).addElement(func);
             }
         }

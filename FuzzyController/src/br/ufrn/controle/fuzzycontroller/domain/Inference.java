@@ -49,4 +49,12 @@ public abstract class Inference {
     public void setRuleBase(RuleBase ruleBase) {
         this.ruleBase = ruleBase;
     }
+
+    public DataBase getDataBase() {
+        return dataBase;
+    }
+
+    public void setDataBase(DataBase dataBase) {
+        this.dataBase = dataBase;
+    }
 }
