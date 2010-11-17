@@ -24,12 +24,17 @@ import java.awt.Point;
  */
 public class FuncPertinence extends Polygon {
 
+    public static int FATOR = 100;
     private static int REC_SIZE = 3;
+
     private String linguisticTerm = "";
+
     protected ArrayList<Double> px = new ArrayList<Double>();
     protected ArrayList<Double> py = new ArrayList<Double>();
+
     private Rectangle dragTarget = null;
     private ArrayList<Rectangle> retangs = new ArrayList<Rectangle>();
+
     private Color color = Color.BLACK;
     private int oldX = 0;
 
@@ -52,7 +57,6 @@ public class FuncPertinence extends Polygon {
 
         addPoint(list2);
     }
-
     /**
      * Metodo para avaliar o valor da funcao no ponto x. As classes filhas precisam
      * sobreescrever esse metodo.
@@ -63,12 +67,6 @@ public class FuncPertinence extends Polygon {
         return -1;
     }
 
-    /**
-     * Metodo para avaliar o valor da funcao no ponto x. As classes filhas precisam
-     * sobreescrever esse metodo.
-     * @param x
-     * @return
-     */
     public double getRangeNormalValue(double x) {
         return -1;
     }
@@ -77,11 +75,11 @@ public class FuncPertinence extends Polygon {
 
         addPoint(list.get(0), 0);
 
-        for (int i = 1; i < list.size() - 1; i++) {
+        for (int i = 1; i < list.size()-1; i++) {
             addPoint(list.get(i), 1);
         }
 
-        addPoint(list.get(list.size() - 1), 0);
+        addPoint(list.get(list.size()-1), 0);
 
     }
 
@@ -122,7 +120,7 @@ public class FuncPertinence extends Polygon {
         this.py.add(y);
 
         //Converter para coordenada de pixels
-        Point conv = ToolsPanel.IODialog.getFuncaoPertinenciaPanel1().toPixelScale(x, y);
+        Point conv = ToolsPanel.IODialog.getFuncaoPertinenciaPanel1().toPixelScale(x,y);
 
         super.addPoint(conv.x, conv.y);
 
@@ -148,9 +146,10 @@ public class FuncPertinence extends Polygon {
     public FuncPertinence union(FuncPertinence shape) {
 
         FuncPertinence retorno = new FuncPertinence();
+
         double[] coords = new double[6];
-        Area uniao = new Area(this);
-        Area area = new Area(shape);
+        Area uniao = new Area(toRealPolygon());
+        Area area = new Area(shape.toRealPolygon());
 
         uniao.add(area);
 
@@ -158,9 +157,10 @@ public class FuncPertinence extends Polygon {
 
         while (!it.isDone()) {
             it.currentSegment(coords);
-            retorno.addPoint((int) coords[0], (int) coords[1]);
+            retorno.addPoint(coords[0]/FATOR, (int) coords[1]/FATOR);
             it.next();
         }
+
         return retorno;
     }
 
@@ -239,7 +239,7 @@ public class FuncPertinence extends Polygon {
              p = new Point(xpoints[i], ypoints[i]);
 
              double conv = ToolsPanel.IODialog.getFuncaoPertinenciaPanel1().toRealScale(p);
-             int intConv = (int)(conv*100);
+             int intConv = (int)(conv*FATOR);
              conv = intConv/100.0;
 
              px.add(i, conv);
@@ -264,7 +264,7 @@ public class FuncPertinence extends Polygon {
             }
         }
 
-        System.out.println(getRangePixelsValue((e.getX())));
+        System.out.println(getRangePixelsValue(e.getX()));
     }
 
     public void mouseClicked() {
@@ -317,6 +317,20 @@ public class FuncPertinence extends Polygon {
             }
         }
         return retorno;
+    }
+
+    public Polygon toRealPolygon() {
+
+        Polygon p = new Polygon();
+        int x, y;
+
+        for (int i = 0; i < px.size(); i++) {
+            x = (int)(px.get(i) * FATOR);
+            y = (int)(py.get(i) * FATOR);
+            p.addPoint(x, y);
+        }
+
+        return p;
     }
 
     @Override
