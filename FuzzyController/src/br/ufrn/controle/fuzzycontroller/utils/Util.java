@@ -50,7 +50,7 @@ public class Util {
         double maxMinNumber = elements[0];
 
         ArrayList<Integer> out = new ArrayList<Integer>();
-
+        out.add(0);
         for (int i = 1; i < elements.length; i++) {
 
             double d = elements[i];

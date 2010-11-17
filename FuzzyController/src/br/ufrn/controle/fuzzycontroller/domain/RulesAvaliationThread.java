@@ -37,9 +37,15 @@ public class RulesAvaliationThread extends Thread {
     public void run() {
         FuncPertinence tempShape = null;
 
-        for (Rule rule : rules) {
+        for (int i = startIndex; i < (elements + startIndex); i++) {
+
+            Rule rule = rules.get(i);
 
             FuncPertinence shape = avaliateRule(rule);
+
+            if (shape == null) {
+                continue;
+            }
 
             if (tempShape == null) {
                 tempShape = shape;
@@ -73,7 +79,7 @@ public class RulesAvaliationThread extends Thread {
 
             double value = dataIn.getValueOfVariable(var);
 
-            double mi = shape.getRangeValue(value);
+            double mi = shape.getRangeNormalValue(value);
 
             if (rule.isOperationNot(var)) {
                 value = 1 - value;
@@ -88,19 +94,16 @@ public class RulesAvaliationThread extends Thread {
         return reShapeFuncOut(funcOut, pertinenceValue[index[0]]);
     }
 
-
-
-
-
     private FuncPertinence reShapeFuncOut(FuncPertinence funcOut, double minPertiValue) {
 
         if (minPertiValue == 0) {
-            return funcOut;
+            return null;
         }
 
         return funcOut.cut(minPertiValue);
     }
 
     private void aggregate(FuncPertinence shape, FuncPertinence shapeOut) {
+        shapeOut = shapeOut.union(shape);
     }
 }

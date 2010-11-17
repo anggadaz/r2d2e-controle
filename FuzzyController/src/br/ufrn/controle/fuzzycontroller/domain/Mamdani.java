@@ -46,7 +46,7 @@ public class Mamdani extends Inference {
             rats[i] = new RulesAvaliationThread(i, i * lengthPerThread, lengthPerThread, rules, dataIn, shapeOut, andFunction);
         }
 
-        rats[numbThreads - 1] = new RulesAvaliationThread(numbThreads - 1, numbThreads - 1 * lengthPerThread, lengthPerThread + rest, rules, dataIn, shapeOut, andFunction);
+        rats[numbThreads - 1] = new RulesAvaliationThread(numbThreads - 1, (numbThreads - 1) * lengthPerThread, lengthPerThread + rest, rules, dataIn, shapeOut, andFunction);
 
         for (int i = 0; i < numbThreads; i++) {
             rats[i].start();

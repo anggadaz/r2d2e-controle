@@ -15,7 +15,8 @@ public class Defuzzification {
 
     private int defuzzificationType;
 
-    public Defuzzification() {
+    public Defuzzification(int defuzzificationType) {
+        this.defuzzificationType = defuzzificationType;
     }
 
     public double defuzzificate(FunctionOutPut functionOutPut) {
@@ -91,9 +92,18 @@ public class Defuzzification {
             }
         }
 
-        return xSum/2;
+        return xSum / 2;
     }
-    private double sugeno(Expression expression){
+
+    private double sugeno(Expression expression) {
         return expression.evaluate(new DataIn());
+    }
+
+    public int getDefuzzificationType() {
+        return defuzzificationType;
+    }
+
+    public void setDefuzzificationType(int defuzzificationType) {
+        this.defuzzificationType = defuzzificationType;
     }
 }

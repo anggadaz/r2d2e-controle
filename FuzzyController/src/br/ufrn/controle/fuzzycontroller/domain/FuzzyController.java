@@ -8,6 +8,7 @@ import br.ufrn.controle.fuzzycontroller.handler.GraphHandler;
 import br.ufrn.controle.fuzzycontroller.quanser.Quanser;
 import br.ufrn.controle.fuzzycontroller.shared.ConstantsFuzzy;
 import br.ufrn.controle.fuzzycontroller.shared.ConstantsGraph;
+import br.ufrn.controle.fuzzycontroller.view.TanquePanel;
 import java.util.ArrayList;
 import org.openide.util.Exceptions;
 
@@ -33,6 +34,7 @@ public class FuzzyController extends Thread {
     private double previousError1 = 0;
     private double previousError2 = 0;
     private double integralTension = 0;
+    private TanquePanel tanquePanel;
 
     public FuzzyController(String name, Inference inference, Defuzzification defuzzification, ArrayList<String> DataInType) {
         this.name = name;
@@ -51,6 +53,14 @@ public class FuzzyController extends Thread {
 
         quanser.connect();
 
+        double level1Cal = quanser.readSensor1();
+        double level2Cal = quanser.readSensor2();
+
+        Quanser.setCALIBRATION1(level1Cal);
+        Quanser.setCALIBRATION2(level2Cal);
+        graphControlHandler.init();
+        graphLevelHandler.init();
+
         while (ative) {
 
             double level1 = quanser.readSensor1();
@@ -68,15 +78,21 @@ public class FuzzyController extends Thread {
 
             double realVoltz = travaTensao(voltz);
 
-            integralTension += realVoltz;
+//            integralTension += realVoltz;
 
-            realVoltz = travaNivel2(level2, integralTension);
+            realVoltz = travaNivel2(level2, realVoltz);
 
-            realVoltz = travaNivel1(level1, integralTension);
+            realVoltz = travaNivel1(level1, realVoltz);
 
-            quanser.writeBomb(integralTension);
+            quanser.writeBomb(realVoltz);
 
-            updateGraph(level1, level2, integralTension);
+            updateGraph(level1, level2, realVoltz);
+
+            tanquePanel.setLevelWater1(level1);
+            tanquePanel.setLevelWater2(level2);
+
+//            System.out.println("Erro " + dataIn.getValueOfVariable(ConstantsFuzzy.VARIABLE_ERROR_TANK2) + " derErro " +
+//                    dataIn.getValueOfVariable(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2) + " saida " + voltz);
 
             try {
                 sleep(100);
@@ -135,16 +151,16 @@ public class FuzzyController extends Thread {
         for (int i = 0; i < DataInType.size(); i++) {
             String string = DataInType.get(i);
             if (string.equals(ConstantsFuzzy.VARIABLE_ERROR_TANK1)) {
-                dataIn.addValue(string, ConstantsFuzzy.setPoint - level1);
+                dataIn.addValue(string, putLimit(string, ConstantsFuzzy.setPoint - level1));
             }
             if (string.equals(ConstantsFuzzy.VARIABLE_ERROR_TANK2)) {
-                dataIn.addValue(string, ConstantsFuzzy.setPoint - level2);
+                dataIn.addValue(string, putLimit(string, ConstantsFuzzy.setPoint - level2));
             }
             if (string.equals(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK1)) {
-                dataIn.addValue(string, (ConstantsFuzzy.setPoint - level1) - previousError1);
+                dataIn.addValue(string, putLimit(string, ((ConstantsFuzzy.setPoint - level1) - previousError1)));
             }
             if (string.equals(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2)) {
-                dataIn.addValue(string, (ConstantsFuzzy.setPoint - level2) - previousError2);
+                dataIn.addValue(string, putLimit(string, (ConstantsFuzzy.setPoint - level2) - previousError2));
             }
         }
 
@@ -227,7 +243,6 @@ public class FuzzyController extends Thread {
 //    public void setSetPoint(int setPoint) {
 //        this.setPoint = setPoint;
 //    }
-
     public SelectionsGraph getSelectionsGraph() {
         return selectionsGraph;
     }
@@ -244,8 +259,28 @@ public class FuzzyController extends Thread {
         this.graphLevelHandler = graphLevelHandler;
     }
 
+    public TanquePanel getTanquePanel() {
+        return tanquePanel;
+    }
+
+    public void setTanquePanel(TanquePanel tanquePanel) {
+        this.tanquePanel = tanquePanel;
+    }
+
     @Override
     public String toString() {
         return name;
+    }
+
+    private Double putLimit(String variable, double value) {
+        ArrayList<Double> range = inference.getDataBase().getRangeIn(variable);
+
+        if (value < range.get(0)) {
+            return range.get(0);
+        } else if (value > range.get(1)) {
+            return range.get(1);
+        }
+
+        return value;
     }
 }

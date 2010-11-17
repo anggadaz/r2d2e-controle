@@ -12,7 +12,6 @@ package br.ufrn.controle.fuzzycontroller.view;
 
 import br.ufrn.controle.fuzzycontroller.handler.GraphHandler;
 import java.awt.Color;
-import java.util.HashMap;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -20,9 +19,7 @@ import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.XYPlot;
-import org.jfree.chart.renderer.xy.DefaultXYItemRenderer;
 import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
-import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 import org.jfree.ui.RectangleInsets;
 
@@ -36,7 +33,7 @@ public class Graph extends ChartPanel {
     private String EIXO_X = "Eixo X";
     private String EIXO_Y = "Eixo Y";
     private PlotOrientation ORIENTATION = PlotOrientation.VERTICAL;
-    private boolean CREATE_LEGENDS = false;
+    private boolean CREATE_LEGENDS = true;
     private boolean SHOW_TOOLTIPS = true;
     private boolean CREATE_URL = true;
     private Color BACKGROUND_COLOR = Color.WHITE;
@@ -76,9 +73,12 @@ public class Graph extends ChartPanel {
         plot.setRangeGridlinePaint(Color.white);
         plot.setAxisOffset(new RectangleInsets(4D, 4D, 4D, 4D));
 
+        plot.setDomainGridlinePaint(Color.GRAY);
+        plot.setRangeGridlinePaint(Color.GRAY);
+
         ValueAxis valueaxis = plot.getDomainAxis();
         valueaxis.setAutoRange(true);
-        valueaxis.setFixedAutoRange(10d);
+//        valueaxis.setFixedAutoRange(100d);
 
         XYLineAndShapeRenderer renderer = new XYLineAndShapeRenderer(true, false);
         plot.setRenderer(renderer);

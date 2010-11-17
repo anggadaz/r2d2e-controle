@@ -23,6 +23,7 @@ public class Expression {
 
     public Expression(double offset) {
         this.offset = offset;
+        constants = new HashMap<String, Double>();
     }
 
     public void addConstant(String variable, double value) {
@@ -42,7 +43,13 @@ public class Expression {
 
         for (String variable : variables) {
             Double value = dataIn.getValueOfVariable(variable);
+
             Double constant = constants.get(variable);
+
+            if(constant == null){
+                constant = 0d;
+            }
+
             result += (constant * value);
         }
 

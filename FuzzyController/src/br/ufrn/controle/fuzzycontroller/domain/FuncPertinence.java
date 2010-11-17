@@ -26,8 +26,8 @@ public class FuncPertinence extends Polygon {
 
     private static int REC_SIZE = 3;
     private String linguisticTerm = "";
-    private ArrayList<Double> px = new ArrayList<Double>();
-    private ArrayList<Double> py = new ArrayList<Double>();
+    protected ArrayList<Double> px = new ArrayList<Double>();
+    protected ArrayList<Double> py = new ArrayList<Double>();
     private Rectangle dragTarget = null;
     private ArrayList<Rectangle> retangs = new ArrayList<Rectangle>();
     private Color color = Color.BLACK;
@@ -52,13 +52,24 @@ public class FuncPertinence extends Polygon {
 
         addPoint(list2);
     }
+
     /**
      * Metodo para avaliar o valor da funcao no ponto x. As classes filhas precisam
      * sobreescrever esse metodo.
      * @param x
      * @return
      */
-    public double getRangeValue(double x) {
+    public double getRangePixelsValue(double x) {
+        return -1;
+    }
+
+    /**
+     * Metodo para avaliar o valor da funcao no ponto x. As classes filhas precisam
+     * sobreescrever esse metodo.
+     * @param x
+     * @return
+     */
+    public double getRangeNormalValue(double x) {
         return -1;
     }
 
@@ -66,11 +77,11 @@ public class FuncPertinence extends Polygon {
 
         addPoint(list.get(0), 0);
 
-        for (int i = 1; i < list.size()-1; i++) {
+        for (int i = 1; i < list.size() - 1; i++) {
             addPoint(list.get(i), 1);
         }
 
-        addPoint(list.get(list.size()-1), 0);
+        addPoint(list.get(list.size() - 1), 0);
 
     }
 
@@ -111,7 +122,7 @@ public class FuncPertinence extends Polygon {
         this.py.add(y);
 
         //Converter para coordenada de pixels
-        Point conv = ToolsPanel.IODialog.getFuncaoPertinenciaPanel1().toPixelScale(x,y);
+        Point conv = ToolsPanel.IODialog.getFuncaoPertinenciaPanel1().toPixelScale(x, y);
 
         super.addPoint(conv.x, conv.y);
 
@@ -253,7 +264,7 @@ public class FuncPertinence extends Polygon {
             }
         }
 
-        System.out.println(getRangeValue(e.getX()));
+        System.out.println(getRangePixelsValue((e.getX())));
     }
 
     public void mouseClicked() {

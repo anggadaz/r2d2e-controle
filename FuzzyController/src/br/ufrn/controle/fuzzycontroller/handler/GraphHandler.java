@@ -46,6 +46,11 @@ public class GraphHandler {
 
     public void removeSerie(String tipo) {
         XYSeries serie = mapSeries.remove(tipo);
+
+        if (serie == null) {
+            return;
+        }
+        
         seriesCollection.removeSeries(serie);
     }
 }
