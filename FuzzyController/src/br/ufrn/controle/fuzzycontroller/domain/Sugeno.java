@@ -18,6 +18,10 @@ public class Sugeno extends Inference {
     private ArrayList<Double> alphas;
     private ArrayList<Double> expressionValues;
 
+    public Sugeno() {
+        super();
+    }
+
     public Sugeno(RuleBase ruleBase, DataBase dataBase) {
         super(ruleBase, dataBase);
     }
@@ -106,4 +110,10 @@ public class Sugeno extends Inference {
 
         return num / den;
     }
+
+    @Override
+    public String toString() {
+        return "Sugeno";
+    }
+
 }

@@ -15,6 +15,10 @@ public class Mamdani extends Inference {
 
     private final int numbThreads = 2;
 
+    public Mamdani() {
+        super();
+    }
+
     public Mamdani(RuleBase ruleBase) {
         super(ruleBase);
     }
@@ -61,5 +65,10 @@ public class Mamdani extends Inference {
         }
 
         return new FunctionOutPut(shapeOut);
+    }
+
+    @Override
+    public String toString() {
+        return "Mamdani";
     }
 }

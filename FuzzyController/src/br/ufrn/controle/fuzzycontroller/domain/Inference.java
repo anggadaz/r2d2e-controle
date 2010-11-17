@@ -16,6 +16,10 @@ public abstract class Inference {
     protected DataBase dataBase;
     protected int andFunction;
 
+    public Inference() {
+        
+    }
+
     public Inference(RuleBase ruleBase) {
         this.ruleBase = ruleBase;
         andFunction = ConstantsFuzzy.MIN_FUNCTION;
