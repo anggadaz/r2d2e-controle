@@ -226,7 +226,13 @@ public class FuncPertinence extends Polygon {
 
          for (int i = 0; i < npoints; i++) {
              p = new Point(xpoints[i], ypoints[i]);
-             param.append(ToolsPanel.IODialog.getFuncaoPertinenciaPanel1().toRealScale(p));
+
+             double conv = ToolsPanel.IODialog.getFuncaoPertinenciaPanel1().toRealScale(p);
+             int intConv = (int)(conv*100);
+             conv = intConv/100.0;
+
+             px.add(i, conv);
+             param.append(conv);
              param.append(" ");
         }
 

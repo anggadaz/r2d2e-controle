@@ -1,6 +1,7 @@
 package br.ufrn.controle.fuzzycontroller.view;
 
 import br.ufrn.controle.fuzzycontroller.domain.FuncPertinence;
+import br.ufrn.controle.fuzzycontroller.view.retractable.ToolsPanel;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.BasicStroke;
@@ -40,9 +41,31 @@ public class FuncaoPertinenciaPanel extends JPanel {
 
             @Override
             public void mouseClicked(java.awt.event.MouseEvent evt) {
+//                boolean clicado = false;
+//                for (FuncPertinence funcaoPertinencia : funcs) {
+//                    if (funcaoPertinencia.contains(evt.getX(), evt.getY()) && !clicado) {
+//                        dragTarget = funcaoPertinencia;
+//                        dragTarget.mouseClicked();
+//                        clicado = true;
+//                    } else {
+//                        funcaoPertinencia.mouseClickedOut();
+//                    }
+//                }
+//
+//                if (!clicado && dragTarget != null) {
+//                    dragTarget.mouseClickedOut();
+//                    ToolsPanel.IODialog.clearFuncData();
+//                    dragTarget = null;
+//                }
+//                repaint();
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
                 boolean clicado = false;
                 for (FuncPertinence funcaoPertinencia : funcs) {
-                    if (funcaoPertinencia.contains(evt.getX(), evt.getY()) && !clicado) {
+                    if (funcaoPertinencia.contains(e.getX(), e.getY()) && !clicado) {
                         dragTarget = funcaoPertinencia;
                         dragTarget.mouseClicked();
                         clicado = true;
@@ -53,13 +76,11 @@ public class FuncaoPertinenciaPanel extends JPanel {
 
                 if (!clicado && dragTarget != null) {
                     dragTarget.mouseClickedOut();
+                    ToolsPanel.IODialog.clearFuncData();
                     dragTarget = null;
                 }
                 repaint();
-            }
 
-            @Override
-            public void mouseReleased(MouseEvent e) {
                 if (dragTarget != null) {
                     dragTarget.mouseReleased(e);
                 }
@@ -98,6 +119,17 @@ public class FuncaoPertinenciaPanel extends JPanel {
         for (FuncPertinence funcaoPertinencia : funcs) {
             funcaoPertinencia.draw(g2d);
         }
+    }
+
+    public void deletTarget() {
+
+        if (dragTarget != null) {
+            dragTarget.mouseClickedOut();
+            funcs.remove(dragTarget);
+            repaint();
+        }
+        
+        dragTarget = null;
     }
 
     private void drawScale(Graphics2D g2d)
@@ -221,7 +253,7 @@ public class FuncaoPertinenciaPanel extends JPanel {
         }
 
         double x = point.x;
-        Double y = (x * limitReal)/limitPixel;
+        Double y = ((x-LIMITE_MAX) * limitReal)/limitPixel;
 
         if(isOutput) {
             y += OUTPUT_SCALE[0];

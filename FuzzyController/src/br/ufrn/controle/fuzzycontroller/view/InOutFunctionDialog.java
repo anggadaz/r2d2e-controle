@@ -209,7 +209,8 @@ public class InOutFunctionDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_btAddActionPerformed
 
     private void delFunction() {
-
+        funcaoPertinenciaPanel1.deletTarget();
+        clearFuncData();
     }
     
     private void addFunction() {
