@@ -177,7 +177,7 @@ public class ToolsPanel extends javax.swing.JPanel implements RetractablePanelCo
         gridBagConstraints.ipady = 36;
         panelOptions.add(transluOptFuzzy, gridBagConstraints);
 
-        buttonGeral.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufrn/controle/fuzzycontroller/view/resources/tools.png"))); // NOI18N
+        buttonGeral.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufrn/controle/fuzzycontroller/view/resources/preferences.png"))); // NOI18N
         buttonGeral.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 buttonGeralMouseReleased(evt);
