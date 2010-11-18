@@ -10,6 +10,7 @@
  */
 package br.ufrn.controle.fuzzycontroller.view.retractable;
 
+import br.ufrn.controle.fuzzycontroller.view.FuzzyEditor;
 import br.ufrn.controle.fuzzycontroller.view.InOutFunctionDialog;
 import br.ufrn.controle.fuzzycontroller.view.InitialDialog;
 import br.ufrn.controle.fuzzycontroller.view.MainView;
@@ -29,6 +30,7 @@ public class ToolsPanel extends javax.swing.JPanel implements RetractablePanelCo
     private MainView parent;
 
     public static InOutFunctionDialog IODialog = new InOutFunctionDialog(null, false, false);
+    public FuzzyEditor fuzzyEditor;
 
     /** Creates new form ToolsPanel
      * @param parent
@@ -36,6 +38,7 @@ public class ToolsPanel extends javax.swing.JPanel implements RetractablePanelCo
     public ToolsPanel(MainView parent) {
         initComponents();
         this.parent = parent;
+        fuzzyEditor = new FuzzyEditor(parent, true);
     }
 
     /** This method is called from within the constructor to
@@ -259,8 +262,11 @@ public class ToolsPanel extends javax.swing.JPanel implements RetractablePanelCo
     }//GEN-LAST:event_buttonStopMouseReleased
 
     private void buttonOpFuncMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonOpFuncMouseReleased
-        IODialog.setLocationRelativeTo(parent);
-        IODialog.setVisible(true);
+//        IODialog.setLocationRelativeTo(parent);
+//        IODialog.setVisible(true);
+        fuzzyEditor.init();
+        fuzzyEditor.setLocationRelativeTo(this);
+        fuzzyEditor.setVisible(true);
     }//GEN-LAST:event_buttonOpFuncMouseReleased
     private void changeCard(String card) {
         CardLayout layout = (CardLayout) getLayout();

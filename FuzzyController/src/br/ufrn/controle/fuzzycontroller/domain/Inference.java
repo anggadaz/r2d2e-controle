@@ -17,7 +17,8 @@ public abstract class Inference {
     protected int andFunction;
 
     public Inference() {
-        
+        this.ruleBase = new RuleBase();
+        this.dataBase = new DataBase();
     }
 
     public Inference(RuleBase ruleBase) {

@@ -8,8 +8,10 @@
  *
  * Created on 02/11/2010, 17:03:46
  */
-
 package br.ufrn.controle.fuzzycontroller.view;
+
+import java.awt.CardLayout;
+import java.awt.Cursor;
 
 /**
  *
@@ -17,10 +19,24 @@ package br.ufrn.controle.fuzzycontroller.view;
  */
 public class FuzzyEditor extends javax.swing.JDialog {
 
+//    private FuzzyController controller;
+    private MainView frame;
+
     /** Creates new form FuzzyEditor */
-    public FuzzyEditor(java.awt.Frame parent, boolean modal) {
+    public FuzzyEditor(MainView parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        this.frame = parent;
+
+//        controller = parent.getControllerSelected();
+//        ruleEditorPanel1.setController(controller);
+
+        controlerPanel1.preencheLista(parent.getControllers());
+        
+    }
+
+    public void init() {
+        controlerPanel1.preencheLista(frame.getControllers());
     }
 
     /** This method is called from within the constructor to
@@ -32,91 +48,259 @@ public class FuzzyEditor extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel6 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        jPanel4 = new javax.swing.JPanel();
+        controlerPanel1 = new br.ufrn.controle.fuzzycontroller.view.ControlerPanel();
         jPanel3 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
-        jLabel2 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox();
+        jPanel5 = new javax.swing.JPanel();
+        ruleEditorPanel1 = new br.ufrn.controle.fuzzycontroller.view.RuleEditorPanel();
+        gradientPanel1 = new br.ufrn.siga.component.gradient.GradientPanel();
+        translucentButton1 = new br.ufrn.siga.component.translucent.TranslucentButton();
+        translucentButton2 = new br.ufrn.siga.component.translucent.TranslucentButton();
+        translucentButton3 = new br.ufrn.siga.component.translucent.TranslucentButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jPanel1.setLayout(new java.awt.GridLayout(1, 0));
+        jPanel6.setBackground(new java.awt.Color(255, 255, 255));
 
-        jPanel2.setLayout(new java.awt.GridLayout(2, 0));
+        jPanel1.setLayout(new java.awt.CardLayout());
 
-        jButton1.setText("Input 1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(controlerPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 542, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(controlerPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 348, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jPanel1.add(jPanel4, "card4");
+
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)), "Editor Função de Pertinencia"));
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 552, Short.MAX_VALUE)
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 346, Short.MAX_VALUE)
+        );
+
+        jPanel1.add(jPanel3, "funcPertinenciaCard");
+
+        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)), "Editor de Regras"));
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 552, Short.MAX_VALUE)
+            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(ruleEditorPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addContainerGap()))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 346, Short.MAX_VALUE)
+            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel5Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(ruleEditorPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 320, Short.MAX_VALUE)
+                    .addGap(15, 15, 15)))
+        );
+
+        jPanel1.add(jPanel5, "ruleEditorCard");
+
+        gradientPanel1.setColor1(new java.awt.Color(255, 255, 255));
+        gradientPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT, 20, 5));
+
+        translucentButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufrn/controle/fuzzycontroller/view/resources/tools48x48.png"))); // NOI18N
+        translucentButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                translucentButton1MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                translucentButton1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                translucentButton1MouseExited(evt);
             }
         });
-        jPanel2.add(jButton1);
 
-        jButton2.setText("Input 2");
-        jPanel2.add(jButton2);
+        javax.swing.GroupLayout translucentButton1Layout = new javax.swing.GroupLayout(translucentButton1);
+        translucentButton1.setLayout(translucentButton1Layout);
+        translucentButton1Layout.setHorizontalGroup(
+            translucentButton1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 48, Short.MAX_VALUE)
+        );
+        translucentButton1Layout.setVerticalGroup(
+            translucentButton1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 48, Short.MAX_VALUE)
+        );
 
-        jPanel1.add(jPanel2);
+        gradientPanel1.add(translucentButton1);
 
-        jButton4.setText("Regras");
-        jPanel1.add(jButton4);
+        translucentButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufrn/controle/fuzzycontroller/view/resources/area_empilhada_48x48.png"))); // NOI18N
+        translucentButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                translucentButton2MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                translucentButton2MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                translucentButton2MouseExited(evt);
+            }
+        });
 
-        jButton5.setText("Output");
-        jPanel1.add(jButton5);
+        javax.swing.GroupLayout translucentButton2Layout = new javax.swing.GroupLayout(translucentButton2);
+        translucentButton2.setLayout(translucentButton2Layout);
+        translucentButton2Layout.setHorizontalGroup(
+            translucentButton2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 48, Short.MAX_VALUE)
+        );
+        translucentButton2Layout.setVerticalGroup(
+            translucentButton2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 48, Short.MAX_VALUE)
+        );
 
-        jLabel1.setText("Método And:");
-        jPanel3.add(jLabel1);
+        gradientPanel1.add(translucentButton2);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel3.add(jComboBox1);
+        translucentButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufrn/controle/fuzzycontroller/view/resources/gear48x48.png"))); // NOI18N
+        translucentButton3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                translucentButton3MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                translucentButton3MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                translucentButton3MouseExited(evt);
+            }
+        });
 
-        jLabel2.setText("Defuzzificação:");
-        jPanel3.add(jLabel2);
+        javax.swing.GroupLayout translucentButton3Layout = new javax.swing.GroupLayout(translucentButton3);
+        translucentButton3.setLayout(translucentButton3Layout);
+        translucentButton3Layout.setHorizontalGroup(
+            translucentButton3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 48, Short.MAX_VALUE)
+        );
+        translucentButton3Layout.setVerticalGroup(
+            translucentButton3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 48, Short.MAX_VALUE)
+        );
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel3.add(jComboBox2);
+        gradientPanel1.add(translucentButton3);
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(gradientPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 562, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel6Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 562, Short.MAX_VALUE)
+                    .addContainerGap()))
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(gradientPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(392, Short.MAX_VALUE))
+            .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                    .addGap(80, 80, 80)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 370, Short.MAX_VALUE)
+                    .addContainerGap()))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE))
-                .addContainerGap())
+            .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(12, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void translucentButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_translucentButton1MouseClicked
+        CardLayout carta = ((CardLayout) jPanel1.getLayout());
+        carta.show(jPanel1, "card4");
+    }//GEN-LAST:event_translucentButton1MouseClicked
+
+    private void translucentButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_translucentButton3MouseClicked
+        ruleEditorPanel1.setController(controlerPanel1.getSelectedFunc());
+
+        CardLayout carta = ((CardLayout) jPanel1.getLayout());
+        carta.show(jPanel1, "ruleEditorCard");
+    }//GEN-LAST:event_translucentButton3MouseClicked
+
+    private void translucentButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_translucentButton2MouseClicked
+        CardLayout carta = ((CardLayout) jPanel1.getLayout());
+        carta.show(jPanel1, "funcPertinenciaCard");
+    }//GEN-LAST:event_translucentButton2MouseClicked
+
+    private void translucentButton1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_translucentButton1MouseEntered
+        translucentButton1.setCursor(new Cursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_translucentButton1MouseEntered
+
+    private void translucentButton2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_translucentButton2MouseEntered
+        translucentButton2.setCursor(new Cursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_translucentButton2MouseEntered
+
+    private void translucentButton3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_translucentButton3MouseEntered
+        translucentButton3.setCursor(new Cursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_translucentButton3MouseEntered
+
+    private void translucentButton1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_translucentButton1MouseExited
+        translucentButton1.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+    }//GEN-LAST:event_translucentButton1MouseExited
+
+    private void translucentButton2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_translucentButton2MouseExited
+        translucentButton2.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+    }//GEN-LAST:event_translucentButton2MouseExited
+
+    private void translucentButton3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_translucentButton3MouseExited
+        translucentButton3.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+    }//GEN-LAST:event_translucentButton3MouseExited
 
     /**
-    * @param args the command line arguments
-    */
+     * @param args the command line arguments
+     */
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                FuzzyEditor dialog = new FuzzyEditor(new javax.swing.JFrame(), true);
+                FuzzyEditor dialog = new FuzzyEditor(new MainView(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+
                     public void windowClosing(java.awt.event.WindowEvent e) {
                         System.exit(0);
                     }
@@ -125,19 +309,17 @@ public class FuzzyEditor extends javax.swing.JDialog {
             }
         });
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JComboBox jComboBox1;
-    private javax.swing.JComboBox jComboBox2;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private br.ufrn.controle.fuzzycontroller.view.ControlerPanel controlerPanel1;
+    private br.ufrn.siga.component.gradient.GradientPanel gradientPanel1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private br.ufrn.controle.fuzzycontroller.view.RuleEditorPanel ruleEditorPanel1;
+    private br.ufrn.siga.component.translucent.TranslucentButton translucentButton1;
+    private br.ufrn.siga.component.translucent.TranslucentButton translucentButton2;
+    private br.ufrn.siga.component.translucent.TranslucentButton translucentButton3;
     // End of variables declaration//GEN-END:variables
-
 }

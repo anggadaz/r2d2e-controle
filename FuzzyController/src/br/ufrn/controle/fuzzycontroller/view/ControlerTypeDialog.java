@@ -52,7 +52,7 @@ public class ControlerTypeDialog extends javax.swing.JDialog {
 
         lblFuzzy.setText(org.openide.util.NbBundle.getMessage(ControlerTypeDialog.class, "ControlerTypeDialog.lblFuzzy.text")); // NOI18N
 
-        comboControllers.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Mamdani", "Sugeno" }));
+        comboControllers.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Mamdami", "Sugeno" }));
         comboControllers.setOpaque(false);
 
         jButton1.setText(org.openide.util.NbBundle.getMessage(ControlerTypeDialog.class, "ControlerTypeDialog.jButton1.text")); // NOI18N
