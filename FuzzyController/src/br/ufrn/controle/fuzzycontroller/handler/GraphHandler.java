@@ -53,4 +53,9 @@ public class GraphHandler {
         
         seriesCollection.removeSeries(serie);
     }
+
+    public void clean() {
+        seriesCollection.removeAllSeries();
+        mapSeries.clear();
+    }
 }

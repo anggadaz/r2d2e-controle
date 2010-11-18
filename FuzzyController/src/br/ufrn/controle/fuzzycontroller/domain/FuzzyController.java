@@ -27,7 +27,6 @@ public class FuzzyController extends Thread {
     private GraphHandler graphControlHandler;
     private Quanser quanser;
     private volatile boolean ative = true;
-//    private int setPoint;
     private static final int NIVEL_MAX = 25;
     private static final int NIVEL_MIN = 3;
     private boolean limiteMaxTank2 = false;
@@ -286,5 +285,5 @@ public class FuzzyController extends Thread {
 
     public ArrayList<String> getDataInType() {
         return DataInType;
-    }
+}
 }

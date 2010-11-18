@@ -19,17 +19,17 @@ public class RulesAvaliationThread extends Thread {
     private int elements;
     private ArrayList<Rule> rules;
     private DataIn dataIn;
-    private FuncPertinence globalShape;
+    private SharedVariableThread globalVariableShared;
     private int andFunction;
     private static final Object lock = new Object();
 
-    public RulesAvaliationThread(int id, int startIndex, int elements, ArrayList<Rule> rules, DataIn dataIn, FuncPertinence globalShape, int andFunction) {
+    public RulesAvaliationThread(int id, int startIndex, int elements, ArrayList<Rule> rules, DataIn dataIn, SharedVariableThread globalShape, int andFunction) {
         this.id = id;
         this.startIndex = startIndex;
         this.elements = elements;
         this.rules = rules;
         this.dataIn = dataIn;
-        this.globalShape = globalShape;
+        this.globalVariableShared = globalShape;
         this.andFunction = andFunction;
     }
 
@@ -52,11 +52,14 @@ public class RulesAvaliationThread extends Thread {
                 continue;
             }
 
-            aggregate(shape, tempShape);
+           tempShape =  aggregate(shape, tempShape);
         }
 
-        synchronized (lock) {
-            aggregate(tempShape, globalShape);
+        if(tempShape != null){
+            synchronized (lock) {
+               FuncPertinence fp =  aggregate(tempShape,globalVariableShared.getPertinence());
+               globalVariableShared.setPertinence(fp);
+            }
         }
 
     }
@@ -103,7 +106,7 @@ public class RulesAvaliationThread extends Thread {
         return funcOut.cut(minPertiValue);
     }
 
-    private void aggregate(FuncPertinence shape, FuncPertinence shapeOut) {
-        shapeOut = shapeOut.union(shape);
+    private FuncPertinence aggregate(FuncPertinence shape, FuncPertinence shapeAggregation) {
+        return shapeAggregation.union(shape);
     }
 }

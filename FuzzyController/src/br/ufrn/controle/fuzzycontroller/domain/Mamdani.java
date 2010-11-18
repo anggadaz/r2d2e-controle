@@ -39,7 +39,7 @@ public class Mamdani extends Inference {
             return null;
         }
 
-        FuncPertinence shapeOut = new FuncPertinence();
+        SharedVariableThread sharedVariableThread = new SharedVariableThread(new FuncPertinence());
 
         RulesAvaliationThread rats[] = new RulesAvaliationThread[numbThreads];
 
@@ -47,10 +47,10 @@ public class Mamdani extends Inference {
         int rest = rules.size() % numbThreads;
 
         for (int i = 0; i < numbThreads - 1; i++) {
-            rats[i] = new RulesAvaliationThread(i, i * lengthPerThread, lengthPerThread, rules, dataIn, shapeOut, andFunction);
+            rats[i] = new RulesAvaliationThread(i, i * lengthPerThread, lengthPerThread, rules, dataIn, sharedVariableThread, andFunction);
         }
 
-        rats[numbThreads - 1] = new RulesAvaliationThread(numbThreads - 1, (numbThreads - 1) * lengthPerThread, lengthPerThread + rest, rules, dataIn, shapeOut, andFunction);
+        rats[numbThreads - 1] = new RulesAvaliationThread(numbThreads - 1, (numbThreads - 1) * lengthPerThread, lengthPerThread + rest, rules, dataIn, sharedVariableThread, andFunction);
 
         for (int i = 0; i < numbThreads; i++) {
             rats[i].start();
@@ -64,11 +64,11 @@ public class Mamdani extends Inference {
             }
         }
 
-        return new FunctionOutPut(shapeOut);
+        return new FunctionOutPut(sharedVariableThread.getPertinence());
     }
 
     @Override
     public String toString() {
         return "Mamdani";
-    }
+}
 }

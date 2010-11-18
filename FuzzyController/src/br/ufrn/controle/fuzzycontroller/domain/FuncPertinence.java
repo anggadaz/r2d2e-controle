@@ -26,15 +26,11 @@ public class FuncPertinence extends Polygon {
 
     public static int FATOR = 100;
     private static int REC_SIZE = 3;
-
     private String linguisticTerm = "";
-
     protected ArrayList<Double> px = new ArrayList<Double>();
     protected ArrayList<Double> py = new ArrayList<Double>();
-
     private Rectangle dragTarget = null;
     private ArrayList<Rectangle> retangs = new ArrayList<Rectangle>();
-
     private Color color = Color.BLACK;
     private int oldX = 0;
 
@@ -57,6 +53,7 @@ public class FuncPertinence extends Polygon {
 
         addPoint(list2);
     }
+
     /**
      * Metodo para avaliar o valor da funcao no ponto x. As classes filhas precisam
      * sobreescrever esse metodo.
@@ -75,11 +72,11 @@ public class FuncPertinence extends Polygon {
 
         addPoint(list.get(0), 0);
 
-        for (int i = 1; i < list.size()-1; i++) {
+        for (int i = 1; i < list.size() - 1; i++) {
             addPoint(list.get(i), 1);
         }
 
-        addPoint(list.get(list.size()-1), 0);
+        addPoint(list.get(list.size() - 1), 0);
 
     }
 
@@ -101,15 +98,30 @@ public class FuncPertinence extends Polygon {
 
             double x = ((px2 - px1) / ((py2 - py1)) * (rangeValue - py1) + px1);
 
+            if (Double.isInfinite(x)) {
+                continue;
+            }
+
             xs.add(x);
 
-            saida.addPoint(x, rangeValue);
-            saida.addPoint(px.get(i), py.get(i));
-
+            if (py1 == 0) {
+                if (x < px1) {
+                    saida.addPoint(x, rangeValue);
+                    saida.addPoint(px1, py1);
+                } else {
+                    saida.addPoint(px1, py1);
+                    saida.addPoint(x, rangeValue);
+                }
+            } else {
+                if (x < px2) {
+                    saida.addPoint(x, rangeValue);
+                    saida.addPoint(px2, py2);
+                } else {
+                    saida.addPoint(px2, py2);
+                    saida.addPoint(x, rangeValue);
+                }
+            }
         }
-
-        saida.addPoint(xs.get(0), rangeValue);
-        saida.addPoint(xs.get(1), rangeValue);
 
         return saida;
     }
@@ -120,7 +132,7 @@ public class FuncPertinence extends Polygon {
         this.py.add(y);
 
         //Converter para coordenada de pixels
-        Point conv = ToolsPanel.IODialog.getFuncaoPertinenciaPanel1().toPixelScale(x,y);
+        Point conv = ToolsPanel.IODialog.getFuncaoPertinenciaPanel1().toPixelScale(x, y);
 
         super.addPoint(conv.x, conv.y);
 
@@ -155,10 +167,22 @@ public class FuncPertinence extends Polygon {
 
         PathIterator it = uniao.getPathIterator(null);
 
+        double lastXY[] = new double[2];
+
         while (!it.isDone()) {
             it.currentSegment(coords);
-            retorno.addPoint(coords[0]/FATOR, (int) coords[1]/FATOR);
+
+            double x = coords[0] / FATOR;
+            double y = coords[1] / FATOR;
+
+            if(lastXY[0] == x && lastXY[1] == y){
+                break;
+            }
+
+            retorno.addPoint(x,y);
             it.next();
+            lastXY[0] = x;
+            lastXY[1] = y;
         }
 
         return retorno;
@@ -235,16 +259,16 @@ public class FuncPertinence extends Polygon {
         Point p;
         StringBuilder param = new StringBuilder();
 
-         for (int i = 0; i < npoints; i++) {
-             p = new Point(xpoints[i], ypoints[i]);
+        for (int i = 0; i < npoints; i++) {
+            p = new Point(xpoints[i], ypoints[i]);
 
-             double conv = ToolsPanel.IODialog.getFuncaoPertinenciaPanel1().toRealScale(p);
-             int intConv = (int)(conv*FATOR);
-             conv = intConv/100.0;
+            double conv = ToolsPanel.IODialog.getFuncaoPertinenciaPanel1().toRealScale(p);
+            int intConv = (int) (conv * FATOR);
+            conv = intConv / 100.0;
 
-             px.add(i, conv);
-             param.append(conv);
-             param.append(" ");
+            px.add(i, conv);
+            param.append(conv);
+            param.append(" ");
         }
 
         ToolsPanel.IODialog.setDelete(true, this);
@@ -325,8 +349,8 @@ public class FuncPertinence extends Polygon {
         int x, y;
 
         for (int i = 0; i < px.size(); i++) {
-            x = (int)(px.get(i) * FATOR);
-            y = (int)(py.get(i) * FATOR);
+            x = (int) (px.get(i) * FATOR);
+            y = (int) (py.get(i) * FATOR);
             p.addPoint(x, y);
         }
 

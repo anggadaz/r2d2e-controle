@@ -218,7 +218,7 @@ public class MainView extends javax.swing.JFrame {
         DataBase dataBase = new DataBase();
         dataBase.addIn(ConstantsFuzzy.VARIABLE_ERROR_TANK2, pertinencesError);
         dataBase.addIn(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2, pertinencesDerError);
-        dataBase.addIn(ConstantsFuzzy.VARIABLE_OUTPUT, pertinencesOut);
+        dataBase.addOut(ConstantsFuzzy.VARIABLE_OUTPUT, pertinencesOut);
 
         ArrayList<Double> rangeError = new ArrayList<Double>();
         rangeError.add(-30d);
@@ -236,9 +236,7 @@ public class MainView extends javax.swing.JFrame {
         typesIn.add(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2);
 
         FuzzyController controller = new FuzzyController("Mandani (Padrão)", new Mamdani(ruleBase, dataBase), new Defuzzification(ConstantsFuzzy.DEFUZZI_CENTROID), typesIn);
-        controller.setSelectionsGraph(selectionsGraph);
-        controller.setGraphLevelHandler(graphLevel.getGraphHandler());
-        controller.setTanquePanel(tanquePanel);
+        configure(controller);
         controllers.add(controller);
     }
 
@@ -398,12 +396,15 @@ public class MainView extends javax.swing.JFrame {
         typesIn.add(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2);
 
         FuzzyController controller = new FuzzyController("Sugeno (Padrão)", new Sugeno(ruleBase, dataBase), new Defuzzification(ConstantsFuzzy.DEFUZZI_SUGENO), typesIn);
+        configure(controller);
+        controllers.add(controller);
+    }
+
+    public void configure(FuzzyController controller) {
         controller.setSelectionsGraph(selectionsGraph);
         controller.setGraphLevelHandler(graphLevel.getGraphHandler());
-        controller.setGraphControlHandler(graphContol.getGraphHandler());
         controller.setTanquePanel(tanquePanel);
-
-        controllers.add(controller);
+        controller.setGraphControlHandler(graphContol.getGraphHandler());
     }
 
     /** This method is called from within the constructor to
@@ -652,6 +653,14 @@ public class MainView extends javax.swing.JFrame {
 
     public void stopController() {
         controllerSelected.setAtive(false);
+    }
+
+    public Graph getGraphContol() {
+        return graphContol;
+    }
+
+    public Graph getGraphLevel() {
+        return graphLevel;
     }
 
     /**
