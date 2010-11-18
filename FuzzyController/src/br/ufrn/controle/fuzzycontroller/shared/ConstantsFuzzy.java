@@ -38,5 +38,8 @@ public class ConstantsFuzzy {
 
     public static final String VARIABLE_OUTPUT = "outPut";
 
+    public static final String[] VARIABLES = new String[]{"errorTank1","errorTank2","derivativeError1","derivativeError2",
+        "integrativeError1","integrativeError2","outPut"};
+
 
 }

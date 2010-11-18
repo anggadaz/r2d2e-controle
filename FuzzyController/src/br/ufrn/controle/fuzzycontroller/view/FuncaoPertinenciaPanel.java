@@ -116,9 +116,22 @@ public class FuncaoPertinenciaPanel extends JPanel {
         drawAxis(g2d);
         drawScale(g2d);
 
-        for (FuncPertinence funcaoPertinencia : funcs) {
-            funcaoPertinencia.draw(g2d);
+        if(funcs != null) {
+            for (FuncPertinence funcaoPertinencia : funcs) {
+                funcaoPertinencia.draw(g2d);
+            }
         }
+    }
+
+    public void setFuncs(ArrayList<FuncPertinence> funcs) {
+        this.funcs = funcs;
+
+        if(dragTarget != null) {
+            dragTarget.mouseClickedOut();
+            dragTarget = null;
+        }
+
+        repaint();
     }
 
     public void deletTarget() {
