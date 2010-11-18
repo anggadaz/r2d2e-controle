@@ -46,6 +46,10 @@ public class Defuzzification {
         double[] xs = shape.getArrayOfX();
         double[] ys = shape.getArrayOfY();
 
+        if (xs.length <= 0) {
+            return 0;
+        }
+
         ArrayList<double[]> points = putLimit(xs, ys);
 
         double[] centroPoint = Geometry.computePolygonCentroid(points.get(0), points.get(1));
@@ -56,6 +60,10 @@ public class Defuzzification {
     private double som(FuncPertinence shape) {
         double[] xs = shape.getArrayOfX();
         double[] ys = shape.getArrayOfY();
+
+        if (xs.length <= 0) {
+            return 0;
+        }
 
         ArrayList<double[]> points = putLimit(xs, ys);
 
@@ -69,6 +77,10 @@ public class Defuzzification {
         double[] xs = shape.getArrayOfX();
         double[] ys = shape.getArrayOfY();
 
+        if (xs.length <= 0) {
+            return 0;
+        }
+
         ArrayList<double[]> points = putLimit(xs, ys);
 
         int indeys[] = Util.max(points.get(1));
@@ -79,6 +91,10 @@ public class Defuzzification {
     private double mom(FuncPertinence shape) {
         double[] xs = shape.getArrayOfX();
         double[] ys = shape.getArrayOfY();
+
+        if (xs.length <= 0) {
+            return 0;
+        }
 
         ArrayList<double[]> points = putLimit(xs, ys);
 
@@ -91,27 +107,22 @@ public class Defuzzification {
             return xs[indeys[0]];
         }
 
-        double xSum = 0;
-        for (int i = 0; i < indeys.length; i += 2) {
-
-            if (i == indeys.length) {
-                xSum += xs[indeys[i]];
-            } else {
-                int y = indeys[i];
-                int y1 = indeys[i + 1];
-
-                double xDiff = xs[y1] - xs[y];
-                xSum += xDiff;
-            }
+        if (indeys.length > 2) {
+            System.out.println("INDEX ACIMA DE 2");
+//            return 0;
         }
 
-        return xSum / 2;
+        double x1 = xs[indeys[0]];
+        double x2 = xs[indeys[1]];
+
+        double diff = x2 - x1;
+
+        return x1 + diff / 2;
     }
 
     private ArrayList<double[]> putLimit(double x[], double y[]) {
 
         ArrayList<double[]> saida = new ArrayList<double[]>();
-
 
         if (x.length != y.length) {
             System.out.println("LISTA COM TAMANHOS DIFERENTES");
@@ -123,7 +134,7 @@ public class Defuzzification {
         ArrayList<Double> xs = new ArrayList<Double>();
         ArrayList<Double> ys = new ArrayList<Double>();
 
-        for (int i = 0; i < n-1; i++) {
+        for (int i = 0; i < n - 1; i++) {
 
             double px1 = x[i];
             double py1 = y[i];

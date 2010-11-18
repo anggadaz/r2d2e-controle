@@ -27,7 +27,6 @@ public class FuzzyController extends Thread {
     private GraphHandler graphControlHandler;
     private Quanser quanser;
     private volatile boolean ative = true;
-//    private int setPoint;
     private static final int NIVEL_MAX = 25;
     private static final int NIVEL_MIN = 3;
     private boolean limiteMaxTank2 = false;
@@ -46,7 +45,6 @@ public class FuzzyController extends Thread {
 
     public FuzzyController(String name) {
         this.name = name;
-        DataInType = new ArrayList<String>();
     }
 
     @Override
@@ -68,6 +66,10 @@ public class FuzzyController extends Thread {
             double level2 = quanser.readSensor2();
 
             DataIn dataIn = createDataIn(level1, level2);
+
+//            DataIn dataIn = new DataIn();
+//            dataIn.addValue(ConstantsFuzzy.VARIABLE_ERROR_TANK2, 12.63);
+//            dataIn.addValue(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2, -0.01526);
 
             FunctionOutPut functionOutPut = inference.work(dataIn);
 
@@ -92,8 +94,9 @@ public class FuzzyController extends Thread {
             tanquePanel.setLevelWater1(level1);
             tanquePanel.setLevelWater2(level2);
 
-//            System.out.println("Erro " + dataIn.getValueOfVariable(ConstantsFuzzy.VARIABLE_ERROR_TANK2) + " derErro " +
-//                    dataIn.getValueOfVariable(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2) + " saida " + voltz);
+//            System.out.println("Erro2 " + dataIn.getValueOfVariable(ConstantsFuzzy.VARIABLE_ERROR_TANK2) + " derErro " +
+//                    dataIn.getValueOfVariable(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2)
+//                    + " saida " + voltz);
 
             try {
                 sleep(100);
@@ -287,5 +290,5 @@ public class FuzzyController extends Thread {
 
     public ArrayList<String> getDataInType() {
         return DataInType;
-    }
+}
 }

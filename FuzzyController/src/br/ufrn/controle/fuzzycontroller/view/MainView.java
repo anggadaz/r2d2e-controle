@@ -84,12 +84,23 @@ public class MainView extends javax.swing.JFrame {
     }
 
     private void createMandaniInitial() {
+        createMandani2Var();
+        createMandani3Var();
+        createMandani3VarMelhorado();
+    }
+
+    private void createMandani2Var() {
         FuncaoTriangular errorNG = new FuncaoTriangular("ENG", new double[]{-54, -30, -8.333});
         FuncaoTriangular errorNM = new FuncaoTriangular("ENM", new double[]{-10.1, -5.159, 0});
         FuncaoTriangular errorZ = new FuncaoTriangular("EZ", new double[]{-1, 0, 1});
+//        FuncaoTriangular errorPM = new FuncaoTriangular("EPM", new double[]{0, 2.14, 4.21});
         FuncaoTriangular errorPM = new FuncaoTriangular("EPM", new double[]{0, 2.302, 10.7});
+//        FuncaoTriangular errorPG = new FuncaoTriangular("EPG", new double[]{3.89, 30, 54});
         FuncaoTriangular errorPG = new FuncaoTriangular("EPG", new double[]{5.952, 30, 54});
 
+//        FuncaoTriangular derErrorVN = new FuncaoTriangular("VN", new double[]{-1.445, -0.8, -0.005});
+//        FuncaoTriangular derErrorVZ = new FuncaoTriangular("VZ", new double[]{-0.01, 0, 0.01});
+//        FuncaoTriangular derErrorVP = new FuncaoTriangular("VP", new double[]{0.005, 0.8, 1.44});
         FuncaoTriangular derErrorVN = new FuncaoTriangular("VN", new double[]{-1.445, -0.8, -0.0133});
         FuncaoTriangular derErrorVZ = new FuncaoTriangular("VZ", new double[]{-0.05, 0, 0.05});
         FuncaoTriangular derErrorVP = new FuncaoTriangular("VP", new double[]{0.01333, 0.8, 1.44});
@@ -228,35 +239,894 @@ public class MainView extends javax.swing.JFrame {
         rangeDerError.add(-0.8);
         rangeDerError.add(0.8);
 
+        ArrayList<Double> rangeOut = new ArrayList<Double>();
+        rangeOut.add(-3d);
+        rangeOut.add(3d);
+
         dataBase.addRangeIn(ConstantsFuzzy.VARIABLE_ERROR_TANK2, rangeError);
         dataBase.addRangeIn(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2, rangeDerError);
+        dataBase.addRangeOut(ConstantsFuzzy.VARIABLE_OUTPUT, rangeOut);
 
         ArrayList<String> typesIn = new ArrayList<String>();
         typesIn.add(ConstantsFuzzy.VARIABLE_ERROR_TANK2);
         typesIn.add(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2);
 
-        FuzzyController controller = new FuzzyController("Mandani (Padrão)", new Mamdani(ruleBase, dataBase), new Defuzzification(ConstantsFuzzy.DEFUZZI_CENTROID), typesIn);
+        FuzzyController controller = new FuzzyController("Mandani (Padrão)", new Mamdani(ruleBase, dataBase), new Defuzzification(ConstantsFuzzy.DEFUZZI_MOM), typesIn);
+        configure(controller);
+        controllers.add(controller);
+    }
+
+    private void createMandani3Var() {
+
+        FuncaoTriangular error2NG = new FuncaoTriangular("ENG", new double[]{-54, -30, -8.333});
+        FuncaoTriangular error2NM = new FuncaoTriangular("ENM", new double[]{-10.1, -5.159, -0});
+        FuncaoTriangular error2Z = new FuncaoTriangular("EZ", new double[]{-1, 0.873, 1});
+        FuncaoTriangular error2PM = new FuncaoTriangular("EPM", new double[]{0, 4.37, 9.603});
+        FuncaoTriangular error2PG = new FuncaoTriangular("EPG", new double[]{3.889, 30, 54});
+
+        FuncaoTriangular error1VN = new FuncaoTriangular("N", new double[]{-54.2, -30.2, 0});
+        FuncaoTriangular error1VZ = new FuncaoTriangular("Z", new double[]{-2, 0, 2});
+        FuncaoTriangular error1VP = new FuncaoTriangular("P", new double[]{0, 30, 54});
+
+        FuncaoTriangular derErrorVN = new FuncaoTriangular("VN", new double[]{-1.445, -0.8, -0.0133});
+        FuncaoTriangular derErrorVZ = new FuncaoTriangular("VZ", new double[]{-0.05, 0, 0.05});
+        FuncaoTriangular derErrorVP = new FuncaoTriangular("VP", new double[]{0.01333, 0.8, 1.44});
+
+        FuncaoTriangular outTNG = new FuncaoTriangular("TNG", new double[]{-5.68, -3, -1.4});
+        FuncaoTriangular outTN = new FuncaoTriangular("TN", new double[]{-1.75, -1.071, -0.135});
+        FuncaoTriangular outTZ = new FuncaoTriangular("TZ", new double[]{-0.2, 0.1667, 0.2});
+        FuncaoTriangular outTP = new FuncaoTriangular("TP", new double[]{0.119, 0.9603, 1.79});
+        FuncaoTriangular outTPG = new FuncaoTriangular("TPG", new double[]{1.4, 3, 5.58});
+
+        /*------------------------------------------------------------------------------
+         *ERRO 1 VP
+         *------------------------------------------------------------------------------*/
+//--------------------------Erro negativo grande -------------------------------
+        Rule rule1 = new Rule();
+        rule1.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK2, false, error2NG);
+        rule1.addPremise(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2, false, derErrorVN);
+        rule1.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK1, false, error1VP);
+        rule1.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, outTP);
+
+        Rule rule2 = new Rule();
+        rule2.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK2, false, error2NG);
+        rule2.addPremise(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2, false, derErrorVZ);
+        rule2.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK1, false, error1VP);
+        rule2.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, outTP);
+
+        Rule rule3 = new Rule();
+        rule3.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK2, false, error2NG);
+        rule3.addPremise(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2, false, derErrorVP);
+        rule3.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK1, false, error1VP);
+        rule3.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, outTP);
+//-------------------------------------------------------------------------------
+//--------------------------Erro negativo Médio -------------------------------
+        Rule rule4 = new Rule();
+        rule4.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK2, false, error2NM);
+        rule4.addPremise(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2, false, derErrorVN);
+        rule4.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK1, false, error1VP);
+        rule4.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, outTP);
+
+        Rule rule5 = new Rule();
+        rule5.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK2, false, error2NM);
+        rule5.addPremise(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2, false, derErrorVZ);
+        rule5.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK1, false, error1VP);
+        rule5.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, outTP);
+
+        Rule rule6 = new Rule();
+        rule6.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK2, false, error2NM);
+        rule6.addPremise(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2, false, derErrorVP);
+        rule6.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK1, false, error1VP);
+        rule6.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, outTP);
+//-------------------------------------------------------------------------------
+//--------------------------Erro zero -------------------------------
+        Rule rule7 = new Rule();
+        rule7.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK2, false, error2Z);
+        rule7.addPremise(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2, false, derErrorVN);
+        rule7.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK1, false, error1VP);
+        rule7.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, outTP);
+
+        Rule rule8 = new Rule();
+        rule8.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK2, false, error2Z);
+        rule8.addPremise(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2, false, derErrorVZ);
+        rule8.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK1, false, error1VP);
+        rule8.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, outTP);
+
+        Rule rule9 = new Rule();
+        rule9.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK2, false, error2Z);
+        rule9.addPremise(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2, false, derErrorVP);
+        rule9.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK1, false, error1VP);
+        rule9.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, outTP);
+//-------------------------------------------------------------------------------
+//--------------------------Erro Positivo Medio -------------------------------------------
+        Rule rule10 = new Rule();
+        rule10.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK2, false, error2PM);
+        rule10.addPremise(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2, false, derErrorVN);
+        rule10.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK1, false, error1VP);
+        rule10.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, outTPG);
+
+        Rule rule11 = new Rule();
+        rule11.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK2, false, error2PM);
+        rule11.addPremise(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2, false, derErrorVZ);
+        rule11.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK1, false, error1VP);
+        rule11.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, outTPG);
+
+        Rule rule12 = new Rule();
+        rule12.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK2, false, error2PM);
+        rule12.addPremise(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2, false, derErrorVP);
+        rule12.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK1, false, error1VP);
+        rule12.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, outTPG);
+//-------------------------------------------------------------------------------
+//--------------------------Erro Positivo Grande -------------------------------------------
+        Rule rule13 = new Rule();
+        rule13.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK2, false, error2PG);
+        rule13.addPremise(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2, false, derErrorVN);
+        rule13.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK1, false, error1VP);
+        rule13.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, outTPG);
+
+        Rule rule14 = new Rule();
+        rule14.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK2, false, error2PG);
+        rule14.addPremise(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2, false, derErrorVZ);
+        rule14.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK1, false, error1VP);
+        rule14.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, outTPG);
+
+        Rule rule15 = new Rule();
+        rule15.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK2, false, error2PG);
+        rule15.addPremise(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2, false, derErrorVP);
+        rule15.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK1, false, error1VP);
+        rule15.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, outTPG);
+//-------------------------------------------------------------------------------
+
+        /*------------------------------------------------------------------------------
+         *ERRO 1 N
+         *------------------------------------------------------------------------------*/
+//--------------------------Erro negativo grande -------------------------------
+        Rule rule16 = new Rule();
+        rule16.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK2, false, error2NG);
+        rule16.addPremise(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2, false, derErrorVN);
+        rule16.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK1, false, error1VN);
+        rule16.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, outTNG);
+
+        Rule rule17 = new Rule();
+        rule17.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK2, false, error2NG);
+        rule17.addPremise(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2, false, derErrorVZ);
+        rule17.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK1, false, error1VN);
+        rule17.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, outTNG);
+
+        Rule rule18 = new Rule();
+        rule18.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK2, false, error2NG);
+        rule18.addPremise(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2, false, derErrorVP);
+        rule18.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK1, false, error1VN);
+        rule18.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, outTNG);
+//-------------------------------------------------------------------------------
+//--------------------------Erro negativo Médio -------------------------------
+        Rule rule19 = new Rule();
+        rule19.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK2, false, error2NM);
+        rule19.addPremise(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2, false, derErrorVN);
+        rule19.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK1, false, error1VN);
+        rule19.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, outTN);
+
+        Rule rule20 = new Rule();
+        rule20.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK2, false, error2NM);
+        rule20.addPremise(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2, false, derErrorVZ);
+        rule20.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK1, false, error1VN);
+        rule20.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, outTN);
+
+        Rule rule21 = new Rule();
+        rule21.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK2, false, error2NM);
+        rule21.addPremise(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2, false, derErrorVP);
+        rule21.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK1, false, error1VN);
+        rule21.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, outTZ);
+//-------------------------------------------------------------------------------
+//--------------------------Erro zero -------------------------------
+        Rule rule22 = new Rule();
+        rule22.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK2, false, error2Z);
+        rule22.addPremise(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2, false, derErrorVN);
+        rule22.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK1, false, error1VN);
+        rule22.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, outTN);
+
+        Rule rule23 = new Rule();
+        rule23.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK2, false, error2Z);
+        rule23.addPremise(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2, false, derErrorVZ);
+        rule23.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK1, false, error1VN);
+        rule23.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, outTZ);
+
+        Rule rule24 = new Rule();
+        rule24.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK2, false, error2Z);
+        rule24.addPremise(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2, false, derErrorVP);
+        rule24.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK1, false, error1VN);
+        rule24.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, outTZ);
+//-------------------------------------------------------------------------------
+//--------------------------Erro Positivo Medio -------------------------------------------
+        Rule rule25 = new Rule();
+        rule25.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK2, false, error2PM);
+        rule25.addPremise(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2, false, derErrorVN);
+        rule25.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK1, false, error1VN);
+        rule25.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, outTP);
+
+        Rule rule26 = new Rule();
+        rule26.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK2, false, error2PM);
+        rule26.addPremise(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2, false, derErrorVZ);
+        rule26.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK1, false, error1VN);
+        rule26.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, outTP);
+
+        Rule rule27 = new Rule();
+        rule27.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK2, false, error2PM);
+        rule27.addPremise(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2, false, derErrorVP);
+        rule27.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK1, false, error1VN);
+        rule27.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, outTP);
+//-------------------------------------------------------------------------------
+//--------------------------Erro Positivo Grande -------------------------------------------
+        Rule rule28 = new Rule();
+        rule28.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK2, false, error2PG);
+        rule28.addPremise(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2, false, derErrorVN);
+        rule28.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK1, false, error1VN);
+        rule28.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, outTPG);
+
+        Rule rule29 = new Rule();
+        rule29.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK2, false, error2PG);
+        rule29.addPremise(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2, false, derErrorVZ);
+        rule29.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK1, false, error1VN);
+        rule29.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, outTPG);
+
+        Rule rule30 = new Rule();
+        rule30.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK2, false, error2PG);
+        rule30.addPremise(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2, false, derErrorVP);
+        rule30.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK1, false, error1VN);
+        rule30.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, outTPG);
+//-------------------------------------------------------------------------------
+
+        /*------------------------------------------------------------------------------
+         *ERRO 1 Z
+         *------------------------------------------------------------------------------*/
+//--------------------------Erro negativo grande -------------------------------
+        Rule rule31 = new Rule();
+        rule31.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK2, false, error2NG);
+        rule31.addPremise(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2, false, derErrorVN);
+        rule31.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK1, false, error1VZ);
+        rule31.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, outTN);
+
+        Rule rule32 = new Rule();
+        rule32.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK2, false, error2NG);
+        rule32.addPremise(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2, false, derErrorVZ);
+        rule32.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK1, false, error1VZ);
+        rule32.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, outTN);
+
+        Rule rule33 = new Rule();
+        rule33.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK2, false, error2NG);
+        rule33.addPremise(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2, false, derErrorVP);
+        rule33.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK1, false, error1VZ);
+        rule33.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, outTN);
+//-------------------------------------------------------------------------------
+//--------------------------Erro negativo Médio -------------------------------
+        Rule rule34 = new Rule();
+        rule34.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK2, false, error2NM);
+        rule34.addPremise(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2, false, derErrorVN);
+        rule34.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK1, false, error1VZ);
+        rule34.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, outTZ);
+
+        Rule rule35 = new Rule();
+        rule35.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK2, false, error2NM);
+        rule35.addPremise(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2, false, derErrorVZ);
+        rule35.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK1, false, error1VZ);
+        rule35.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, outTZ);
+
+        Rule rule36 = new Rule();
+        rule36.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK2, false, error2NM);
+        rule36.addPremise(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2, false, derErrorVP);
+        rule36.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK1, false, error1VZ);
+        rule36.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, outTZ);
+//-------------------------------------------------------------------------------
+//--------------------------Erro zero -------------------------------
+        Rule rule37 = new Rule();
+        rule37.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK2, false, error2Z);
+        rule37.addPremise(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2, false, derErrorVN);
+        rule37.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK1, false, error1VZ);
+        rule37.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, outTZ);
+
+        Rule rule38 = new Rule();
+        rule38.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK2, false, error2Z);
+        rule38.addPremise(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2, false, derErrorVZ);
+        rule38.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK1, false, error1VZ);
+        rule38.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, outTZ);
+
+        Rule rule39 = new Rule();
+        rule39.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK2, false, error2Z);
+        rule39.addPremise(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2, false, derErrorVP);
+        rule39.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK1, false, error1VZ);
+        rule39.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, outTZ);
+//-------------------------------------------------------------------------------
+//--------------------------Erro Positivo Medio -------------------------------------------
+        Rule rule40 = new Rule();
+        rule40.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK2, false, error2PM);
+        rule40.addPremise(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2, false, derErrorVN);
+        rule40.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK1, false, error1VZ);
+        rule40.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, outTP);
+
+        Rule rule41 = new Rule();
+        rule41.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK2, false, error2PM);
+        rule41.addPremise(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2, false, derErrorVZ);
+        rule41.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK1, false, error1VZ);
+        rule41.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, outTP);
+
+        Rule rule42 = new Rule();
+        rule42.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK2, false, error2PM);
+        rule42.addPremise(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2, false, derErrorVP);
+        rule42.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK1, false, error1VZ);
+        rule42.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, outTP);
+//-------------------------------------------------------------------------------
+//--------------------------Erro Positivo Grande -------------------------------------------
+        Rule rule43 = new Rule();
+        rule43.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK2, false, error2PG);
+        rule43.addPremise(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2, false, derErrorVN);
+        rule43.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK1, false, error1VZ);
+        rule43.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, outTP);
+
+        Rule rule44 = new Rule();
+        rule44.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK2, false, error2PG);
+        rule44.addPremise(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2, false, derErrorVZ);
+        rule44.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK1, false, error1VZ);
+        rule44.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, outTP);
+
+        Rule rule45 = new Rule();
+        rule45.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK2, false, error2PG);
+        rule45.addPremise(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2, false, derErrorVP);
+        rule45.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK1, false, error1VZ);
+        rule45.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, outTP);
+//------------------------------------------------------------------------------
+        ArrayList<Rule> rules = new ArrayList<Rule>();
+        rules.add(rule1);
+        rules.add(rule2);
+        rules.add(rule3);
+        rules.add(rule4);
+        rules.add(rule5);
+        rules.add(rule6);
+        rules.add(rule7);
+        rules.add(rule8);
+        rules.add(rule9);
+        rules.add(rule10);
+        rules.add(rule11);
+        rules.add(rule12);
+        rules.add(rule13);
+        rules.add(rule14);
+        rules.add(rule15);
+        rules.add(rule16);
+        rules.add(rule17);
+        rules.add(rule18);
+        rules.add(rule19);
+        rules.add(rule20);
+        rules.add(rule21);
+        rules.add(rule22);
+        rules.add(rule23);
+        rules.add(rule24);
+        rules.add(rule25);
+        rules.add(rule26);
+        rules.add(rule27);
+        rules.add(rule28);
+        rules.add(rule29);
+        rules.add(rule30);
+        rules.add(rule31);
+        rules.add(rule32);
+        rules.add(rule33);
+        rules.add(rule34);
+        rules.add(rule35);
+        rules.add(rule36);
+        rules.add(rule37);
+        rules.add(rule38);
+        rules.add(rule39);
+        rules.add(rule40);
+        rules.add(rule41);
+        rules.add(rule42);
+        rules.add(rule43);
+        rules.add(rule44);
+        rules.add(rule45);
+
+        ArrayList<FuncPertinence> pertinencesError2 = new ArrayList<FuncPertinence>();
+        ArrayList<FuncPertinence> pertinencesDerError = new ArrayList<FuncPertinence>();
+        ArrayList<FuncPertinence> pertinencesError1 = new ArrayList<FuncPertinence>();
+        ArrayList<FuncPertinence> pertinencesOut = new ArrayList<FuncPertinence>();
+        pertinencesError2.add(error2NG);
+        pertinencesError2.add(error2NM);
+        pertinencesError2.add(error2Z);
+        pertinencesError2.add(error2PM);
+        pertinencesError2.add(error2PG);
+        pertinencesDerError.add(derErrorVN);
+        pertinencesDerError.add(derErrorVZ);
+        pertinencesDerError.add(derErrorVP);
+        pertinencesError1.add(error1VN);
+        pertinencesError1.add(error1VP);
+        pertinencesError1.add(error1VZ);
+        pertinencesOut.add(outTNG);
+        pertinencesOut.add(outTN);
+        pertinencesOut.add(outTZ);
+        pertinencesOut.add(outTP);
+        pertinencesOut.add(outTPG);
+
+        RuleBase ruleBase = new RuleBase(rules);
+
+        DataBase dataBase = new DataBase();
+        dataBase.addIn(ConstantsFuzzy.VARIABLE_ERROR_TANK2, pertinencesError2);
+        dataBase.addIn(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2, pertinencesDerError);
+        dataBase.addIn(ConstantsFuzzy.VARIABLE_ERROR_TANK1, pertinencesError1);
+        dataBase.addOut(ConstantsFuzzy.VARIABLE_OUTPUT, pertinencesOut);
+
+        ArrayList<Double> rangeError2 = new ArrayList<Double>();
+        rangeError2.add(-30d);
+        rangeError2.add(30d);
+
+        ArrayList<Double> rangeError1 = new ArrayList<Double>();
+        rangeError1.add(-30d);
+        rangeError1.add(30d);
+
+        ArrayList<Double> rangeDerError = new ArrayList<Double>();
+        rangeDerError.add(-0.8);
+        rangeDerError.add(0.8);
+
+        ArrayList<Double> rangeOut = new ArrayList<Double>();
+        rangeOut.add(-3d);
+        rangeOut.add(3d);
+
+        dataBase.addRangeIn(ConstantsFuzzy.VARIABLE_ERROR_TANK2, rangeError2);
+        dataBase.addRangeIn(ConstantsFuzzy.VARIABLE_ERROR_TANK1, rangeError1);
+        dataBase.addRangeIn(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2, rangeDerError);
+        dataBase.addRangeOut(ConstantsFuzzy.VARIABLE_OUTPUT, rangeOut);
+
+        ArrayList<String> typesIn = new ArrayList<String>();
+        typesIn.add(ConstantsFuzzy.VARIABLE_ERROR_TANK2);
+        typesIn.add(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2);
+        typesIn.add(ConstantsFuzzy.VARIABLE_ERROR_TANK1);
+
+        FuzzyController controller = new FuzzyController("Mandani 3 Var", new Mamdani(ruleBase, dataBase), new Defuzzification(ConstantsFuzzy.DEFUZZI_CENTROID), typesIn);
+        configure(controller);
+        controllers.add(controller);
+    }
+
+    private void createMandani3VarMelhorado() {
+
+        FuncaoTriangular error2NG = new FuncaoTriangular("ENG", new double[]{-53.84, -29.84, -3.254});
+        FuncaoTriangular error2NM = new FuncaoTriangular("ENM", new double[]{-3.89, -1.508, 0.556});
+        FuncaoTriangular error2Z = new FuncaoTriangular("EZ", new double[]{-1, 0.7143, 1});
+        FuncaoTriangular error2PM = new FuncaoTriangular("EPM", new double[]{-0.0794, 3.41, 3.57});
+        FuncaoTriangular error2PG = new FuncaoTriangular("EPG", new double[]{1.984, 30, 54});
+
+        FuncaoTriangular error1VN = new FuncaoTriangular("N", new double[]{-54.2, -30.2, 0});
+        FuncaoTriangular error1VZ = new FuncaoTriangular("Z", new double[]{-2, 0, 2});
+        FuncaoTriangular error1VP = new FuncaoTriangular("P", new double[]{0, 30, 54});
+
+        FuncaoTriangular derErrorVN = new FuncaoTriangular("VN", new double[]{-1.445, -0.8, -0.0133});
+        FuncaoTriangular derErrorVZ = new FuncaoTriangular("VZ", new double[]{-0.05, 0, 0.05});
+        FuncaoTriangular derErrorVP = new FuncaoTriangular("VP", new double[]{0.01333, 0.8, 1.44});
+
+        FuncaoTriangular outTNG = new FuncaoTriangular("TNG", new double[]{-5.68, -3, -0.8492});
+        FuncaoTriangular outTNM = new FuncaoTriangular("TNM", new double[]{-1.75, -1.37, -0.5635});
+        FuncaoTriangular outTNP = new FuncaoTriangular("TNP", new double[]{-1, -0.548, 0});
+        FuncaoTriangular outTZ = new FuncaoTriangular("TZ", new double[]{-0.2, 0, 0.2});
+        FuncaoTriangular outTPP = new FuncaoTriangular("TPP", new double[]{0.143, 0.6746, 1.02});
+        FuncaoTriangular outTPM = new FuncaoTriangular("TPM", new double[]{0.722, 1.32, 1.849});
+        FuncaoTriangular outTPG = new FuncaoTriangular("TPG", new double[]{1.246, 3.02, 6.18});
+
+        /*------------------------------------------------------------------------------
+         *ERRO 1 VP
+         *------------------------------------------------------------------------------*/
+//--------------------------Erro negativo grande -------------------------------
+        Rule rule1 = new Rule();
+        rule1.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK2, false, error2NG);
+        rule1.addPremise(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2, false, derErrorVN);
+        rule1.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK1, false, error1VP);
+        rule1.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, outTPM);
+
+        Rule rule2 = new Rule();
+        rule2.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK2, false, error2NG);
+        rule2.addPremise(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2, false, derErrorVZ);
+        rule2.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK1, false, error1VP);
+        rule2.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, outTPM);
+
+        Rule rule3 = new Rule();
+        rule3.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK2, false, error2NG);
+        rule3.addPremise(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2, false, derErrorVP);
+        rule3.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK1, false, error1VP);
+        rule3.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, outTPM);
+//-------------------------------------------------------------------------------
+//--------------------------Erro negativo Médio -------------------------------
+        Rule rule4 = new Rule();
+        rule4.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK2, false, error2NM);
+        rule4.addPremise(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2, false, derErrorVN);
+        rule4.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK1, false, error1VP);
+        rule4.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, outTPM);
+
+        Rule rule5 = new Rule();
+        rule5.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK2, false, error2NM);
+        rule5.addPremise(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2, false, derErrorVZ);
+        rule5.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK1, false, error1VP);
+        rule5.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, outTPM);
+
+        Rule rule6 = new Rule();
+        rule6.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK2, false, error2NM);
+        rule6.addPremise(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2, false, derErrorVP);
+        rule6.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK1, false, error1VP);
+        rule6.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, outTPM);
+//-------------------------------------------------------------------------------
+//--------------------------Erro zero -------------------------------
+        Rule rule7 = new Rule();
+        rule7.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK2, false, error2Z);
+        rule7.addPremise(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2, false, derErrorVN);
+        rule7.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK1, false, error1VP);
+        rule7.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, outTPM);
+
+        Rule rule8 = new Rule();
+        rule8.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK2, false, error2Z);
+        rule8.addPremise(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2, false, derErrorVZ);
+        rule8.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK1, false, error1VP);
+        rule8.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, outTPM);
+
+        Rule rule9 = new Rule();
+        rule9.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK2, false, error2Z);
+        rule9.addPremise(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2, false, derErrorVP);
+        rule9.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK1, false, error1VP);
+        rule9.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, outTPM);
+//-------------------------------------------------------------------------------
+//--------------------------Erro Positivo Medio -------------------------------------------
+        Rule rule10 = new Rule();
+        rule10.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK2, false, error2PM);
+        rule10.addPremise(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2, false, derErrorVN);
+        rule10.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK1, false, error1VP);
+        rule10.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, outTPG);
+
+        Rule rule11 = new Rule();
+        rule11.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK2, false, error2PM);
+        rule11.addPremise(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2, false, derErrorVZ);
+        rule11.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK1, false, error1VP);
+        rule11.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, outTPG);
+
+        Rule rule12 = new Rule();
+        rule12.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK2, false, error2PM);
+        rule12.addPremise(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2, false, derErrorVP);
+        rule12.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK1, false, error1VP);
+        rule12.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, outTPG);
+//-------------------------------------------------------------------------------
+//--------------------------Erro Positivo Grande -------------------------------------------
+        Rule rule13 = new Rule();
+        rule13.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK2, false, error2PG);
+        rule13.addPremise(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2, false, derErrorVN);
+        rule13.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK1, false, error1VP);
+        rule13.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, outTPG);
+
+        Rule rule14 = new Rule();
+        rule14.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK2, false, error2PG);
+        rule14.addPremise(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2, false, derErrorVZ);
+        rule14.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK1, false, error1VP);
+        rule14.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, outTPG);
+
+        Rule rule15 = new Rule();
+        rule15.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK2, false, error2PG);
+        rule15.addPremise(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2, false, derErrorVP);
+        rule15.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK1, false, error1VP);
+        rule15.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, outTPG);
+//-------------------------------------------------------------------------------
+
+        /*------------------------------------------------------------------------------
+         *ERRO 1 N
+         *------------------------------------------------------------------------------*/
+//--------------------------Erro negativo grande -------------------------------
+        Rule rule16 = new Rule();
+        rule16.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK2, false, error2NG);
+        rule16.addPremise(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2, false, derErrorVN);
+        rule16.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK1, false, error1VN);
+        rule16.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, outTNG);
+
+        Rule rule17 = new Rule();
+        rule17.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK2, false, error2NG);
+        rule17.addPremise(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2, false, derErrorVZ);
+        rule17.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK1, false, error1VN);
+        rule17.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, outTNG);
+
+        Rule rule18 = new Rule();
+        rule18.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK2, false, error2NG);
+        rule18.addPremise(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2, false, derErrorVP);
+        rule18.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK1, false, error1VN);
+        rule18.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, outTNG);
+//-------------------------------------------------------------------------------
+//--------------------------Erro negativo Médio -------------------------------
+        Rule rule19 = new Rule();
+        rule19.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK2, false, error2NM);
+        rule19.addPremise(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2, false, derErrorVN);
+        rule19.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK1, false, error1VN);
+        rule19.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, outTNP);
+
+        Rule rule20 = new Rule();
+        rule20.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK2, false, error2NM);
+        rule20.addPremise(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2, false, derErrorVZ);
+        rule20.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK1, false, error1VN);
+        rule20.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, outTNP);
+
+        Rule rule21 = new Rule();
+        rule21.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK2, false, error2NM);
+        rule21.addPremise(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2, false, derErrorVP);
+        rule21.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK1, false, error1VN);
+        rule21.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, outTZ);
+//-------------------------------------------------------------------------------
+//--------------------------Erro zero -------------------------------
+        Rule rule22 = new Rule();
+        rule22.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK2, false, error2Z);
+        rule22.addPremise(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2, false, derErrorVN);
+        rule22.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK1, false, error1VN);
+        rule22.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, outTNP);
+
+        Rule rule23 = new Rule();
+        rule23.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK2, false, error2Z);
+        rule23.addPremise(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2, false, derErrorVZ);
+        rule23.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK1, false, error1VN);
+        rule23.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, outTPP);
+
+        Rule rule24 = new Rule();
+        rule24.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK2, false, error2Z);
+        rule24.addPremise(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2, false, derErrorVP);
+        rule24.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK1, false, error1VN);
+        rule24.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, outTPP);
+//-------------------------------------------------------------------------------
+//--------------------------Erro Positivo Medio -------------------------------------------
+        Rule rule25 = new Rule();
+        rule25.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK2, false, error2PM);
+        rule25.addPremise(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2, false, derErrorVN);
+        rule25.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK1, false, error1VN);
+        rule25.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, outTPP);
+
+        Rule rule26 = new Rule();
+        rule26.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK2, false, error2PM);
+        rule26.addPremise(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2, false, derErrorVZ);
+        rule26.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK1, false, error1VN);
+        rule26.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, outTPP);
+
+        Rule rule27 = new Rule();
+        rule27.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK2, false, error2PM);
+        rule27.addPremise(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2, false, derErrorVP);
+        rule27.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK1, false, error1VN);
+        rule27.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, outTPP);
+//-------------------------------------------------------------------------------
+//--------------------------Erro Positivo Grande -------------------------------------------
+        Rule rule28 = new Rule();
+        rule28.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK2, false, error2PG);
+        rule28.addPremise(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2, false, derErrorVN);
+        rule28.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK1, false, error1VN);
+        rule28.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, outTPG);
+
+        Rule rule29 = new Rule();
+        rule29.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK2, false, error2PG);
+        rule29.addPremise(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2, false, derErrorVZ);
+        rule29.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK1, false, error1VN);
+        rule29.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, outTPG);
+
+        Rule rule30 = new Rule();
+        rule30.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK2, false, error2PG);
+        rule30.addPremise(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2, false, derErrorVP);
+        rule30.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK1, false, error1VN);
+        rule30.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, outTPG);
+//-------------------------------------------------------------------------------
+
+        /*------------------------------------------------------------------------------
+         *ERRO 1 Z
+         *------------------------------------------------------------------------------*/
+//--------------------------Erro negativo grande -------------------------------
+        Rule rule31 = new Rule();
+        rule31.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK2, false, error2NG);
+        rule31.addPremise(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2, false, derErrorVN);
+        rule31.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK1, false, error1VZ);
+        rule31.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, outTNP);
+
+        Rule rule32 = new Rule();
+        rule32.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK2, false, error2NG);
+        rule32.addPremise(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2, false, derErrorVZ);
+        rule32.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK1, false, error1VZ);
+        rule32.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, outTNP);
+
+        Rule rule33 = new Rule();
+        rule33.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK2, false, error2NG);
+        rule33.addPremise(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2, false, derErrorVP);
+        rule33.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK1, false, error1VZ);
+        rule33.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, outTNM);//olha aki tnp
+//-------------------------------------------------------------------------------
+//--------------------------Erro negativo Médio -------------------------------
+        Rule rule34 = new Rule();
+        rule34.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK2, false, error2NM);
+        rule34.addPremise(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2, false, derErrorVN);
+        rule34.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK1, false, error1VZ);
+        rule34.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, outTZ);
+
+        Rule rule35 = new Rule();
+        rule35.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK2, false, error2NM);
+        rule35.addPremise(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2, false, derErrorVZ);
+        rule35.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK1, false, error1VZ);
+        rule35.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, outTZ);
+
+        Rule rule36 = new Rule();
+        rule36.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK2, false, error2NM);
+        rule36.addPremise(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2, false, derErrorVP);
+        rule36.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK1, false, error1VZ);
+        rule36.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, outTZ);
+//-------------------------------------------------------------------------------
+//--------------------------Erro zero -------------------------------
+        Rule rule37 = new Rule();
+        rule37.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK2, false, error2Z);
+        rule37.addPremise(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2, false, derErrorVN);
+        rule37.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK1, false, error1VZ);
+        rule37.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, outTZ);
+
+        Rule rule38 = new Rule();
+        rule38.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK2, false, error2Z);
+        rule38.addPremise(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2, false, derErrorVZ);
+        rule38.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK1, false, error1VZ);
+        rule38.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, outTZ);
+
+        Rule rule39 = new Rule();
+        rule39.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK2, false, error2Z);
+        rule39.addPremise(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2, false, derErrorVP);
+        rule39.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK1, false, error1VZ);
+        rule39.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, outTZ);
+//-------------------------------------------------------------------------------
+//--------------------------Erro Positivo Medio -------------------------------------------
+        Rule rule40 = new Rule();
+        rule40.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK2, false, error2PM);
+        rule40.addPremise(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2, false, derErrorVN);
+        rule40.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK1, false, error1VZ);
+        rule40.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, outTPM);
+
+        Rule rule41 = new Rule();
+        rule41.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK2, false, error2PM);
+        rule41.addPremise(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2, false, derErrorVZ);
+        rule41.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK1, false, error1VZ);
+        rule41.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, outTPM);
+
+        Rule rule42 = new Rule();
+        rule42.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK2, false, error2PM);
+        rule42.addPremise(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2, false, derErrorVP);
+        rule42.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK1, false, error1VZ);
+        rule42.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, outTPM);
+//-------------------------------------------------------------------------------
+//--------------------------Erro Positivo Grande -------------------------------------------
+        Rule rule43 = new Rule();
+        rule43.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK2, false, error2PG);
+        rule43.addPremise(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2, false, derErrorVN);
+        rule43.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK1, false, error1VZ);
+        rule43.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, outTPG);
+
+        Rule rule44 = new Rule();
+        rule44.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK2, false, error2PG);
+        rule44.addPremise(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2, false, derErrorVZ);
+        rule44.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK1, false, error1VZ);
+        rule44.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, outTPG);
+
+        Rule rule45 = new Rule();
+        rule45.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK2, false, error2PG);
+        rule45.addPremise(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2, false, derErrorVP);
+        rule45.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK1, false, error1VZ);
+        rule45.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, outTPG);
+//------------------------------------------------------------------------------
+        ArrayList<Rule> rules = new ArrayList<Rule>();
+        rules.add(rule1);
+        rules.add(rule2);
+        rules.add(rule3);
+        rules.add(rule4);
+        rules.add(rule5);
+        rules.add(rule6);
+        rules.add(rule7);
+        rules.add(rule8);
+        rules.add(rule9);
+        rules.add(rule10);
+        rules.add(rule11);
+        rules.add(rule12);
+        rules.add(rule13);
+        rules.add(rule14);
+        rules.add(rule15);
+        rules.add(rule16);
+        rules.add(rule17);
+        rules.add(rule18);
+        rules.add(rule19);
+        rules.add(rule20);
+        rules.add(rule21);
+        rules.add(rule22);
+        rules.add(rule23);
+        rules.add(rule24);
+        rules.add(rule25);
+        rules.add(rule26);
+        rules.add(rule27);
+        rules.add(rule28);
+        rules.add(rule29);
+        rules.add(rule30);
+        rules.add(rule31);
+        rules.add(rule32);
+        rules.add(rule33);
+        rules.add(rule34);
+        rules.add(rule35);
+        rules.add(rule36);
+        rules.add(rule37);
+        rules.add(rule38);
+        rules.add(rule39);
+        rules.add(rule40);
+        rules.add(rule41);
+        rules.add(rule42);
+        rules.add(rule43);
+        rules.add(rule44);
+        rules.add(rule45);
+
+        ArrayList<FuncPertinence> pertinencesError2 = new ArrayList<FuncPertinence>();
+        ArrayList<FuncPertinence> pertinencesDerError = new ArrayList<FuncPertinence>();
+        ArrayList<FuncPertinence> pertinencesError1 = new ArrayList<FuncPertinence>();
+        ArrayList<FuncPertinence> pertinencesOut = new ArrayList<FuncPertinence>();
+        pertinencesError2.add(error2NG);
+        pertinencesError2.add(error2NM);
+        pertinencesError2.add(error2Z);
+        pertinencesError2.add(error2PM);
+        pertinencesError2.add(error2PG);
+        pertinencesDerError.add(derErrorVN);
+        pertinencesDerError.add(derErrorVZ);
+        pertinencesDerError.add(derErrorVP);
+        pertinencesError1.add(error1VN);
+        pertinencesError1.add(error1VP);
+        pertinencesError1.add(error1VZ);
+        pertinencesOut.add(outTNG);
+        pertinencesOut.add(outTNM);
+        pertinencesOut.add(outTNP);
+        pertinencesOut.add(outTZ);
+        pertinencesOut.add(outTPP);
+        pertinencesOut.add(outTPM);
+        pertinencesOut.add(outTPG);
+
+        RuleBase ruleBase = new RuleBase(rules);
+
+        DataBase dataBase = new DataBase();
+        dataBase.addIn(ConstantsFuzzy.VARIABLE_ERROR_TANK2, pertinencesError2);
+        dataBase.addIn(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2, pertinencesDerError);
+        dataBase.addIn(ConstantsFuzzy.VARIABLE_ERROR_TANK1, pertinencesError1);
+        dataBase.addOut(ConstantsFuzzy.VARIABLE_OUTPUT, pertinencesOut);
+
+        ArrayList<Double> rangeError2 = new ArrayList<Double>();
+        rangeError2.add(-30d);
+        rangeError2.add(30d);
+
+        ArrayList<Double> rangeError1 = new ArrayList<Double>();
+        rangeError1.add(-30d);
+        rangeError1.add(30d);
+
+        ArrayList<Double> rangeDerError = new ArrayList<Double>();
+        rangeDerError.add(-0.8);
+        rangeDerError.add(0.8);
+
+        ArrayList<Double> rangeOut = new ArrayList<Double>();
+        rangeOut.add(-3d);
+        rangeOut.add(3d);
+
+        dataBase.addRangeIn(ConstantsFuzzy.VARIABLE_ERROR_TANK2, rangeError2);
+        dataBase.addRangeIn(ConstantsFuzzy.VARIABLE_ERROR_TANK1, rangeError1);
+        dataBase.addRangeIn(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2, rangeDerError);
+        dataBase.addRangeOut(ConstantsFuzzy.VARIABLE_OUTPUT, rangeOut);
+
+        ArrayList<String> typesIn = new ArrayList<String>();
+        typesIn.add(ConstantsFuzzy.VARIABLE_ERROR_TANK2);
+        typesIn.add(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2);
+        typesIn.add(ConstantsFuzzy.VARIABLE_ERROR_TANK1);
+
+        FuzzyController controller = new FuzzyController("Mandani 3 Var Melhorado", new Mamdani(ruleBase, dataBase), new Defuzzification(ConstantsFuzzy.DEFUZZI_CENTROID), typesIn);
         configure(controller);
         controllers.add(controller);
     }
 
     private void createSugenoInitial() {
 
-        FuncaoTrapezoidal errorNG = new FuncaoTrapezoidal("ENG", new double[]{-59.7, -33.3, -19.6, -2.937});
-        FuncaoTriangular errorNM = new FuncaoTriangular("ENM", new double[]{-3.88, -1.98, -0.238});
+        FuncaoTriangular errorNG = new FuncaoTriangular("ENG", new double[]{-71.8, -30 ,-1.31});
+        FuncaoTriangular errorNM = new FuncaoTriangular("ENM", new double[]{-3.889, -1.98, -0.238});
         FuncaoTriangular errorZ = new FuncaoTriangular("EZ", new double[]{-1, 0.397, 1});
-        FuncaoTriangular errorPM = new FuncaoTriangular("EPM", new double[]{0.873, 2.62, 4.52});
-        FuncaoTriangular errorPG = new FuncaoTriangular("EPG", new double[]{0.2381, 30, 59.8});
+        FuncaoTriangular errorPM = new FuncaoTriangular("EPM", new double[]{0.873, 2.62, 5.794});
+        FuncaoTriangular errorPG = new FuncaoTriangular("EPG", new double[]{2.619, 30, 59.8});
 
-        FuncaoTriangular derErrorVN = new FuncaoTriangular("VN", new double[]{-3, -0.8, -0.02328});
-        FuncaoTriangular derErrorVZ = new FuncaoTriangular("VZ", new double[]{-0.05, 0, 0.05});
-        FuncaoTriangular derErrorVP = new FuncaoTriangular("VP", new double[]{0.03598, 0.8, 1.67});
+        FuncaoTriangular derErrorVN = new FuncaoTriangular("VN", new double[]{-3, -0.8, 0.002116});
+        FuncaoTriangular derErrorVZ = new FuncaoTriangular("VZ", new double[]{-0.03, 0, 0.03});
+        FuncaoTriangular derErrorVP = new FuncaoTriangular("VP", new double[]{0.01481, 0.8, 1.67});
 
-        Expression satP = new Expression(2.3);
+        Expression satP = new Expression(2);
         Expression satN = new Expression(-1);
-        Expression pi = new Expression();
+        Expression pi = new Expression(1.22);
         pi.addConstant(ConstantsFuzzy.VARIABLE_ERROR_TANK2, 0.03);
-        pi.addConstant(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2, 2);
+        pi.addConstant(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2, 1);
 //--------------------------Erro negativo grande -------------------------------
         Rule rule1 = new Rule();
         rule1.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK2, false, errorNG);
@@ -319,7 +1189,7 @@ public class MainView extends javax.swing.JFrame {
         Rule rule12 = new Rule();
         rule12.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK2, false, errorPM);
         rule12.addPremise(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2, false, derErrorVP);
-        rule12.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, satP);
+        rule12.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, pi);
 //-------------------------------------------------------------------------------
 //--------------------------Erro Positivo Grande -------------------------------------------
         Rule rule13 = new Rule();
@@ -388,8 +1258,13 @@ public class MainView extends javax.swing.JFrame {
         rangeDerError.add(-0.8);
         rangeDerError.add(0.8);
 
+        ArrayList<Double> rangeOut = new ArrayList<Double>();
+        rangeOut.add(-3d);
+        rangeOut.add(3d);
+
         dataBase.addRangeIn(ConstantsFuzzy.VARIABLE_ERROR_TANK2, rangeError);
         dataBase.addRangeIn(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2, rangeDerError);
+        dataBase.addRangeOut(ConstantsFuzzy.VARIABLE_OUTPUT, rangeOut);
 
         ArrayList<String> typesIn = new ArrayList<String>();
         typesIn.add(ConstantsFuzzy.VARIABLE_ERROR_TANK2);
