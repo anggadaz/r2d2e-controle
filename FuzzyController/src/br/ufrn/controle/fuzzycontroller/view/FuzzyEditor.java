@@ -282,16 +282,33 @@ public class FuzzyEditor extends javax.swing.JDialog {
         iOPanel1.clear();
 
         FuzzyController fc = controlerPanel1.getSelectedFunc();
+        iOPanel1.setController(fc);
 
         for (String type : fc.getDataInType()) {
             ArrayList<FuncPertinence> funcs = fc.getInference().getDataBase().getIn(type);
-            iOPanel1.addIn(funcs, type);
+            ArrayList<Double> ranges = fc.getInference().getDataBase().getRangeIn(type);
+            String range;
+            if (ranges != null) {
+                range = ranges.get(0).toString() + " " + ranges.get(1).toString();
+            } else {
+                range = "";
+            }
+            iOPanel1.addIn(funcs, type, range);
         }
 
         ArrayList<FuncPertinence> funcs = fc.getInference().getDataBase().getOut(ConstantsFuzzy.VARIABLE_OUTPUT);
-        iOPanel1.addOut(funcs, ConstantsFuzzy.VARIABLE_OUTPUT);
 
-        fc.getInference().getDataBase().getRangeIn(null);
+        ArrayList<Double> ranges = fc.getInference().getDataBase().getRangeOut(ConstantsFuzzy.VARIABLE_OUTPUT);
+        String range;
+        if (ranges != null) {
+            range = ranges.get(0).toString() + " " + ranges.get(1).toString();
+        } else {
+            range = "";
+        }
+
+        if (funcs != null) {
+            iOPanel1.addOut(funcs, ConstantsFuzzy.VARIABLE_OUTPUT, range);
+        }
 
         CardLayout carta = ((CardLayout) jPanel1.getLayout());
         carta.show(jPanel1, "funcPertinenciaCard");

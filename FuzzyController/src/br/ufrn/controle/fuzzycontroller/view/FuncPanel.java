@@ -44,7 +44,7 @@ public class FuncPanel extends javax.swing.JPanel {
             dlm.addElement(s);
         }
 
-        funcaoPertinenciaPanel1.setRange(-3, 3);
+        funcaoPertinenciaPanel1.setRange(-0.8, 0.8);
     }
 
     /** This method is called from within the constructor to
@@ -250,6 +250,9 @@ public class FuncPanel extends javax.swing.JPanel {
 
         ioSelected.setVariable((String) cbType.getSelectedItem());
         ioSelected.setRange(tbRange.getText());
+        setRange(tbRange.getText());
+        parent.updateRange();
+
     }//GEN-LAST:event_btAtuaActionPerformed
 
     private void btDelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDelActionPerformed
@@ -292,6 +295,8 @@ public class FuncPanel extends javax.swing.JPanel {
         funcaoPertinenciaPanel1.addFunc(func);
         funcaoPertinenciaPanel1.repaint();
         clearFuncData();
+
+        parent.addFunc(func);
     }
 
     public void setIoSelected() {
@@ -305,9 +310,8 @@ public class FuncPanel extends javax.swing.JPanel {
         enableAll(true);
 
         setVariable(ioSelected.getVariable());
-        setRange(ioSelected.getRange());
-
         setFunctions(ioSelected.getFuncs());
+        setRange(ioSelected.getRange());
     }
 
     private ArrayList<Double> getParametros()
@@ -385,7 +389,26 @@ public class FuncPanel extends javax.swing.JPanel {
     }
 
     public void setRange(String range) {
+
+        if (range == null || "".equals(range)) {
+            return;
+        }
+
         tbRange.setText(range);
+        String[] partes = range.split(" ");
+
+        double min = 0.0, max = 0.0;
+
+        try {
+            if (partes != null) {
+                min = Double.parseDouble(partes[0]);
+                max = Double.parseDouble(partes[1]);
+            }
+        } catch (Exception e) {
+        }
+
+        funcaoPertinenciaPanel1.setRange(min, max);
+        funcaoPertinenciaPanel1.repaint();
     }
 
     public void setFunctions(ArrayList<FuncPertinence> func) {

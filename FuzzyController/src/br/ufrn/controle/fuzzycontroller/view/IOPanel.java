@@ -8,10 +8,10 @@
  *
  * Created on 17/11/2010, 20:13:01
  */
-
 package br.ufrn.controle.fuzzycontroller.view;
 
 import br.ufrn.controle.fuzzycontroller.domain.FuncPertinence;
+import br.ufrn.controle.fuzzycontroller.domain.FuzzyController;
 import br.ufrn.controle.fuzzycontroller.domain.InputOutput;
 import java.util.ArrayList;
 import javax.swing.JDialog;
@@ -24,6 +24,54 @@ public class IOPanel extends javax.swing.JPanel {
 
     public static FuncPanel FPanel = null;
     private InputOutput selected;
+    private FuzzyController controller;
+
+    public FuzzyController getController() {
+        return controller;
+    }
+
+    public void setController(FuzzyController controller) {
+        this.controller = controller;
+    }
+
+    public void updateRange() {
+        String range = selected.getRange();
+
+        String[] partes = range.split(" ");
+
+        double min = 0.0, max = 0.0;
+
+        try {
+            if (partes != null) {
+                min = Double.parseDouble(partes[0]);
+                max = Double.parseDouble(partes[1]);
+            }
+        } catch (Exception e) {
+        }
+
+        ArrayList<Double> ranges = new ArrayList<Double>();
+        ranges.add(min);
+        ranges.add(max);
+
+        if (selected.getType() == InputOutput.INPUT) {
+            controller.getInference().getDataBase().addRangeIn(selected.getVariable(), ranges);
+
+        } else if (selected.getType() == InputOutput.OUTPUT) {
+            controller.getInference().getDataBase().addRangeOut(selected.getVariable(), ranges);
+        }
+    }
+
+    public void addFunc(FuncPertinence func) {
+  
+        if (selected.getType() == InputOutput.INPUT) {
+            controller.getDataInType().add(selected.getVariable());
+            controller.getInference().getDataBase().addIn(selected.getVariable(), func);
+
+        } else if (selected.getType() == InputOutput.OUTPUT) {
+            controller.getInference().getDataBase().addOut(selected.getVariable(), func);
+        }
+
+    }
 
     /** Creates new form FuncPanel */
     public IOPanel() {
@@ -35,10 +83,10 @@ public class IOPanel extends javax.swing.JPanel {
 
     public void setSelected(InputOutput selected) {
 
-        if(this.selected != null) {
+        if (this.selected != null) {
             this.selected.select(false);
         }
-        
+
         this.selected = selected;
         this.selected.select(true);
         funcPanel1.setIoSelected();
@@ -103,14 +151,20 @@ public class IOPanel extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        btAddOut.setText("A");
+        btAddOut.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufrn/controle/fuzzycontroller/view/resources/adicionar.png"))); // NOI18N
+        btAddOut.setText(org.openide.util.NbBundle.getMessage(IOPanel.class, "IOPanel.btAddOut.text")); // NOI18N
+        btAddOut.setBorderPainted(false);
+        btAddOut.setContentAreaFilled(false);
         btAddOut.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btAddOutActionPerformed(evt);
             }
         });
 
-        btAddIn.setText("A");
+        btAddIn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufrn/controle/fuzzycontroller/view/resources/adicionar.png"))); // NOI18N
+        btAddIn.setText(org.openide.util.NbBundle.getMessage(IOPanel.class, "IOPanel.btAddIn.text")); // NOI18N
+        btAddIn.setBorderPainted(false);
+        btAddIn.setContentAreaFilled(false);
         btAddIn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btAddInActionPerformed(evt);
@@ -125,11 +179,11 @@ public class IOPanel extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(translucentPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btAddIn))
+                    .addComponent(btAddIn, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(translucentPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btAddOut))
+                    .addComponent(btAddOut, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(funcPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -140,11 +194,11 @@ public class IOPanel extends javax.swing.JPanel {
                     .addComponent(translucentPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(translucentPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btAddOut)
-                    .addComponent(btAddIn))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btAddOut, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btAddIn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
-            .addComponent(funcPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)
+            .addComponent(funcPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -156,23 +210,25 @@ public class IOPanel extends javax.swing.JPanel {
         tpOutput.addItem(new InputOutput(InputOutput.OUTPUT, this));
     }//GEN-LAST:event_btAddOutActionPerformed
 
-    public void addIn(FuncPertinence func, String variable) {
+    public void addIn(FuncPertinence func, String variable, String range) {
         ArrayList x = new ArrayList<FuncPertinence>();
         x.add(func);
-        addIn(x, variable);
+        addIn(x, variable, range);
     }
 
-    public void addIn(ArrayList<FuncPertinence> funcs, String variable) {
+    public void addIn(ArrayList<FuncPertinence> funcs, String variable, String range) {
         InputOutput inputOutput = new InputOutput(InputOutput.INPUT, this);
         inputOutput.setFuncs(funcs);
         inputOutput.setVariable(variable);
+        inputOutput.setRange(range);
         tpInput.addItem(inputOutput);
     }
 
-    public void addOut(ArrayList<FuncPertinence> funcs, String variable) {
+    public void addOut(ArrayList<FuncPertinence> funcs, String variable, String range) {
         InputOutput inputOutput = new InputOutput(InputOutput.OUTPUT, this);
         inputOutput.setFuncs(funcs);
         inputOutput.setVariable(variable);
+        inputOutput.setRange(range);
         tpOutput.addItem(inputOutput);
     }
 
@@ -180,7 +236,6 @@ public class IOPanel extends javax.swing.JPanel {
         tpInput.removeAllItems();
         tpOutput.removeAllItems();
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAddIn;
     private javax.swing.JButton btAddOut;
@@ -191,12 +246,11 @@ public class IOPanel extends javax.swing.JPanel {
     private br.ufrn.siga.component.translucent.TranslucentPanel translucentPanel2;
     // End of variables declaration//GEN-END:variables
 
-
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
 
             public void run() {
-                JDialog dialog = new JDialog(new javax.swing.JFrame(),true);
+                JDialog dialog = new JDialog(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
 
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -208,5 +262,4 @@ public class IOPanel extends javax.swing.JPanel {
             }
         });
     }
-
 }

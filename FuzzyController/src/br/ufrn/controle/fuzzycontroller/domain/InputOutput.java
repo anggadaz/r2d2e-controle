@@ -5,6 +5,7 @@
 
 package br.ufrn.controle.fuzzycontroller.domain;
 
+import br.ufrn.controle.fuzzycontroller.shared.ConstantsFuzzy;
 import br.ufrn.controle.fuzzycontroller.view.IOPanel;
 import br.ufrn.siga.component.translucent.TranslucentButton;
 import java.util.ArrayList;
@@ -20,7 +21,7 @@ public class InputOutput extends TranslucentButton {
     public static int OUTPUT_SUGENO = 2;
 
     private int type = INPUT;
-    private String variable = "";
+    private String variable = ConstantsFuzzy.VARIABLE_ERROR_TANK1;
     private String range = "";
 
     private IOPanel panel;

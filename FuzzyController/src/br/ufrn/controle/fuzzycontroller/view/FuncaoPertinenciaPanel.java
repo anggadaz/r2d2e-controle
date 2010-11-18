@@ -140,6 +140,10 @@ public class FuncaoPertinenciaPanel extends JPanel {
             scale.add(i/100.0);
         }
 
+        for (FuncPertinence funcPertinence : funcs) {
+            funcPertinence.recalculate();
+        }
+
     }
 
     @Override

@@ -127,6 +127,20 @@ public class FuncPertinence extends Polygon {
         return saida;
     }
 
+    public void recalculate() {
+
+        reset();
+        retangs.clear();
+
+        Point conv;
+        for (int i = 0; i < px.size(); i++) {
+            conv = IOPanel.FPanel.getFuncaoPertinenciaPanel1().toPixelScale(px.get(i), py.get(i));
+            super.addPoint(conv.x, conv.y);
+            retangs.add(new Rectangle(conv.x - REC_SIZE, conv.y - REC_SIZE, 2 * REC_SIZE, 2 * REC_SIZE));
+        }
+
+    }
+
     public void addPoint(double x, double y) {
 
         this.px.add(x);
