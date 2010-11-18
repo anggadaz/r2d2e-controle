@@ -28,7 +28,6 @@ public class ToolsPanel extends javax.swing.JPanel implements RetractablePanelCo
     private static final String CARD_OPTIONS = "cardOptions";
     private boolean compact;
     private MainView parent;
-
     public FuzzyEditor fuzzyEditor;
 
     /** Creates new form ToolsPanel
@@ -244,8 +243,12 @@ public class ToolsPanel extends javax.swing.JPanel implements RetractablePanelCo
         InitialDialog dialog = new InitialDialog(parent, true);
         dialog.setLocationRelativeTo(parent);
         dialog.setVisible(true);
-        parent.setControllerSelected(dialog.getFuzzyControllerSelected());
-        parent.startController();
+        if (dialog.isOk()) {
+            parent.setControllerSelected(dialog.getFuzzyControllerSelected());
+            parent.startController();
+            parent.getGraphContol().clean();
+            parent.getGraphLevel().clean();
+        }
     }//GEN-LAST:event_buttonStartMouseReleased
 
     private void buttonGeralMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonGeralMouseReleased
