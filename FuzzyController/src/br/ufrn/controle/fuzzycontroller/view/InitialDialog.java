@@ -20,6 +20,8 @@ import javax.swing.DefaultComboBoxModel;
  */
 public class InitialDialog extends javax.swing.JDialog {
 
+    private boolean ok = false;
+
     /** Creates new form InitialDialog
      * @param parent
      * @param modal
@@ -110,7 +112,12 @@ public class InitialDialog extends javax.swing.JDialog {
     private void buttonStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonStartActionPerformed
         // TODO add your handling code here:
         dispose();
+        ok = true;
     }//GEN-LAST:event_buttonStartActionPerformed
+
+    public boolean isOk(){
+        return ok;
+    }
 
     public FuzzyController getFuzzyControllerSelected() {
         return (FuzzyController) comboControllers.getSelectedItem();
