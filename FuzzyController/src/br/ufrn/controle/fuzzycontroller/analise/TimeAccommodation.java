@@ -43,6 +43,10 @@ public class TimeAccommodation {
 
     }
 
+    public void init() {
+        this.initialTime = System.currentTimeMillis();
+    }
+
     public int getCriterio() {
         return criterio;
     }

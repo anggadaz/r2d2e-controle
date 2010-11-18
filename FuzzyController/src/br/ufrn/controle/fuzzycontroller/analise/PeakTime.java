@@ -23,7 +23,7 @@ public class PeakTime {
     private Double setpointAnterior = 0.0;
 
     public PeakTime(Double set) {
-        MainView.stati.setPeekTime(0.0);
+        //MainView.stati.setPeekTime(0.0);
         setSetpoint(set);
     }
 

@@ -21,7 +21,7 @@ public class CalcOvershoot {
     private Double setpointAnterior = 0.0;
 
     public CalcOvershoot(Double set) {
-        MainView.stati.setOvershoot(0.0);
+        //MainView.stati.setOvershoot(0.0);
         setSetpoint(set);
     }
 

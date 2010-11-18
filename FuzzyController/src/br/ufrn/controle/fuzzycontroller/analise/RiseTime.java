@@ -21,6 +21,10 @@ public class RiseTime {
         this.initTime = System.currentTimeMillis();
     }
 
+    public void init() {
+        this.initTime = System.currentTimeMillis();
+    }
+
     public double calcRiseTime(double setPoint, double nivel) {
 
         if (setPoint == setPointAnt) {

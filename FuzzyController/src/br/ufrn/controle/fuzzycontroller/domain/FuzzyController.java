@@ -77,8 +77,12 @@ public class FuzzyController extends Thread {
 
         Quanser.setCALIBRATION1(level1Cal);
         Quanser.setCALIBRATION2(level2Cal);
+
+        MainView.stati.clear();
         graphControlHandler.init();
         graphLevelHandler.init();
+        timeOfAccommodation.init();
+        riseTime.init();
 
         while (ative) {
 
