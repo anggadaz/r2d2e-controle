@@ -62,9 +62,11 @@ public class IOPanel extends javax.swing.JPanel {
     }
 
     public void addFunc(FuncPertinence func) {
-  
+
         if (selected.getType() == InputOutput.INPUT) {
-            controller.getDataInType().add(selected.getVariable());
+            if (!controller.getDataInType().contains(selected.getVariable())) {
+                controller.getDataInType().add(selected.getVariable());
+            }
             controller.getInference().getDataBase().addIn(selected.getVariable(), func);
 
         } else if (selected.getType() == InputOutput.OUTPUT) {
@@ -235,6 +237,10 @@ public class IOPanel extends javax.swing.JPanel {
     public void clear() {
         tpInput.removeAllItems();
         tpOutput.removeAllItems();
+        funcPanel1.clearFuncData();
+        funcPanel1.clearInOutData();
+        funcPanel1.enableAll(false);
+
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAddIn;
@@ -261,5 +267,9 @@ public class IOPanel extends javax.swing.JPanel {
                 dialog.setVisible(true);
             }
         });
+    }
+
+    public FuncPanel getFuncPanel1() {
+        return funcPanel1;
     }
 }

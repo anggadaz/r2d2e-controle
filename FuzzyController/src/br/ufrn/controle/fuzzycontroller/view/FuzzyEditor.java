@@ -310,6 +310,8 @@ public class FuzzyEditor extends javax.swing.JDialog {
             iOPanel1.addOut(funcs, ConstantsFuzzy.VARIABLE_OUTPUT, range);
         }
 
+        iOPanel1.getFuncPanel1().getFuncaoPertinenciaPanel1().repaint();
+
         CardLayout carta = ((CardLayout) jPanel1.getLayout());
         carta.show(jPanel1, "funcPertinenciaCard");
     }//GEN-LAST:event_translucentButton2MouseClicked

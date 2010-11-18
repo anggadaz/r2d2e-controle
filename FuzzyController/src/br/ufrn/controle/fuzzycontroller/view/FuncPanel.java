@@ -292,11 +292,10 @@ public class FuncPanel extends javax.swing.JPanel {
             func = new FuncaoTrapezoidal(nome, param);
         }
 
-        funcaoPertinenciaPanel1.addFunc(func);
+        parent.addFunc(func);
         funcaoPertinenciaPanel1.repaint();
         clearFuncData();
 
-        parent.addFunc(func);
     }
 
     public void setIoSelected() {
