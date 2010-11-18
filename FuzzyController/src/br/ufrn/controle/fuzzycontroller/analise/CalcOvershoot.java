@@ -1,5 +1,7 @@
 package br.ufrn.controle.fuzzycontroller.analise;
 
+import br.ufrn.controle.fuzzycontroller.view.MainView;
+
 
 /**
  *
@@ -19,6 +21,7 @@ public class CalcOvershoot {
     private Double setpointAnterior = 0.0;
 
     public CalcOvershoot(Double set) {
+        MainView.stati.setOvershoot(0.0);
         setSetpoint(set);
     }
 
@@ -50,6 +53,7 @@ public class CalcOvershoot {
                     nivelAnterior = nivelAtual;
                 } else { // Diminiu então pode ser tu
                     Double over = calcPercentOvershoot(nivelAnterior);
+                    MainView.stati.setOvershoot(over);
                 }
 
             } else {
@@ -75,6 +79,7 @@ public class CalcOvershoot {
                     nivelAnterior = nivelAtual;
                 } else { // Diminiu então pode ser tu
                     Double over = calcPercentOvershoot(nivelAnterior);
+                    MainView.stati.setOvershoot(over);
                 }
             } else {
 

@@ -33,6 +33,8 @@ public class ControlerPanel extends javax.swing.JPanel {
     private final int MOM = 2;
     private final int LOM = 3;
 
+    MainView parent;
+
     /** Creates new form ControlerPanel */
     public ControlerPanel() {
         initComponents();
@@ -230,6 +232,10 @@ public class ControlerPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    public void setParent(MainView p) {
+        parent = p;
+    }
+
     private void btRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRActionPerformed
 
         DefaultListModel dlm = (DefaultListModel) listControler.getModel();
@@ -263,6 +269,7 @@ public class ControlerPanel extends javax.swing.JPanel {
                 fc.setDefuzzification(new Defuzzification(ConstantsFuzzy.DEFUZZI_SUGENO));
             }
 
+            parent.configure(fc);
             controllers.add(fc);
             preencheLista(controllers);
         }

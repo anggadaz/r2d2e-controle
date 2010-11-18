@@ -4,6 +4,8 @@
  */
 package br.ufrn.controle.fuzzycontroller.analise;
 
+import br.ufrn.controle.fuzzycontroller.view.MainView;
+
 /**
  *
  * @author demetrios
@@ -21,6 +23,7 @@ public class PeakTime {
     private Double setpointAnterior = 0.0;
 
     public PeakTime(Double set) {
+        MainView.stati.setPeekTime(0.0);
         setSetpoint(set);
     }
 
@@ -58,6 +61,7 @@ public class PeakTime {
                     finalTime = System.currentTimeMillis();
                 } else { // Diminiu então pode ser tu
                     Double time = convertToTwoPlaces(finalTime - initTime) / 1000;
+                    MainView.stati.setPeekTime(time);
                 }
 
             } else {
@@ -81,6 +85,7 @@ public class PeakTime {
                     nivelAnterior = nivelAtual;
                 } else { // Diminiu então pode ser tu
                     Double time = convertToTwoPlaces(System.currentTimeMillis() - initTime) / 1000;
+                    MainView.stati.setPeekTime(time);
                 }
             } else {
                 // Desceu do setpoint e depois subiu, não calculo mais

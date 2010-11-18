@@ -4,11 +4,17 @@
  */
 package br.ufrn.controle.fuzzycontroller.domain;
 
+import br.ufrn.controle.fuzzycontroller.analise.CalcOvershoot;
+import br.ufrn.controle.fuzzycontroller.analise.PeakTime;
+import br.ufrn.controle.fuzzycontroller.analise.RiseTime;
+import br.ufrn.controle.fuzzycontroller.analise.TimeAccommodation;
 import br.ufrn.controle.fuzzycontroller.handler.GraphHandler;
 import br.ufrn.controle.fuzzycontroller.quanser.Quanser;
 import br.ufrn.controle.fuzzycontroller.shared.ConstantsFuzzy;
 import br.ufrn.controle.fuzzycontroller.shared.ConstantsGraph;
+import br.ufrn.controle.fuzzycontroller.view.MainView;
 import br.ufrn.controle.fuzzycontroller.view.TanquePanel;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import org.openide.util.Exceptions;
 
@@ -35,16 +41,30 @@ public class FuzzyController extends Thread {
     private double integralTension = 0;
     private TanquePanel tanquePanel;
 
+    private CalcOvershoot calcOvershoot;
+    private TimeAccommodation timeOfAccommodation;
+    private RiseTime riseTime;
+    private PeakTime peakTime;
+
     public FuzzyController(String name, Inference inference, Defuzzification defuzzification, ArrayList<String> DataInType) {
         this.name = name;
         this.inference = inference;
         this.defuzzification = defuzzification;
         this.DataInType = DataInType;
         quanser = new Quanser();
+        createCalc();
     }
 
     public FuzzyController(String name) {
         this.name = name;
+        createCalc();
+    }
+
+    private void createCalc() {
+        calcOvershoot = new CalcOvershoot(ConstantsFuzzy.setPoint);
+        timeOfAccommodation = new TimeAccommodation(ConstantsFuzzy.criterio, ConstantsFuzzy.setPoint);
+        riseTime = new RiseTime(ConstantsFuzzy.setPoint);
+        peakTime = new PeakTime(ConstantsFuzzy.setPoint);
     }
 
     @Override
@@ -91,6 +111,16 @@ public class FuzzyController extends Thread {
 
             updateGraph(level1, level2, realVoltz);
 
+            calcOvershoot.CalcOvershoot(level2);
+
+            Double rise = riseTime.calcRiseTime(ConstantsFuzzy.setPoint, level2);
+            atualizarRiseTime(rise);
+
+            Double acomodation = timeOfAccommodation.calcTimeOfAcoomodation(ConstantsFuzzy.setPoint, level2);
+            atualizaAcomodationTime(acomodation);
+
+            peakTime.calcPeakTime(level2);
+
             tanquePanel.setLevelWater1(level1);
             tanquePanel.setLevelWater2(level2);
 
@@ -103,6 +133,22 @@ public class FuzzyController extends Thread {
             } catch (InterruptedException ex) {
                 Exceptions.printStackTrace(ex);
             }
+        }
+    }
+
+    public static void atualizarRiseTime(Double rise){
+        if(rise != null) {
+            DecimalFormat decimal = new DecimalFormat("0.00");
+            String valorFormatado = decimal.format(rise);
+            MainView.stati.setRiseTime(valorFormatado);
+        }
+    }
+
+    public static void atualizaAcomodationTime(Double acom) {
+        if(acom != null) {
+            DecimalFormat decimal = new DecimalFormat("0.00");
+            String valorFormatado = decimal.format(acom);
+            MainView.stati.setAcomodation(valorFormatado);
         }
     }
 

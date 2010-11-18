@@ -19,6 +19,7 @@ import br.ufrn.controle.fuzzycontroller.domain.Mamdani;
 import br.ufrn.controle.fuzzycontroller.domain.Rule;
 import br.ufrn.controle.fuzzycontroller.domain.RuleBase;
 import br.ufrn.controle.fuzzycontroller.domain.SelectionsGraph;
+import br.ufrn.controle.fuzzycontroller.domain.Statistics;
 import br.ufrn.controle.fuzzycontroller.domain.Sugeno;
 import br.ufrn.controle.fuzzycontroller.funcaopertinencia.FuncaoTrapezoidal;
 import br.ufrn.controle.fuzzycontroller.funcaopertinencia.FuncaoTriangular;
@@ -49,10 +50,13 @@ public class MainView extends javax.swing.JFrame {
     private FuzzyController controllerSelected;
     private SelectionsGraph selectionsGraph;
 
+    public static Statistics stati;
+
     /** Creates new form MainView */
     public MainView() {
         initComponents();
         init();
+        stati = new Statistics(txtOverShoot, txtSubida, txtPico, txtAcomodation);
     }
 
     private void init() {
@@ -1290,7 +1294,6 @@ public class MainView extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
 
         panelBackGround = new javax.swing.JPanel();
         panelGraphs = new javax.swing.JPanel();
@@ -1440,6 +1443,11 @@ public class MainView extends javax.swing.JFrame {
         lblFactorAcomo.setText("Fator de Acomodação :");
 
         comboFactorAcomo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2 %", "5 %", "7 %", "10 %" }));
+        comboFactorAcomo.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                comboFactorAcomoItemStateChanged(evt);
+            }
+        });
 
         javax.swing.GroupLayout DataPanelLayout = new javax.swing.GroupLayout(DataPanel);
         DataPanel.setLayout(DataPanelLayout);
@@ -1501,6 +1509,24 @@ public class MainView extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void comboFactorAcomoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboFactorAcomoItemStateChanged
+        String atual = (String) comboFactorAcomo.getSelectedItem();
+
+        if("5 %".equals(atual)) {
+            ConstantsFuzzy.criterio = 5;
+        }
+
+        if("7 %".equals(atual)) {
+            ConstantsFuzzy.criterio = 7;
+        }
+
+        if("10 %".equals(atual)) {
+            ConstantsFuzzy.criterio = 10;
+        }
+
+        ConstantsFuzzy.criterio = 2;
+    }//GEN-LAST:event_comboFactorAcomoItemStateChanged
 
     public ArrayList<FuzzyController> getControllers() {
         return controllers;

@@ -35,6 +35,7 @@ public class FuzzyEditor extends javax.swing.JDialog {
 //        controller = parent.getControllerSelected();
 //        ruleEditorPanel1.setController(controller);
 
+        controlerPanel1.setParent(parent);
         controlerPanel1.preencheLista(parent.getControllers());
 
     }

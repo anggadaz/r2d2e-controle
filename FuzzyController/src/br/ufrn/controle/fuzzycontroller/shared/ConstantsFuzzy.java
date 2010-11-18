@@ -11,8 +11,8 @@ package br.ufrn.controle.fuzzycontroller.shared;
  */
 public class ConstantsFuzzy {
 
-    
-    public static double setPoint;
+    public static int criterio = 2;
+    public static double setPoint = 15;
 
     public static final int MAMDAMI_TYPE = 1;
     public static final int TAKAGI_SUGENO_TYPE = 2;
