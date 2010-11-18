@@ -30,6 +30,7 @@ public class FuncaoPertinenciaPanel extends JPanel {
     private boolean isOutput = false;
 
     public FuncaoPertinenciaPanel() {
+        setBackground(new java.awt.Color(255, 255, 255));
 
         funcs = new ArrayList<FuncPertinence>();
 

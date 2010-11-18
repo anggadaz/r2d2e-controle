@@ -71,6 +71,8 @@ public class FuncPanel extends javax.swing.JPanel {
         tbParam = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+
         javax.swing.GroupLayout funcaoPertinenciaPanel1Layout = new javax.swing.GroupLayout(funcaoPertinenciaPanel1);
         funcaoPertinenciaPanel1.setLayout(funcaoPertinenciaPanel1Layout);
         funcaoPertinenciaPanel1Layout.setHorizontalGroup(
@@ -79,9 +81,10 @@ public class FuncPanel extends javax.swing.JPanel {
         );
         funcaoPertinenciaPanel1Layout.setVerticalGroup(
             funcaoPertinenciaPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 235, Short.MAX_VALUE)
+            .addGap(0, 237, Short.MAX_VALUE)
         );
 
+        jpInput.setBackground(new java.awt.Color(255, 255, 255));
         jpInput.setBorder(javax.swing.BorderFactory.createTitledBorder(org.openide.util.NbBundle.getMessage(FuncPanel.class, "FuncPanel.jpInput.border.title"))); // NOI18N
 
         jLabel2.setText(org.openide.util.NbBundle.getMessage(FuncPanel.class, "FuncPanel.jLabel2.text")); // NOI18N
@@ -141,6 +144,7 @@ public class FuncPanel extends javax.swing.JPanel {
                     .addComponent(btAtua)))
         );
 
+        jpFunc.setBackground(new java.awt.Color(255, 255, 255));
         jpFunc.setBorder(javax.swing.BorderFactory.createTitledBorder(org.openide.util.NbBundle.getMessage(FuncPanel.class, "FuncPanel.jpFunc.border.title"))); // NOI18N
 
         jLabel4.setText(org.openide.util.NbBundle.getMessage(FuncPanel.class, "FuncPanel.jLabel4.text")); // NOI18N
@@ -186,7 +190,7 @@ public class FuncPanel extends javax.swing.JPanel {
                 .addGroup(jpFuncLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(tbFunctionName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jpFuncLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(cbFunctionType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -195,7 +199,8 @@ public class FuncPanel extends javax.swing.JPanel {
                     .addComponent(jLabel5)
                     .addComponent(tbParam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btAdd))
+                .addComponent(btAdd)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -213,15 +218,14 @@ public class FuncPanel extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 259, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(funcaoPertinenciaPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jpInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jpFunc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jpFunc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents

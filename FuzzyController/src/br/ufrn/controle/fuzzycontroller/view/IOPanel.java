@@ -69,6 +69,8 @@ public class IOPanel extends javax.swing.JPanel {
         btAddIn = new javax.swing.JButton();
         funcPanel1 = new br.ufrn.controle.fuzzycontroller.view.FuncPanel();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+
         javax.swing.GroupLayout translucentPanel1Layout = new javax.swing.GroupLayout(translucentPanel1);
         translucentPanel1.setLayout(translucentPanel1Layout);
         translucentPanel1Layout.setHorizontalGroup(
