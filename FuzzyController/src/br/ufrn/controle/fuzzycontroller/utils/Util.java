@@ -45,6 +45,11 @@ public class Util {
         return maxMin(elements, GET_MAX);
     }
 
+    public static double truncate(double d, int fator) {
+        int temp = (int) (d * fator);
+        return (double) Math.round((double)temp/fator);
+    }
+
     private static int[] maxMin(double[] elements, int getMax) {
 
         double maxMinNumber = elements[0];

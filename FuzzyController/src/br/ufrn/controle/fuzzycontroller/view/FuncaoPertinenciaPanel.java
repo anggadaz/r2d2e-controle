@@ -1,6 +1,7 @@
 package br.ufrn.controle.fuzzycontroller.view;
 
 import br.ufrn.controle.fuzzycontroller.domain.FuncPertinence;
+import br.ufrn.controle.fuzzycontroller.utils.Util;
 import br.ufrn.controle.fuzzycontroller.view.retractable.ToolsPanel;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -15,8 +16,15 @@ import javax.swing.JPanel;
 
 public class FuncaoPertinenciaPanel extends JPanel {
 
-    private static int [] INPUT_SCALE = {0,5,10,15,20,25,30};
-    private static int [] OUTPUT_SCALE = {-3,-2,-1,0,1,2,3};
+    private static final int FATOR = 100;
+
+    private static final int MIN_DIV = 3;
+    private static final int MAX_DIV = 8;
+
+//    private static int [] INPUT_SCALE = {0,5,10,15,20,25,30};
+//    private static int [] OUTPUT_SCALE = {-3,-2,-1,0,1,2,3};
+
+    private ArrayList<Double> scale = new ArrayList<Double>();
 
     private ArrayList<FuncPertinence> funcs;
     private FuncPertinence dragTarget = null;
@@ -109,6 +117,31 @@ public class FuncaoPertinenciaPanel extends JPanel {
         });
     }
 
+    public void setRange(double min, double max) {
+
+        scale.clear();
+
+        double incremento;
+        int div = MAX_DIV;
+
+        int norma = (int) ( (max - min) * FATOR );
+
+        while(div >= MIN_DIV && norma % div != 0) {
+            div--;
+        }
+
+        NUM_DIVISOES = div;
+        incremento = (norma/div);
+
+        int minInt = (int)(min * FATOR);
+        int maxInt = (int)(max * FATOR);
+
+        for(int i = minInt; i <= maxInt; i += incremento) {
+            scale.add(i/100.0);
+        }
+
+    }
+
     @Override
     public void paintComponent(Graphics g) {
 
@@ -165,18 +198,11 @@ public class FuncaoPertinenciaPanel extends JPanel {
 
         // Eixo X
 
-        int[] scale;
         int deslocamento = 3;
 
-        if (isOutput) {
-            scale = OUTPUT_SCALE;
-        } else {
-            scale = INPUT_SCALE;
-        }
+        for (double i : scale) {
 
-        for (int i : scale) {
-
-            g2d.drawString(Integer.toString(i), posicao-deslocamento, getHeight()-LIMITE_NUM);
+            g2d.drawString(Double.toString(i), posicao-deslocamento, getHeight()-LIMITE_NUM);
 
             path.moveTo(posicao, getHeight() - LIMITE_MAX + 4);
             path.lineTo(posicao, getHeight() - LIMITE_MAX - 4);
@@ -232,19 +258,15 @@ public class FuncaoPertinenciaPanel extends JPanel {
 
     public Point toPixelScale(Double pX, Double pY) {
 
-        int limitReal;
+        double limitReal;
         int limitPixel = getWidth() - 2*LIMITE_MAX;
 
-        if(isOutput) {
-            limitReal = OUTPUT_SCALE[NUM_DIVISOES] - OUTPUT_SCALE[0];
-        } else {
-            limitReal = INPUT_SCALE[NUM_DIVISOES] - INPUT_SCALE[0];
-        }
+        limitReal = scale.get(NUM_DIVISOES) - scale.get(0);
 
         int altura;
 
-        int x = (int) pX.doubleValue();
-        int y = (x * limitPixel)/limitReal;
+        double x = pX.doubleValue() - scale.get(0);
+        int y = (int) ((x * limitPixel)/limitReal);
 
         y += (LIMITE_MAX);
 
@@ -259,23 +281,15 @@ public class FuncaoPertinenciaPanel extends JPanel {
 
     public Double toRealScale(Point point) {
 
-        int limitReal;
+        double limitReal;
         int limitPixel = getWidth() - 2*LIMITE_MAX;
 
-        if(isOutput) {
-            limitReal = OUTPUT_SCALE[NUM_DIVISOES] - OUTPUT_SCALE[0];
-        } else {
-            limitReal = INPUT_SCALE[NUM_DIVISOES] - INPUT_SCALE[0];
-        }
+        limitReal = scale.get(NUM_DIVISOES) - scale.get(0);
 
         double x = point.x;
         Double y = ((x-LIMITE_MAX) * limitReal)/limitPixel;
 
-        if(isOutput) {
-            y += OUTPUT_SCALE[0];
-        } else {
-            y += INPUT_SCALE[0];
-        }
+        y += scale.get(0);
 
         return y;
     }

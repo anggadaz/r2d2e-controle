@@ -43,6 +43,8 @@ public class FuncPanel extends javax.swing.JPanel {
         for (String s : ConstantsFuzzy.VARIABLES) {
             dlm.addElement(s);
         }
+
+        funcaoPertinenciaPanel1.setRange(-3, 3);
     }
 
     /** This method is called from within the constructor to
