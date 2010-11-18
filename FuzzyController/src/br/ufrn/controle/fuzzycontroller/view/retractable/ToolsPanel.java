@@ -29,7 +29,6 @@ public class ToolsPanel extends javax.swing.JPanel implements RetractablePanelCo
     private boolean compact;
     private MainView parent;
 
-    public static InOutFunctionDialog IODialog = new InOutFunctionDialog(null, false, false);
     public FuzzyEditor fuzzyEditor;
 
     /** Creates new form ToolsPanel

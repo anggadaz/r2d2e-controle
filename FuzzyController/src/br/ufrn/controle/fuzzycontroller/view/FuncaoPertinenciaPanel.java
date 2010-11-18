@@ -77,7 +77,9 @@ public class FuncaoPertinenciaPanel extends JPanel {
 
                 if (!clicado && dragTarget != null) {
                     dragTarget.mouseClickedOut();
-                    ToolsPanel.IODialog.clearFuncData();
+                    if(IOPanel.FPanel != null) {
+                        IOPanel.FPanel.clearFuncData();
+                    }
                     dragTarget = null;
                 }
                 repaint();

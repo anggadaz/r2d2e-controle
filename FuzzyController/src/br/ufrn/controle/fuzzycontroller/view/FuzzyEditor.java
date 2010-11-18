@@ -10,8 +10,12 @@
  */
 package br.ufrn.controle.fuzzycontroller.view;
 
+import br.ufrn.controle.fuzzycontroller.domain.FuncPertinence;
+import br.ufrn.controle.fuzzycontroller.domain.FuzzyController;
+import br.ufrn.controle.fuzzycontroller.shared.ConstantsFuzzy;
 import java.awt.CardLayout;
 import java.awt.Cursor;
+import java.util.ArrayList;
 
 /**
  *
@@ -32,7 +36,7 @@ public class FuzzyEditor extends javax.swing.JDialog {
 //        ruleEditorPanel1.setController(controller);
 
         controlerPanel1.preencheLista(parent.getControllers());
-        
+
     }
 
     public void init() {
@@ -275,6 +279,20 @@ public class FuzzyEditor extends javax.swing.JDialog {
     }//GEN-LAST:event_translucentButton3MouseClicked
 
     private void translucentButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_translucentButton2MouseClicked
+        iOPanel1.clear();
+
+        FuzzyController fc = controlerPanel1.getSelectedFunc();
+
+        for (String type : fc.getDataInType()) {
+            ArrayList<FuncPertinence> funcs = fc.getInference().getDataBase().getIn(type);
+            iOPanel1.addIn(funcs, type);
+        }
+
+        ArrayList<FuncPertinence> funcs = fc.getInference().getDataBase().getOut(ConstantsFuzzy.VARIABLE_OUTPUT);
+        iOPanel1.addOut(funcs, ConstantsFuzzy.VARIABLE_OUTPUT);
+
+        fc.getInference().getDataBase().getRangeIn(null);
+
         CardLayout carta = ((CardLayout) jPanel1.getLayout());
         carta.show(jPanel1, "funcPertinenciaCard");
     }//GEN-LAST:event_translucentButton2MouseClicked
@@ -308,6 +326,7 @@ public class FuzzyEditor extends javax.swing.JDialog {
      */
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
+
             public void run() {
                 FuzzyEditor dialog = new FuzzyEditor(new MainView(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {

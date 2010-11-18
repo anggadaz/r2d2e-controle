@@ -11,7 +11,9 @@
 
 package br.ufrn.controle.fuzzycontroller.view;
 
+import br.ufrn.controle.fuzzycontroller.domain.FuncPertinence;
 import br.ufrn.controle.fuzzycontroller.domain.InputOutput;
+import java.util.ArrayList;
 import javax.swing.JDialog;
 
 /**
@@ -20,6 +22,7 @@ import javax.swing.JDialog;
  */
 public class IOPanel extends javax.swing.JPanel {
 
+    public static FuncPanel FPanel = null;
     private InputOutput selected;
 
     /** Creates new form FuncPanel */
@@ -27,6 +30,7 @@ public class IOPanel extends javax.swing.JPanel {
         initComponents();
         funcPanel1.setParent(this);
         funcPanel1.enableAll(false);
+        FPanel = funcPanel1;
     }
 
     public void setSelected(InputOutput selected) {
@@ -152,6 +156,30 @@ public class IOPanel extends javax.swing.JPanel {
         tpOutput.addItem(new InputOutput(InputOutput.OUTPUT, this));
     }//GEN-LAST:event_btAddOutActionPerformed
 
+    public void addIn(FuncPertinence func, String variable) {
+        ArrayList x = new ArrayList<FuncPertinence>();
+        x.add(func);
+        addIn(x, variable);
+    }
+
+    public void addIn(ArrayList<FuncPertinence> funcs, String variable) {
+        InputOutput inputOutput = new InputOutput(InputOutput.INPUT, this);
+        inputOutput.setFuncs(funcs);
+        inputOutput.setVariable(variable);
+        tpInput.addItem(inputOutput);
+    }
+
+    public void addOut(ArrayList<FuncPertinence> funcs, String variable) {
+        InputOutput inputOutput = new InputOutput(InputOutput.OUTPUT, this);
+        inputOutput.setFuncs(funcs);
+        inputOutput.setVariable(variable);
+        tpOutput.addItem(inputOutput);
+    }
+
+    public void clear() {
+        tpInput.removeAllItems();
+        tpOutput.removeAllItems();
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAddIn;

@@ -5,6 +5,7 @@
 package br.ufrn.controle.fuzzycontroller.domain;
 
 import br.ufrn.controle.fuzzycontroller.utils.Util;
+import br.ufrn.controle.fuzzycontroller.view.IOPanel;
 import br.ufrn.controle.fuzzycontroller.view.retractable.ToolsPanel;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -132,7 +133,7 @@ public class FuncPertinence extends Polygon {
         this.py.add(y);
 
         //Converter para coordenada de pixels
-        Point conv = ToolsPanel.IODialog.getFuncaoPertinenciaPanel1().toPixelScale(x, y);
+        Point conv = IOPanel.FPanel.getFuncaoPertinenciaPanel1().toPixelScale(x, y);
 
         super.addPoint(conv.x, conv.y);
 
@@ -262,7 +263,7 @@ public class FuncPertinence extends Polygon {
         for (int i = 0; i < npoints; i++) {
             p = new Point(xpoints[i], ypoints[i]);
 
-            double conv = ToolsPanel.IODialog.getFuncaoPertinenciaPanel1().toRealScale(p);
+            double conv = IOPanel.FPanel.getFuncaoPertinenciaPanel1().toRealScale(p);
             int intConv = (int) (conv * FATOR);
             conv = intConv / 100.0;
 
@@ -271,9 +272,9 @@ public class FuncPertinence extends Polygon {
             param.append(" ");
         }
 
-        ToolsPanel.IODialog.setDelete(true, this);
-        ToolsPanel.IODialog.getTbParam().setText(param.toString());
-        ToolsPanel.IODialog.getTbFunctionName().setText(linguisticTerm);
+        IOPanel.FPanel.setDelete(true, this);
+        IOPanel.FPanel.getTbParam().setText(param.toString());
+        IOPanel.FPanel.getTbFunctionName().setText(linguisticTerm);
     }
 
     public void mousePressed(MouseEvent e) {
