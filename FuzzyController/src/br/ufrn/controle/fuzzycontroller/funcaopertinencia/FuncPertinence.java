@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.ufrn.controle.fuzzycontroller.domain;
+package br.ufrn.controle.fuzzycontroller.funcaopertinencia;
 
 import br.ufrn.controle.fuzzycontroller.utils.Util;
 import br.ufrn.controle.fuzzycontroller.view.IOPanel;

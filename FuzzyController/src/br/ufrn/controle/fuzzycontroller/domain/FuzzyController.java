@@ -38,13 +38,15 @@ public class FuzzyController extends Thread {
     private boolean limiteMaxTank2 = false;
     private double previousError1 = 0;
     private double previousError2 = 0;
-    private double integralTension = 0;
     private TanquePanel tanquePanel;
-
     private CalcOvershoot calcOvershoot;
     private TimeAccommodation timeOfAccommodation;
     private RiseTime riseTime;
     private PeakTime peakTime;
+    private volatile boolean incremental = false;
+    private double derivative1;
+    private double derivative2;
+    private double integralTension = 0;
 
     public FuzzyController(String name, Inference inference, Defuzzification defuzzification, ArrayList<String> DataInType) {
         this.name = name;
@@ -72,8 +74,13 @@ public class FuzzyController extends Thread {
 
         quanser.connect();
 
+        if (!quanser.isServerOk()) {
+            return;
+        }
+
         double level1Cal = quanser.readSensor1();
         double level2Cal = quanser.readSensor2();
+
 
         Quanser.setCALIBRATION1(level1Cal);
         Quanser.setCALIBRATION2(level2Cal);
@@ -103,9 +110,13 @@ public class FuzzyController extends Thread {
 
             double voltz = defuzzification.defuzzificate(functionOutPut);
 
-            double realVoltz = travaTensao(voltz);
+            if (incremental) {
+                integralTension += voltz;
+            } else {
+                integralTension = voltz;
+            }
 
-//            integralTension += realVoltz;
+            double realVoltz = travaTensao(integralTension);
 
             realVoltz = travaNivel2(level2, realVoltz);
 
@@ -138,10 +149,13 @@ public class FuzzyController extends Thread {
                 Exceptions.printStackTrace(ex);
             }
         }
+
+        quanser.writeBomb(0);
+        quanser.closeConnection();
     }
 
-    public static void atualizarRiseTime(Double rise){
-        if(rise != null) {
+    public static void atualizarRiseTime(Double rise) {
+        if (rise != null) {
             DecimalFormat decimal = new DecimalFormat("0.00");
             String valorFormatado = decimal.format(rise);
             MainView.stati.setRiseTime(valorFormatado);
@@ -149,7 +163,7 @@ public class FuzzyController extends Thread {
     }
 
     public static void atualizaAcomodationTime(Double acom) {
-        if(acom != null) {
+        if (acom != null) {
             DecimalFormat decimal = new DecimalFormat("0.00");
             String valorFormatado = decimal.format(acom);
             MainView.stati.setAcomodation(valorFormatado);
@@ -211,10 +225,19 @@ public class FuzzyController extends Thread {
                 dataIn.addValue(string, putLimit(string, ConstantsFuzzy.setPoint - level2));
             }
             if (string.equals(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK1)) {
-                dataIn.addValue(string, putLimit(string, ((ConstantsFuzzy.setPoint - level1) - previousError1)));
+                derivative1 = (ConstantsFuzzy.setPoint - level1) - previousError1;
+                System.out.println("der1 " + derivative1);
+                dataIn.addValue(string, putLimit(string, derivative1));
             }
             if (string.equals(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK2)) {
-                dataIn.addValue(string, putLimit(string, (ConstantsFuzzy.setPoint - level2) - previousError2));
+                derivative2 = (ConstantsFuzzy.setPoint - level2) - previousError2;
+                dataIn.addValue(string, putLimit(string, derivative2));
+            }
+            if (string.equals(ConstantsFuzzy.VARIABLE_LEVEL1)) {
+                dataIn.addValue(string, putLimit(string, level1));
+            }
+            if (string.equals(ConstantsFuzzy.VARIABLE_LEVEL2)) {
+                dataIn.addValue(string, putLimit(string, level2));
             }
         }
 
@@ -249,6 +272,18 @@ public class FuzzyController extends Thread {
                     graphLevelHandler.addValue(ConstantsGraph.SET_POINT, ConstantsFuzzy.setPoint);
                 }
 
+                if (selectionsGraph.isDerivateError1()) {
+                    graphLevelHandler.addValue(ConstantsGraph.DERIVATE_TANK1, derivative1);
+                }
+
+                if (selectionsGraph.isDerivateError2()) {
+                    graphLevelHandler.addValue(ConstantsGraph.DERIVATE_TANK2, derivative2);
+                }
+
+                if (selectionsGraph.isSinalFuzzy()) {
+                    graphControlHandler.addValue(ConstantsGraph.SINAL_FUZZY, integralTension);
+                }
+
                 graphControlHandler.addValue(ConstantsGraph.SINAL_CONTROLE, tension);
 
             }
@@ -262,8 +297,6 @@ public class FuzzyController extends Thread {
 
     public void setAtive(boolean ative) {
         this.ative = ative;
-        quanser.writeBomb(0);
-        quanser.closeConnection();
     }
 
     public Defuzzification getDefuzzification() {
@@ -340,5 +373,10 @@ public class FuzzyController extends Thread {
 
     public ArrayList<String> getDataInType() {
         return DataInType;
-}
+    }
+
+    public void setIncremental(boolean incremental) {
+        this.incremental = incremental;
+        System.out.println("inc " + this.incremental);
+    }
 }

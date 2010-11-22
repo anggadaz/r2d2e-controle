@@ -1,6 +1,5 @@
 package br.ufrn.controle.fuzzycontroller.funcaopertinencia;
 
-import br.ufrn.controle.fuzzycontroller.domain.FuncPertinence;
 import br.ufrn.controle.fuzzycontroller.view.FuncaoPertinenciaPanel;
 import java.awt.Point;
 import java.util.ArrayList;

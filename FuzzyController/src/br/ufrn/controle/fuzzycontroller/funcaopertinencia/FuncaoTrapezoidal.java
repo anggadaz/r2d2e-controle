@@ -1,6 +1,5 @@
 package br.ufrn.controle.fuzzycontroller.funcaopertinencia;
 
-import br.ufrn.controle.fuzzycontroller.domain.FuncPertinence;
 import java.util.ArrayList;
 
 /**

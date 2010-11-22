@@ -13,7 +13,7 @@ package br.ufrn.controle.fuzzycontroller.view;
 import br.ufrn.controle.fuzzycontroller.domain.DataBase;
 import br.ufrn.controle.fuzzycontroller.domain.Defuzzification;
 import br.ufrn.controle.fuzzycontroller.domain.Expression;
-import br.ufrn.controle.fuzzycontroller.domain.FuncPertinence;
+import br.ufrn.controle.fuzzycontroller.funcaopertinencia.FuncPertinence;
 import br.ufrn.controle.fuzzycontroller.domain.FuzzyController;
 import br.ufrn.controle.fuzzycontroller.domain.Mamdani;
 import br.ufrn.controle.fuzzycontroller.domain.Rule;
@@ -56,6 +56,7 @@ public class MainView extends javax.swing.JFrame {
     public MainView() {
         initComponents();
         init();
+        setLocationRelativeTo(null);
         stati = new Statistics(txtOverShoot, txtSubida, txtPico, txtAcomodation);
     }
 
@@ -68,7 +69,7 @@ public class MainView extends javax.swing.JFrame {
         panelEmpty.setCrossSizeLock(Math.round(getWidth() * crossSizeLock));
         retractable.add(toolRetractable);
         retractable.add(panelEmpty);
-        retractable.add(new RetractablePanel(retractable, new TankOptionsPanel(selectionsGraph, graphLevel.getGraphHandler()), "Opções De Gráficos", true));
+        retractable.add(new RetractablePanel(retractable, new TankOptionsPanel(selectionsGraph, graphLevel.getGraphHandler(),graphContol.getGraphHandler()), "Opções De Gráficos", true));
         setPreferredSize(new Dimension(996, 550));
         setMinimumSize(new Dimension(996, 550));
         initialConfiguration();

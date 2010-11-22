@@ -267,7 +267,7 @@ public class ToolsPanel extends javax.swing.JPanel implements RetractablePanelCo
 //        IODialog.setLocationRelativeTo(parent);
 //        IODialog.setVisible(true);
         fuzzyEditor.init();
-        fuzzyEditor.setLocationRelativeTo(this);
+        fuzzyEditor.setLocationRelativeTo(parent);
         fuzzyEditor.setVisible(true);
     }//GEN-LAST:event_buttonOpFuncMouseReleased
     private void changeCard(String card) {

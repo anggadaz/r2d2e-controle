@@ -10,11 +10,12 @@
  */
 package br.ufrn.controle.fuzzycontroller.view;
 
-import br.ufrn.controle.fuzzycontroller.domain.FuncPertinence;
+import br.ufrn.controle.fuzzycontroller.funcaopertinencia.FuncPertinence;
 import br.ufrn.controle.fuzzycontroller.domain.FuzzyController;
 import br.ufrn.controle.fuzzycontroller.shared.ConstantsFuzzy;
 import java.awt.CardLayout;
 import java.awt.Cursor;
+import java.awt.Dimension;
 import java.util.ArrayList;
 
 /**
@@ -38,6 +39,8 @@ public class FuzzyEditor extends javax.swing.JDialog {
         controlerPanel1.setParent(parent);
         controlerPanel1.preencheLista(parent.getControllers());
 
+        setMinimumSize(new Dimension(941, 400));
+
     }
 
     public void init() {
@@ -55,16 +58,16 @@ public class FuzzyEditor extends javax.swing.JDialog {
 
         jPanel6 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
-        jPanel4 = new javax.swing.JPanel();
+        panelConf = new javax.swing.JPanel();
         controlerPanel1 = new br.ufrn.controle.fuzzycontroller.view.ControlerPanel();
-        jPanel3 = new javax.swing.JPanel();
+        panelFunc = new javax.swing.JPanel();
         iOPanel1 = new br.ufrn.controle.fuzzycontroller.view.IOPanel();
-        jPanel5 = new javax.swing.JPanel();
+        panelRules = new javax.swing.JPanel();
         ruleEditorPanel1 = new br.ufrn.controle.fuzzycontroller.view.RuleEditorPanel();
         gradientPanel1 = new br.ufrn.siga.component.gradient.GradientPanel();
-        translucentButton1 = new br.ufrn.siga.component.translucent.TranslucentButton();
-        translucentButton2 = new br.ufrn.siga.component.translucent.TranslucentButton();
-        translucentButton3 = new br.ufrn.siga.component.translucent.TranslucentButton();
+        buttonConf = new br.ufrn.siga.component.translucent.TranslucentButton();
+        buttonFuncs = new br.ufrn.siga.component.translucent.TranslucentButton();
+        buttonRules = new br.ufrn.siga.component.translucent.TranslucentButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -72,159 +75,168 @@ public class FuzzyEditor extends javax.swing.JDialog {
 
         jPanel1.setLayout(new java.awt.CardLayout());
 
-        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
+        panelConf.setBackground(new java.awt.Color(255, 255, 255));
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
+        javax.swing.GroupLayout panelConfLayout = new javax.swing.GroupLayout(panelConf);
+        panelConf.setLayout(panelConfLayout);
+        panelConfLayout.setHorizontalGroup(
+            panelConfLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelConfLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(controlerPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 737, Short.MAX_VALUE)
+                .addComponent(controlerPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 753, Short.MAX_VALUE)
                 .addContainerGap())
         );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+        panelConfLayout.setVerticalGroup(
+            panelConfLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelConfLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(controlerPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 353, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        jPanel1.add(jPanel4, "card4");
+        jPanel1.add(panelConf, "card4");
 
-        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)), "Editor Função de Pertinencia"));
+        panelFunc.setBackground(new java.awt.Color(255, 255, 255));
+        panelFunc.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)), "Editor Função de Pertinencia"));
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 747, Short.MAX_VALUE)
-            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel3Layout.createSequentialGroup()
+        javax.swing.GroupLayout panelFuncLayout = new javax.swing.GroupLayout(panelFunc);
+        panelFunc.setLayout(panelFuncLayout);
+        panelFuncLayout.setHorizontalGroup(
+            panelFuncLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 763, Short.MAX_VALUE)
+            .addGroup(panelFuncLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelFuncLayout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(iOPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(iOPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 743, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        panelFuncLayout.setVerticalGroup(
+            panelFuncLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 351, Short.MAX_VALUE)
-            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel3Layout.createSequentialGroup()
+            .addGroup(panelFuncLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelFuncLayout.createSequentialGroup()
                     .addContainerGap()
                     .addComponent(iOPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 329, Short.MAX_VALUE)
                     .addContainerGap()))
         );
 
-        jPanel1.add(jPanel3, "funcPertinenciaCard");
+        jPanel1.add(panelFunc, "funcPertinenciaCard");
 
-        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)), "Editor de Regras"));
+        panelRules.setBackground(new java.awt.Color(255, 255, 255));
+        panelRules.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)), "Editor de Regras"));
 
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 747, Short.MAX_VALUE)
-            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+        javax.swing.GroupLayout panelRulesLayout = new javax.swing.GroupLayout(panelRules);
+        panelRules.setLayout(panelRulesLayout);
+        panelRulesLayout.setHorizontalGroup(
+            panelRulesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 763, Short.MAX_VALUE)
+            .addGroup(panelRulesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRulesLayout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(ruleEditorPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 727, Short.MAX_VALUE)
+                    .addComponent(ruleEditorPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 743, Short.MAX_VALUE)
                     .addContainerGap()))
         );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        panelRulesLayout.setVerticalGroup(
+            panelRulesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 351, Short.MAX_VALUE)
-            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel5Layout.createSequentialGroup()
+            .addGroup(panelRulesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelRulesLayout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(ruleEditorPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 325, Short.MAX_VALUE)
+                    .addComponent(ruleEditorPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE)
                     .addGap(15, 15, 15)))
         );
 
-        jPanel1.add(jPanel5, "ruleEditorCard");
+        jPanel1.add(panelRules, "ruleEditorCard");
 
         gradientPanel1.setColor1(new java.awt.Color(255, 255, 255));
         gradientPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT, 20, 5));
 
-        translucentButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufrn/controle/fuzzycontroller/view/resources/tools48x48.png"))); // NOI18N
-        translucentButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        buttonConf.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufrn/controle/fuzzycontroller/view/resources/tools48x48.png"))); // NOI18N
+        buttonConf.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                translucentButton1MouseClicked(evt);
+                buttonConfMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                translucentButton1MouseEntered(evt);
+                buttonConfMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                translucentButton1MouseExited(evt);
+                buttonConfMouseExited(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                buttonConfMouseReleased(evt);
             }
         });
 
-        javax.swing.GroupLayout translucentButton1Layout = new javax.swing.GroupLayout(translucentButton1);
-        translucentButton1.setLayout(translucentButton1Layout);
-        translucentButton1Layout.setHorizontalGroup(
-            translucentButton1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout buttonConfLayout = new javax.swing.GroupLayout(buttonConf);
+        buttonConf.setLayout(buttonConfLayout);
+        buttonConfLayout.setHorizontalGroup(
+            buttonConfLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 48, Short.MAX_VALUE)
         );
-        translucentButton1Layout.setVerticalGroup(
-            translucentButton1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        buttonConfLayout.setVerticalGroup(
+            buttonConfLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 48, Short.MAX_VALUE)
         );
 
-        gradientPanel1.add(translucentButton1);
+        gradientPanel1.add(buttonConf);
 
-        translucentButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufrn/controle/fuzzycontroller/view/resources/area_empilhada_48x48.png"))); // NOI18N
-        translucentButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+        buttonFuncs.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufrn/controle/fuzzycontroller/view/resources/area_empilhada_48x48.png"))); // NOI18N
+        buttonFuncs.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                translucentButton2MouseClicked(evt);
+                buttonFuncsMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                translucentButton2MouseEntered(evt);
+                buttonFuncsMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                translucentButton2MouseExited(evt);
+                buttonFuncsMouseExited(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                buttonFuncsMouseReleased(evt);
             }
         });
 
-        javax.swing.GroupLayout translucentButton2Layout = new javax.swing.GroupLayout(translucentButton2);
-        translucentButton2.setLayout(translucentButton2Layout);
-        translucentButton2Layout.setHorizontalGroup(
-            translucentButton2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout buttonFuncsLayout = new javax.swing.GroupLayout(buttonFuncs);
+        buttonFuncs.setLayout(buttonFuncsLayout);
+        buttonFuncsLayout.setHorizontalGroup(
+            buttonFuncsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 48, Short.MAX_VALUE)
         );
-        translucentButton2Layout.setVerticalGroup(
-            translucentButton2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        buttonFuncsLayout.setVerticalGroup(
+            buttonFuncsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 48, Short.MAX_VALUE)
         );
 
-        gradientPanel1.add(translucentButton2);
+        gradientPanel1.add(buttonFuncs);
 
-        translucentButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufrn/controle/fuzzycontroller/view/resources/gear48x48.png"))); // NOI18N
-        translucentButton3.addMouseListener(new java.awt.event.MouseAdapter() {
+        buttonRules.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufrn/controle/fuzzycontroller/view/resources/gear48x48.png"))); // NOI18N
+        buttonRules.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                translucentButton3MouseClicked(evt);
+                buttonRulesMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                translucentButton3MouseEntered(evt);
+                buttonRulesMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                translucentButton3MouseExited(evt);
+                buttonRulesMouseExited(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                buttonRulesMouseReleased(evt);
             }
         });
 
-        javax.swing.GroupLayout translucentButton3Layout = new javax.swing.GroupLayout(translucentButton3);
-        translucentButton3.setLayout(translucentButton3Layout);
-        translucentButton3Layout.setHorizontalGroup(
-            translucentButton3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout buttonRulesLayout = new javax.swing.GroupLayout(buttonRules);
+        buttonRules.setLayout(buttonRulesLayout);
+        buttonRulesLayout.setHorizontalGroup(
+            buttonRulesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 48, Short.MAX_VALUE)
         );
-        translucentButton3Layout.setVerticalGroup(
-            translucentButton3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        buttonRulesLayout.setVerticalGroup(
+            buttonRulesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 48, Short.MAX_VALUE)
         );
 
-        gradientPanel1.add(translucentButton3);
+        gradientPanel1.add(buttonRules);
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -232,12 +244,12 @@ public class FuzzyEditor extends javax.swing.JDialog {
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(gradientPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 757, Short.MAX_VALUE)
+                .addComponent(gradientPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 773, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel6Layout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 773, Short.MAX_VALUE)
                     .addContainerGap()))
         );
         jPanel6Layout.setVerticalGroup(
@@ -267,22 +279,49 @@ public class FuzzyEditor extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void translucentButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_translucentButton1MouseClicked
-        CardLayout carta = ((CardLayout) jPanel1.getLayout());
-        carta.show(jPanel1, "card4");
-    }//GEN-LAST:event_translucentButton1MouseClicked
+    private void buttonConfMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonConfMouseClicked
+    }//GEN-LAST:event_buttonConfMouseClicked
 
-    private void translucentButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_translucentButton3MouseClicked
-        ruleEditorPanel1.setController(controlerPanel1.getSelectedFunc());
+    private void buttonRulesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonRulesMouseClicked
+    }//GEN-LAST:event_buttonRulesMouseClicked
 
-        CardLayout carta = ((CardLayout) jPanel1.getLayout());
-        carta.show(jPanel1, "ruleEditorCard");
-    }//GEN-LAST:event_translucentButton3MouseClicked
+    private void buttonFuncsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonFuncsMouseClicked
+    }//GEN-LAST:event_buttonFuncsMouseClicked
 
-    private void translucentButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_translucentButton2MouseClicked
+    private void buttonConfMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonConfMouseEntered
+        buttonConf.setCursor(new Cursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_buttonConfMouseEntered
+
+    private void buttonFuncsMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonFuncsMouseEntered
+        buttonFuncs.setCursor(new Cursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_buttonFuncsMouseEntered
+
+    private void buttonRulesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonRulesMouseEntered
+        buttonRules.setCursor(new Cursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_buttonRulesMouseEntered
+
+    private void buttonConfMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonConfMouseExited
+        buttonConf.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+    }//GEN-LAST:event_buttonConfMouseExited
+
+    private void buttonFuncsMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonFuncsMouseExited
+        buttonFuncs.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+    }//GEN-LAST:event_buttonFuncsMouseExited
+
+    private void buttonRulesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonRulesMouseExited
+        buttonRules.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+    }//GEN-LAST:event_buttonRulesMouseExited
+
+    private void buttonFuncsMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonFuncsMouseReleased
+        // TODO add your handling code here:
         iOPanel1.clear();
 
         FuzzyController fc = controlerPanel1.getSelectedFunc();
+
+        if (fc == null) {
+            return;
+        }
+
         iOPanel1.setController(fc);
 
         for (String type : fc.getDataInType()) {
@@ -315,31 +354,27 @@ public class FuzzyEditor extends javax.swing.JDialog {
 
         CardLayout carta = ((CardLayout) jPanel1.getLayout());
         carta.show(jPanel1, "funcPertinenciaCard");
-    }//GEN-LAST:event_translucentButton2MouseClicked
+    }//GEN-LAST:event_buttonFuncsMouseReleased
 
-    private void translucentButton1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_translucentButton1MouseEntered
-        translucentButton1.setCursor(new Cursor(Cursor.HAND_CURSOR));
-    }//GEN-LAST:event_translucentButton1MouseEntered
+    private void buttonConfMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonConfMouseReleased
+        // TODO add your handling code here:
+        CardLayout carta = ((CardLayout) jPanel1.getLayout());
+        carta.show(jPanel1, "card4");
+    }//GEN-LAST:event_buttonConfMouseReleased
 
-    private void translucentButton2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_translucentButton2MouseEntered
-        translucentButton2.setCursor(new Cursor(Cursor.HAND_CURSOR));
-    }//GEN-LAST:event_translucentButton2MouseEntered
+    private void buttonRulesMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonRulesMouseReleased
+        // TODO add your handling code here:
+        FuzzyController fc = controlerPanel1.getSelectedFunc();
+        
+        if (fc == null) {
+            return;
+        }
 
-    private void translucentButton3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_translucentButton3MouseEntered
-        translucentButton3.setCursor(new Cursor(Cursor.HAND_CURSOR));
-    }//GEN-LAST:event_translucentButton3MouseEntered
+        ruleEditorPanel1.setController(fc);
 
-    private void translucentButton1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_translucentButton1MouseExited
-        translucentButton1.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-    }//GEN-LAST:event_translucentButton1MouseExited
-
-    private void translucentButton2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_translucentButton2MouseExited
-        translucentButton2.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-    }//GEN-LAST:event_translucentButton2MouseExited
-
-    private void translucentButton3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_translucentButton3MouseExited
-        translucentButton3.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-    }//GEN-LAST:event_translucentButton3MouseExited
+        CardLayout carta = ((CardLayout) jPanel1.getLayout());
+        carta.show(jPanel1, "ruleEditorCard");
+    }//GEN-LAST:event_buttonRulesMouseReleased
 
     /**
      * @param args the command line arguments
@@ -360,17 +395,17 @@ public class FuzzyEditor extends javax.swing.JDialog {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private br.ufrn.siga.component.translucent.TranslucentButton buttonConf;
+    private br.ufrn.siga.component.translucent.TranslucentButton buttonFuncs;
+    private br.ufrn.siga.component.translucent.TranslucentButton buttonRules;
     private br.ufrn.controle.fuzzycontroller.view.ControlerPanel controlerPanel1;
     private br.ufrn.siga.component.gradient.GradientPanel gradientPanel1;
     private br.ufrn.controle.fuzzycontroller.view.IOPanel iOPanel1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel panelConf;
+    private javax.swing.JPanel panelFunc;
+    private javax.swing.JPanel panelRules;
     private br.ufrn.controle.fuzzycontroller.view.RuleEditorPanel ruleEditorPanel1;
-    private br.ufrn.siga.component.translucent.TranslucentButton translucentButton1;
-    private br.ufrn.siga.component.translucent.TranslucentButton translucentButton2;
-    private br.ufrn.siga.component.translucent.TranslucentButton translucentButton3;
     // End of variables declaration//GEN-END:variables
 }

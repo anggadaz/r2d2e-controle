@@ -15,6 +15,9 @@ public class SelectionsGraph {
     private boolean error1Selected = true;
     private boolean error2Selected = true;
     private boolean setPointSelected = true;
+    private boolean derivateError1 = true;
+    private boolean derivateError2 = true;
+    private boolean sinalFuzzy = true;
 
     public boolean isError1Selected() {
         return error1Selected;
@@ -54,5 +57,41 @@ public class SelectionsGraph {
 
     public void setSetPointSelected(boolean setPoint) {
         this.setPointSelected = setPoint;
+    }
+
+    public void setDer1(boolean derivateError1) {
+        this.derivateError1 = derivateError1;
+    }
+
+    public void setDer2(boolean derivateError2) {
+        this.derivateError2 = derivateError2;
+    }
+
+    public boolean isDerivateError1() {
+        return derivateError1;
+    }
+
+    public void setDerivateError1(boolean derivateError1) {
+        this.derivateError1 = derivateError1;
+    }
+
+    public boolean isDerivateError2() {
+        return derivateError2;
+    }
+
+    public void setDerivateError2(boolean derivateError2) {
+        this.derivateError2 = derivateError2;
+    }
+
+    public void setSaidaFuzzy(boolean sinalFuzzy) {
+        this.sinalFuzzy = sinalFuzzy;
+    }
+
+    public boolean isSinalFuzzy() {
+        return sinalFuzzy;
+    }
+
+    public void setSinalFuzzy(boolean sinalFuzzy) {
+        this.sinalFuzzy = sinalFuzzy;
     }
 }

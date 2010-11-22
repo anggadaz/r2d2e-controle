@@ -32,7 +32,6 @@ public class ControlerPanel extends javax.swing.JPanel {
     private final int SOM = 1;
     private final int MOM = 2;
     private final int LOM = 3;
-
     MainView parent;
 
     /** Creates new form ControlerPanel */
@@ -63,6 +62,7 @@ public class ControlerPanel extends javax.swing.JPanel {
         cbAnd = new javax.swing.JComboBox();
         jLabel4 = new javax.swing.JLabel();
         cbDef = new javax.swing.JComboBox();
+        checkIncremental = new javax.swing.JCheckBox();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -124,7 +124,7 @@ public class ControlerPanel extends javax.swing.JPanel {
                         .addComponent(btAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
                         .addGap(10, 10, 10))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -169,6 +169,14 @@ public class ControlerPanel extends javax.swing.JPanel {
             }
         });
 
+        checkIncremental.setText(org.openide.util.NbBundle.getMessage(ControlerPanel.class, "ControlerPanel.checkIncremental.text")); // NOI18N
+        checkIncremental.setOpaque(false);
+        checkIncremental.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                checkIncrementalItemStateChanged(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -185,7 +193,8 @@ public class ControlerPanel extends javax.swing.JPanel {
                     .addComponent(tbTipo, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
                     .addComponent(cbAnd, 0, 100, Short.MAX_VALUE)
                     .addComponent(cbDef, 0, 100, Short.MAX_VALUE)
-                    .addComponent(tbNome, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))
+                    .addComponent(tbNome, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                    .addComponent(checkIncremental, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -207,7 +216,9 @@ public class ControlerPanel extends javax.swing.JPanel {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
                     .addComponent(cbDef, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(85, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(checkIncremental)
+                .addContainerGap(44, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -217,7 +228,7 @@ public class ControlerPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -226,8 +237,8 @@ public class ControlerPanel extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -332,6 +343,17 @@ public class ControlerPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_cbAndItemStateChanged
 
+    private void checkIncrementalItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_checkIncrementalItemStateChanged
+        // TODO add your handling code here:
+        FuzzyController controller = getSelectedFunc();
+
+        if (controller == null) {
+            return;
+        }
+
+        controller.setIncremental(checkIncremental.isSelected());
+    }//GEN-LAST:event_checkIncrementalItemStateChanged
+
     public FuzzyController getSelectedFunc() {
         return (FuzzyController) listControler.getSelectedValue();
     }
@@ -404,6 +426,7 @@ public class ControlerPanel extends javax.swing.JPanel {
     private javax.swing.JButton btR;
     private javax.swing.JComboBox cbAnd;
     private javax.swing.JComboBox cbDef;
+    private javax.swing.JCheckBox checkIncremental;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

@@ -1,6 +1,6 @@
 package br.ufrn.controle.fuzzycontroller.view;
 
-import br.ufrn.controle.fuzzycontroller.domain.FuncPertinence;
+import br.ufrn.controle.fuzzycontroller.funcaopertinencia.FuncPertinence;
 import br.ufrn.controle.fuzzycontroller.utils.Util;
 import br.ufrn.controle.fuzzycontroller.view.retractable.ToolsPanel;
 import java.awt.Color;

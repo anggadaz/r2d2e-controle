@@ -4,6 +4,7 @@
  */
 package br.ufrn.controle.fuzzycontroller.domain;
 
+import br.ufrn.controle.fuzzycontroller.funcaopertinencia.FuncPertinence;
 import java.util.ArrayList;
 import java.util.HashMap;
 

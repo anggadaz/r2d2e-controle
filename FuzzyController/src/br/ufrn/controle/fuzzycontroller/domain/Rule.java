@@ -4,6 +4,7 @@
  */
 package br.ufrn.controle.fuzzycontroller.domain;
 
+import br.ufrn.controle.fuzzycontroller.funcaopertinencia.FuncPertinence;
 import br.ufrn.controle.fuzzycontroller.shared.ConstantsFuzzy;
 import java.util.HashMap;
 
@@ -64,23 +65,23 @@ public class Rule {
     @Override
     public String toString() {
         StringBuilder retorno = new StringBuilder();
-        retorno.append("If ");
+        retorno.append("Se ");
         for (String entrada : premises.keySet()) {
             retorno.append("(");
             retorno.append(entrada);
-            retorno.append(" is ");
-            retorno.append(premises.get(entrada).isOperationNot() ? "not " : "");
+            retorno.append(" é ");
+            retorno.append(premises.get(entrada).isOperationNot() ? "não " : "");
             retorno.append(premises.get(entrada).getShape());
-            retorno.append(") and ");
+            retorno.append(") e ");
         }
 
-        if (retorno.toString().trim().endsWith("and")) {
-            int index = retorno.lastIndexOf("and");
+        if (retorno.toString().trim().endsWith("e")) {
+            int index = retorno.lastIndexOf("e");
             retorno.replace(index, retorno.length() - 1, "");
         }
 
-        retorno.append(" Then (Output is ");
-        retorno.append(functionOuts.get(ConstantsFuzzy.VARIABLE_OUTPUT).isOperationNot() ? "not " : "");
+        retorno.append(" Então (Saída é ");
+        retorno.append(functionOuts.get(ConstantsFuzzy.VARIABLE_OUTPUT).isOperationNot() ? "não " : "");
         retorno.append(functionOuts.get(ConstantsFuzzy.VARIABLE_OUTPUT).getPertinence());
         retorno.append(")");
 

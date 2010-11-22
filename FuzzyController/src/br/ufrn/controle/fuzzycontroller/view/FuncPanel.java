@@ -11,7 +11,7 @@
 
 package br.ufrn.controle.fuzzycontroller.view;
 
-import br.ufrn.controle.fuzzycontroller.domain.FuncPertinence;
+import br.ufrn.controle.fuzzycontroller.funcaopertinencia.FuncPertinence;
 import br.ufrn.controle.fuzzycontroller.domain.InputOutput;
 import br.ufrn.controle.fuzzycontroller.funcaopertinencia.FuncaoTrapezoidal;
 import br.ufrn.controle.fuzzycontroller.funcaopertinencia.FuncaoTriangular;
@@ -79,15 +79,16 @@ public class FuncPanel extends javax.swing.JPanel {
         funcaoPertinenciaPanel1.setLayout(funcaoPertinenciaPanel1Layout);
         funcaoPertinenciaPanel1Layout.setHorizontalGroup(
             funcaoPertinenciaPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 304, Short.MAX_VALUE)
+            .addGap(0, 258, Short.MAX_VALUE)
         );
         funcaoPertinenciaPanel1Layout.setVerticalGroup(
             funcaoPertinenciaPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 237, Short.MAX_VALUE)
+            .addGap(0, 261, Short.MAX_VALUE)
         );
 
         jpInput.setBackground(new java.awt.Color(255, 255, 255));
         jpInput.setBorder(javax.swing.BorderFactory.createTitledBorder(org.openide.util.NbBundle.getMessage(FuncPanel.class, "FuncPanel.jpInput.border.title"))); // NOI18N
+        jpInput.setPreferredSize(new java.awt.Dimension(216, 144));
 
         jLabel2.setText(org.openide.util.NbBundle.getMessage(FuncPanel.class, "FuncPanel.jLabel2.text")); // NOI18N
 
@@ -96,6 +97,8 @@ public class FuncPanel extends javax.swing.JPanel {
         jLabel3.setText(org.openide.util.NbBundle.getMessage(FuncPanel.class, "FuncPanel.jLabel3.text")); // NOI18N
 
         btDel.setText(org.openide.util.NbBundle.getMessage(FuncPanel.class, "FuncPanel.btDel.text")); // NOI18N
+        btDel.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
+        btDel.setContentAreaFilled(false);
         btDel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btDelActionPerformed(evt);
@@ -103,6 +106,8 @@ public class FuncPanel extends javax.swing.JPanel {
         });
 
         btAtua.setText(org.openide.util.NbBundle.getMessage(FuncPanel.class, "FuncPanel.btAtua.text")); // NOI18N
+        btAtua.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
+        btAtua.setContentAreaFilled(false);
         btAtua.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btAtuaActionPerformed(evt);
@@ -116,20 +121,21 @@ public class FuncPanel extends javax.swing.JPanel {
             .addGroup(jpInputLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jpInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jpInputLayout.createSequentialGroup()
-                        .addGroup(jpInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jpInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tbRange, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
-                            .addComponent(cbType, 0, 113, Short.MAX_VALUE)))
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jpInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpInputLayout.createSequentialGroup()
-                        .addComponent(btAtua)
+                        .addComponent(btAtua, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btDel)))
+                        .addComponent(btDel, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tbRange, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
+                    .addComponent(cbType, 0, 132, Short.MAX_VALUE))
                 .addContainerGap())
         );
+
+        jpInputLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btAtua, btDel});
+
         jpInputLayout.setVerticalGroup(
             jpInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpInputLayout.createSequentialGroup()
@@ -140,10 +146,10 @@ public class FuncPanel extends javax.swing.JPanel {
                 .addGroup(jpInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(tbRange, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addGroup(jpInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btDel)
-                    .addComponent(btAtua)))
+                    .addComponent(btDel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btAtua, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         jpFunc.setBackground(new java.awt.Color(255, 255, 255));
@@ -156,6 +162,8 @@ public class FuncPanel extends javax.swing.JPanel {
         jLabel5.setText(org.openide.util.NbBundle.getMessage(FuncPanel.class, "FuncPanel.jLabel5.text")); // NOI18N
 
         btAdd.setText(org.openide.util.NbBundle.getMessage(FuncPanel.class, "FuncPanel.btAdd.text")); // NOI18N
+        btAdd.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
+        btAdd.setContentAreaFilled(false);
         btAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btAddActionPerformed(evt);
@@ -168,27 +176,27 @@ public class FuncPanel extends javax.swing.JPanel {
         jpFunc.setLayout(jpFuncLayout);
         jpFuncLayout.setHorizontalGroup(
             jpFuncLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpFuncLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpFuncLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jpFuncLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jpFuncLayout.createSequentialGroup()
+                .addGroup(jpFuncLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jpFuncLayout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tbParam, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE))
-                    .addComponent(btAdd, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jpFuncLayout.createSequentialGroup()
+                        .addComponent(tbParam, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jpFuncLayout.createSequentialGroup()
                         .addGroup(jpFuncLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6)
                             .addComponent(jLabel4))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jpFuncLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(cbFunctionType, 0, 130, Short.MAX_VALUE)
-                            .addComponent(tbFunctionName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE))))
+                            .addComponent(cbFunctionType, 0, 149, Short.MAX_VALUE)
+                            .addComponent(tbFunctionName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         jpFuncLayout.setVerticalGroup(
             jpFuncLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpFuncLayout.createSequentialGroup()
+            .addGroup(jpFuncLayout.createSequentialGroup()
                 .addGroup(jpFuncLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(tbFunctionName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -200,9 +208,8 @@ public class FuncPanel extends javax.swing.JPanel {
                 .addGroup(jpFuncLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(tbParam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btAdd)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -211,7 +218,7 @@ public class FuncPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(funcaoPertinenciaPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(funcaoPertinenciaPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jpFunc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -222,12 +229,12 @@ public class FuncPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(funcaoPertinenciaPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(funcaoPertinenciaPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jpInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jpInput, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jpFunc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jpFunc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents

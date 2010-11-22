@@ -5,6 +5,7 @@
 
 package br.ufrn.controle.fuzzycontroller.domain;
 
+import br.ufrn.controle.fuzzycontroller.funcaopertinencia.FuncPertinence;
 import br.ufrn.controle.fuzzycontroller.shared.ConstantsFuzzy;
 import br.ufrn.controle.fuzzycontroller.view.IOPanel;
 import br.ufrn.siga.component.translucent.TranslucentButton;

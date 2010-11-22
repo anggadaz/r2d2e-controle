@@ -4,6 +4,8 @@
  */
 package br.ufrn.controle.fuzzycontroller.domain;
 
+import br.ufrn.controle.fuzzycontroller.funcaopertinencia.FuncPertinence;
+
 /**
  *
  * @author demetrios

@@ -11,7 +11,7 @@
 package br.ufrn.controle.fuzzycontroller.view;
 
 import br.ufrn.controle.fuzzycontroller.domain.DataBase;
-import br.ufrn.controle.fuzzycontroller.domain.FuncPertinence;
+import br.ufrn.controle.fuzzycontroller.funcaopertinencia.FuncPertinence;
 import br.ufrn.controle.fuzzycontroller.domain.FuzzyController;
 import br.ufrn.controle.fuzzycontroller.domain.Rule;
 import br.ufrn.controle.fuzzycontroller.domain.RuleBase;
@@ -41,15 +41,15 @@ public class RuleEditorPanel extends javax.swing.JPanel {
     private ArrayList<JList> listas = new ArrayList<JList>();
     private ArrayList<JCheckBox> chkNot = new ArrayList<JCheckBox>();
     private final String NONE = "None";
-    private FuzzyController controller;
 
     public RuleEditorPanel() {
         initComponents();
     }
 
-    /** Creates new form RuleEditorPanel */
+    /** Creates new form RuleEditorPanel
+     * @param controller
+     */
     public RuleEditorPanel(FuzzyController controller) {
-        this.controller = controller;
         baseDados = controller.getInference().getDataBase();
         regras = controller.getInference().getRuleBase();
         dataTypeIn = controller.getDataInType();
@@ -58,7 +58,6 @@ public class RuleEditorPanel extends javax.swing.JPanel {
     }
 
     public void setController(FuzzyController controller) {
-        this.controller = controller;
         baseDados = controller.getInference().getDataBase();
         regras = controller.getInference().getRuleBase();
         dataTypeIn = controller.getDataInType();
@@ -77,15 +76,15 @@ public class RuleEditorPanel extends javax.swing.JPanel {
         jCheckBox3 = new javax.swing.JCheckBox();
         jLabel2 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
-        jPanel1 = new javax.swing.JPanel();
+        panelIns = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jList4 = new javax.swing.JList();
+        listOut = new javax.swing.JList();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList();
-        jPanel2 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        lsitRules = new javax.swing.JList();
+        panelButton = new javax.swing.JPanel();
+        buttonAdd = new javax.swing.JButton();
+        buttonRefresh = new javax.swing.JButton();
+        buttonRemove = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -96,76 +95,76 @@ public class RuleEditorPanel extends javax.swing.JPanel {
 
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.LINE_AXIS));
+        panelIns.setBackground(new java.awt.Color(255, 255, 255));
+        panelIns.setLayout(new javax.swing.BoxLayout(panelIns, javax.swing.BoxLayout.LINE_AXIS));
 
-        jList4.setModel(new DefaultListModel());
-        jScrollPane4.setViewportView(jList4);
+        listOut.setModel(new DefaultListModel());
+        jScrollPane4.setViewportView(listOut);
 
-        jList1.setModel(new DefaultListModel());
-        jList1.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+        lsitRules.setModel(new DefaultListModel());
+        lsitRules.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
-                jList1ValueChanged(evt);
+                lsitRulesValueChanged(evt);
             }
         });
-        jScrollPane1.setViewportView(jList1);
+        jScrollPane1.setViewportView(lsitRules);
 
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel2.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 3, 5));
+        panelButton.setBackground(new java.awt.Color(255, 255, 255));
+        panelButton.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 3, 5));
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufrn/controle/fuzzycontroller/view/resources/adicionar.png"))); // NOI18N
-        jButton1.setText(org.openide.util.NbBundle.getMessage(RuleEditorPanel.class, "RuleEditorPanel.jButton1.text")); // NOI18N
-        jButton1.setBorderPainted(false);
-        jButton1.setContentAreaFilled(false);
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        buttonAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufrn/controle/fuzzycontroller/view/resources/adicionar.png"))); // NOI18N
+        buttonAdd.setText(org.openide.util.NbBundle.getMessage(RuleEditorPanel.class, "RuleEditorPanel.buttonAdd.text")); // NOI18N
+        buttonAdd.setBorderPainted(false);
+        buttonAdd.setContentAreaFilled(false);
+        buttonAdd.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jButton1MouseEntered(evt);
+                buttonAddMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                jButton1MouseExited(evt);
+                buttonAddMouseExited(evt);
             }
         });
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        buttonAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                buttonAddActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton1);
+        panelButton.add(buttonAdd);
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufrn/controle/fuzzycontroller/view/resources/alterar.gif"))); // NOI18N
-        jButton2.setText(org.openide.util.NbBundle.getMessage(RuleEditorPanel.class, "RuleEditorPanel.jButton2.text")); // NOI18N
-        jButton2.setBorderPainted(false);
-        jButton2.setContentAreaFilled(false);
-        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+        buttonRefresh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufrn/controle/fuzzycontroller/view/resources/alterar.gif"))); // NOI18N
+        buttonRefresh.setText(org.openide.util.NbBundle.getMessage(RuleEditorPanel.class, "RuleEditorPanel.buttonRefresh.text")); // NOI18N
+        buttonRefresh.setBorderPainted(false);
+        buttonRefresh.setContentAreaFilled(false);
+        buttonRefresh.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jButton2MouseEntered(evt);
+                buttonRefreshMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                jButton2MouseExited(evt);
+                buttonRefreshMouseExited(evt);
             }
         });
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        buttonRefresh.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                buttonRefreshActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton2);
+        panelButton.add(buttonRefresh);
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufrn/controle/fuzzycontroller/view/resources/cancel.png"))); // NOI18N
-        jButton3.setText(org.openide.util.NbBundle.getMessage(RuleEditorPanel.class, "RuleEditorPanel.jButton3.text")); // NOI18N
-        jButton3.setBorderPainted(false);
-        jButton3.setContentAreaFilled(false);
-        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
+        buttonRemove.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufrn/controle/fuzzycontroller/view/resources/cancel.png"))); // NOI18N
+        buttonRemove.setText(org.openide.util.NbBundle.getMessage(RuleEditorPanel.class, "RuleEditorPanel.buttonRemove.text")); // NOI18N
+        buttonRemove.setBorderPainted(false);
+        buttonRemove.setContentAreaFilled(false);
+        buttonRemove.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jButton3MouseEntered(evt);
+                buttonRemoveMouseEntered(evt);
             }
         });
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        buttonRemove.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                buttonRemoveActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton3);
+        panelButton.add(buttonRemove);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -174,44 +173,47 @@ public class RuleEditorPanel extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 432, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 489, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(panelIns, javax.swing.GroupLayout.DEFAULT_SIZE, 283, Short.MAX_VALUE)
+                        .addGap(10, 10, 10)
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jCheckBox3)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(59, 59, 59))))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(23, 23, 23)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jCheckBox3, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(59, 59, 59))))
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
+                            .addComponent(panelButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jCheckBox3)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jCheckBox3))
-                    .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(panelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(panelIns, javax.swing.GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void buttonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddActionPerformed
         Rule regra = new Rule();
 
         boolean inputValido = false;
@@ -230,15 +232,15 @@ public class RuleEditorPanel extends javax.swing.JPanel {
             return;
         }
 
-        regra.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, jCheckBox3.isSelected(), (FuncPertinence) jList4.getSelectedValue());
+        regra.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, jCheckBox3.isSelected(), (FuncPertinence) listOut.getSelectedValue());
 
         regras.addRule(regra);
 
-        ((DefaultListModel) jList1.getModel()).addElement(regra);
-}//GEN-LAST:event_jButton1ActionPerformed
+        ((DefaultListModel) lsitRules.getModel()).addElement(regra);
+}//GEN-LAST:event_buttonAddActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        Rule regra = (Rule) jList1.getSelectedValue();
+    private void buttonRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRefreshActionPerformed
+        Rule regra = (Rule) lsitRules.getSelectedValue();
 
         boolean inputValido = false;
         for (int i = 0; i < listas.size(); i++) {
@@ -252,13 +254,13 @@ public class RuleEditorPanel extends javax.swing.JPanel {
             return;
         }
 
-        regra.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, jCheckBox3.isSelected(), (FuncPertinence) jList4.getSelectedValue());
+        regra.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, jCheckBox3.isSelected(), (FuncPertinence) listOut.getSelectedValue());
 
-        jList1.repaint();
-    }//GEN-LAST:event_jButton2ActionPerformed
+        lsitRules.repaint();
+    }//GEN-LAST:event_buttonRefreshActionPerformed
 
-    private void jList1ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jList1ValueChanged
-        Rule regra = (Rule) jList1.getSelectedValue();
+    private void lsitRulesValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lsitRulesValueChanged
+        Rule regra = (Rule) lsitRules.getSelectedValue();
 
         if (regra == null) {
             return;
@@ -269,44 +271,44 @@ public class RuleEditorPanel extends javax.swing.JPanel {
             listas.get(i).setSelectedValue(func, true);
         }
 
-        jList4.setSelectedValue(regra.getOutPutShape(ConstantsFuzzy.VARIABLE_OUTPUT), true);
-    }//GEN-LAST:event_jList1ValueChanged
+        listOut.setSelectedValue(regra.getOutPutShape(ConstantsFuzzy.VARIABLE_OUTPUT), true);
+    }//GEN-LAST:event_lsitRulesValueChanged
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        Rule regra = (Rule) jList1.getSelectedValue();
+    private void buttonRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRemoveActionPerformed
+        Rule regra = (Rule) lsitRules.getSelectedValue();
         if (regra != null) {
             regras.getRules().remove(regra);
-            ((DefaultListModel) jList1.getModel()).removeElement(regra);
-            jList1.repaint();
+            ((DefaultListModel) lsitRules.getModel()).removeElement(regra);
+            lsitRules.repaint();
         }
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_buttonRemoveActionPerformed
 
-    private void jButton1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseEntered
-        jButton1.setCursor(new Cursor(Cursor.HAND_CURSOR));
-    }//GEN-LAST:event_jButton1MouseEntered
+    private void buttonAddMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonAddMouseEntered
+        buttonAdd.setCursor(new Cursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_buttonAddMouseEntered
 
-    private void jButton2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseEntered
-        jButton2.setCursor(new Cursor(Cursor.HAND_CURSOR));
-    }//GEN-LAST:event_jButton2MouseEntered
+    private void buttonRefreshMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonRefreshMouseEntered
+        buttonRefresh.setCursor(new Cursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_buttonRefreshMouseEntered
 
-    private void jButton3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseEntered
-        jButton3.setCursor(new Cursor(Cursor.HAND_CURSOR));
-    }//GEN-LAST:event_jButton3MouseEntered
+    private void buttonRemoveMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonRemoveMouseEntered
+        buttonRemove.setCursor(new Cursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_buttonRemoveMouseEntered
 
-    private void jButton1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseExited
-        jButton1.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-    }//GEN-LAST:event_jButton1MouseExited
+    private void buttonAddMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonAddMouseExited
+        buttonAdd.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+    }//GEN-LAST:event_buttonAddMouseExited
 
-    private void jButton2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseExited
-        jButton2.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-    }//GEN-LAST:event_jButton2MouseExited
+    private void buttonRefreshMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonRefreshMouseExited
+        buttonRefresh.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+    }//GEN-LAST:event_buttonRefreshMouseExited
 
     private void criarPanelInput(String nomeInput) {
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
         panel.setBackground(new java.awt.Color(255, 255, 255));
 
-        JLabel label = new JLabel("<html>If <font color=red>" + nomeInput + "</font> is:</html>");
+        JLabel label = new JLabel("<html>Se <font color=red>" + nomeInput + "</font> é:</html>");
         JList lista = new JList(new DefaultListModel());
 
         JScrollPane scroll = new JScrollPane();
@@ -332,21 +334,21 @@ public class RuleEditorPanel extends javax.swing.JPanel {
         listas.add(lista);
         chkNot.add(chkBox);
 
-        jPanel1.add(panel);
+        panelIns.add(panel);
     }
 
     private void init() {
-        jPanel1.removeAll();
+        panelIns.removeAll();
         listas = new ArrayList<JList>();
-        ((DefaultListModel) jList1.getModel()).removeAllElements();
-        jList1.clearSelection();
+        ((DefaultListModel) lsitRules.getModel()).removeAllElements();
+        lsitRules.clearSelection();
 
-        ((DefaultListModel) jList4.getModel()).removeAllElements();
-        jList4.clearSelection();
+        ((DefaultListModel) listOut.getModel()).removeAllElements();
+        listOut.clearSelection();
 
         if (baseDados.getOut(ConstantsFuzzy.VARIABLE_OUTPUT) != null) {
             for (FuncPertinence func : baseDados.getOut(ConstantsFuzzy.VARIABLE_OUTPUT)) {
-                ((DefaultListModel) jList4.getModel()).addElement(func);
+                ((DefaultListModel) listOut.getModel()).addElement(func);
             }
         }
 
@@ -355,7 +357,7 @@ public class RuleEditorPanel extends javax.swing.JPanel {
         }
 
         for (Rule regra : regras.getRules()) {
-            ((DefaultListModel) jList1.getModel()).addElement(regra);
+            ((DefaultListModel) lsitRules.getModel()).addElement(regra);
         }
     }
 
@@ -379,17 +381,17 @@ public class RuleEditorPanel extends javax.swing.JPanel {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton buttonAdd;
+    private javax.swing.JButton buttonRefresh;
+    private javax.swing.JButton buttonRemove;
     private javax.swing.JCheckBox jCheckBox3;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JList jList1;
-    private javax.swing.JList jList4;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JList listOut;
+    private javax.swing.JList lsitRules;
+    private javax.swing.JPanel panelButton;
+    private javax.swing.JPanel panelIns;
     // End of variables declaration//GEN-END:variables
 }

@@ -29,17 +29,17 @@ public class ConstantsFuzzy {
     public static final String MAMDAMI = "Mamdami";
     public static final String TAKAGI_SUGENO = "Takagi - Sugeno";
 
-    public static final String VARIABLE_ERROR_TANK1 = "errorTank1";
-    public static final String VARIABLE_ERROR_TANK2 = "errorTank2";
-    public static final String VARIABLE_DERIVATIVE_TANK1 = "derivativeError1";
-    public static final String VARIABLE_DERIVATIVE_TANK2 = "derivativeError2";
-    public static final String VARIABLE_INTEGRATIVE_ERROR_TANK1 = "integrativeError1";
-    public static final String VARIABLE_INTEGRATIVE_ERROR_TANK2 = "integrativeError2";
+    public static final String VARIABLE_ERROR_TANK1 = "Erro Tanque 1";
+    public static final String VARIABLE_ERROR_TANK2 = "Erro Tanque 2";
+    public static final String VARIABLE_DERIVATIVE_TANK1 = "Derivada Tanque 1";
+    public static final String VARIABLE_DERIVATIVE_TANK2 = "Derivada Tanque 2";
+    public static final String VARIABLE_LEVEL1 = "Nível Tanque 1";
+    public static final String VARIABLE_LEVEL2 = "Nível Tanque 2";
 
-    public static final String VARIABLE_OUTPUT = "outPut";
+    public static final String VARIABLE_OUTPUT = "Saída";
 
-    public static final String[] VARIABLES = new String[]{"errorTank1","errorTank2","derivativeError1","derivativeError2",
-        "integrativeError1","integrativeError2","outPut"};
+    public static final String[] VARIABLES = new String[]{VARIABLE_ERROR_TANK1,VARIABLE_ERROR_TANK2,VARIABLE_DERIVATIVE_TANK1,VARIABLE_DERIVATIVE_TANK2,
+        VARIABLE_LEVEL1,VARIABLE_LEVEL2,VARIABLE_OUTPUT};
 
 
 }

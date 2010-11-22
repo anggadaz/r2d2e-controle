@@ -27,6 +27,7 @@ public class TankOptionsPanel extends javax.swing.JPanel implements RetractableP
     private final static String CARD_COMPACT = "cardCompact";
     private SelectionsGraph selectionsGraph;
     private GraphHandler graphHandler;
+    private GraphHandler graphControlHandler;
 
     /** Creates new form OpcoesTanque
      * @param selectionsGraph
@@ -42,6 +43,14 @@ public class TankOptionsPanel extends javax.swing.JPanel implements RetractableP
         this.graphHandler = graphHandler;
     }
 
+    public TankOptionsPanel(SelectionsGraph selectionsGraph, GraphHandler graphHandler, GraphHandler graphControlHandler) {
+        initComponents();
+        this.selectionsGraph = selectionsGraph;
+        this.graphHandler = graphHandler;
+        this.graphControlHandler = graphControlHandler;
+    }
+    
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -55,9 +64,12 @@ public class TankOptionsPanel extends javax.swing.JPanel implements RetractableP
         translucentPanel1 = new br.ufrn.siga.component.translucent.TranslucentPanel();
         chkTank1 = new javax.swing.JCheckBox();
         chkTank2 = new javax.swing.JCheckBox();
+        chkDer1 = new javax.swing.JCheckBox();
+        chkDer2 = new javax.swing.JCheckBox();
         chkError1 = new javax.swing.JCheckBox();
         chkError2 = new javax.swing.JCheckBox();
         chkSetPoint = new javax.swing.JCheckBox();
+        chkFuzzy = new javax.swing.JCheckBox();
         panelCompact = new br.ufrn.siga.component.gradient.GradientPanel();
         lblOptions = new javax.swing.JLabel();
         lblNumber = new javax.swing.JLabel();
@@ -70,7 +82,7 @@ public class TankOptionsPanel extends javax.swing.JPanel implements RetractableP
 
         translucentPanel1.setBlur(40);
         translucentPanel1.setTransparency(50);
-        translucentPanel1.setLayout(new java.awt.GridLayout(5, 1));
+        translucentPanel1.setLayout(new java.awt.GridLayout(8, 1));
 
         chkTank1.setSelected(true);
         chkTank1.setText("Nivel do Tanque 1");
@@ -91,6 +103,26 @@ public class TankOptionsPanel extends javax.swing.JPanel implements RetractableP
             }
         });
         translucentPanel1.add(chkTank2);
+
+        chkDer1.setSelected(true);
+        chkDer1.setText(org.openide.util.NbBundle.getMessage(TankOptionsPanel.class, "TankOptionsPanel.chkDer1.text")); // NOI18N
+        chkDer1.setOpaque(false);
+        chkDer1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkDer1ActionPerformed(evt);
+            }
+        });
+        translucentPanel1.add(chkDer1);
+
+        chkDer2.setSelected(true);
+        chkDer2.setText(org.openide.util.NbBundle.getMessage(TankOptionsPanel.class, "TankOptionsPanel.chkDer2.text")); // NOI18N
+        chkDer2.setOpaque(false);
+        chkDer2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkDer2ActionPerformed(evt);
+            }
+        });
+        translucentPanel1.add(chkDer2);
 
         chkError1.setSelected(true);
         chkError1.setText("Erro do Tanque1");
@@ -122,15 +154,25 @@ public class TankOptionsPanel extends javax.swing.JPanel implements RetractableP
         });
         translucentPanel1.add(chkSetPoint);
 
+        chkFuzzy.setSelected(true);
+        chkFuzzy.setText(org.openide.util.NbBundle.getMessage(TankOptionsPanel.class, "TankOptionsPanel.chkFuzzy.text")); // NOI18N
+        chkFuzzy.setOpaque(false);
+        chkFuzzy.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkFuzzyActionPerformed(evt);
+            }
+        });
+        translucentPanel1.add(chkFuzzy);
+
         javax.swing.GroupLayout panelCheckLayout = new javax.swing.GroupLayout(panelCheck);
         panelCheck.setLayout(panelCheckLayout);
         panelCheckLayout.setHorizontalGroup(
             panelCheckLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(translucentPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
+            .addComponent(translucentPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         panelCheckLayout.setVerticalGroup(
             panelCheckLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(translucentPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE)
+            .addComponent(translucentPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         add(panelCheck, "cardCheck");
@@ -152,7 +194,7 @@ public class TankOptionsPanel extends javax.swing.JPanel implements RetractableP
                 .addComponent(lblNumber, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblOptions)
-                .addGap(19, 19, 19))
+                .addGap(27, 27, 27))
         );
         panelCompactLayout.setVerticalGroup(
             panelCompactLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -160,7 +202,7 @@ public class TankOptionsPanel extends javax.swing.JPanel implements RetractableP
                 .addGroup(panelCompactLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblOptions)
                     .addComponent(lblNumber))
-                .addContainerGap(197, Short.MAX_VALUE))
+                .addContainerGap(198, Short.MAX_VALUE))
         );
 
         add(panelCompact, "cardCompact");
@@ -206,6 +248,30 @@ public class TankOptionsPanel extends javax.swing.JPanel implements RetractableP
         }
     }//GEN-LAST:event_chkSetPointActionPerformed
 
+    private void chkDer1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkDer1ActionPerformed
+        // TODO add your handling code here:
+        selectionsGraph.setDer1(chkDer1.isSelected());
+        if (!chkDer1.isSelected()) {
+            graphHandler.removeSerie(ConstantsGraph.DERIVATE_TANK1);
+        }
+    }//GEN-LAST:event_chkDer1ActionPerformed
+
+    private void chkDer2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkDer2ActionPerformed
+        // TODO add your handling code here:
+        selectionsGraph.setDer2(chkDer2.isSelected());
+        if (!chkDer2.isSelected()) {
+            graphHandler.removeSerie(ConstantsGraph.DERIVATE_TANK2);
+        }
+    }//GEN-LAST:event_chkDer2ActionPerformed
+
+    private void chkFuzzyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkFuzzyActionPerformed
+        // TODO add your handling code here:
+        selectionsGraph.setSaidaFuzzy(chkFuzzy.isSelected());
+        if (!chkFuzzy.isSelected()) {
+            graphControlHandler.removeSerie(ConstantsGraph.SINAL_FUZZY);
+        }
+    }//GEN-LAST:event_chkFuzzyActionPerformed
+
     private void changeCard(String card) {
         CardLayout layout = (CardLayout) getLayout();
         layout.show(this, card);
@@ -237,6 +303,16 @@ public class TankOptionsPanel extends javax.swing.JPanel implements RetractableP
         if (chkTank2.isSelected()) {
             count++;
         }
+        if (chkDer1.isSelected()) {
+            count++;
+        }
+        if (chkDer2.isSelected()) {
+            count++;
+        }
+        if (chkFuzzy.isSelected()) {
+            count++;
+        }
+
         lblNumber.setText(Integer.toString(count));
     }
 
@@ -249,8 +325,11 @@ public class TankOptionsPanel extends javax.swing.JPanel implements RetractableP
         return compact;
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JCheckBox chkDer1;
+    private javax.swing.JCheckBox chkDer2;
     private javax.swing.JCheckBox chkError1;
     private javax.swing.JCheckBox chkError2;
+    private javax.swing.JCheckBox chkFuzzy;
     private javax.swing.JCheckBox chkSetPoint;
     private javax.swing.JCheckBox chkTank1;
     private javax.swing.JCheckBox chkTank2;
