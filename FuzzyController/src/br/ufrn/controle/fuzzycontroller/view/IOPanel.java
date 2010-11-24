@@ -10,11 +10,19 @@
  */
 package br.ufrn.controle.fuzzycontroller.view;
 
+import br.ufrn.controle.fuzzycontroller.domain.Expression;
 import br.ufrn.controle.fuzzycontroller.funcaopertinencia.FuncPertinence;
 import br.ufrn.controle.fuzzycontroller.domain.FuzzyController;
 import br.ufrn.controle.fuzzycontroller.domain.InputOutput;
+import br.ufrn.controle.fuzzycontroller.domain.Mamdani;
+import java.awt.CardLayout;
+import java.awt.GridLayout;
+import java.lang.Double;
 import java.util.ArrayList;
+import javax.swing.DefaultListModel;
 import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -25,6 +33,9 @@ public class IOPanel extends javax.swing.JPanel {
     public static FuncPanel FPanel = null;
     private InputOutput selected;
     private FuzzyController controller;
+    private static final String CARD_FUNCPANEL = "funcpanel";
+    private static final String CARD_SUGENO_SAIDA_PANEL = "sugenosaidapanel";
+    private DefaultListModel listSugenoSaidaModel;
 
     public FuzzyController getController() {
         return controller;
@@ -78,9 +89,11 @@ public class IOPanel extends javax.swing.JPanel {
     /** Creates new form FuncPanel */
     public IOPanel() {
         initComponents();
-        funcPanel1.setParent(this);
-        funcPanel1.enableAll(false);
-        FPanel = funcPanel1;
+        panelFunc.setParent(this);
+        panelFunc.enableAll(false);
+        FPanel = panelFunc;
+        listSugenoSaidaModel = new DefaultListModel();
+        listSaidaSugeno.setModel(listSugenoSaidaModel);
     }
 
     public void setSelected(InputOutput selected) {
@@ -91,7 +104,23 @@ public class IOPanel extends javax.swing.JPanel {
 
         this.selected = selected;
         this.selected.select(true);
-        funcPanel1.setIoSelected();
+
+        if (selected.getType() == InputOutput.INPUT || (controller.getInference() instanceof Mamdani && selected.getType() == InputOutput.OUTPUT)) {
+            showPanel(CARD_FUNCPANEL);
+            panelFunc.setIoSelected();
+        } else {
+            showPanel(CARD_SUGENO_SAIDA_PANEL);
+            ArrayList<Expression> expressions = selected.getExpressions();
+
+            for (Expression expression : expressions) {
+                listSugenoSaidaModel.addElement(expression);
+            }
+        }
+    }
+
+    public void showPanel(String card) {
+        CardLayout cardLayout = (CardLayout) panelFuncCard.getLayout();
+        cardLayout.show(panelFuncCard, card);
     }
 
     public InputOutput getSelected() {
@@ -121,7 +150,14 @@ public class IOPanel extends javax.swing.JPanel {
         tpOutput = new br.ufrn.siga.component.scroll.ScrollPanel();
         btAddOut = new javax.swing.JButton();
         btAddIn = new javax.swing.JButton();
-        funcPanel1 = new br.ufrn.controle.fuzzycontroller.view.FuncPanel();
+        panelFuncCard = new javax.swing.JPanel();
+        panelFunc = new br.ufrn.controle.fuzzycontroller.view.FuncPanel();
+        panelSugeno = new javax.swing.JPanel();
+        scrollPaneSaidaSugeno = new javax.swing.JScrollPane();
+        listSaidaSugeno = new javax.swing.JList();
+        buttonAdd = new javax.swing.JButton();
+        buttonRemove = new javax.swing.JButton();
+        panelParam = new javax.swing.JPanel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -173,6 +209,75 @@ public class IOPanel extends javax.swing.JPanel {
             }
         });
 
+        panelFuncCard.setOpaque(false);
+        panelFuncCard.setLayout(new java.awt.CardLayout());
+        panelFuncCard.add(panelFunc, "funcpanel");
+
+        panelSugeno.setOpaque(false);
+
+        listSaidaSugeno.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        listSaidaSugeno.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                listSaidaSugenoValueChanged(evt);
+            }
+        });
+        scrollPaneSaidaSugeno.setViewportView(listSaidaSugeno);
+
+        buttonAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufrn/controle/fuzzycontroller/view/resources/adicionar.png"))); // NOI18N
+        buttonAdd.setText(org.openide.util.NbBundle.getMessage(IOPanel.class, "IOPanel.buttonAdd.text")); // NOI18N
+        buttonAdd.setBorderPainted(false);
+        buttonAdd.setContentAreaFilled(false);
+        buttonAdd.setFocusPainted(false);
+        buttonAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonAddActionPerformed(evt);
+            }
+        });
+
+        buttonRemove.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufrn/controle/fuzzycontroller/view/resources/cancel.png"))); // NOI18N
+        buttonRemove.setText(org.openide.util.NbBundle.getMessage(IOPanel.class, "IOPanel.buttonRemove.text")); // NOI18N
+        buttonRemove.setBorderPainted(false);
+        buttonRemove.setContentAreaFilled(false);
+        buttonRemove.setFocusPainted(false);
+        buttonRemove.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonRemoveActionPerformed(evt);
+            }
+        });
+
+        panelParam.setOpaque(false);
+        panelParam.setLayout(new javax.swing.BoxLayout(panelParam, javax.swing.BoxLayout.LINE_AXIS));
+
+        javax.swing.GroupLayout panelSugenoLayout = new javax.swing.GroupLayout(panelSugeno);
+        panelSugeno.setLayout(panelSugenoLayout);
+        panelSugenoLayout.setHorizontalGroup(
+            panelSugenoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelSugenoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelSugenoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(panelSugenoLayout.createSequentialGroup()
+                        .addComponent(buttonRemove, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(buttonAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(scrollPaneSaidaSugeno, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(290, 290, 290)
+                .addComponent(panelParam, javax.swing.GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE))
+        );
+        panelSugenoLayout.setVerticalGroup(
+            panelSugenoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelSugenoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(scrollPaneSaidaSugeno, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelSugenoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(buttonAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonRemove, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(31, Short.MAX_VALUE))
+            .addComponent(panelParam, javax.swing.GroupLayout.DEFAULT_SIZE, 307, Short.MAX_VALUE)
+        );
+
+        panelFuncCard.add(panelSugeno, "sugenosaidapanel");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -187,7 +292,7 @@ public class IOPanel extends javax.swing.JPanel {
                     .addComponent(translucentPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btAddOut, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(funcPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 632, Short.MAX_VALUE))
+                .addComponent(panelFuncCard, javax.swing.GroupLayout.PREFERRED_SIZE, 652, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -199,8 +304,8 @@ public class IOPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btAddOut, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btAddIn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-            .addComponent(funcPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE)
+                .addContainerGap(46, Short.MAX_VALUE))
+            .addComponent(panelFuncCard, javax.swing.GroupLayout.DEFAULT_SIZE, 307, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -211,6 +316,55 @@ public class IOPanel extends javax.swing.JPanel {
     private void btAddOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAddOutActionPerformed
         tpOutput.addItem(new InputOutput(InputOutput.OUTPUT, this));
     }//GEN-LAST:event_btAddOutActionPerformed
+
+    private void buttonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddActionPerformed
+        // TODO add your handling code here:
+        String name = JOptionPane.showInputDialog(panelSugeno, "Digite o nome da função:", "Saída Sugeno", JOptionPane.OK_CANCEL_OPTION);
+
+        if (!name.trim().equals("")) {
+            Expression expression = new Expression(name);
+            listSugenoSaidaModel.addElement(expression);
+            selected.addExpression(expression);
+        }
+    }//GEN-LAST:event_buttonAddActionPerformed
+
+    private void buttonRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRemoveActionPerformed
+        // TODO add your handling code here:
+        int ind = listSaidaSugeno.getSelectedIndex();
+        if (ind > -1) {
+            listSugenoSaidaModel.remove(ind);
+            selected.getExpressions().remove(ind);
+        }
+    }//GEN-LAST:event_buttonRemoveActionPerformed
+
+    private void listSaidaSugenoValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listSaidaSugenoValueChanged
+        // TODO add your handling code here:
+        Expression expression = (Expression) listSaidaSugeno.getSelectedValue();
+        if (expression != null) {
+            panelParam.removeAll();
+            fillParametersPanel(expression);
+        }
+    }//GEN-LAST:event_listSaidaSugenoValueChanged
+    private void fillParametersPanel(Expression expression) {
+
+        ArrayList<String> dataIn = controller.getDataInType();
+        int count = dataIn.size();
+
+        for (int i = 0; i < count; i++) {
+            Double value = expression.getConstant(dataIn.get(i));
+            ParametroSugenoPanel psp = new ParametroSugenoPanel();
+            psp.setParameterNumber(i + 1);
+            psp.setValue(value == null ? 0 : value);
+            panelParam.add(psp);
+        }
+
+        ParametroSugenoPanel psp = new ParametroSugenoPanel();
+        psp.setOffsetName();
+        psp.setValue(expression.getOffset());
+        panelParam.add(psp);
+
+        panelFuncCard.repaint();
+    }
 
     public void addIn(FuncPertinence func, String variable, String range) {
         ArrayList x = new ArrayList<FuncPertinence>();
@@ -234,18 +388,32 @@ public class IOPanel extends javax.swing.JPanel {
         tpOutput.addItem(inputOutput);
     }
 
+    public void addOutSugeno(ArrayList<Expression> expressions, String variable) {
+        InputOutput inputOutput = new InputOutput(InputOutput.OUTPUT, this);
+        inputOutput.setExpressions(expressions);
+        inputOutput.setVariable(variable);
+        tpOutput.addItem(inputOutput);
+    }
+
     public void clear() {
         tpInput.removeAllItems();
         tpOutput.removeAllItems();
-        funcPanel1.clearFuncData();
-        funcPanel1.clearInOutData();
-        funcPanel1.enableAll(false);
+        panelFunc.clearFuncData();
+        panelFunc.clearInOutData();
+        panelFunc.enableAll(false);
 
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAddIn;
     private javax.swing.JButton btAddOut;
-    private br.ufrn.controle.fuzzycontroller.view.FuncPanel funcPanel1;
+    private javax.swing.JButton buttonAdd;
+    private javax.swing.JButton buttonRemove;
+    private javax.swing.JList listSaidaSugeno;
+    private br.ufrn.controle.fuzzycontroller.view.FuncPanel panelFunc;
+    private javax.swing.JPanel panelFuncCard;
+    private javax.swing.JPanel panelParam;
+    private javax.swing.JPanel panelSugeno;
+    private javax.swing.JScrollPane scrollPaneSaidaSugeno;
     private br.ufrn.siga.component.scroll.ScrollPanel tpInput;
     private br.ufrn.siga.component.scroll.ScrollPanel tpOutput;
     private br.ufrn.siga.component.translucent.TranslucentPanel translucentPanel1;
@@ -270,6 +438,6 @@ public class IOPanel extends javax.swing.JPanel {
     }
 
     public FuncPanel getFuncPanel1() {
-        return funcPanel1;
+        return panelFunc;
     }
 }

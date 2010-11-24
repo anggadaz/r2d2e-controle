@@ -28,6 +28,7 @@ public class InputOutput extends TranslucentButton {
     private IOPanel panel;
 
     ArrayList<FuncPertinence> funcs = new ArrayList<FuncPertinence>();
+    ArrayList<Expression> expressions = new ArrayList<Expression>();
 
     public InputOutput() {
         super();
@@ -87,6 +88,22 @@ public class InputOutput extends TranslucentButton {
 
     public void removeFunction(FuncPertinence fun) {
         funcs.remove(fun);
+    }
+    
+    public ArrayList<Expression> getExpressions() {
+        return expressions;
+    }
+
+    public void setExpressions(ArrayList<Expression> expressions) {
+        this.expressions = expressions;
+    }
+
+    public void addExpression(Expression expression) {
+        expressions.add(expression);
+    }
+
+    public void removeE(Expression expression) {
+        expressions.remove(expression);
     }
 
     private void addMouseEvent() {

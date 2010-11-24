@@ -47,7 +47,6 @@ public class ToolsPanel extends javax.swing.JPanel implements RetractablePanelCo
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
 
         panelOptions = new br.ufrn.siga.component.gradient.GradientPanel();
         transluStart = new br.ufrn.siga.component.translucent.TranslucentPanel();
@@ -67,7 +66,7 @@ public class ToolsPanel extends javax.swing.JPanel implements RetractablePanelCo
         panelOptions.setColor1(new java.awt.Color(255, 255, 255));
         panelOptions.setColor2(new java.awt.Color(119, 166, 110));
         panelOptions.setOpaque(false);
-        panelOptions.setLayout(new java.awt.GridBagLayout());
+        panelOptions.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 2, 2));
 
         buttonStart.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufrn/controle/fuzzycontroller/view/resources/play.png"))); // NOI18N
         buttonStart.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -80,7 +79,7 @@ public class ToolsPanel extends javax.swing.JPanel implements RetractablePanelCo
         buttonStart.setLayout(buttonStartLayout);
         buttonStartLayout.setHorizontalGroup(
             buttonStartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 39, Short.MAX_VALUE)
+            .addGap(0, 40, Short.MAX_VALUE)
         );
         buttonStartLayout.setVerticalGroup(
             buttonStartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -91,19 +90,14 @@ public class ToolsPanel extends javax.swing.JPanel implements RetractablePanelCo
         transluStart.setLayout(transluStartLayout);
         transluStartLayout.setHorizontalGroup(
             transluStartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(buttonStart, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
+            .addComponent(buttonStart, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
         );
         transluStartLayout.setVerticalGroup(
             transluStartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(buttonStart, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
         );
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.ipadx = 40;
-        gridBagConstraints.ipady = 36;
-        panelOptions.add(transluStart, gridBagConstraints);
+        panelOptions.add(transluStart);
 
         buttonStop.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufrn/controle/fuzzycontroller/view/resources/play_stop.png"))); // NOI18N
         buttonStop.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -116,7 +110,7 @@ public class ToolsPanel extends javax.swing.JPanel implements RetractablePanelCo
         buttonStop.setLayout(buttonStopLayout);
         buttonStopLayout.setHorizontalGroup(
             buttonStopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 39, Short.MAX_VALUE)
+            .addGap(0, 40, Short.MAX_VALUE)
         );
         buttonStopLayout.setVerticalGroup(
             buttonStopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -127,19 +121,14 @@ public class ToolsPanel extends javax.swing.JPanel implements RetractablePanelCo
         transluStop.setLayout(transluStopLayout);
         transluStopLayout.setHorizontalGroup(
             transluStopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(buttonStop, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
+            .addComponent(buttonStop, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
         );
         transluStopLayout.setVerticalGroup(
             transluStopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(buttonStop, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
         );
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.ipadx = 40;
-        gridBagConstraints.ipady = 36;
-        panelOptions.add(transluStop, gridBagConstraints);
+        panelOptions.add(transluStop);
 
         buttonOpFunc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufrn/controle/fuzzycontroller/view/resources/tools.png"))); // NOI18N
         buttonOpFunc.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -152,7 +141,7 @@ public class ToolsPanel extends javax.swing.JPanel implements RetractablePanelCo
         buttonOpFunc.setLayout(buttonOpFuncLayout);
         buttonOpFuncLayout.setHorizontalGroup(
             buttonOpFuncLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 39, Short.MAX_VALUE)
+            .addGap(0, 40, Short.MAX_VALUE)
         );
         buttonOpFuncLayout.setVerticalGroup(
             buttonOpFuncLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -163,19 +152,14 @@ public class ToolsPanel extends javax.swing.JPanel implements RetractablePanelCo
         transluOptFuzzy.setLayout(transluOptFuzzyLayout);
         transluOptFuzzyLayout.setHorizontalGroup(
             transluOptFuzzyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(buttonOpFunc, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
+            .addComponent(buttonOpFunc, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
         );
         transluOptFuzzyLayout.setVerticalGroup(
             transluOptFuzzyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(buttonOpFunc, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
         );
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.ipadx = 40;
-        gridBagConstraints.ipady = 36;
-        panelOptions.add(transluOptFuzzy, gridBagConstraints);
+        panelOptions.add(transluOptFuzzy);
 
         buttonGeral.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufrn/controle/fuzzycontroller/view/resources/preferences.png"))); // NOI18N
         buttonGeral.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -188,7 +172,7 @@ public class ToolsPanel extends javax.swing.JPanel implements RetractablePanelCo
         buttonGeral.setLayout(buttonGeralLayout);
         buttonGeralLayout.setHorizontalGroup(
             buttonGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 39, Short.MAX_VALUE)
+            .addGap(0, 40, Short.MAX_VALUE)
         );
         buttonGeralLayout.setVerticalGroup(
             buttonGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -199,19 +183,14 @@ public class ToolsPanel extends javax.swing.JPanel implements RetractablePanelCo
         transluOptGeral.setLayout(transluOptGeralLayout);
         transluOptGeralLayout.setHorizontalGroup(
             transluOptGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(buttonGeral, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
+            .addComponent(buttonGeral, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
         );
         transluOptGeralLayout.setVerticalGroup(
             transluOptGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(buttonGeral, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
         );
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.ipadx = 40;
-        gridBagConstraints.ipady = 36;
-        panelOptions.add(transluOptGeral, gridBagConstraints);
+        panelOptions.add(transluOptGeral);
 
         add(panelOptions, "cardOptions");
 
@@ -226,13 +205,13 @@ public class ToolsPanel extends javax.swing.JPanel implements RetractablePanelCo
         panelCompact.setLayout(panelCompactLayout);
         panelCompactLayout.setHorizontalGroup(
             panelCompactLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblCompact, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(lblCompact, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
         );
         panelCompactLayout.setVerticalGroup(
             panelCompactLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelCompactLayout.createSequentialGroup()
                 .addComponent(lblCompact)
-                .addContainerGap(236, Short.MAX_VALUE))
+                .addContainerGap(115, Short.MAX_VALUE))
         );
 
         add(panelCompact, "cardCompact");

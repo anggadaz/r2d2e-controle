@@ -10,8 +10,10 @@
  */
 package br.ufrn.controle.fuzzycontroller.view;
 
+import br.ufrn.controle.fuzzycontroller.domain.Expression;
 import br.ufrn.controle.fuzzycontroller.funcaopertinencia.FuncPertinence;
 import br.ufrn.controle.fuzzycontroller.domain.FuzzyController;
+import br.ufrn.controle.fuzzycontroller.domain.Mamdani;
 import br.ufrn.controle.fuzzycontroller.shared.ConstantsFuzzy;
 import java.awt.CardLayout;
 import java.awt.Cursor;
@@ -336,18 +338,23 @@ public class FuzzyEditor extends javax.swing.JDialog {
             iOPanel1.addIn(funcs, type, range);
         }
 
-        ArrayList<FuncPertinence> funcs = fc.getInference().getDataBase().getOut(ConstantsFuzzy.VARIABLE_OUTPUT);
+        if(fc.getInference() instanceof Mamdani){
+            ArrayList<FuncPertinence> funcs = fc.getInference().getDataBase().getOut(ConstantsFuzzy.VARIABLE_OUTPUT);
 
-        ArrayList<Double> ranges = fc.getInference().getDataBase().getRangeOut(ConstantsFuzzy.VARIABLE_OUTPUT);
-        String range;
-        if (ranges != null) {
-            range = ranges.get(0).toString() + " " + ranges.get(1).toString();
-        } else {
-            range = "";
-        }
+            ArrayList<Double> ranges = fc.getInference().getDataBase().getRangeOut(ConstantsFuzzy.VARIABLE_OUTPUT);
+            String range;
+            if (ranges != null) {
+                range = ranges.get(0).toString() + " " + ranges.get(1).toString();
+            } else {
+                range = "";
+            }
 
-        if (funcs != null) {
-            iOPanel1.addOut(funcs, ConstantsFuzzy.VARIABLE_OUTPUT, range);
+            if (funcs != null) {
+                iOPanel1.addOut(funcs, ConstantsFuzzy.VARIABLE_OUTPUT, range);
+            }
+        }else{
+            ArrayList<Expression> expressions = fc.getInference().getDataBase().getExpressionOut(ConstantsFuzzy.VARIABLE_OUTPUT);
+            iOPanel1.addOutSugeno(expressions,ConstantsFuzzy.VARIABLE_OUTPUT);
         }
 
         iOPanel1.getFuncPanel1().getFuncaoPertinenciaPanel1().repaint();

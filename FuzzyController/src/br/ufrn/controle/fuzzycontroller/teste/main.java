@@ -1,52 +1,52 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-package br.ufrn.controle.fuzzycontroller.teste;
-
-import br.ufrn.controle.fuzzycontroller.domain.DataIn;
-import br.ufrn.controle.fuzzycontroller.domain.Mamdani;
-import br.ufrn.controle.fuzzycontroller.domain.Line;
-import br.ufrn.controle.fuzzycontroller.domain.Rule;
-import br.ufrn.controle.fuzzycontroller.domain.FuncPertinence;
-import br.ufrn.controle.fuzzycontroller.shared.ConstantsFuzzy;
-
-/**
- *
- * @author Demetrios
- */
-public class main {
-
-    public static void main(String args[]) {
-        //Mamdani inference = new Mamdani();
-
-//        s.addLine(new Line(0, 0, 3, 1));
-//        s.addLine(new Line(6, 0, 3, 1));
-//        s.addLine(new Line(0, 0, 6, 0));
+///*
+// * To change this template, choose Tools | Templates
+// * and open the template in the editor.
+// */
+//package br.ufrn.controle.fuzzycontroller.teste;
 //
-//        FuncPertinence i1 = new FuncPertinence();
+//import br.ufrn.controle.fuzzycontroller.domain.DataIn;
+//import br.ufrn.controle.fuzzycontroller.domain.Mamdani;
+//import br.ufrn.controle.fuzzycontroller.domain.Line;
+//import br.ufrn.controle.fuzzycontroller.domain.Rule;
+//import br.ufrn.controle.fuzzycontroller.domain.FuncPertinence;
+//import br.ufrn.controle.fuzzycontroller.shared.ConstantsFuzzy;
 //
-//        i1.addLine(new Line(1, 0, 3, 1));
-//        i1.addLine(new Line(5, 0, 3, 1));
-//        i1.addLine(new Line(1, 0, 5, 0));
+///**
+// *
+// * @author Demetrios
+// */
+//public class main {
 //
-//        FuncPertinence i2 = new FuncPertinence();
+//    public static void main(String args[]) {
+//        //Mamdani inference = new Mamdani();
 //
-//        i2.addLine(new Line(0, 0, 1, 1));
-//        i2.addLine(new Line(1, 1, 3, 1));
-//        i2.addLine(new Line(3, 1, 5, 0));
-//        i2.addLine(new Line(0, 0, 5, 0));
+////        s.addLine(new Line(0, 0, 3, 1));
+////        s.addLine(new Line(6, 0, 3, 1));
+////        s.addLine(new Line(0, 0, 6, 0));
+////
+////        FuncPertinence i1 = new FuncPertinence();
+////
+////        i1.addLine(new Line(1, 0, 3, 1));
+////        i1.addLine(new Line(5, 0, 3, 1));
+////        i1.addLine(new Line(1, 0, 5, 0));
+////
+////        FuncPertinence i2 = new FuncPertinence();
+////
+////        i2.addLine(new Line(0, 0, 1, 1));
+////        i2.addLine(new Line(1, 1, 3, 1));
+////        i2.addLine(new Line(3, 1, 5, 0));
+////        i2.addLine(new Line(0, 0, 5, 0));
+////
+////        Rule r = new Rule();
+////
+//////        r.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK1, i1);
+//////        r.addPremise(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK1, i2);
+////        r.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, s);
+////
+////        DataIn dataIn = new DataIn();
+////        dataIn.addValue(ConstantsFuzzy.VARIABLE_ERROR_TANK1, 0.3d);
+////        dataIn.addValue(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK1,2d);
 //
-//        Rule r = new Rule();
-//
-////        r.addPremise(ConstantsFuzzy.VARIABLE_ERROR_TANK1, i1);
-////        r.addPremise(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK1, i2);
-//        r.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, s);
-//
-//        DataIn dataIn = new DataIn();
-//        dataIn.addValue(ConstantsFuzzy.VARIABLE_ERROR_TANK1, 0.3d);
-//        dataIn.addValue(ConstantsFuzzy.VARIABLE_DERIVATIVE_TANK1,2d);
-
-//        inference.avaliateRule(r,dataIn);
-    }
-}
+////        inference.avaliateRule(r,dataIn);
+//    }
+//}

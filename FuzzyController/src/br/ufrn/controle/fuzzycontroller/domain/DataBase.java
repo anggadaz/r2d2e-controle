@@ -100,4 +100,8 @@ public class DataBase {
     public void addRangeOut(String variableOut, ArrayList<Double> rangeOut) {
         rangesOut.put(variableOut, rangeOut);
     }
+
+    public int getInputCount(){
+        return pertinenceIn.size();
+    }
 }

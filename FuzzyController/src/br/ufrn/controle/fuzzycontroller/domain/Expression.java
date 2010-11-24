@@ -15,14 +15,29 @@ public class Expression {
 
     private HashMap<String, Double> constants;
     private double offset;
+    private String name;
 
     public Expression() {
         constants = new HashMap<String, Double>();
         offset = 0;
+        name = "";
     }
 
     public Expression(double offset) {
         this.offset = offset;
+        constants = new HashMap<String, Double>();
+        name = "";
+    }
+
+    public Expression(String name) {
+        this.name = name;
+        constants = new HashMap<String, Double>();
+        offset = 0;
+    }
+
+    public Expression(double offset, String name) {
+        this.offset = offset;
+        this.name = name;
         constants = new HashMap<String, Double>();
     }
 
@@ -30,8 +45,20 @@ public class Expression {
         constants.put(variable, value);
     }
 
+    public Double getConstant(String variable) {
+        return constants.get(variable);
+    }
+
     public void setOffset(double offset) {
         this.offset = offset;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public double getOffset() {
+        return offset;
     }
 
     public double evaluate(DataIn dataIn) {
@@ -46,7 +73,7 @@ public class Expression {
 
             Double constant = constants.get(variable);
 
-            if(constant == null){
+            if (constant == null) {
                 constant = 0d;
             }
 
@@ -54,5 +81,10 @@ public class Expression {
         }
 
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 }
