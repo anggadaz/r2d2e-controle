@@ -15,14 +15,17 @@ import br.ufrn.controle.fuzzycontroller.funcaopertinencia.FuncPertinence;
 import br.ufrn.controle.fuzzycontroller.domain.FuzzyController;
 import br.ufrn.controle.fuzzycontroller.domain.InputOutput;
 import br.ufrn.controle.fuzzycontroller.domain.Mamdani;
+import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.GridLayout;
 import java.lang.Double;
 import java.util.ArrayList;
+import javax.swing.BoxLayout;
 import javax.swing.DefaultListModel;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import org.netbeans.lib.awtextra.AbsoluteLayout;
 
 /**
  *
@@ -246,7 +249,7 @@ public class IOPanel extends javax.swing.JPanel {
         });
 
         panelParam.setOpaque(false);
-        panelParam.setLayout(new javax.swing.BoxLayout(panelParam, javax.swing.BoxLayout.LINE_AXIS));
+        panelParam.setLayout(new javax.swing.BoxLayout(panelParam, javax.swing.BoxLayout.PAGE_AXIS));
 
         javax.swing.GroupLayout panelSugenoLayout = new javax.swing.GroupLayout(panelSugeno);
         panelSugeno.setLayout(panelSugenoLayout);
@@ -260,8 +263,8 @@ public class IOPanel extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(buttonAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(scrollPaneSaidaSugeno, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(290, 290, 290)
-                .addComponent(panelParam, javax.swing.GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE))
+                .addGap(218, 218, 218)
+                .addComponent(panelParam, javax.swing.GroupLayout.DEFAULT_SIZE, 303, Short.MAX_VALUE))
         );
         panelSugenoLayout.setVerticalGroup(
             panelSugenoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -362,8 +365,8 @@ public class IOPanel extends javax.swing.JPanel {
         psp.setOffsetName();
         psp.setValue(expression.getOffset());
         panelParam.add(psp);
+        panelParam.validate();
 
-        panelFuncCard.repaint();
     }
 
     public void addIn(FuncPertinence func, String variable, String range) {

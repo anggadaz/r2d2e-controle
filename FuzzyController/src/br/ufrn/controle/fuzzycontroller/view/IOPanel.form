@@ -169,8 +169,8 @@
                           </Group>
                           <Component id="scrollPaneSaidaSugeno" alignment="1" min="-2" pref="121" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="290" max="-2" attributes="0"/>
-                      <Component id="panelParam" pref="231" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="218" max="-2" attributes="0"/>
+                      <Component id="panelParam" pref="303" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -248,7 +248,9 @@
                 <Property name="opaque" type="boolean" value="false"/>
               </Properties>
 
-              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout"/>
+              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout">
+                <Property name="axis" type="int" value="3"/>
+              </Layout>
             </Container>
           </SubComponents>
         </Container>

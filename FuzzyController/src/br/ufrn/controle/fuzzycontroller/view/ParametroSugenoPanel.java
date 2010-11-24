@@ -46,23 +46,15 @@ public class ParametroSugenoPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         lblParameter = new javax.swing.JLabel();
-        txtParaValue = new javax.swing.JFormattedTextField();
+        txtParaValue = new javax.swing.JTextField();
 
+        setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 5, 1));
         setOpaque(false);
 
         lblParameter.setText(org.openide.util.NbBundle.getMessage(ParametroSugenoPanel.class, "ParametroSugenoPanel.lblParameter.text")); // NOI18N
 
-        txtParaValue.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
         txtParaValue.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        txtParaValue.setText(org.openide.util.NbBundle.getMessage(ParametroSugenoPanel.class, "ParametroSugenoPanel.txtParaValue.text_2")); // NOI18N
-        txtParaValue.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                txtParaValueFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                txtParaValueFocusLost(evt);
-            }
-        });
+        txtParaValue.setText(org.openide.util.NbBundle.getMessage(ParametroSugenoPanel.class, "ParametroSugenoPanel.txtParaValue.text")); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -72,7 +64,7 @@ public class ParametroSugenoPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(lblParameter)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtParaValue, javax.swing.GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE))
+                .addComponent(txtParaValue, javax.swing.GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -82,18 +74,9 @@ public class ParametroSugenoPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtParaValueFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtParaValueFocusGained
-        // TODO add your handling code here:
-        System.out.println("gained");
-    }//GEN-LAST:event_txtParaValueFocusGained
-
-    private void txtParaValueFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtParaValueFocusLost
-        // TODO add your handling code here:
-        System.out.println("lost");
-    }//GEN-LAST:event_txtParaValueFocusLost
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel lblParameter;
-    private javax.swing.JFormattedTextField txtParaValue;
+    private javax.swing.JTextField txtParaValue;
     // End of variables declaration//GEN-END:variables
 
     public void setOffsetName() {
