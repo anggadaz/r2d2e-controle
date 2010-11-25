@@ -81,6 +81,7 @@ public class DataBase {
 
         list.add(expr);
     }
+    
     public void addIn(String variableOut, ArrayList<FuncPertinence> pertinences) {
         pertinenceIn.put(variableOut, pertinences);
     }
@@ -103,5 +104,9 @@ public class DataBase {
 
     public int getInputCount(){
         return pertinenceIn.size();
+    }
+
+    public int getOutPutSize(){
+        return pertinenceOut.size();
     }
 }

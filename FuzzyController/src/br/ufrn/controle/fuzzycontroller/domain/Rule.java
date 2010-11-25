@@ -32,6 +32,12 @@ public class Rule {
         functionOuts.put(variable, func);
     }
 
+    public void addFunctionOut(String variable, boolean isOperationNot, Expression expression) {
+        FunctionOutPut func = new FunctionOutPut(expression);
+        func.setOperationNot(isOperationNot);
+        functionOuts.put(variable, func);
+    }
+
     public void addFunctionOut(String variable, FuncPertinence shape) {
         FunctionOutPut func = new FunctionOutPut(shape);
         functionOuts.put(variable, func);
@@ -81,10 +87,14 @@ public class Rule {
         }
 
         retorno.append(" Então (Saída é ");
-        retorno.append(functionOuts.get(ConstantsFuzzy.VARIABLE_OUTPUT).isOperationNot() ? "não " : "");
-        retorno.append(functionOuts.get(ConstantsFuzzy.VARIABLE_OUTPUT).getPertinence());
+
+        FunctionOutPut funcOut = functionOuts.get(ConstantsFuzzy.VARIABLE_OUTPUT);
+
+        retorno.append(funcOut.isOperationNot() ? "não " : "");
+        retorno.append(funcOut.getPertinence() == null ? funcOut.getExpression() : funcOut.getPertinence());
         retorno.append(")");
 
         return retorno.toString();
     }
+
 }

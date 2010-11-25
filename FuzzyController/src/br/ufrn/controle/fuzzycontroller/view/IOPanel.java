@@ -15,17 +15,12 @@ import br.ufrn.controle.fuzzycontroller.funcaopertinencia.FuncPertinence;
 import br.ufrn.controle.fuzzycontroller.domain.FuzzyController;
 import br.ufrn.controle.fuzzycontroller.domain.InputOutput;
 import br.ufrn.controle.fuzzycontroller.domain.Mamdani;
-import java.awt.BorderLayout;
 import java.awt.CardLayout;
-import java.awt.GridLayout;
 import java.lang.Double;
 import java.util.ArrayList;
-import javax.swing.BoxLayout;
 import javax.swing.DefaultListModel;
 import javax.swing.JDialog;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import org.netbeans.lib.awtextra.AbsoluteLayout;
 
 /**
  *
@@ -112,12 +107,15 @@ public class IOPanel extends javax.swing.JPanel {
             showPanel(CARD_FUNCPANEL);
             panelFunc.setIoSelected();
         } else {
-            showPanel(CARD_SUGENO_SAIDA_PANEL);
             ArrayList<Expression> expressions = selected.getExpressions();
+
+            listSugenoSaidaModel.removeAllElements();
 
             for (Expression expression : expressions) {
                 listSugenoSaidaModel.addElement(expression);
             }
+
+            showPanel(CARD_SUGENO_SAIDA_PANEL);
         }
     }
 
@@ -336,7 +334,7 @@ public class IOPanel extends javax.swing.JPanel {
         int ind = listSaidaSugeno.getSelectedIndex();
         if (ind > -1) {
             listSugenoSaidaModel.remove(ind);
-            selected.getExpressions().remove(ind);
+            selected.getExpressions().remove((Expression)listSaidaSugeno.getSelectedValue());
         }
     }//GEN-LAST:event_buttonRemoveActionPerformed
 
@@ -354,16 +352,13 @@ public class IOPanel extends javax.swing.JPanel {
         int count = dataIn.size();
 
         for (int i = 0; i < count; i++) {
-            Double value = expression.getConstant(dataIn.get(i));
-            ParametroSugenoPanel psp = new ParametroSugenoPanel();
+            ParametroSugenoPanel psp = new ParametroSugenoPanel(expression, dataIn.get(i));
             psp.setParameterNumber(i + 1);
-            psp.setValue(value == null ? 0 : value);
             panelParam.add(psp);
         }
 
-        ParametroSugenoPanel psp = new ParametroSugenoPanel();
+        ParametroSugenoPanel psp = new ParametroSugenoPanel(expression, "");
         psp.setOffsetName();
-        psp.setValue(expression.getOffset());
         panelParam.add(psp);
         panelParam.validate();
 

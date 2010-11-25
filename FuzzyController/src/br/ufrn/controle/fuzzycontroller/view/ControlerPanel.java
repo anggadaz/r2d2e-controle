@@ -32,7 +32,7 @@ public class ControlerPanel extends javax.swing.JPanel {
     private final int SOM = 1;
     private final int MOM = 2;
     private final int LOM = 3;
-    MainView parent;
+    private MainView parent;
 
     /** Creates new form ControlerPanel */
     public ControlerPanel() {
@@ -271,6 +271,8 @@ public class ControlerPanel extends javax.swing.JPanel {
         if (ctd.isValid()) {
 
             FuzzyController fc = new FuzzyController(ctd.getSelectedName());
+
+
 
             if (ConstantsFuzzy.MAMDAMI.equals(ctd.getSelectedControler())) {
                 fc.setInference(new Mamdani());

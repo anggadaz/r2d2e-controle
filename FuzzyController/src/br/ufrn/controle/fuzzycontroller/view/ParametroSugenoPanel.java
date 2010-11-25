@@ -10,6 +10,8 @@
  */
 package br.ufrn.controle.fuzzycontroller.view;
 
+import br.ufrn.controle.fuzzycontroller.domain.Expression;
+
 /**
  *
  * @author demetrios
@@ -18,17 +20,36 @@ public class ParametroSugenoPanel extends javax.swing.JPanel {
 
     private static final String LBL_STRING = "Parâmetro";
     private static final String LBL_STRING_OFFSET = "Offset :";
+    private Expression expression;
+    private String variable;
 
     /** Creates new form ParametroSugenoPanel */
     public ParametroSugenoPanel() {
         initComponents();
     }
 
-    public Double getValue() {
+    public ParametroSugenoPanel(Expression expression, String variable) {
+        initComponents();
+
+        this.expression = expression;
+        this.variable = variable;
+
+        Double value = null;
+
+        if (variable.equals("")) {
+            value = expression.getOffset();
+        } else {
+            value = expression.getConstant(variable);
+
+        }
+        setValue(value == null ? 0 : value);
+    }
+
+    private Double getValue() {
         return Double.parseDouble(txtParaValue.getText());
     }
 
-    public void setValue(double value) {
+    private void setValue(double value) {
         txtParaValue.setText(Double.toString(value));
     }
 
@@ -51,10 +72,18 @@ public class ParametroSugenoPanel extends javax.swing.JPanel {
         setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 5, 1));
         setOpaque(false);
 
-        lblParameter.setText(org.openide.util.NbBundle.getMessage(ParametroSugenoPanel.class, "ParametroSugenoPanel.lblParameter.text")); // NOI18N
+        lblParameter.setText("jLabel1");
 
         txtParaValue.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        txtParaValue.setText(org.openide.util.NbBundle.getMessage(ParametroSugenoPanel.class, "ParametroSugenoPanel.txtParaValue.text")); // NOI18N
+        txtParaValue.setText("0.00");
+        txtParaValue.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtParaValueFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtParaValueFocusLost(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -74,6 +103,25 @@ public class ParametroSugenoPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void txtParaValueFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtParaValueFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtParaValueFocusGained
+
+    private void txtParaValueFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtParaValueFocusLost
+        // TODO add your handling code here:
+        Double value = getValue();
+        if (value != null) {
+            if (variable.equals("")) {
+                expression.setOffset(value);
+            } else {
+                expression.addConstant(variable, value);
+            }
+            
+            System.out.println("value " + value + " " + variable);
+        } else {
+            System.out.println("value nulo");
+        }
+    }//GEN-LAST:event_txtParaValueFocusLost
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel lblParameter;
     private javax.swing.JTextField txtParaValue;

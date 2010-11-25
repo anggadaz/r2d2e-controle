@@ -59,6 +59,7 @@ public class FuzzyController extends Thread {
 
     public FuzzyController(String name) {
         this.name = name;
+        DataInType = new ArrayList<String>();
         createCalc();
     }
 

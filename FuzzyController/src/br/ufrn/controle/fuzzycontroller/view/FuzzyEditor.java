@@ -326,35 +326,39 @@ public class FuzzyEditor extends javax.swing.JDialog {
 
         iOPanel1.setController(fc);
 
-        for (String type : fc.getDataInType()) {
-            ArrayList<FuncPertinence> funcs = fc.getInference().getDataBase().getIn(type);
-            ArrayList<Double> ranges = fc.getInference().getDataBase().getRangeIn(type);
-            String range;
-            if (ranges != null) {
-                range = ranges.get(0).toString() + " " + ranges.get(1).toString();
-            } else {
-                range = "";
+        if (fc.getDataInType().size() > 0) {
+            for (String type : fc.getDataInType()) {
+                ArrayList<FuncPertinence> funcs = fc.getInference().getDataBase().getIn(type);
+                ArrayList<Double> ranges = fc.getInference().getDataBase().getRangeIn(type);
+                String range;
+                if (ranges != null) {
+                    range = ranges.get(0).toString() + " " + ranges.get(1).toString();
+                } else {
+                    range = "";
+                }
+                iOPanel1.addIn(funcs, type, range);
             }
-            iOPanel1.addIn(funcs, type, range);
         }
 
-        if(fc.getInference() instanceof Mamdani){
-            ArrayList<FuncPertinence> funcs = fc.getInference().getDataBase().getOut(ConstantsFuzzy.VARIABLE_OUTPUT);
+        if (fc.getInference().getDataBase().getOutPutSize() > 0) {
+            if (fc.getInference() instanceof Mamdani) {
+                ArrayList<FuncPertinence> funcs = fc.getInference().getDataBase().getOut(ConstantsFuzzy.VARIABLE_OUTPUT);
 
-            ArrayList<Double> ranges = fc.getInference().getDataBase().getRangeOut(ConstantsFuzzy.VARIABLE_OUTPUT);
-            String range;
-            if (ranges != null) {
-                range = ranges.get(0).toString() + " " + ranges.get(1).toString();
+                ArrayList<Double> ranges = fc.getInference().getDataBase().getRangeOut(ConstantsFuzzy.VARIABLE_OUTPUT);
+                String range;
+                if (ranges != null) {
+                    range = ranges.get(0).toString() + " " + ranges.get(1).toString();
+                } else {
+                    range = "";
+                }
+
+                if (funcs != null) {
+                    iOPanel1.addOut(funcs, ConstantsFuzzy.VARIABLE_OUTPUT, range);
+                }
             } else {
-                range = "";
+                ArrayList<Expression> expressions = fc.getInference().getDataBase().getExpressionOut(ConstantsFuzzy.VARIABLE_OUTPUT);
+                iOPanel1.addOutSugeno(expressions, ConstantsFuzzy.VARIABLE_OUTPUT);
             }
-
-            if (funcs != null) {
-                iOPanel1.addOut(funcs, ConstantsFuzzy.VARIABLE_OUTPUT, range);
-            }
-        }else{
-            ArrayList<Expression> expressions = fc.getInference().getDataBase().getExpressionOut(ConstantsFuzzy.VARIABLE_OUTPUT);
-            iOPanel1.addOutSugeno(expressions,ConstantsFuzzy.VARIABLE_OUTPUT);
         }
 
         iOPanel1.getFuncPanel1().getFuncaoPertinenciaPanel1().repaint();
@@ -372,7 +376,7 @@ public class FuzzyEditor extends javax.swing.JDialog {
     private void buttonRulesMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonRulesMouseReleased
         // TODO add your handling code here:
         FuzzyController fc = controlerPanel1.getSelectedFunc();
-        
+
         if (fc == null) {
             return;
         }

@@ -11,10 +11,12 @@
 package br.ufrn.controle.fuzzycontroller.view;
 
 import br.ufrn.controle.fuzzycontroller.domain.DataBase;
+import br.ufrn.controle.fuzzycontroller.domain.Expression;
 import br.ufrn.controle.fuzzycontroller.funcaopertinencia.FuncPertinence;
 import br.ufrn.controle.fuzzycontroller.domain.FuzzyController;
 import br.ufrn.controle.fuzzycontroller.domain.Rule;
 import br.ufrn.controle.fuzzycontroller.domain.RuleBase;
+import br.ufrn.controle.fuzzycontroller.domain.Sugeno;
 import br.ufrn.controle.fuzzycontroller.shared.ConstantsFuzzy;
 import java.awt.Color;
 import java.awt.Cursor;
@@ -53,6 +55,7 @@ public class RuleEditorPanel extends javax.swing.JPanel {
         baseDados = controller.getInference().getDataBase();
         regras = controller.getInference().getRuleBase();
         dataTypeIn = controller.getDataInType();
+
         initComponents();
         init();
     }
@@ -61,6 +64,7 @@ public class RuleEditorPanel extends javax.swing.JPanel {
         baseDados = controller.getInference().getDataBase();
         regras = controller.getInference().getRuleBase();
         dataTypeIn = controller.getDataInType();
+
         init();
     }
 
@@ -232,7 +236,11 @@ public class RuleEditorPanel extends javax.swing.JPanel {
             return;
         }
 
-        regra.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, jCheckBox3.isSelected(), (FuncPertinence) listOut.getSelectedValue());
+        if (listOut.getSelectedValue() instanceof Expression) {
+            regra.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, jCheckBox3.isSelected(), (Expression) listOut.getSelectedValue());
+        } else {
+            regra.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, jCheckBox3.isSelected(), (FuncPertinence) listOut.getSelectedValue());
+        }
 
         regras.addRule(regra);
 
@@ -254,7 +262,11 @@ public class RuleEditorPanel extends javax.swing.JPanel {
             return;
         }
 
-        regra.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, jCheckBox3.isSelected(), (FuncPertinence) listOut.getSelectedValue());
+        if (listOut.getSelectedValue() instanceof Expression) {
+            regra.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, jCheckBox3.isSelected(), (Expression) listOut.getSelectedValue());
+        } else {
+            regra.addFunctionOut(ConstantsFuzzy.VARIABLE_OUTPUT, jCheckBox3.isSelected(), (FuncPertinence) listOut.getSelectedValue());
+        }
 
         lsitRules.repaint();
     }//GEN-LAST:event_buttonRefreshActionPerformed
@@ -271,7 +283,13 @@ public class RuleEditorPanel extends javax.swing.JPanel {
             listas.get(i).setSelectedValue(func, true);
         }
 
-        listOut.setSelectedValue(regra.getOutPutShape(ConstantsFuzzy.VARIABLE_OUTPUT), true);
+        FuncPertinence fp = regra.getOutPutShape(ConstantsFuzzy.VARIABLE_OUTPUT);
+        if (fp == null) {
+            listOut.setSelectedValue(regra.getOutPutExpression(ConstantsFuzzy.VARIABLE_OUTPUT), true);
+        } else {
+            listOut.setSelectedValue(fp, true);
+        }
+
     }//GEN-LAST:event_lsitRulesValueChanged
 
     private void buttonRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRemoveActionPerformed
@@ -314,7 +332,7 @@ public class RuleEditorPanel extends javax.swing.JPanel {
         JScrollPane scroll = new JScrollPane();
         scroll.setViewportView(lista);
 
-        JCheckBox chkBox = new JCheckBox("not");
+        JCheckBox chkBox = new JCheckBox("Não");
         chkBox.setBackground(new java.awt.Color(255, 255, 255));
 
         panel.setPreferredSize(new Dimension(15, 15));
@@ -349,6 +367,10 @@ public class RuleEditorPanel extends javax.swing.JPanel {
         if (baseDados.getOut(ConstantsFuzzy.VARIABLE_OUTPUT) != null) {
             for (FuncPertinence func : baseDados.getOut(ConstantsFuzzy.VARIABLE_OUTPUT)) {
                 ((DefaultListModel) listOut.getModel()).addElement(func);
+            }
+        } else {
+            for (Expression exp : baseDados.getExpressionOut(ConstantsFuzzy.VARIABLE_OUTPUT)) {
+                ((DefaultListModel) listOut.getModel()).addElement(exp);
             }
         }
 
