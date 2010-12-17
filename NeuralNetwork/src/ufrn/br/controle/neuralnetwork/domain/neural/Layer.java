@@ -16,10 +16,12 @@ public class Layer {
     private Layer backLayer;
     private Layer forwardLayer;
     private ArrayList<ArrayList<Double>> deltaOmegas;
+    private ArrayList<Double> deltaBias;
 
     public Layer(ArrayList<Neuron> neurons) {
         this.neurons = neurons;
         deltaOmegas = new ArrayList<ArrayList<Double>>();
+        deltaBias = new ArrayList<Double>();
     }
 
     public Layer getBackLayer() {
@@ -87,6 +89,7 @@ public class Layer {
                 for (int j = 0; j < forwardLayer.getNeuronsCount(); j++) {
                     Neuron fowardNeuron = forwardLayer.getNeuron(j);
                     sum += (fowardNeuron.getWeights().get(i) * fowardNeuron.getGradient());
+                    sum += (fowardNeuron.getBiasWeight() * fowardNeuron.getGradient());
                 }
 
                 neuron.setGradient(neuron.getDerivateOutPut() * sum);
@@ -109,8 +112,12 @@ public class Layer {
                 deltas.add(delta);
             }
 
+            double bi = neuron.getGradient() * neuron.getBias() * learnRate;
+            deltaBias.add(bi);
+
             deltaOmegas.add(deltas);
         }
+
     }
 
     public void updateWeight() {
@@ -123,8 +130,10 @@ public class Layer {
             ArrayList<Double> omegas = deltaOmegas.get(i);
 
             for (int j = 0; j < weigths.size(); j++) {
-                weigths.set(j, weigths.get(j)+omegas.get(j));
+                weigths.set(j, weigths.get(j) + omegas.get(j));
             }
+
+            neurons.get(i).setBiasWeight((neurons.get(i).getBiasWeight() + deltaBias.get(i)));
         }
     }
 }
