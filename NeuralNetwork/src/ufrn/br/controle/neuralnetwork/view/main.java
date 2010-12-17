@@ -120,6 +120,6 @@ public class main {
         m.processFile(new File("output1.txt"));
         m.prepareValidation();
 
-        NeuralNetwork network = new NeuralNetwork(numbNeuronsIn, numbNeuronsOut, numbHiddenNeurons, activationFunctions);
+//        NeuralNetwork network = new NeuralNetwork(numbNeuronsIn, numbNeuronsOut, numbHiddenNeurons, activationFunctions);
     }
 }
