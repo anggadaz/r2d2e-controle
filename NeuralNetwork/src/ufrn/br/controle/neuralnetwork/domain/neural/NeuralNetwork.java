@@ -20,9 +20,10 @@ public class NeuralNetwork {
     private ArrayList<Double> localErros;
 
     public NeuralNetwork(int numbNeuronsIn, int numbNeuronsOut, int numbHiddenNeurons[], ActivationFunction activationFunctions[]) {
-        createNeuralNetwork(numbNeuronsIn, numbNeuronsOut, numbHiddenNeurons, activationFunctions);
         meanSquaredErrors = new ArrayList<Double>();
         localErros = new ArrayList<Double>();
+        layers = new ArrayList<Layer>();
+        createNeuralNetwork(numbNeuronsIn, numbNeuronsOut, numbHiddenNeurons, activationFunctions);
     }
 
     private void createNeuralNetwork(int numbNeuronsIn, int numbNeuronsOut, int numbHiddenNeurons[], ActivationFunction activationFunctions[]) {
@@ -79,7 +80,7 @@ public class NeuralNetwork {
 
     private double rand(double low, double high) {
         Random random = new Random();
-        return low + random.nextDouble() * (Math.abs(low + high));
+        return low + random.nextDouble() * (Math.abs(low) + Math.abs(high));
     }
 
     private ArrayList<Double> generateRandWeights(int numbWeight) {
@@ -156,5 +157,22 @@ public class NeuralNetwork {
             iteration++;
 
         } while (globalError > errorQuadra && iteration < maxItera);
+
+        System.out.println("acabou na iteração " + iteration);
+        System.out.println("Global Error " + meanSquaredErrors.get(meanSquaredErrors.size()-1));
+    }
+
+    public ArrayList<Double> simulate(ArrayList<Double> inValues){
+        updateNeuronsWeightedSum(inValues);
+
+        ArrayList<Double> saida = new ArrayList<Double>();
+
+        Layer layer = layers.get(layers.size()-1);
+
+        for(int i = 0 ; i < layer.getNeuronsCount();i++){
+            saida.add(layer.getNeuron(i).getOutPut());
+        }
+
+        return saida;
     }
 }

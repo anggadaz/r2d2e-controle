@@ -10,9 +10,13 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.omg.PortableServer.THREAD_POLICY_ID;
+import ufrn.br.controle.neuralnetwork.domain.functions.ActivationFunction;
+import ufrn.br.controle.neuralnetwork.domain.functions.HyperbolicTangent;
+import ufrn.br.controle.neuralnetwork.domain.functions.Linear;
+import ufrn.br.controle.neuralnetwork.domain.functions.Sigmoid;
 import ufrn.br.controle.neuralnetwork.domain.neural.NeuralNetwork;
 
 /**
@@ -120,6 +124,29 @@ public class main {
         m.processFile(new File("output1.txt"));
         m.prepareValidation();
 
-//        NeuralNetwork network = new NeuralNetwork(numbNeuronsIn, numbNeuronsOut, numbHiddenNeurons, activationFunctions);
+        ActivationFunction af[] = new ActivationFunction[m.numbHiddenNeurons.length + 2];
+
+        af[0] = new Linear();
+        af[m.numbHiddenNeurons.length + 1] = new HyperbolicTangent();
+
+        for (int i = 1; i <= m.numbHiddenNeurons.length; i++) {
+            af[i] = new HyperbolicTangent();
+        }
+
+        NeuralNetwork network = new NeuralNetwork(m.numbNeuronsIn, m.numbNeuronsOut, m.numbHiddenNeurons, af);
+        network.train(m.maxItera, m.errorQuadra, 0.00001, m.porcValidation, m.inValues, m.outValues);
+
+        for (int i = 0; i < m.inValiValues.size(); i++) {
+            ArrayList<Double> out = network.simulate(m.inValiValues.get(i));
+            System.out.println("Entrada :" + m.inValiValues.get(i));
+            System.out.println("Saida esperada :" + m.outValiValues.get(i));
+            System.out.println("Saida da Rede :" + out);
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
     }
 }

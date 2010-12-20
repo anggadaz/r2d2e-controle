@@ -98,7 +98,7 @@ public class Layer {
     }
 
     public void calculateDeltaOmega(double learnRate) {
-        if (forwardLayer == null) {
+        if (backLayer == null) {
             return;
         }
 
