@@ -7,6 +7,7 @@ package ufrn.br.controle.neuralnetwork.domain.neural;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Random;
+import javax.swing.JProgressBar;
 import ufrn.br.controle.neuralnetwork.domain.functions.ActivationFunction;
 import ufrn.br.controle.neuralnetwork.shared.Constants;
 import ufrn.br.controle.neuralnetwork.view.GraficoErroQuadratico;
@@ -153,10 +154,11 @@ public class NeuralNetwork {
         return sum / localErros.size();
     }
 
-    public void train(int maxItera, double errorQuadra, double learnRate, double alpha, double porcValidation, ArrayList<ArrayList<Double>> inValues, ArrayList<ArrayList<Double>> outValues) {
+    public void train(int maxItera, double errorQuadra, double learnRate, double alpha, double porcValidation, ArrayList<ArrayList<Double>> inValues, ArrayList<ArrayList<Double>> outValues, JProgressBar bar) {
         int iteration = 0;
         double globalError = 0;
 
+        bar.setMaximum(maxItera);
         meanSquaredErrors.add(0d);
 
         ArrayList<ArrayList<Double>> inValuesTmp = copy(inValues);
@@ -209,6 +211,7 @@ public class NeuralNetwork {
             grafico.addObservation(meanSquaredErrors.size(), errorQuadra, 1);
 //            System.out.println(globalError);
 
+            bar.setValue(iteration);
             iteration++;
 
         } while (globalError > errorQuadra && iteration < maxItera);

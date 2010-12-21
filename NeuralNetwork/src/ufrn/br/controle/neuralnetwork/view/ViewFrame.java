@@ -8,8 +8,33 @@
  *
  * Created on 16/12/2010, 22:25:55
  */
-
 package ufrn.br.controle.neuralnetwork.view;
+
+import java.awt.CardLayout;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JDialog;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JProgressBar;
+import javax.swing.UIManager;
+import javax.swing.plaf.metal.MetalLookAndFeel;
+import org.jvnet.substance.skin.BusinessBlackSteelSkin;
+import org.jvnet.substance.skin.SubstanceBusinessBlackSteelLookAndFeel;
+import org.jvnet.substance.skin.SubstanceCremeCoffeeLookAndFeel;
+import org.jvnet.substance.skin.SubstanceMistAquaLookAndFeel;
+import ufrn.br.controle.neuralnetwork.domain.functions.ActivationFunction;
+import ufrn.br.controle.neuralnetwork.domain.functions.HyperbolicTangent;
+import ufrn.br.controle.neuralnetwork.domain.functions.Linear;
+import ufrn.br.controle.neuralnetwork.domain.functions.Sigmoid;
+import ufrn.br.controle.neuralnetwork.domain.neural.NeuralNetwork;
 
 /**
  *
@@ -17,9 +42,38 @@ package ufrn.br.controle.neuralnetwork.view;
  */
 public class ViewFrame extends javax.swing.JFrame {
 
+    private int selected = 0;
+    private boolean executing = false;
+    private NeuralNetwork network;
+    private int numHiddenCam = 0;
+    private int numbNeuronsIn = 0;
+    private int numbNeuronsOut = 0;
+    private int numbHiddenNeurons[] = {0, 0};
+    ActivationFunction af[] = {new Linear(), new Linear(), new Linear(), new Linear()};
+    private int maxItera;
+    private double errorQuadra;
+    private double learnRate;
+    private double porcValidation;
+    private ArrayList<ArrayList<Double>> inValues = new ArrayList<ArrayList<Double>>();
+    private ArrayList<ArrayList<Double>> outValues = new ArrayList<ArrayList<Double>>();
+    private ArrayList<ArrayList<Double>> inValiValues = new ArrayList<ArrayList<Double>>();
+    private ArrayList<ArrayList<Double>> outValiValues = new ArrayList<ArrayList<Double>>();
+
     /** Creates new form viewFrame */
     public ViewFrame() {
         initComponents();
+
+        DefaultComboBoxModel dcbm = (DefaultComboBoxModel) cbFunc.getModel();
+        dcbm.removeAllElements();
+
+        ActivationFunction lim = new Linear();
+
+        dcbm.addElement(lim);
+        dcbm.addElement(new HyperbolicTangent());
+        dcbm.addElement(new Sigmoid());
+
+        af = new ActivationFunction[]{lim, lim, lim, lim};
+
     }
 
     /** This method is called from within the constructor to
@@ -31,126 +85,1054 @@ public class ViewFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
+        jPanel2 = new javax.swing.JPanel();
+        cbCamadasOcultas = new javax.swing.JComboBox();
+        jLabel6 = new javax.swing.JLabel();
+        spNeuronios = new javax.swing.JSpinner();
+        jLabel11 = new javax.swing.JLabel();
+        cbFunc = new javax.swing.JComboBox();
+        jLabel3 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        jPanel4 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
+        jButton7 = new javax.swing.JButton();
+        jLabel10 = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
+        jLabel12 = new javax.swing.JLabel();
+        jButton3 = new javax.swing.JButton();
+        jLabel13 = new javax.swing.JLabel();
+        jButton4 = new javax.swing.JButton();
+        jLabel14 = new javax.swing.JLabel();
+        jButton5 = new javax.swing.JButton();
+        jLabel15 = new javax.swing.JLabel();
+        jPanel6 = new javax.swing.JPanel();
+        jLabel17 = new javax.swing.JLabel();
+        jButton8 = new javax.swing.JButton();
+        jLabel18 = new javax.swing.JLabel();
+        jButton9 = new javax.swing.JButton();
+        jLabel19 = new javax.swing.JLabel();
+        jButton10 = new javax.swing.JButton();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        jButton11 = new javax.swing.JButton();
+        jPanel7 = new javax.swing.JPanel();
+        jButton6 = new javax.swing.JButton();
+        jButton13 = new javax.swing.JButton();
+        btCarregarEntrada = new javax.swing.JButton();
+        jButton14 = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        tfIteracoes = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        tfErro = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        tfApre = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        chkPesoAleato = new javax.swing.JCheckBox();
+        chkPesoArqu = new javax.swing.JCheckBox();
+        buttonCarregar = new javax.swing.JButton();
+        tfPorc = new javax.swing.JTextField();
+        jLabel16 = new javax.swing.JLabel();
+        chkMomentum = new javax.swing.JCheckBox();
+        chkAdaptativo = new javax.swing.JCheckBox();
+        tfAlfa = new javax.swing.JTextField();
+        labelAlfa = new javax.swing.JLabel();
+        jProgressBar1 = new javax.swing.JProgressBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ufrn/br/controle/neuralnetwork/view/resources/quadrado.png"))); // NOI18N
-        jButton1.setContentAreaFilled(false);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Parâmetros"));
+
+        cbCamadasOcultas.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0", "1", "2" }));
+        cbCamadasOcultas.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbCamadasOcultasItemStateChanged(evt);
             }
         });
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ufrn/br/controle/neuralnetwork/view/resources/Seta.png"))); // NOI18N
+        jLabel6.setText("Camadas ocultas");
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ufrn/br/controle/neuralnetwork/view/resources/quadrado.png"))); // NOI18N
-        jButton2.setContentAreaFilled(false);
+        spNeuronios.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                spNeuroniosStateChanged(evt);
+            }
+        });
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ufrn/br/controle/neuralnetwork/view/resources/Seta.png"))); // NOI18N
+        jLabel11.setText("Nº de Neuronios");
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ufrn/br/controle/neuralnetwork/view/resources/Seta.png"))); // NOI18N
+        cbFunc.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Linear", "Hiperbólico", "Sigmoid" }));
+        cbFunc.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbFuncItemStateChanged(evt);
+            }
+        });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addComponent(jLabel1))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jButton2)
-                        .addComponent(jButton1))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addComponent(jLabel2))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(9, 9, 9)
-                        .addComponent(jLabel3))))
-        );
+        jLabel3.setText("Função de Ativação");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 331, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(cbFunc, javax.swing.GroupLayout.Alignment.LEADING, 0, 80, Short.MAX_VALUE)
+                    .addComponent(spNeuronios, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
+                    .addComponent(cbCamadasOcultas, 0, 80, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(jLabel3))
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbCamadasOcultas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(spNeuronios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel11))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbFunc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addContainerGap(151, Short.MAX_VALUE))
         );
+
+        jPanel1.setLayout(new java.awt.CardLayout());
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ufrn/br/controle/neuralnetwork/view/resources/Seta.png"))); // NOI18N
+
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ufrn/br/controle/neuralnetwork/view/resources/quadrado.png"))); // NOI18N
+        jButton2.setBorderPainted(false);
+        jButton2.setContentAreaFilled(false);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ufrn/br/controle/neuralnetwork/view/resources/Seta.png"))); // NOI18N
+
+        jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ufrn/br/controle/neuralnetwork/view/resources/quadrado.png"))); // NOI18N
+        jButton7.setBorderPainted(false);
+        jButton7.setContentAreaFilled(false);
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ufrn/br/controle/neuralnetwork/view/resources/Seta.png"))); // NOI18N
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(131, 131, 131)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel10)
+                .addContainerGap(153, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton7)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(jLabel10))
+                    .addComponent(jButton2)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addComponent(jLabel1))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(jLabel2)))
+                .addContainerGap(13, Short.MAX_VALUE))
+        );
+
+        jPanel1.add(jPanel4, "card2");
+
+        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ufrn/br/controle/neuralnetwork/view/resources/Seta.png"))); // NOI18N
+
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ufrn/br/controle/neuralnetwork/view/resources/quadrado.png"))); // NOI18N
+        jButton3.setBorderPainted(false);
+        jButton3.setContentAreaFilled(false);
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ufrn/br/controle/neuralnetwork/view/resources/Seta.png"))); // NOI18N
+
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ufrn/br/controle/neuralnetwork/view/resources/quadrado.png"))); // NOI18N
+        jButton4.setBorderPainted(false);
+        jButton4.setContentAreaFilled(false);
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
+        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ufrn/br/controle/neuralnetwork/view/resources/Seta.png"))); // NOI18N
+
+        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ufrn/br/controle/neuralnetwork/view/resources/quadrado.png"))); // NOI18N
+        jButton5.setBorderPainted(false);
+        jButton5.setContentAreaFilled(false);
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
+        jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ufrn/br/controle/neuralnetwork/view/resources/Seta.png"))); // NOI18N
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel12)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel13)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel14)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel15)
+                .addContainerGap(153, Short.MAX_VALUE))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton5)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(jLabel15))
+                    .addComponent(jButton4)
+                    .addComponent(jButton3)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addComponent(jLabel13))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(jLabel14))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(9, 9, 9)
+                        .addComponent(jLabel12)))
+                .addContainerGap(13, Short.MAX_VALUE))
+        );
+
+        jPanel1.add(jPanel5, "card3");
+
+        jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ufrn/br/controle/neuralnetwork/view/resources/Seta.png"))); // NOI18N
+
+        jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ufrn/br/controle/neuralnetwork/view/resources/quadrado.png"))); // NOI18N
+        jButton8.setBorderPainted(false);
+        jButton8.setContentAreaFilled(false);
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
+
+        jLabel18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ufrn/br/controle/neuralnetwork/view/resources/Seta.png"))); // NOI18N
+
+        jButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ufrn/br/controle/neuralnetwork/view/resources/quadrado.png"))); // NOI18N
+        jButton9.setBorderPainted(false);
+        jButton9.setContentAreaFilled(false);
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
+
+        jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ufrn/br/controle/neuralnetwork/view/resources/Seta.png"))); // NOI18N
+
+        jButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ufrn/br/controle/neuralnetwork/view/resources/quadrado.png"))); // NOI18N
+        jButton10.setBorderPainted(false);
+        jButton10.setContentAreaFilled(false);
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton10ActionPerformed(evt);
+            }
+        });
+
+        jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ufrn/br/controle/neuralnetwork/view/resources/Seta.png"))); // NOI18N
+
+        jLabel21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ufrn/br/controle/neuralnetwork/view/resources/Seta.png"))); // NOI18N
+
+        jButton11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ufrn/br/controle/neuralnetwork/view/resources/quadrado.png"))); // NOI18N
+        jButton11.setBorderPainted(false);
+        jButton11.setContentAreaFilled(false);
+        jButton11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton11ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel17)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel19)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel20)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel21)
+                .addContainerGap(33, Short.MAX_VALUE))
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton11)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(jLabel21))
+                    .addComponent(jButton10)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(jLabel20))
+                    .addComponent(jButton9)
+                    .addComponent(jButton8)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addComponent(jLabel18))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(jLabel19))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(9, 9, 9)
+                        .addComponent(jLabel17)))
+                .addContainerGap(13, Short.MAX_VALUE))
+        );
+
+        jPanel1.add(jPanel6, "card4");
+
+        jButton6.setText("Saída");
+        jButton6.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
+        jButton6.setContentAreaFilled(false);
+        jButton6.setFocusPainted(false);
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+
+        jButton13.setText("Erro Global");
+        jButton13.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
+        jButton13.setContentAreaFilled(false);
+        jButton13.setFocusPainted(false);
+        jButton13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton13ActionPerformed(evt);
+            }
+        });
+
+        btCarregarEntrada.setText("Carregar Entrada");
+        btCarregarEntrada.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
+        btCarregarEntrada.setContentAreaFilled(false);
+        btCarregarEntrada.setFocusPainted(false);
+        btCarregarEntrada.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btCarregarEntradaActionPerformed(evt);
+            }
+        });
+
+        jButton14.setText("Treinar");
+        jButton14.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
+        jButton14.setContentAreaFilled(false);
+        jButton14.setFocusPainted(false);
+        jButton14.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton14ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
+            .addComponent(jButton13, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
+            .addComponent(btCarregarEntrada, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
+            .addComponent(jButton14, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btCarregarEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Treinamento"));
+
+        tfIteracoes.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                tfIteracoesCaretUpdate(evt);
+            }
+        });
+
+        jLabel7.setText("Iterações");
+
+        tfErro.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                tfErroCaretUpdate(evt);
+            }
+        });
+
+        jLabel8.setText("Erro médio quadrático");
+
+        tfApre.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                tfApreCaretUpdate(evt);
+            }
+        });
+
+        jLabel9.setText("Fator de aprendizagem");
+
+        buttonGroup1.add(chkPesoAleato);
+        chkPesoAleato.setSelected(true);
+        chkPesoAleato.setText("Peso Aleatórios");
+        chkPesoAleato.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkPesoAleatoActionPerformed(evt);
+            }
+        });
+
+        buttonGroup1.add(chkPesoArqu);
+        chkPesoArqu.setText("Peso via Arquivo");
+        chkPesoArqu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkPesoArquActionPerformed(evt);
+            }
+        });
+
+        buttonCarregar.setText("Carregar");
+        buttonCarregar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
+        buttonCarregar.setContentAreaFilled(false);
+        buttonCarregar.setEnabled(false);
+        buttonCarregar.setFocusPainted(false);
+        buttonCarregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonCarregarActionPerformed(evt);
+            }
+        });
+
+        tfPorc.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                tfPorcCaretUpdate(evt);
+            }
+        });
+
+        jLabel16.setText("Porcentagem de validação");
+
+        chkMomentum.setText("Momentum");
+        chkMomentum.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkMomentumActionPerformed(evt);
+            }
+        });
+
+        chkAdaptativo.setText("Eta Adaptativo");
+
+        tfAlfa.setEnabled(false);
+        tfAlfa.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                tfAlfaCaretUpdate(evt);
+            }
+        });
+
+        labelAlfa.setText("Alfa");
+        labelAlfa.setEnabled(false);
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(tfPorc)
+                            .addComponent(tfApre, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
+                            .addComponent(tfIteracoes)
+                            .addComponent(tfErro))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel16)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel7))
+                        .addGap(25, 25, 25))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(chkPesoAleato, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addComponent(chkPesoArqu, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(buttonCarregar, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(chkMomentum, javax.swing.GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(chkAdaptativo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(4, 4, 4))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(tfAlfa, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(labelAlfa)
+                        .addGap(132, 132, 132))))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tfIteracoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tfErro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tfApre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tfPorc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel16))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tfAlfa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelAlfa))
+                .addGap(4, 4, 4)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(chkMomentum)
+                    .addComponent(chkAdaptativo))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(chkPesoAleato)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(chkPesoArqu)
+                    .addComponent(buttonCarregar, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(16, 16, 16))
+        );
+
+        jProgressBar1.setForeground(new java.awt.Color(51, 51, 255));
+        jProgressBar1.setValue(10);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(2, 2, 2)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 574, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(201, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
+                        .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        selected = 0;
+        spNeuronios.setValue(numbNeuronsIn);
+        cbFunc.setSelectedItem(af[0]);
+    }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        selected = 0;
+        spNeuronios.setValue(numbNeuronsIn);
+        cbFunc.setSelectedItem(af[0]);
+}//GEN-LAST:event_jButton3ActionPerformed
+
+    private void cbCamadasOcultasItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbCamadasOcultasItemStateChanged
+        CardLayout card = (CardLayout) jPanel1.getLayout();
+        switch (cbCamadasOcultas.getSelectedIndex()) {
+            case 0:
+                numHiddenCam = 0;
+                card.show(jPanel1, "card2");
+                break;
+            case 1:
+                numHiddenCam = 1;
+                card.show(jPanel1, "card3");
+                break;
+            case 2:
+                numHiddenCam = 2;
+                card.show(jPanel1, "card4");
+                break;
+        }
+    }//GEN-LAST:event_cbCamadasOcultasItemStateChanged
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        selected = 0;
+        spNeuronios.setValue(numbNeuronsIn);
+        cbFunc.setSelectedItem(af[0]);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void chkPesoAleatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkPesoAleatoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_chkPesoAleatoActionPerformed
+
+    private void btCarregarEntradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCarregarEntradaActionPerformed
+
+        JFileChooser fc = new JFileChooser();
+        int res = fc.showOpenDialog(this);
+
+        if (res == JFileChooser.APPROVE_OPTION) {
+            File file = fc.getSelectedFile();
+            processFile(file);
+        }
+
+    }//GEN-LAST:event_btCarregarEntradaActionPerformed
+
+    private void tfIteracoesCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_tfIteracoesCaretUpdate
+        maxItera = Integer.parseInt(tfIteracoes.getText());
+    }//GEN-LAST:event_tfIteracoesCaretUpdate
+
+    private void tfErroCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_tfErroCaretUpdate
+        errorQuadra = Double.parseDouble(tfErro.getText());
+    }//GEN-LAST:event_tfErroCaretUpdate
+
+    private void tfPorcCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_tfPorcCaretUpdate
+        porcValidation = Double.parseDouble(tfPorc.getText());
+    }//GEN-LAST:event_tfPorcCaretUpdate
+
+    private void tfApreCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_tfApreCaretUpdate
+        if (!tfApre.getText().trim().isEmpty()) {
+            learnRate = Double.parseDouble(tfApre.getText());
+        }
+    }//GEN-LAST:event_tfApreCaretUpdate
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        selected = 3;
+        spNeuronios.setValue(numbNeuronsOut);
+        cbFunc.setSelectedItem(af[3]);
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        selected = 1;
+        spNeuronios.setValue(numbHiddenNeurons[0]);
+        cbFunc.setSelectedItem(af[1]);
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        selected = 2;
+        spNeuronios.setValue(numbNeuronsOut);
+        cbFunc.setSelectedItem(af[3]);
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        selected = 1;
+        spNeuronios.setValue(numbHiddenNeurons[0]);
+        cbFunc.setSelectedItem(af[1]);
+    }//GEN-LAST:event_jButton9ActionPerformed
+
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+        selected = 2;
+        spNeuronios.setValue(numbHiddenNeurons[1]);
+        cbFunc.setSelectedItem(af[2]);
+    }//GEN-LAST:event_jButton10ActionPerformed
+
+    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+        selected = 3;
+        spNeuronios.setValue(numbNeuronsOut);
+        cbFunc.setSelectedItem(af[3]);
+    }//GEN-LAST:event_jButton11ActionPerformed
+
+    private void spNeuroniosStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spNeuroniosStateChanged
+        setNeuroNumber(Integer.parseInt(spNeuronios.getValue().toString()));
+    }//GEN-LAST:event_spNeuroniosStateChanged
+
+    private void cbFuncItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbFuncItemStateChanged
+        af[selected] = (ActivationFunction) cbFunc.getSelectedItem();
+    }//GEN-LAST:event_cbFuncItemStateChanged
+
+    public void prepareValidation() {
+
+        int size = inValues.size();
+
+        int sizeValidation = (int) (size * (porcValidation / 100));
+
+        for (int i = size - 1; i > size - sizeValidation; i--) {
+            inValiValues.add(inValues.get(i));
+            outValiValues.add(outValues.get(i));
+            inValues.remove(i);
+            outValues.remove(i);
+        }
+    }
+
+    private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
+
+        if (executing) {
+            return;
+        }
+        final double alpha;
+
+        if (tfAlfa.isEnabled()) {
+            alpha = Double.parseDouble(tfAlfa.getText());
+        } else {
+            alpha = 0;
+        }
+
+        Thread myThread = new Thread() {
+
+            @Override
+            public void run() {
+                executing = true;
+                prepareValidation();
+                ActivationFunction temp[] = new ActivationFunction[2+numHiddenCam];
+
+                temp[0] = af[0];
+
+                int i = 1;
+                for( ; i <= numHiddenCam; i++) {
+                    temp[i] = af[i];
+                }
+
+                temp[i] = af[3];
+
+                network = new NeuralNetwork(numbNeuronsIn, numbNeuronsOut, numbHiddenNeurons, temp);
+                network.setAdaptative(chkAdaptativo.isSelected());
+                network.setMomentum(chkMomentum.isSelected());
+                network.train(maxItera, errorQuadra, learnRate, alpha, porcValidation, inValues, outValues, getjProgressBar1());
+                executing = false;
+            }
+        };
+
+        myThread.start();
+
+    }//GEN-LAST:event_jButton14ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        JFrame frame = new JFrame();
+
+        GraficoSaida graficoSaida = new GraficoSaida(numbNeuronsOut);
+
+        frame.add(graficoSaida.getChart());
+        frame.setVisible(true);
+        frame.pack();
+
+        graficoSaida.clear();
+        for (int i = 0; i < inValues.size(); i++) {
+
+            ArrayList<Double> out = network.simulate(inValues.get(i));
+
+            for (int j = 0; j < out.size(); j++) {
+                graficoSaida.addObservation(i, out.get(j), j, false);
+                graficoSaida.addObservation(i, outValues.get(i).get(j), j, true);
+            }
+        }
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
+        GraficoErroQuadratico erroGrafico = network.getGrafico();
+
+        JFrame frame = new JFrame();
+        frame.add(erroGrafico.getChart());
+        frame.setVisible(true);
+        frame.pack();
+
+    }//GEN-LAST:event_jButton13ActionPerformed
+
+    private void tfAlfaCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_tfAlfaCaretUpdate
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfAlfaCaretUpdate
+
+    private void chkMomentumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkMomentumActionPerformed
+        // TODO add your handling code here:
+
+        if (chkMomentum.isSelected()) {
+            tfAlfa.setEnabled(true);
+            labelAlfa.setEnabled(true);
+        } else {
+            tfAlfa.setEnabled(false);
+            labelAlfa.setEnabled(false);
+        }
+
+    }//GEN-LAST:event_chkMomentumActionPerformed
+
+    private void chkPesoArquActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkPesoArquActionPerformed
+        // TODO add your handling code here:
+        if (chkPesoArqu.isSelected()) {
+            buttonCarregar.setEnabled(true);
+        } else {
+            buttonCarregar.setEnabled(false);
+        }
+    }//GEN-LAST:event_chkPesoArquActionPerformed
+
+    private void buttonCarregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCarregarActionPerformed
+        // TODO add your handling code here:
+        JFileChooser fc = new JFileChooser();
+        int res = fc.showOpenDialog(this);
+
+        if (res == JFileChooser.APPROVE_OPTION) {
+            File file = fc.getSelectedFile();
+
+        }
+    }//GEN-LAST:event_buttonCarregarActionPerformed
+
+    public JProgressBar getjProgressBar1() {
+        return jProgressBar1;
+    }
+
+    public void setjProgressBar1(JProgressBar jProgressBar1) {
+        this.jProgressBar1 = jProgressBar1;
+    }
+
+    void setNeuroNumber(int n) {
+
+        switch (selected) {
+            case 0:
+                numbNeuronsIn = n;
+                break;
+            case 1:
+                numbHiddenNeurons[0] = n;
+                break;
+            case 2:
+                numbHiddenNeurons[1] = n;
+                break;
+            case 3:
+                numbNeuronsOut = n;
+                break;
+        }
+    }
+
+    public void processFile(File file) {
+
+        try {
+
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
+
+            String line = bufferedReader.readLine();
+
+            if (!processLineParams(line)) {
+                return;
+            }
+
+            while (bufferedReader.ready()) {
+                line = bufferedReader.readLine();
+
+                processLineData(line);
+            }
+
+            bufferedReader.close();
+            reloadInterface();
+        } catch (IOException ex) {
+            Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private boolean processLineParams(String line) {
+
+        String[] params = line.split(" ");
+
+        if (params.length >= 6 && params.length <= 8) {
+
+            numbNeuronsIn = Integer.parseInt(params[0]);
+            numbNeuronsOut = Integer.parseInt(params[1]);
+            maxItera = Integer.parseInt(params[3]);
+            errorQuadra = Double.parseDouble(params[4]);
+            porcValidation = Double.parseDouble(params[5]);
+
+            numHiddenCam = 0;
+
+            if (params.length == 7) {
+                numHiddenCam = 1;
+                numbHiddenNeurons[0] = Integer.parseInt(params[6]);
+            } else if (params.length == 8) {
+                numHiddenCam = 2;
+                numbHiddenNeurons = new int[]{Integer.parseInt(params[6]), Integer.parseInt(params[7])};
+            }
+
+            return true;
+        } else {
+            System.out.println("LINHA DE PARAMENTROS ERRADO");
+            return false;
+        }
+    }
+
+    private void reloadInterface() {
+        cbCamadasOcultas.setSelectedIndex(numHiddenCam);
+        tfIteracoes.setText(Integer.toString(maxItera));
+        tfErro.setText(Double.toString(errorQuadra));
+        tfPorc.setText(Double.toString(porcValidation));
+    }
+
+    private void processLineData(String line) {
+        String[] params = line.split(" ");
+
+        ArrayList<Double> inData = new ArrayList<Double>();
+        ArrayList<Double> outData = new ArrayList<Double>();
+
+        for (int i = 0; i < params.length; i++) {
+            String string = params[i];
+            if (i < numbNeuronsIn) {
+                inData.add(Double.parseDouble(string));
+            } else {
+                outData.add(Double.parseDouble(string));
+            }
+        }
+
+        inValues.add(inData);
+        outValues.add(outData);
+    }
+
+    private static void SkinInitialize() {
+        JFrame.setDefaultLookAndFeelDecorated(true);
+        JDialog.setDefaultLookAndFeelDecorated(true);
+
+        try { /*SubstanceBusinessLookAndFeel()*/
+            UIManager.setLookAndFeel(new SubstanceBusinessBlackSteelLookAndFeel());
+        } catch (Exception e) {
+            System.out.println("Substance Raven Graphite failed to initialize");
+        }
+    }
 
     /**
-    * @param args the command line arguments
-    */
+     * @param args the command line arguments
+     */
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
+
             public void run() {
+                SkinInitialize();
                 new ViewFrame().setVisible(true);
             }
         });
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btCarregarEntrada;
+    private javax.swing.JButton buttonCarregar;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JComboBox cbCamadasOcultas;
+    private javax.swing.JComboBox cbFunc;
+    private javax.swing.JCheckBox chkAdaptativo;
+    private javax.swing.JCheckBox chkMomentum;
+    private javax.swing.JCheckBox chkPesoAleato;
+    private javax.swing.JCheckBox chkPesoArqu;
+    private javax.swing.JButton jButton10;
+    private javax.swing.JButton jButton11;
+    private javax.swing.JButton jButton13;
+    private javax.swing.JButton jButton14;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
+    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JProgressBar jProgressBar1;
+    private javax.swing.JLabel labelAlfa;
+    private javax.swing.JSpinner spNeuronios;
+    private javax.swing.JTextField tfAlfa;
+    private javax.swing.JTextField tfApre;
+    private javax.swing.JTextField tfErro;
+    private javax.swing.JTextField tfIteracoes;
+    private javax.swing.JTextField tfPorc;
     // End of variables declaration//GEN-END:variables
-
 }

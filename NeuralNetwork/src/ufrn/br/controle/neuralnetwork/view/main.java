@@ -121,7 +121,7 @@ public class main {
     public static void main(String args[]) {
 
         main m = new main();
-        m.processFile(new File("output1.txt"));
+        m.processFile(new File("output2.txt"));
         m.prepareValidation();
 
 
@@ -158,15 +158,19 @@ public class main {
         frame2.setVisible(true);
         frame2.pack();
 
-        network.train(m.maxItera, m.errorQuadra, 0.001, 0.1, 0, m.inValues, m.outValues);
-        
+//        network.train(m.maxItera, m.errorQuadra, 0.4, 0.01, 0, m.inValues, m.outValues);
+
         for (int i = 0; i < m.inValues.size(); i++) {
             ArrayList<Double> out = network.simulate(m.inValues.get(i));
-            graficoSaida.addObservation(i, out.get(0), 0, false);
-            graficoSaida.addObservation(i, m.outValues.get(i).get(0), 0, true);
-//            System.out.println("Entrada :" + m.inValiValues.get(i));
-//            System.out.println("Saida esperada :" + m.outValiValues.get(i));
-//            System.out.println("Saida da Rede :" + out);
+//            for (int j = 0; j < out.size(); j++) {
+//                graficoSaida.addObservation(i, out.get(j), 0, false);
+//                graficoSaida.addObservation(i, m.outValiValues.get(i).get(j), 0, true);
+//            }
+
+
+            System.out.println("Entrada :" + m.inValues.get(i));
+            System.out.println("Saida esperada :" + m.outValues.get(i));
+            System.out.println("Saida da Rede :" + out);
 //            try {
 //                Thread.sleep(100);
 //            } catch (InterruptedException ex) {
