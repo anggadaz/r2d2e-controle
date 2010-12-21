@@ -17,4 +17,9 @@ public class Sigmoid implements ActivationFunction {
     public double getDerivativeValue(double x) {
         return getValue(x) - Math.pow(getValue(x), 2);
     }
+
+    @Override
+    public String toString() {
+        return "Sigmoide";
+    }
 }

@@ -12,11 +12,10 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.omg.PortableServer.THREAD_POLICY_ID;
+import javax.swing.JFrame;
 import ufrn.br.controle.neuralnetwork.domain.functions.ActivationFunction;
 import ufrn.br.controle.neuralnetwork.domain.functions.HyperbolicTangent;
 import ufrn.br.controle.neuralnetwork.domain.functions.Linear;
-import ufrn.br.controle.neuralnetwork.domain.functions.Sigmoid;
 import ufrn.br.controle.neuralnetwork.domain.neural.NeuralNetwork;
 
 /**
@@ -120,33 +119,59 @@ public class main {
     }
 
     public static void main(String args[]) {
+
         main m = new main();
         m.processFile(new File("output1.txt"));
         m.prepareValidation();
 
-        ActivationFunction af[] = new ActivationFunction[m.numbHiddenNeurons.length + 2];
 
-        af[0] = new Linear();
-        af[m.numbHiddenNeurons.length + 1] = new HyperbolicTangent();
+        ActivationFunction af[] = null;
 
-        for (int i = 1; i <= m.numbHiddenNeurons.length; i++) {
-            af[i] = new HyperbolicTangent();
-        }
+        if (m.numbHiddenNeurons == null) {
+            af = new ActivationFunction[2];
+            af[1] = new Linear();
+        } else {
+            af = new ActivationFunction[m.numbHiddenNeurons.length + 2];
+            af[m.numbHiddenNeurons.length + 1] = new Linear();
 
-        NeuralNetwork network = new NeuralNetwork(m.numbNeuronsIn, m.numbNeuronsOut, m.numbHiddenNeurons, af);
-        network.train(m.maxItera, m.errorQuadra, 0.00001, m.porcValidation, m.inValues, m.outValues);
-
-        for (int i = 0; i < m.inValiValues.size(); i++) {
-            ArrayList<Double> out = network.simulate(m.inValiValues.get(i));
-            System.out.println("Entrada :" + m.inValiValues.get(i));
-            System.out.println("Saida esperada :" + m.outValiValues.get(i));
-            System.out.println("Saida da Rede :" + out);
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException ex) {
-                Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
+            for (int i = 1; i <= m.numbHiddenNeurons.length; i++) {
+                af[i] = new HyperbolicTangent();
             }
         }
 
+        af[0] = new Linear();
+
+        NeuralNetwork network = new NeuralNetwork(m.numbNeuronsIn, m.numbNeuronsOut, m.numbHiddenNeurons, af);
+//        network.setMomentum(true);
+//        network.setAdaptative(true);
+        GraficoSaida graficoSaida = new GraficoSaida(m.numbNeuronsOut);
+
+        JFrame frame = new JFrame();
+//        frame.add(graficoSaida.getChart());
+        frame.add(network.getGrafico().getChart());
+        frame.setVisible(true);
+        frame.pack();
+
+        JFrame frame2 = new JFrame();
+        frame2.add(graficoSaida.getChart());
+//        frame2.add(network.getGrafico().getChart());
+        frame2.setVisible(true);
+        frame2.pack();
+
+        network.train(m.maxItera, m.errorQuadra, 0.001, 0.1, 0, m.inValues, m.outValues);
+        
+        for (int i = 0; i < m.inValues.size(); i++) {
+            ArrayList<Double> out = network.simulate(m.inValues.get(i));
+            graficoSaida.addObservation(i, out.get(0), 0, false);
+            graficoSaida.addObservation(i, m.outValues.get(i).get(0), 0, true);
+//            System.out.println("Entrada :" + m.inValiValues.get(i));
+//            System.out.println("Saida esperada :" + m.outValiValues.get(i));
+//            System.out.println("Saida da Rede :" + out);
+//            try {
+//                Thread.sleep(100);
+//            } catch (InterruptedException ex) {
+//                Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+        }
     }
 }

@@ -17,4 +17,9 @@ public class Linear implements ActivationFunction {
     public double getDerivativeValue(double x) {
         return 1;
     }
+
+    @Override
+    public String toString() {
+        return "Linear";
+    }
 }

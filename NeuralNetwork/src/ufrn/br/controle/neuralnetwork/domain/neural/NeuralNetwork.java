@@ -5,9 +5,11 @@
 package ufrn.br.controle.neuralnetwork.domain.neural;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Random;
 import ufrn.br.controle.neuralnetwork.domain.functions.ActivationFunction;
 import ufrn.br.controle.neuralnetwork.shared.Constants;
+import ufrn.br.controle.neuralnetwork.view.GraficoErroQuadratico;
 
 /**
  *
@@ -18,6 +20,17 @@ public class NeuralNetwork {
     private ArrayList<Layer> layers;
     private ArrayList<Double> meanSquaredErrors;
     private ArrayList<Double> localErros;
+    private GraficoErroQuadratico grafico = new GraficoErroQuadratico();
+    private boolean momentum = false;
+    private boolean adaptative = false;
+
+    public ArrayList<Double> getMeanSquaredErrors() {
+        return meanSquaredErrors;
+    }
+
+    public GraficoErroQuadratico getGrafico() {
+        return grafico;
+    }
 
     public NeuralNetwork(int numbNeuronsIn, int numbNeuronsOut, int numbHiddenNeurons[], ActivationFunction activationFunctions[]) {
         meanSquaredErrors = new ArrayList<Double>();
@@ -37,32 +50,45 @@ public class NeuralNetwork {
 
         layers.add(new Layer(neuronsIn));
 
-        for (int i = 0; i < numbHiddenNeurons.length; i++) {
-            int numbHidden = numbHiddenNeurons[i];
+        ArrayList<Neuron> neuronsOut = null;
 
-            ArrayList<Neuron> neurons = new ArrayList<Neuron>();
+        if (numbHiddenNeurons != null) {
+            for (int i = 0; i < numbHiddenNeurons.length; i++) {
+                int numbHidden = numbHiddenNeurons[i];
 
-            for (int j = 0; j < numbHidden; j++) {
-                Neuron neuron = null;
+                ArrayList<Neuron> neurons = new ArrayList<Neuron>();
 
-                if (i == 0) {
-                    neuron = new Neuron(rand(Constants.LOW_RAND, Constants.HIGH_RAND), generateRandWeights(numbNeuronsIn), activationFunctions[i + 1]);
-                } else {
-                    neuron = new Neuron(rand(Constants.LOW_RAND, Constants.HIGH_RAND), generateRandWeights(numbHiddenNeurons[i - 1]), activationFunctions[i + 1]);
+                for (int j = 0; j < numbHidden; j++) {
+                    Neuron neuron = null;
+
+                    if (i == 0) {
+                        neuron = new Neuron(rand(Constants.LOW_RAND, Constants.HIGH_RAND), generateRandWeights(numbNeuronsIn), activationFunctions[i + 1]);
+                    } else {
+                        neuron = new Neuron(rand(Constants.LOW_RAND, Constants.HIGH_RAND), generateRandWeights(numbHiddenNeurons[i - 1]), activationFunctions[i + 1]);
+                    }
+
+                    neurons.add(neuron);
                 }
 
-                neurons.add(neuron);
+                layers.add(new Layer(neurons));
             }
 
-            layers.add(new Layer(neurons));
+            neuronsOut = new ArrayList<Neuron>();
+
+            for (int i = 0; i < numbNeuronsOut; i++) {
+                Neuron neuron = new Neuron(rand(Constants.LOW_RAND, Constants.HIGH_RAND), generateRandWeights(numbHiddenNeurons[numbHiddenNeurons.length - 1]), activationFunctions[activationFunctions.length - 1]);
+                neuronsOut.add(neuron);
+            }
+        } else {
+            neuronsOut = new ArrayList<Neuron>();
+
+            for (int i = 0; i < numbNeuronsOut; i++) {
+                Neuron neuron = new Neuron(rand(Constants.LOW_RAND, Constants.HIGH_RAND), generateRandWeights(numbNeuronsIn), activationFunctions[activationFunctions.length - 1]);
+                neuronsOut.add(neuron);
+            }
         }
 
-        ArrayList<Neuron> neuronsOut = new ArrayList<Neuron>();
 
-        for (int i = 0; i < numbNeuronsOut; i++) {
-            Neuron neuron = new Neuron(rand(Constants.LOW_RAND, Constants.HIGH_RAND), generateRandWeights(numbHiddenNeurons[numbHiddenNeurons.length - 1]), activationFunctions[activationFunctions.length - 1]);
-            neuronsOut.add(neuron);
-        }
 
         layers.add(new Layer(neuronsOut));
 
@@ -127,52 +153,135 @@ public class NeuralNetwork {
         return sum / localErros.size();
     }
 
-    public void train(int maxItera, double errorQuadra, double learnRate, double porcValidation, ArrayList<ArrayList<Double>> inValues, ArrayList<ArrayList<Double>> outValues) {
+    public void train(int maxItera, double errorQuadra, double learnRate, double alpha, double porcValidation, ArrayList<ArrayList<Double>> inValues, ArrayList<ArrayList<Double>> outValues) {
         int iteration = 0;
         double globalError = 0;
 
+        meanSquaredErrors.add(0d);
+
+        ArrayList<ArrayList<Double>> inValuesTmp = copy(inValues);
+        ArrayList<ArrayList<Double>> outValuesTmp = copy(outValues);
+
         do {
+
+            shuffle(inValuesTmp, outValuesTmp);
+
             //para cada ponto da entrada
-            for (int l = 0; l < inValues.size(); l++) {
+            for (int l = 0; l < inValuesTmp.size(); l++) {
                 //atualiza os somatorios ponderados de cada neuronio
-                updateNeuronsWeightedSum(inValues.get(l));
+//                System.out.println("-------------------------------Iteration " + iteration);
+//                System.out.println("ponto " + l + " in " + inValuesTmp.get(l) + " out " + outValuesTmp.get(l));
+                updateNeuronsWeightedSum(inValuesTmp.get(l));
+//                for (int k = 0; k < layers.size(); k++) {
+//                    Layer layer = layers.get(k);
+//                    System.out.println("camada " + k);
+//                    for (int i = 0; i < layer.getNeuronsCount(); i++) {
+//                        Neuron n = layer.getNeuron(i);
+//                        System.out.println(n);
+//                    }
+//                }
+
                 //fase backward do fim ate a primeira camada escondida
                 for (int k = layers.size() - 1; k > 0; k--) {
                     Layer layer = layers.get(k);
                     //calcula o gradiente
-                    layer.updateNeuronsGradient(outValues.get(l));
+                    layer.updateNeuronsGradient(outValuesTmp.get(l));
                     //calcula o delta omega
-                    layer.calculateDeltaOmega(learnRate);
+                    layer.calculateDeltaOmega(learnRate, alpha, momentum);
                 }
                 //atualização dos pesos
                 updateNeuronsWeight();
                 //calcula o valor do erro local
-                calculateLocalError(outValues.get(l));
+                calculateLocalError(outValuesTmp.get(l));
             }
 
             globalError = calculateMeanSquaredError();
 
             meanSquaredErrors.add(globalError);
 
+            if (adaptative) {
+                learnRate = adaptEta(learnRate);
+            }
+
+            localErros.clear();
+            
+            grafico.addObservation(meanSquaredErrors.size(), globalError);
+            grafico.addObservation(meanSquaredErrors.size(), errorQuadra, 1);
+//            System.out.println(globalError);
+
             iteration++;
 
         } while (globalError > errorQuadra && iteration < maxItera);
 
         System.out.println("acabou na iteração " + iteration);
-        System.out.println("Global Error " + meanSquaredErrors.get(meanSquaredErrors.size()-1));
+        System.out.println("Global Error " + meanSquaredErrors.get(meanSquaredErrors.size() - 1));
     }
 
-    public ArrayList<Double> simulate(ArrayList<Double> inValues){
+    public ArrayList<Double> simulate(ArrayList<Double> inValues) {
         updateNeuronsWeightedSum(inValues);
 
         ArrayList<Double> saida = new ArrayList<Double>();
 
-        Layer layer = layers.get(layers.size()-1);
+        Layer layer = layers.get(layers.size() - 1);
 
-        for(int i = 0 ; i < layer.getNeuronsCount();i++){
+        for (int i = 0; i < layer.getNeuronsCount(); i++) {
             saida.add(layer.getNeuron(i).getOutPut());
         }
 
         return saida;
+    }
+
+    private void shuffle(ArrayList<ArrayList<Double>> inValues, ArrayList<ArrayList<Double>> outValues) {
+
+        Random random = new Random();
+
+        for (int i = 0; i < outValues.size(); i++) {
+            int index = random.nextInt(inValues.size());
+
+            ArrayList<Double> inAux = inValues.get(i);
+            ArrayList<Double> outAux = outValues.get(i);
+
+            inValues.set(i, inValues.get(index));
+            outValues.set(i, outValues.get(index));
+
+            inValues.set(index, inAux);
+            outValues.set(index, outAux);
+        }
+    }
+
+    private ArrayList<ArrayList<Double>> copy(ArrayList<ArrayList<Double>> inValues) {
+        ArrayList<ArrayList<Double>> saida = new ArrayList<ArrayList<Double>>();
+
+        for (ArrayList<Double> values : inValues) {
+            saida.add(values);
+        }
+
+        return saida;
+    }
+
+    public boolean isMomentum() {
+        return momentum;
+    }
+
+    public void setMomentum(boolean momentum) {
+        this.momentum = momentum;
+    }
+
+    public double adaptEta(double eta) {
+        if (1.05 * meanSquaredErrors.get(meanSquaredErrors.size() - 1) > meanSquaredErrors.get(meanSquaredErrors.size() - 2)) {
+            return 0.7 * eta;
+        } else if (meanSquaredErrors.get(meanSquaredErrors.size() - 1) <= meanSquaredErrors.get(meanSquaredErrors.size() - 2)) {
+            return 1.03 * eta;
+        } else {
+            return eta;
+        }
+    }
+
+    public boolean isAdaptative() {
+        return adaptative;
+    }
+
+    public void setAdaptative(boolean adaptative) {
+        this.adaptative = adaptative;
     }
 }
